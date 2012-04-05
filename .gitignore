@@ -1,0 +1,8 @@
+build/*
+junit*
+test-output*
+bin/*
+*.log
+.settings/*
+
+

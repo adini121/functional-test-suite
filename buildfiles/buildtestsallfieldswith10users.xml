@@ -1,0 +1,130 @@
+<project name="Run Selenium Tests" default="all_selenium_tests" basedir=".">
+	<property name="src" location="src"/>
+	<property name="build" location="build" />
+	<property name="libs" location="lib" />
+	<property name="testresults" location="junit-results" />
+	<property name="testreport" location="junit-report" />
+	<path id="junit.class.path">
+		<pathelement location="lib/junit-4.10.jar" />
+		<pathelement location="lib/selenium-2.15.0/selenium-java-2.15.0.jar" />
+		<pathelement location="lib/selenium-2.15.0/selenium-java-2.15.0-srcs.jar" />
+		<pathelement location="lib/selenium-server-standalone-2.18.0.jar" />
+		<pathelement location="lib/selenium-2.15.0/libs/apache-mime4j-0.6.jar" />
+		<pathelement location="lib/selenium-2.15.0/libs/bsh-1.3.0.jar" />
+		<pathelement location="lib/selenium-2.15.0/libs/cglib-nodep-2.1_3.jar" />
+		<pathelement location="lib/selenium-2.15.0/libs/commons-codec-1.4.jar" />
+		<pathelement location="lib/selenium-2.15.0/libs/commons-collections-3.2.1.jar" />
+		<pathelement location="lib/selenium-2.15.0/libs/commons-exec-1.1.jar" />
+		<pathelement location="lib/selenium-2.15.0/libs/commons-io-2.0.1.jar" />
+		<pathelement location="lib/selenium-2.15.0/libs/commons-jxpath-1.3.jar" />
+		<pathelement location="lib/selenium-2.15.0/libs/commons-lang-2.6.jar" />
+		<pathelement location="lib/selenium-2.15.0/libs/commons-logging-1.1.1.jar" />
+		<pathelement location="lib/selenium-2.15.0/libs/cssparser-0.9.5.jar" />
+		<pathelement location="lib/selenium-2.15.0/libs/guava-10.0.1.jar" />
+		<pathelement location="lib/selenium-2.15.0/libs/hamcrest-all-1.1.jar" />
+		<pathelement location="lib/selenium-2.15.0/libs/htmlunit-2.9.jar" />
+		<pathelement location="lib/selenium-2.15.0/libs/htmlunit-core-js-2.9.jar" />
+		<pathelement location="lib/selenium-2.15.0/libs/httpclient-4.1.2.jar" />
+		<pathelement location="lib/selenium-2.15.0/libs/httpcore-4.1.3.jar" />
+		<pathelement location="lib/selenium-2.15.0/libs/httpmime-4.1.2.jar" />
+		<pathelement location="lib/selenium-2.15.0/libs/jcommander-1.13.jar" />
+		<pathelement location="lib/selenium-2.15.0/libs/jna-3.3.0.jar" />
+		<pathelement location="lib/selenium-2.15.0/libs/json-20080701.jar" />
+		<pathelement location="lib/selenium-2.15.0/libs/junit-dep-4.10.jar" />
+		<pathelement location="lib/selenium-2.15.0/libs/nekohtml-1.9.15.jar" />
+		<pathelement location="lib/selenium-2.15.0/libs/operadriver-v0.8.1.jar" />
+		<pathelement location="lib/selenium-2.15.0/libs/protobuf-java-2.4.1.jar" />
+		<pathelement location="lib/selenium-2.15.0/libs/sac-1.3.jar" />
+		<pathelement location="lib/selenium-2.15.0/libs/serializer-2.7.1.jar" />
+		<pathelement location="lib/selenium-2.15.0/libs/testng-6.0.1-nobsh-noguice.jar" />
+		<pathelement location="lib/selenium-2.15.0/libs/xalan-2.7.1.jar" />
+		<pathelement location="lib/selenium-2.15.0/libs/xerceslmpl-2.9.1.jar" />
+		<pathelement location="lib/selenium-2.15.0/libs/xml-apis-1.3.04.jar" />
+		<pathelement location="${build}" />
+		<pathelement location="${src}"/>
+	</path>
+	<target name="clean">
+		<delete dir="${build}" />
+		<delete dir="${testresults}" />
+		<delete dir="${testreport}" />
+	</target>
+	<target name="makedir">
+		<mkdir dir="${build}"/>
+		<mkdir dir="${testresults}" />
+		<mkdir dir="${testreport}" />
+	</target>
+	<target name="compile" depends="clean, makedir">
+		<javac 
+			srcdir="${src}" destdir="${build}"
+			debug="true" includeAntRuntime="fales">
+			<classpath refid="junit.class.path" />			
+		</javac>
+	</target>
+	<target name="run_tests">
+		<parallel>
+			<junit printsummary="yes" fork="yes" errorproperty="junit.error" failureproperty="junit.error">
+				<classpath refid="junit.class.path"/>
+				<formatter type="xml" />
+				<test todir="${testresults}" name="com.moodle.test.database.MDL17327DatabaseAdvancedSearchAllFields"/>
+			</junit>
+			<junit printsummary="yes" fork="yes" errorproperty="junit.error" failureproperty="junit.error">
+				<classpath refid="junit.class.path"/>
+				<formatter type="xml" />
+				<test todir="${testresults}" name="com.moodle.test.database.MDL17327DatabaseAdvancedSearchAllFields"/>
+			</junit>
+			<junit printsummary="yes" fork="yes" errorproperty="junit.error" failureproperty="junit.error">
+				<classpath refid="junit.class.path"/>
+				<formatter type="xml" />
+				<test todir="${testresults}" name="com.moodle.test.database.MDL17327DatabaseAdvancedSearchAllFields"/>
+			</junit>
+			<junit printsummary="yes" fork="yes" errorproperty="junit.error" failureproperty="junit.error">
+				<classpath refid="junit.class.path"/>
+				<formatter type="xml" />
+				<test todir="${testresults}" name="com.moodle.test.database.MDL17327DatabaseAdvancedSearchAllFields"/>
+			</junit>
+			<junit printsummary="yes" fork="yes" errorproperty="junit.error" failureproperty="junit.error">
+				<classpath refid="junit.class.path"/>
+				<formatter type="xml" />
+				<test todir="${testresults}" name="com.moodle.test.database.MDL17327DatabaseAdvancedSearchAllFields"/>
+			</junit>
+			<junit printsummary="yes" fork="yes" errorproperty="junit.error" failureproperty="junit.error">
+				<classpath refid="junit.class.path"/>
+				<formatter type="xml" />
+				<test todir="${testresults}" name="com.moodle.test.database.MDL17327DatabaseAdvancedSearchAllFieldsChrome"/>
+			</junit>
+			<junit printsummary="yes" fork="yes" errorproperty="junit.error" failureproperty="junit.error">
+				<classpath refid="junit.class.path"/>
+				<formatter type="xml" />
+				<test todir="${testresults}" name="com.moodle.test.database.MDL17327DatabaseAdvancedSearchAllFieldsChrome"/>
+			</junit>
+			<junit printsummary="yes" fork="yes" errorproperty="junit.error" failureproperty="junit.error">
+				<classpath refid="junit.class.path"/>
+				<formatter type="xml" />
+				<test todir="${testresults}" name="com.moodle.test.database.MDL17327DatabaseAdvancedSearchAllFieldsChrome"/>
+			</junit>
+			<junit printsummary="yes" fork="yes" errorproperty="junit.error" failureproperty="junit.error">
+				<classpath refid="junit.class.path"/>
+				<formatter type="xml" />
+				<test todir="${testresults}" name="com.moodle.test.database.MDL17327DatabaseAdvancedSearchAllFieldsChrome"/>
+			</junit>
+			<junit printsummary="yes" fork="yes" errorproperty="junit.error" failureproperty="junit.error">
+				<classpath refid="junit.class.path"/>
+				<formatter type="xml" />
+				<test todir="${testresults}" name="com.moodle.test.database.MDL17327DatabaseAdvancedSearchAllFieldsChrome"/>
+			</junit>
+		</parallel>
+		<antcall target ="report-junit"/>
+		<fail if="junit.error" message="Selenium test(s) failed. See reports!"/>
+	</target>
+
+	<target name="all_selenium_tests" depends="compile" description="The Main Target for running all tests">
+		<antcall target="run_tests"/>
+	</target>
+	<target name="report-junit">
+		<junitreport todir="${testreport}">
+			<fileset dir ="${testresults}">
+				<include name="TEST-*.xml"/>
+			</fileset>
+		</junitreport>	
+	</target>
+</project>
