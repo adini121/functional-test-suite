@@ -1,4 +1,5 @@
 build/*
+junit*
 test-output*
 bin/*
 *.log
