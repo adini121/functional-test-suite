@@ -4,7 +4,9 @@ import java.io.FileInputStream;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
+import java.util.concurrent.TimeUnit;
 
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
 import com.moodle.seleniumutils.FormActions;
@@ -55,6 +57,8 @@ public class CoursesAddAnActivity {
 		this.properties.put("activitySurvey", activityDropdown.getProperty("activitySurvey"));
 		this.properties.put("activityWiki", activityDropdown.getProperty("activityWiki"));
 		this.properties.put("activityWorkshop", activityDropdown.getProperty("activityWorkshop"));
+		this.properties.put("activityGo", activityDropdown.getProperty("activityGo"));
+		this.properties.put("activityAssignment", activityDropdown.getProperty("activityAssignment"));
 	}
 /*
  * ASSIGNMENTS, these subtypes are required for versions prior to 2.3	
@@ -110,8 +114,19 @@ public class CoursesAddAnActivity {
 /*
  * ASSIGNMENTS 2.3 onwards
  */
+/**
+ * Selects teh single 2.3 assignment
+ * @param outlineSection the outline section in which you want to add the activity. Pass with value from the test.
+ */
 	public void selectAssignment(String outlineSection) {
-		//TODO Select a single assignment option from the Activity dropdown.
+		FormActions dropdown = new FormActions(driver);
+		dropdown.selectDropdownItemByXPathHandlesJS(".//*[@id='section-" +
+				outlineSection +
+				"']/*/div[@class='section_add_menus']/div/div/form/div/select[contains(.,'" +
+				this.properties.get("activity") +
+				"')]", this.properties.get("activityAssignment"), ".//*[@id='" +
+						outlineSection +
+						"']/div/noscript/div/input", 0);
 	}
 /**
  * Selects the Chat activity.
