@@ -121,7 +121,7 @@ public class AssignmentAddAssignment {
 		checkbox.click();
 	}
 /*
- * In 2.3 the mockups have changed the field labels for this.
+ * In 2.3 the mockups the field labels for this have changed.
  */
 	public void selectAllowSubmissionsFrom() {
 		//TODO fond out if the Field ID's have changed and if so what the new ones are.
