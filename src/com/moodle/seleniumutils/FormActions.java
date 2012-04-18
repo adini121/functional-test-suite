@@ -106,4 +106,7 @@ import org.openqa.selenium.support.ui.Select;
 			richTextBox.sendKeys(message);
 			driver.switchTo().window(driver.getWindowHandle());			
 	}
+/*
+ * Re-usable form buttons		
+ */
 }
