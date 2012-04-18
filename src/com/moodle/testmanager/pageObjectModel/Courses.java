@@ -6,6 +6,7 @@ import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
@@ -51,13 +52,34 @@ public class Courses {
 		this.properties.put("exceptionPostTracked", courses.getProperty("exceptionPostTracked"));
 		}
 /**
- * Clicks the Add a New Course Button.
+ * Clicks the Add a New Course Button. If there are no courses already it does this from the home page. If there is already a course
+ * the page object locates an alternative Add a new course button.
  */
 	public void clickAddCourse() {
-		WebElement addCourseButton = driver.findElement(By .cssSelector("input[value='" +
-				this.properties.get("addNewCourseButton") +
-				"']"));
-		addCourseButton.click();
+		boolean itemVisible = false;
+		try {
+			WebElement addCourseButton = driver.findElement(By .cssSelector("input[value='" +
+					this.properties.get("addNewCourseButton") +
+					"']"));
+			itemVisible = addCourseButton.isDisplayed();
+		}
+		catch (NoSuchElementException ex){}
+		if (itemVisible) {
+			WebElement addCourseButton = driver.findElement(By .cssSelector("input[value='" +
+					this.properties.get("addNewCourseButton") +
+					"']"));
+			addCourseButton.click();
+		}
+		else {
+			WebElement courseTreeItemRoot = driver.findElement(By .partialLinkText("" +
+					this.properties.get("coursesNavBlock") +
+					""));
+			courseTreeItemRoot.click();
+			WebElement addCourseButton = driver.findElement(By .cssSelector("input[value='" +
+					this.properties.get("addNewCourseButton") +
+					"']"));
+			addCourseButton.click();
+		}
 	}
 /**
  * Enters a value passed from the test into the fullname field.
@@ -91,7 +113,6 @@ public class Courses {
 				this.properties.get("coursesNavBlock") +
 				""));
 		courseTreeItemRoot.click();
-		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 	}
 /**
  * Clicks a course item defined in the test in the tree menu.

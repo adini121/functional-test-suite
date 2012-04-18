@@ -67,7 +67,7 @@
 		<junit printsummary="yes" fork="yes" errorproperty="junit.error" failureproperty="junit.error">
 			<classpath refid="junit.class.path"/>
 			<formatter type="xml" />
-			<test todir="${testresults}" name="com.moodle.moodleinstallation.Install23"/>
+		<!--	<test todir="${testresults}" name="com.moodle.moodleinstallation.Install23"/>-->
 			<test todir="${testresults}" name="com.moodle.datacreation.MDLQADT1AddCourse"/>
 			<test todir="${testresults}" name="com.moodle.datacreation.MDLQADT2AddUsers"/>
 			<test todir="${testresults}" name="com.moodle.datacreation.MDLQADT3AssignFrontPageRoles"/>

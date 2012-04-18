@@ -4,9 +4,7 @@ import java.io.FileInputStream;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
-import java.util.concurrent.TimeUnit;
 
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
 import com.moodle.seleniumutils.FormActions;
@@ -125,8 +123,8 @@ public class CoursesAddAnActivity {
 				"']/*/div[@class='section_add_menus']/div/div/form/div/select[contains(.,'" +
 				this.properties.get("activity") +
 				"')]", this.properties.get("activityAssignment"), ".//*[@id='" +
-						outlineSection +
-						"']/div/noscript/div/input", 0);
+				outlineSection +
+				"']/div/noscript/div/input", 0);
 	}
 /**
  * Selects the Chat activity.
