@@ -5,9 +5,10 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebDriver;
+
+import com.moodle.seleniumutils.FormActions;
 /**
  * The page object model for the Add Submission.
  * @author Tim Barker 
@@ -38,11 +39,101 @@ public class AssignmentAddSubmission {
 			dataLoad.load(new FileInputStream(data));
 		} catch (Exception e) {}
 		//put values from the properties file into hashmap
-		this.properties.put("PROPERTY", dataLoad.getProperty("PROPERTY"));
+		this.properties.put("buttonSaveChanges", dataLoad.getProperty("buttonSaveChanges"));
+		this.properties.put("buttonCancel", dataLoad.getProperty("buttonCancel"));
+		this.properties.put("buttonAdd", dataLoad.getProperty("buttonAdd"));
+		this.properties.put("buttonCreateFolder", dataLoad.getProperty("buttonCreateFolder"));
+		this.properties.put("buttonOK", dataLoad.getProperty("buttonOK"));
+		this.properties.put("buttonSubmit", dataLoad.getProperty("buttonSubmit"));
+		//this.properties.put("PROPERTY", dataLoad.getProperty("PROPERTY"));
 	}
 /*
- * TODO Methods in this class for existing non-2.3 assigment
- * TODO Methods in this class for 2.3 assignment
- * Assignment is changing in 2.3, the subtypes are being removed so the form is changing.
+ * Clicks the submission statement checkbox that appears on Netspot's website
  */
+/**
+ * Clicks the submission statement checkbox.
+ */
+	public void clickCheckboxSubmissionStatement() {
+		WebElement checkbox = driver.findElementById("id_submissionstatement");
+		checkbox.click();
+	}
+/**
+ * Enters the text for an online submission.
+ * @param textToBeEntered The test to be entered as the online text submission.
+ */
+	public void enterOnlineText(String textToBeEntered) {
+		FormActions textAreaEntry = new FormActions(driver);
+		textAreaEntry.enterValueInTinyMCE(textToBeEntered);
+	}
+/**
+ * Clicks the Add button to launch the file picker.
+ */
+	public void clickButtonAdd() {
+		WebElement button = driver.findElementByCssSelector("input[value='" +
+				this.properties.get("buttonAdd") +
+				"']");
+		button.click();
+	}
+/**
+ * Clicks the Create folder button.
+ */
+	public void clickButtonCreateFolder() {
+		WebElement button = driver.findElementByCssSelector("input[value='" +
+				this.properties.get("buttonCreateFolder") +
+				"']");
+		button.click();
+	}
+/**
+ * Enters a value for folder name.
+ * @param folderName The desired name of the folder. Pass from the test.
+ */
+	public void enterTextFolderName(String folderName) {
+		WebElement yuiTextField = driver.findElementByCssSelector("input[type='text']");
+		yuiTextField.sendKeys(folderName);
+	}
+/**
+ * Clicks the OK button when entering a folder name.
+ */
+	public void clickButtonOKFolderName() {
+		WebElement yuiButton = driver.findElementByXPath("//button[contains(.,'" +
+				this.properties.get("buttonOK") +
+				"')]");
+		yuiButton.click();
+	}
+/**
+ * Clicks the Cancel button when entering a folder name.
+ */
+	public void clickButtonCancelFolderName() {
+		WebElement yuiButton = driver.findElementByXPath("//button[contains(.,'" +
+				this.properties.get("buttonCancel") +
+				"')]");
+		yuiButton.click();
+	}
+/**
+ * Clicks the Save changes button.
+ */
+	public void clickButtonSaveChanges() {
+		WebElement button = driver.findElementByCssSelector("input[value='" +
+				this.properties.get("buttonSaveChanges") +
+				"']");
+		button.click();
+	}
+/**
+ * Clicks the Cancel button.
+ */
+	public void clickButtonCancel() {
+		WebElement button = driver.findElementByCssSelector("input[value='" +
+				this.properties.get("buttonCancel") +
+				"']");
+		button.click();
+	}
+/**
+ * Clicks the Submit button.
+ */
+	public void clickButtonSubmit() {
+		WebElement button = driver.findElementByCssSelector("input[value='" +
+				this.properties.get("buttonSubmit") +
+				"']");
+		button.click();
+	}
 }

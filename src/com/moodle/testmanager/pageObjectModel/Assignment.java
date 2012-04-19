@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebDriver;
 /**
@@ -38,11 +37,36 @@ public class Assignment {
 			dataLoad.load(new FileInputStream(data));
 		} catch (Exception e) {}
 		//put values from the properties file into hashmap
-		this.properties.put("PROPERTY", dataLoad.getProperty("PROPERTY"));
+		this.properties.put("buttonEditMySubmission", dataLoad.getProperty("buttonEditMySubmission"));
+		this.properties.put("buttonGradeAssignment", dataLoad.getProperty("buttonGradeAssignment"));
+		this.properties.put("buttonSubmitAssignment", dataLoad.getProperty("buttonSubmitAssignment"));
+		//this.properties.put("PROPERTY", dataLoad.getProperty("PROPERTY"));
 	}
-/*
- * TODO Methods in this class for existing non-2.3 assigment
- * TODO Methods in this class for 2.3 assignment
- * Assignment is changing in 2.3, the subtypes are being removed so the form is changing.
+/**
+ * Clicks the Edit my submission button.
  */
+	public void clickButtonEditMySubmission() {
+		WebElement button = driver.findElementByCssSelector("input[value='" +
+				this.properties.get("buttonEditMySubmission") +
+				"']");
+		button.click();
+	}
+/**
+ * Clicks the Grade assignment button.
+ */
+	public void clickButtonGradeAssignment() {
+		WebElement button = driver.findElementByCssSelector("input[value='" +
+				this.properties.get("buttonGradeAssignment") +
+				"']");
+		button.click();
+	}
+/**
+ * Clicks the Submit assignment button when it is enabled.
+ */
+	public void clickButtonSubmitAssignment() {
+		WebElement button = driver.findElementByCssSelector("input[value='" +
+				this.properties.get("buttonSubmitAssignment") +
+				"']");
+		button.click();
+	}
 }

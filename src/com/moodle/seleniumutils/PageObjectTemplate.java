@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebDriver;
 /**
@@ -13,6 +12,7 @@ import org.openqa.selenium.remote.RemoteWebDriver;
  * @author Tim Barker 
  * @see <a href="http://www.gnu.org/copyleft/gpl.html">License: GNU GPL v3 or later</a>
  */
+@SuppressWarnings("unused")
 public class PageObjectTemplate {
 	//Internationalization file location
 	public static String data = "properties/data/static/<YOUR_OBJECT>.properties";
@@ -40,9 +40,4 @@ public class PageObjectTemplate {
 		//put values from the properties file into hashmap
 		this.properties.put("<YOUR_PROPERTY>", dataLoad.getProperty("<YOUR_PROPERTY>"));
 	}
-/*
- * TODO Methods in this class for existing non-2.3 assigment
- * TODO Methods in this class for 2.3 assignment
- * Assignment is changing in 2.3, the subtypes are being removed so the form is changing.
- */
 }

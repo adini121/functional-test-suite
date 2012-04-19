@@ -62,12 +62,8 @@ public class AssignmentAddAssignment {
  * @param description The value to be entered for Description.
  */
 	public void enterAssignmentDescription(String description) {
-		WebElement frame = driver.findElement(By .id("id_introeditor_ifr"));
-		driver.switchTo().frame(frame);
-		WebElement messagebox = driver.findElement(By.id("tinymce"));
-		messagebox.click();
-		messagebox.sendKeys(description);
-		driver.switchTo().window(driver.getWindowHandle());
+		FormActions textAreaEntry = new FormActions(driver);
+		textAreaEntry.enterValueInTinyMCE(description);
 	}
 /**
  * Clicks the show description on course page checkbox. Should work for versions <2.3 and >=2.3.
