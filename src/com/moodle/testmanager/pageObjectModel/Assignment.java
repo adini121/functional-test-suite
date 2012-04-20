@@ -69,4 +69,12 @@ public class Assignment {
 				"']");
 		button.click();
 	}
+/**
+ * Clicks on the assignment name when it appears in a link onscreen.
+ * @param assignmentName The name of the assignment you want to click on. Pass this value from the test.
+ */
+	public void clickAssignmentLink(String assignmentName) {
+		WebElement link = driver.findElementByLinkText(assignmentName);
+		link.click();
+	}
 }

@@ -9,6 +9,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
 import com.moodle.seleniumutils.FormActions;
+import com.moodle.seleniumutils.PassFailCriteria;
 /**
  * The page object model for the Assignment module.
  * @author Tim Barker 
@@ -42,7 +43,10 @@ public class AssignmentGrading {
 		this.properties.put("linkComments", dataLoad.getProperty("linkComments"));
 		this.properties.put("linkSaveComment", dataLoad.getProperty("linkSaveComment"));
 		this.properties.put("linkCancelComment", dataLoad.getProperty("linkCancelComment"));
-		this.properties.put("PROPERTY", dataLoad.getProperty("PROPERTY"));
+		this.properties.put("submissionStatusField", dataLoad.getProperty("submissionStatusField"));
+		this.properties.put("errorSubmissionStatus", dataLoad.getProperty("errorSubmissionStatus"));
+		this.properties.put("errorAssignmentName", dataLoad.getProperty("errorAssignmentName"));
+		//this.properties.put("PROPERTY", dataLoad.getProperty("PROPERTY"));
 	}
 /**
  * Clicks the Submitted for grading link.
@@ -148,5 +152,27 @@ public class AssignmentGrading {
 	public void clickButtonCancel() {
 		AssignmentAddSubmission clickButton = new AssignmentAddSubmission(driver);
 		clickButton.clickButtonCancel();
+	}
+/**
+ * Makes the test fail if mod/assign/view.php does not contain the assignment title. Useful for verifying that the page has been loaded.
+ * @param assignmentName The Assignment name, it should appear as a heading on the grading summary page. Pass the assignment name form the test.
+ */
+	public void assertGradingSummaryPage(String assignmentName) {
+		PassFailCriteria passFail = new PassFailCriteria(driver);
+		passFail.assertTextPresentByXpath("//h2[contains(.,'" +
+				assignmentName +
+				"')]", this.properties.get("errorAssignmentName"), assignmentName);
+	}
+/**
+ * Makes the test fail if the submission status is not displayed onscreen when grading an assignment.
+ * @param submissionStatus The desired submission status. The value of which is passed from the test.
+ */
+	public void assertSubmissionStatus(String submissionStatus) {
+		PassFailCriteria passFail = new PassFailCriteria(driver);
+		passFail.assertTextPresentByXpath("//tr[contains(.,'" +
+				this.properties.get("submissionStatusField") +
+				"')][contains(.,'" +
+				submissionStatus +
+				"')]", this.properties.get("errorSubmissionStatus") + " " + submissionStatus, submissionStatus);
 	}
 }

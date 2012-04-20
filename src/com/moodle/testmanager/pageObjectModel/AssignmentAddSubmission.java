@@ -4,11 +4,14 @@ import java.io.FileInputStream;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
+import java.util.concurrent.TimeUnit;
 
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
 import com.moodle.seleniumutils.FormActions;
+import com.moodle.seleniumutils.PassFailCriteria;
 /**
  * The page object model for the Add Submission.
  * @author Tim Barker 
@@ -45,17 +48,28 @@ public class AssignmentAddSubmission {
 		this.properties.put("buttonCreateFolder", dataLoad.getProperty("buttonCreateFolder"));
 		this.properties.put("buttonOK", dataLoad.getProperty("buttonOK"));
 		this.properties.put("buttonSubmit", dataLoad.getProperty("buttonSubmit"));
+		this.properties.put("submissionTableOnlineText", dataLoad.getProperty("submissionTableOnlineText"));
 		//this.properties.put("PROPERTY", dataLoad.getProperty("PROPERTY"));
 	}
 /*
  * Clicks the submission statement checkbox that appears on Netspot's website
  */
 /**
- * Clicks the submission statement checkbox.
+ * Clicks the submission statement checkbox. Test will not fail with a No Such Element Exception but will continue to next step.
  */
 	public void clickCheckboxSubmissionStatement() {
-		WebElement checkbox = driver.findElementById("id_submissionstatement");
-		checkbox.click();
+		boolean itemVisible = false;
+		try{
+			driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+			WebElement checkbox = driver.findElementById("id_submissionstatement");
+			itemVisible = checkbox.isDisplayed();
+		}
+		catch (NoSuchElementException ex){}
+		if (itemVisible){
+			WebElement checkbox = driver.findElementById("id_submissionstatement");
+			checkbox.click();
+		}
+		else{}
 	}
 /**
  * Enters the text for an online submission.
@@ -135,5 +149,27 @@ public class AssignmentAddSubmission {
 				this.properties.get("buttonSubmit") +
 				"']");
 		button.click();
+	}
+/**
+ * Makes the test fail if mod/assign/view.php does not contain the assignment title. Useful for verifying that the page has been loaded.
+ * @param assignmentName The Assignment name, it should appear as a heading on the submission page. Pass the assignment name form the test.
+ */
+	public void assertSubmissionPage(String assignmentName) {
+		PassFailCriteria passFail = new PassFailCriteria(driver);
+		passFail.assertTextPresentByXpath("//h2[contains(.,'" +
+				assignmentName +
+				"')]", "The assignment name should appear onscreen.", assignmentName);
+	}
+/**
+ * Makes the test fail if the submission text doesn't appear on mod/assign/view.php. This verifies that the assignment has been saved.
+ * @param submissionText The submission text that the student has entered. The value for this is passed from the test.
+ */
+	public void assertSubmissionOnlineText(String submissionText) {
+		PassFailCriteria passFail = new PassFailCriteria(driver);
+		passFail.assertTextPresentByXpath("//tr[contains(.,'" +
+				this.properties.get("submissionTableOnlineText") +
+				"')][contains(.,'" +
+				submissionText +
+				"')]", "The text entered as a submission should appear onscreen.", submissionText);		
 	}
 }
