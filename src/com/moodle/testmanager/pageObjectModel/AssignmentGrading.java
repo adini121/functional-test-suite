@@ -11,7 +11,7 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 import com.moodle.seleniumutils.FormActions;
 import com.moodle.seleniumutils.PassFailCriteria;
 /**
- * The page object model for the Assignment module.
+ * The page object model for the Assignment Grading.
  * @author Tim Barker 
  * @see <a href="http://www.gnu.org/copyleft/gpl.html">License: GNU GPL v3 or later</a>
  */
@@ -40,9 +40,6 @@ public class AssignmentGrading {
 			dataLoad.load(new FileInputStream(data));
 		} catch (Exception e) {}
 		//put values from the properties file into hashmap
-		this.properties.put("linkComments", dataLoad.getProperty("linkComments"));
-		this.properties.put("linkSaveComment", dataLoad.getProperty("linkSaveComment"));
-		this.properties.put("linkCancelComment", dataLoad.getProperty("linkCancelComment"));
 		this.properties.put("submissionStatusField", dataLoad.getProperty("submissionStatusField"));
 		this.properties.put("errorSubmissionStatus", dataLoad.getProperty("errorSubmissionStatus"));
 		this.properties.put("errorAssignmentName", dataLoad.getProperty("errorAssignmentName"));
@@ -63,35 +60,6 @@ public class AssignmentGrading {
  */
 	public void clickLinkFileSubmission(String filename) {
 		WebElement link = driver.findElementByLinkText(filename);
-		link.click();
-	}
-/**
- * Clicks the comments link to display submission comments.
- */
-	public void clickLinkSubmissionComments() {
-		WebElement link = driver.findElementByPartialLinkText(this.properties.get("linkComments"));
-		link.click();
-	}
-/**
- * Enters text in the submission comments text box.
- * @param desiredComment The text that you want to enter in the comments box. Pass from the test.
- */
-	public void enterTextSubmissionComments(String desiredComment) {
-		WebElement textArea = driver.findElementByXPath("//div[@class='comment-area']/div/textarea");
-		textArea.sendKeys(desiredComment);
-	}
-/**
- * Clicks the link to save a submission comment.
- */
-	public void clickLinkSaveComment() {
-		WebElement link = driver.findElementByLinkText(this.properties.get("linkSaveComment"));
-		link.click();
-	}
-/**
- * Clicks the link to cancel a submission comment.
- */
-	public void clickLinkCancelComment() {
-		WebElement link = driver.findElementByLinkText(this.properties.get("linkCancelComment"));
 		link.click();
 	}
 /**
