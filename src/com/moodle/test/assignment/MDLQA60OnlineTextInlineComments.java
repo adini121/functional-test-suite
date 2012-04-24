@@ -112,7 +112,7 @@ public class MDLQA60OnlineTextInlineComments {
 			assignment.clickButtonGradeAssignment();
 			grading.clickLinkSubmittedForGrading(this.properties.get("studentFirstname") + " " + this.properties.get("studentSurname"));
 			submission.assertSubmissionOnlineText(this.properties.get("MDLQA59StudentEditedSubmissionText"));
-			grading.assertSubmissionStatus(this.properties.get("MDLQA60SubmissionStatusSubmitted"));
+			grading.assertSubmissionStatusGradingForm(this.properties.get("MDLQA60SubmissionStatusSubmitted"));
 		}
 		// 3. Add an inline comment then click the 'Save changes' button.
 		@Test
@@ -129,7 +129,7 @@ public class MDLQA60OnlineTextInlineComments {
 		}
 		@Test
 		public void linkTextChanged() {
-			grading.assertSubmissionStatus(this.properties.get("MDLQA60SubmissionStatusGraded"));
+			grading.assertSubmissionStatusGradingForm(this.properties.get("MDLQA60SubmissionStatusGraded"));
 			user.selectLogout();
 		}
 		//Tear Down webdriver for @Test methods

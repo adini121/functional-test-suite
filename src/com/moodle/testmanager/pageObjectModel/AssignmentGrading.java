@@ -43,6 +43,10 @@ public class AssignmentGrading {
 		this.properties.put("submissionStatusField", dataLoad.getProperty("submissionStatusField"));
 		this.properties.put("errorSubmissionStatus", dataLoad.getProperty("errorSubmissionStatus"));
 		this.properties.put("errorAssignmentName", dataLoad.getProperty("errorAssignmentName"));
+		this.properties.put("gradingSummarySubmittedField", dataLoad.getProperty("gradingSummarySubmittedField"));
+		this.properties.put("errorSubmitted", dataLoad.getProperty("errorSubmitted"));
+		this.properties.put("errorFeedbackComments", dataLoad.getProperty("errorFeedbackComments"));
+		this.properties.put("errorGrade", dataLoad.getProperty("errorGrade"));
 		//this.properties.put("PROPERTY", dataLoad.getProperty("PROPERTY"));
 	}
 /**
@@ -52,6 +56,15 @@ public class AssignmentGrading {
 		WebElement link = driver.findElementByXPath("//tr[contains(.,'" +
 				studentName +
 				"')]/td/a[@class='submissionstatussubmitted']");
+		link.click();
+	}
+/**
+ * Clicks the Grade link
+ */
+	public void clickLinkGrade(String studentName) {
+		WebElement link = driver.findElementByXPath("//tr[contains(.,'" +
+				studentName +
+				"')]/td/a[@class='submissionstatus']");
 		link.click();
 	}
 /**
@@ -132,15 +145,57 @@ public class AssignmentGrading {
 				"')]", this.properties.get("errorAssignmentName"), assignmentName);
 	}
 /**
- * Makes the test fail if the submission status is not displayed onscreen when grading an assignment.
+ * Makes the test fail if the submission status is not displayed on the grading form when grading an assignment.
  * @param submissionStatus The desired submission status. The value of which is passed from the test.
  */
-	public void assertSubmissionStatus(String submissionStatus) {
+	public void assertSubmissionStatusGradingForm(String submissionStatus) {
 		PassFailCriteria passFail = new PassFailCriteria(driver);
 		passFail.assertTextPresentByXpath("//tr[contains(.,'" +
 				this.properties.get("submissionStatusField") +
 				"')][contains(.,'" +
 				submissionStatus +
 				"')]", this.properties.get("errorSubmissionStatus") + " " + submissionStatus, submissionStatus);
+	}
+/**
+ * Makes the test fail if the corrent number of submissions are not displayed in the grading summary table.
+ * @param numberOfSubmissions The number of submissions that should be displayed, this value is passed from the test.
+ */
+	public void assertNumberOfSubmissions(String numberOfSubmissions) {
+		PassFailCriteria passFail = new PassFailCriteria(driver);
+		passFail.assertTextPresentByXpath(".//tr[contains(.,'" + this.properties.get("gradingSummarySubmittedField") + "')][contains(.,'" + numberOfSubmissions + "')]", 
+				numberOfSubmissions + this.properties.get("errorSubmitted"), numberOfSubmissions);		
+	}
+/**
+ * Makes the test fail if a given feedback comment doesn't appear in the grading table. 
+ * @param feedbackComments The feedback comments that have been entered and should appear in the grading table.
+ * @param studentFirstName The Student's first name
+ * @param studentSurname The Student's surname
+ */
+	public void assertFeedbackComments(String feedbackComments, String studentFirstName, String studentSurname) {
+		PassFailCriteria passFail = new PassFailCriteria(driver);
+		passFail.assertTextPresentByXpath("//tr[contains(.,'" + studentFirstName + " " + studentSurname + "')][contains(.,'" + feedbackComments + "')]", 
+				this.properties.get("errorFeedbackComments") + feedbackComments, feedbackComments);
+	}
+/**
+ * Makes the test fail if the students grade doesn't appear in the grading table.
+ * @param grade The grade that has been given to the student and you are expecting to appear in the grading table.
+ * @param studentFirstName The student's first name.
+ * @param studentSurname The student's surname.
+ */
+	public void assertFinalGradeStandard(String grade, String studentFirstName, String studentSurname) {
+		PassFailCriteria passFail = new PassFailCriteria(driver);
+		passFail.assertTextPresentByXpath("//tr[contains(.,'" + studentFirstName + " " + studentSurname + "')][contains(.,'" + grade + "')]", 
+				this.properties.get("errorGrade"), grade);
+	}
+/**
+ * Makes the test fail if the submission status doesn't appear in the grading table.
+ * @param status The submission status that you are expecting to see in the grading table. 
+ * @param studentFirstName The student's first name.
+ * @param studentSurname The student's surname.
+ */
+	public void assertSubmissionStatusGradingTable(String status, String studentFirstName, String studentSurname) {
+		PassFailCriteria passFail = new PassFailCriteria(driver);
+		passFail.assertTextPresentByXpath("//tr[contains(.,'" + studentFirstName + " " + studentSurname + "')][contains(.,'" + status + "')]",
+				this.properties.get("errorSubmissionStatus"), status);
 	}
 }
