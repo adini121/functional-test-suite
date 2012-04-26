@@ -52,6 +52,7 @@ public class BlockSettings {
 		this.properties.put("treeEditProfile", blockSettings.getProperty("treeEditProfile"));
 		this.properties.put("treeForumAdmin", blockSettings.getProperty("treeForumAdmin"));
 		this.properties.put("treeDontTrack", blockSettings.getProperty("treeDontTrack"));
+		this.properties.put("treeAssignmentAdministration", blockSettings.getProperty("treeAssignmentAdministration"));
 		this.properties.put("exceptionTrackingCanBeEnabled", blockSettings.getProperty("exceptionTrackingCanBeEnabled"));
 		this.properties.put("exceptionTrackingCanBeDisabled", blockSettings.getProperty("exceptionTrackingCanBeDisabled"));
 	}
@@ -172,5 +173,14 @@ public class BlockSettings {
 				"')]/ul/li/*/a[contains(.,'" +
 				this.properties.get("treeDontTrack") +
 				"')]", this.properties.get("exceptionTrackingCanBeDisabled"), 0);
+	}
+/**
+ * Navigates to the Edit assignment settngs page via the tree view whether it's expanded or collapsed.
+ */
+	public void navigateEditSettings() {
+		Navigation navigate = new Navigation(driver);
+		navigate.navigateTree2DeepByXpath(".//li[contains(.,'" 
+		+ this.properties.get("treeAssignmentAdministration") + "')]", 
+		"//a[@title='" + this.properties.get("treeEditSettings") + "']");
 	}
 }

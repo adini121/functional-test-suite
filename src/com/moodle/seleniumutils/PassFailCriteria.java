@@ -24,7 +24,7 @@ public class PassFailCriteria {
 		this.driver = driver;
 	}
 /**
- * Asserts that an element appears onscreen when located by css selector. The selector is passed from the page object.
+ * Asserts that an element does not appear onscreen when located by css selector. The selector is passed from the page object.
  * @param cssSelector The CSS locator which is passed by the page object.
  * @param exceptionMessage The Exception Message which is passed by the page object.
  * @throws Exception Throws an exception with the text from the Exception Message parameter.

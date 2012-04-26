@@ -7,6 +7,8 @@ import java.util.Properties;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebDriver;
+
+import com.moodle.seleniumutils.PassFailCriteria;
 /**
  * The page object model for the Assignment module.
  * @author Tim Barker 
@@ -40,6 +42,7 @@ public class Assignment {
 		this.properties.put("buttonEditMySubmission", dataLoad.getProperty("buttonEditMySubmission"));
 		this.properties.put("buttonGradeAssignment", dataLoad.getProperty("buttonGradeAssignment"));
 		this.properties.put("buttonSubmitAssignment", dataLoad.getProperty("buttonSubmitAssignment"));
+		this.properties.put("exceptionSubmissionEnabled", dataLoad.getProperty("exceptionSubmissionEnabled"));
 		//this.properties.put("PROPERTY", dataLoad.getProperty("PROPERTY"));
 	}
 /**
@@ -76,5 +79,9 @@ public class Assignment {
 	public void clickAssignmentLink(String assignmentName) {
 		WebElement link = driver.findElementByLinkText(assignmentName);
 		link.click();
+	}
+	public void assertFileSubmisisonDisabled() throws Exception {
+		PassFailCriteria passFail = new PassFailCriteria(driver);
+		passFail.assertItemNotOnscreenByCSSSelector("input[value='" + this.properties.get("buttonEditMySubmission") + "']", this.properties.get("exceptionSubmissionEnabled"), 2);
 	}
 }

@@ -461,7 +461,7 @@ public class AssignmentAddAssignment {
 /**
  * Selects the checkbox to enable or disable the Allow access from field.
  */
-	public void selectAllowAccessFromEnable() {
+	public void checkboxAllowAccessFromEnable() {
 		WebElement checkbox = driver.findElementByName("availablefrom[enabled]");
 		checkbox.click();
 	}
@@ -484,7 +484,7 @@ public class AssignmentAddAssignment {
 /**
  * Selects the checkbox to enable or disable the Allow access until field.
  */
-	public void selectAllowAccessFromUntil() {
+	public void checkboxAllowAccessUntilEnable() {
 		WebElement checkbox = driver.findElementByName("availableuntil[enabled]");
 		checkbox.click();
 	}	

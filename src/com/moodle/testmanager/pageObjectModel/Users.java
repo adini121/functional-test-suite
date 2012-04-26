@@ -75,4 +75,19 @@ public class Users {
 		WebElement password = driver.findElement(By .id("password"));
 		password.sendKeys(userPassword);	
 	}
+/**
+ * Logs a given user into the system. calling this method avoids repeating code.
+ * @param uname The Username of the user you want to log into Moodle. Pass this value from the test.
+ * @param userPassword The password of the user that you want to log into the system. Pass this value from the test.
+ */
+	public void loginToSystem(String uname, String userPassword) {
+		WebElement login;
+		login = driver.findElement(By .partialLinkText(this.properties.get("loginLink")));
+		login.click();
+		WebElement username = driver.findElement(By .id("username"));
+		username.sendKeys(uname);
+		WebElement password = driver.findElement(By .id("password"));
+		password.sendKeys(userPassword);	
+		driver.findElement(By .id("loginbtn")).click();	
+	}
 }
