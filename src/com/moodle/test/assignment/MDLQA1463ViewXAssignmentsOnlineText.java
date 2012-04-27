@@ -36,6 +36,7 @@ import com.moodle.testmanager.pageObjectModel.Users;
 public class MDLQA1463ViewXAssignmentsOnlineText {
 		//The WebDriver
 		static RemoteWebDriver driver;
+		//static FirefoxDriver driver;
 		static SeleniumManager sm;
 		//TEST DATA
 		//Test Data Property Files
@@ -87,7 +88,9 @@ public class MDLQA1463ViewXAssignmentsOnlineText {
 		//Call setup method
 			sm = new SeleniumManager();
 			sm.startRemotes(gridHubURL, browserType);
+			//sm.startFirefoxDriver();
 			driver = sm.getRemoteDriver();
+			//driver = sm.getFirefoxDriver();
 			driver.get(moodleHomePage);
 		}
 		/*
@@ -122,7 +125,7 @@ public class MDLQA1463ViewXAssignmentsOnlineText {
 			//Login as student 1
 			user.selectLoginLink();
 			user.enterUsername(this.properties.get("studentUsername"));
-			user.enterPassword("password");
+			user.enterPassword(this.properties.get("password"));
 			user.clickLoginButton();
 			//Access course
 			course.clickCourseLink(this.properties.get("courseName"));
@@ -139,7 +142,7 @@ public class MDLQA1463ViewXAssignmentsOnlineText {
 		 * 2. Login as a teacher and check that a 'View 1 submitted assignments' link is displayed on the assignment page and also the assignments index page.
 		 */
 		@Test
-		public void teacherChecksLink() {
+		public void teacherChecksLink() throws Exception {
 			//Teacher logs in
 			user.selectLoginLink();
 			user.enterUsername(this.properties.get("teacherUsername"));
@@ -162,7 +165,7 @@ public class MDLQA1463ViewXAssignmentsOnlineText {
 			//Login as student 2
 			user.selectLoginLink();
 			user.enterUsername(this.properties.get("student2Username"));
-			user.enterPassword("password");
+			user.enterPassword(this.properties.get("password"));
 			user.clickLoginButton();
 			//Access course
 			course.clickCourseLink(this.properties.get("courseName"));
@@ -179,7 +182,7 @@ public class MDLQA1463ViewXAssignmentsOnlineText {
 		 * 4. Login as a teacher and check that the link now states 'View 2 submitted assignments'.
 		 */
 		@Test
-		public void teacherChecksSingleLink() {
+		public void teacherChecksSingleLink() throws Exception {
 			//Teacher logs in
 			user.selectLoginLink();
 			user.enterUsername(this.properties.get("teacherUsername"));

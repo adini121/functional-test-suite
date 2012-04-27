@@ -159,11 +159,13 @@ public class AssignmentGrading {
 /**
  * Makes the test fail if the corrent number of submissions are not displayed in the grading summary table.
  * @param numberOfSubmissions The number of submissions that should be displayed, this value is passed from the test.
+ * @throws Exception Throws a custom exception if the element is not present onscreen.
  */
-	public void assertNumberOfSubmissions(String numberOfSubmissions) {
+	public void assertNumberOfSubmissions(String numberOfSubmissions) throws Exception {
 		PassFailCriteria passFail = new PassFailCriteria(driver);
-		passFail.assertTextPresentByXpath(".//tr[contains(.,'" + this.properties.get("gradingSummarySubmittedField") + "')][contains(.,'" + numberOfSubmissions + "')]", 
-				numberOfSubmissions + this.properties.get("errorSubmitted"), numberOfSubmissions);		
+		//passFail.assertTextPresentByXpath(".//tr[contains(.,'" + this.properties.get("gradingSummarySubmittedField") + "')][contains(.,'" + numberOfSubmissions + "')]", 
+		//		numberOfSubmissions + this.properties.get("errorSubmitted"), numberOfSubmissions);
+		passFail.assertElementIsPresentByXpath(".//tr[contains(.,'" + this.properties.get("gradingSummarySubmittedField") + "')][contains(.,'" + numberOfSubmissions + "')]", this.properties.get("errorSubmitted"), 2);
 	}
 /**
  * Makes the test fail if a given feedback comment doesn't appear in the grading table. 

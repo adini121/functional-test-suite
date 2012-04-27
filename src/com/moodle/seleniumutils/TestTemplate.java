@@ -34,7 +34,7 @@ public class TestTemplate {
 		public static String someTestData = "properties/data/user/Forum/TESTDATA.properties";
 		//Data Hashmap
 		private Map<String, String> properties = new HashMap<String, String>();
-		//Declare page objects e.g. Users.
+		//Construct page objects e.g. Users.
 		private Users user = new Users(driver);
 		//Load test data from properties file
 		public TestTemplate(){
