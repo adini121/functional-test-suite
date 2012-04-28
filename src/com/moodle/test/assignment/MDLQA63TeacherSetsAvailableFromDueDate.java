@@ -9,6 +9,7 @@ import java.util.Properties;
 
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
+import org.junit.Test;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
 import com.moodle.seleniumutils.SeleniumManager;
@@ -91,14 +92,17 @@ public class MDLQA63TeacherSetsAvailableFromDueDate {
 			String moodleHomePage = startupConfig.getProperty("moodleHomePage");
 		//Call setup method
 			sm = new SeleniumManager();
-			sm.startRemotes(gridHubURL, browserType);
-			driver = sm.getRemoteDriver();
+			//sm.startRemotes(gridHubURL, browserType);
+			sm.startChromeDriver();
+			//driver = sm.getRemoteDriver();
+			driver = sm.getChromeDriver();
 			driver.get(moodleHomePage);
 		}
 		/*
 		 * PRE-REQUISITES
 		 * This test requires an assignment with File Submissions enabled.
 		 */
+		@Test
 		public void setupAssignment() {
 			//Login as the teacher. 
 			user.loginToSystem(this.properties.get("teacherUsername"), this.properties.get("password"));			
@@ -119,6 +123,7 @@ public class MDLQA63TeacherSetsAvailableFromDueDate {
 		 * START OF TEST
 		 * 1. Login as a teacher, update the assignment and set an 'Available from' date.
 		 */
+		@Test
 		public void setAvailableFrom() {
 			//Login as the teacher. 
 			user.loginToSystem(this.properties.get("teacherUsername"), this.properties.get("password"));
@@ -153,6 +158,7 @@ public class MDLQA63TeacherSetsAvailableFromDueDate {
 		/*
 		 * 2. Login as a student and check that the 'Available from' date is displayed in the assignment and that before this date there is no upload file option.
 		 */
+		@Test
 		public void studentChecksFromDates() throws Exception {
 			//Student logs in.
 			user.loginToSystem(this.properties.get("studentUsername"), this.properties.get("password"));
@@ -168,6 +174,7 @@ public class MDLQA63TeacherSetsAvailableFromDueDate {
 		/*
 		 * 3. Login as a teacher, update the assignment and set a due date. Set 'Prevent late submissions' to Yes.
 		 */
+		@Test
 		public void setDueDateInsidePartition() {
 			//Login as the teacher. 
 			user.loginToSystem(this.properties.get("teacherUsername"), this.properties.get("password"));
@@ -202,6 +209,7 @@ public class MDLQA63TeacherSetsAvailableFromDueDate {
 		/*
 		 * 4. Login as a student and check that the due date is displayed in the assignment and also in the course calendar.
 		 */
+		@Test
 		public void studentChecksSubmissionCanBeMade() {
 			//Student logs in.
 			user.loginToSystem(this.properties.get("studentUsername"), this.properties.get("password"));
@@ -212,6 +220,7 @@ public class MDLQA63TeacherSetsAvailableFromDueDate {
 			assignment.clickButtonEditMySubmission();
 			user.selectLogout();
 		}
+		@Test
 		public void setDueDateOutsidePartition() {
 			//Login as the teacher. 
 			user.loginToSystem(this.properties.get("teacherUsername"), this.properties.get("password"));
@@ -246,6 +255,7 @@ public class MDLQA63TeacherSetsAvailableFromDueDate {
 		/*
 		 * 5. Check that after the due date there is no longer an upload file option.
 		 */
+		@Test
 		public void studentChecksSubmissionCannotBeMade() throws Exception {
 			//Student logs in.
 			user.loginToSystem(this.properties.get("studentUsername"), this.properties.get("password"));
@@ -265,6 +275,7 @@ public class MDLQA63TeacherSetsAvailableFromDueDate {
 		@AfterClass
 		static public void Quit() {
 		//End Webdriver Session by calling teardown method
-			sm.teardown();
+			//sm.teardown();
+			sm.teardownChrome();
 		}
 }

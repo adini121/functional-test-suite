@@ -90,7 +90,9 @@ public class MDLQA61OfflineActivityGradeAndComments {
 		//Call setup method
 			sm = new SeleniumManager();
 			sm.startRemotes(gridHubURL, browserType);
+			//sm.startChromeDriver();
 			driver = sm.getRemoteDriver();
+			//driver = sm.getChromeDriver();
 			driver.get(moodleHomePage);
 		}
 		/*
@@ -155,7 +157,7 @@ public class MDLQA61OfflineActivityGradeAndComments {
 		 * the assignment just graded and the link text in the status column has changed from 'Grade' to 'Update'. 
 		 */
 		@Test
-		public void checkGrade() {
+		public void checkGrade() throws Exception {
 			//Check the feedback comments
 			gradeAssignment.assertFeedbackComments(this.properties.get("MDLQA61FeedbackComment"), this.properties.get("studentFirstname"), this.properties.get("studentSurname"));
 			//Check the final grade
@@ -168,6 +170,7 @@ public class MDLQA61OfflineActivityGradeAndComments {
 		static public void Quit() {
 		//End Webdriver Session by calling teardown method
 			sm.teardown();
+			//sm.teardownChrome();
 		}
 		//
 		//END OF TEST

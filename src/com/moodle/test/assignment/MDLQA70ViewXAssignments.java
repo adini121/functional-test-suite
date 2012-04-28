@@ -81,7 +81,7 @@ public class MDLQA70ViewXAssignments {
 		 * 1. Login as a teacher and check that the link now states 'View 2 submitted assignments'.
 		 */
 		@Test
-		public void teacherChecksLink() {
+		public void teacherChecksLink() throws Exception {
 			//Teacher logs in
 			user.selectLoginLink();
 			user.enterUsername(this.properties.get("teacherUsername"));

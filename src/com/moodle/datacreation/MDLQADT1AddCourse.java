@@ -13,6 +13,7 @@ import java.util.Properties;
 
 import org.junit.*;
 import org.openqa.selenium.remote.RemoteWebDriver;
+
 import com.moodle.seleniumutils.SeleniumManager;
 import com.moodle.testmanager.pageObjectModel.Courses;
 import com.moodle.testmanager.pageObjectModel.Users;
@@ -23,7 +24,6 @@ public class MDLQADT1AddCourse {
 		public static String runParameters = "properties/runParameters.properties";
 		public static String courseData = "properties/data/user/Courses/courseData.properties";
 		public static String usersData = "properties/data/user/Users/usersData.properties";
-		//Weekly outline section
 		private Map<String, String> properties = new HashMap<String, String>();
 		//Load test data from properties file
 		public MDLQADT1AddCourse(){
@@ -40,25 +40,26 @@ public class MDLQADT1AddCourse {
 			this.properties.put("courseName", testData.getProperty("courseName"));
 			this.properties.put("courseShortname", testData.getProperty("courseShortname"));
 		}
-		//define "driver" in a field
 		static RemoteWebDriver driver;
 		static SeleniumManager sm;
-		//Setup webdriver for @Test methods
 		@BeforeClass
-		static public void automateTestSetup()throws FileNotFoundException, IOException{
-		//Load properties required for test run
-		Properties startupConfig = new Properties();
-		startupConfig.load(new FileInputStream(runParameters));
-		String gridHubURL = startupConfig.getProperty("gridHubURL");
-		String browserType = startupConfig.getProperty("browserType");
-		String moodleHomePage = startupConfig.getProperty("moodleHomePage");
-		//Call setup method
-		sm = new SeleniumManager();
-		sm.startRemotes(gridHubURL, browserType);
-		driver = sm.getRemoteDriver();
-		driver.get(moodleHomePage);
-		}	
-	@Before
+		public static void automateTestSetup() throws FileNotFoundException, IOException {
+			//Load properties required for test run
+				Properties startupConfig = new Properties();
+				startupConfig.load(new FileInputStream(runParameters));
+				String gridHubURL = startupConfig.getProperty("gridHubURL");
+				String browserType = startupConfig.getProperty("browserType");
+				String moodleHomePage = startupConfig.getProperty("moodleHomePage");
+				//Call setup method
+				sm = new SeleniumManager();
+				//sm.startRemotes(gridHubURL, browserType);
+				sm.startChromeDriver();
+				//driver = sm.getRemoteDriver();
+				driver = sm.getChromeDriver();
+				driver.get(moodleHomePage);
+				}
+		
+		@Test
 		public void login(){
 		//Log in as the admin user
 		Users userLogin = new Users(driver);
@@ -68,7 +69,7 @@ public class MDLQADT1AddCourse {
 		userLogin.clickLoginButton();
 		}
 		//Test to add a course
-	@Test
+	//@Test
 		public void addCourse() throws MalformedURLException {
 		Courses addCourse = new Courses(driver);
 		addCourse.clickAddCourse();
@@ -86,6 +87,7 @@ public class MDLQADT1AddCourse {
 	@AfterClass
 		static public void Quit() {
 		//End Webdriver Session by calling teardown method
-		sm.teardown();
+		//sm.teardown();
+		sm.teardownChrome();
 		}		
 }

@@ -49,6 +49,7 @@ public class AssignmentAddSubmission {
 		this.properties.put("buttonOK", dataLoad.getProperty("buttonOK"));
 		this.properties.put("buttonSubmit", dataLoad.getProperty("buttonSubmit"));
 		this.properties.put("submissionTableOnlineText", dataLoad.getProperty("submissionTableOnlineText"));
+		this.properties.put("errorMessageSubmissionNotSaved", dataLoad.getProperty("errorMessageSubmissionNotSaved"));
 		//this.properties.put("PROPERTY", dataLoad.getProperty("PROPERTY"));
 	}
 /*
@@ -163,13 +164,14 @@ public class AssignmentAddSubmission {
 /**
  * Makes the test fail if the submission text doesn't appear on mod/assign/view.php. This verifies that the assignment has been saved.
  * @param submissionText The submission text that the student has entered. The value for this is passed from the test.
+ * @throws Exception Throws an exception if the specified element ins not present onscreen.
  */
-	public void assertSubmissionOnlineText(String submissionText) {
+	public void assertSubmissionOnlineText(String submissionText) throws Exception {
 		PassFailCriteria passFail = new PassFailCriteria(driver);
-		passFail.assertTextPresentByXpath("//tr[contains(.,'" +
+		passFail.assertElementIsPresentByXpath("//tr[contains(.,'" +
 				this.properties.get("submissionTableOnlineText") +
 				"')][contains(.,'" +
 				submissionText +
-				"')]", "The text entered as a submission should appear onscreen.", submissionText);		
+				"')]", this.properties.get("errorMessageSubmissionNotSaved"), 2);		
 	}
 }

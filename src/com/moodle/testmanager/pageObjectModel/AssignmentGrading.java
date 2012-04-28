@@ -147,14 +147,15 @@ public class AssignmentGrading {
 /**
  * Makes the test fail if the submission status is not displayed on the grading form when grading an assignment.
  * @param submissionStatus The desired submission status. The value of which is passed from the test.
+ * @throws Exception Throws exception when the status given is not present onscreen.
  */
-	public void assertSubmissionStatusGradingForm(String submissionStatus) {
+	public void assertSubmissionStatusGradingForm(String submissionStatus) throws Exception {
 		PassFailCriteria passFail = new PassFailCriteria(driver);
-		passFail.assertTextPresentByXpath("//tr[contains(.,'" +
+		passFail.assertElementIsPresentByXpath("//tr[contains(.,'" +
 				this.properties.get("submissionStatusField") +
 				"')][contains(.,'" +
 				submissionStatus +
-				"')]", this.properties.get("errorSubmissionStatus") + " " + submissionStatus, submissionStatus);
+				"')]", this.properties.get("errorSubmissionStatus") + " " + submissionStatus, 2);
 	}
 /**
  * Makes the test fail if the corrent number of submissions are not displayed in the grading summary table.
@@ -172,32 +173,32 @@ public class AssignmentGrading {
  * @param feedbackComments The feedback comments that have been entered and should appear in the grading table.
  * @param studentFirstName The Student's first name
  * @param studentSurname The Student's surname
+ * @throws Exception Throws an exception if the given text is not displayed int the feedback comments field.
  */
-	public void assertFeedbackComments(String feedbackComments, String studentFirstName, String studentSurname) {
+	public void assertFeedbackComments(String feedbackComments, String studentFirstName, String studentSurname) throws Exception {
 		PassFailCriteria passFail = new PassFailCriteria(driver);
-		passFail.assertTextPresentByXpath("//tr[contains(.,'" + studentFirstName + " " + studentSurname + "')][contains(.,'" + feedbackComments + "')]", 
-				this.properties.get("errorFeedbackComments") + feedbackComments, feedbackComments);
+		passFail.assertElementIsPresentByXpath("//tr[contains(.,'" + studentFirstName + " " + studentSurname + "')][contains(.,'" + feedbackComments + "')]", this.properties.get("errorFeedbackComments") + feedbackComments, 2);
 	}
 /**
  * Makes the test fail if the students grade doesn't appear in the grading table.
  * @param grade The grade that has been given to the student and you are expecting to appear in the grading table.
  * @param studentFirstName The student's first name.
  * @param studentSurname The student's surname.
+ * @throws Exception Throws an exception if the grade given doesn't appear in the field for grade.
  */
-	public void assertFinalGradeStandard(String grade, String studentFirstName, String studentSurname) {
+	public void assertFinalGradeStandard(String grade, String studentFirstName, String studentSurname) throws Exception {
 		PassFailCriteria passFail = new PassFailCriteria(driver);
-		passFail.assertTextPresentByXpath("//tr[contains(.,'" + studentFirstName + " " + studentSurname + "')][contains(.,'" + grade + "')]", 
-				this.properties.get("errorGrade"), grade);
+		passFail.assertElementIsPresentByXpath("//tr[contains(.,'" + studentFirstName + " " + studentSurname + "')][contains(.,'" + grade + "')]", this.properties.get("errorGrade"), 1);
 	}
 /**
  * Makes the test fail if the submission status doesn't appear in the grading table.
  * @param status The submission status that you are expecting to see in the grading table. 
  * @param studentFirstName The student's first name.
  * @param studentSurname The student's surname.
+ * @throws Exception Throws an exception if the submission status doesn't appear in the grading table.
  */
-	public void assertSubmissionStatusGradingTable(String status, String studentFirstName, String studentSurname) {
+	public void assertSubmissionStatusGradingTable(String status, String studentFirstName, String studentSurname) throws Exception {
 		PassFailCriteria passFail = new PassFailCriteria(driver);
-		passFail.assertTextPresentByXpath("//tr[contains(.,'" + studentFirstName + " " + studentSurname + "')][contains(.,'" + status + "')]",
-				this.properties.get("errorSubmissionStatus"), status);
+		passFail.assertElementIsPresentByXpath("//tr[contains(.,'" + studentFirstName + " " + studentSurname + "')][contains(.,'" + status + "')]", this.properties.get("errorSubmissionStatus"), 1);
 	}
 }

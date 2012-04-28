@@ -20,6 +20,7 @@ import com.moodle.testmanager.pageObjectModel.AssignmentAddSubmission;
 import com.moodle.testmanager.pageObjectModel.Courses;
 import com.moodle.testmanager.pageObjectModel.CoursesAddAnActivity;
 import com.moodle.testmanager.pageObjectModel.Users;
+import com.opera.core.systems.OperaDriver;
 /*
  * DESCRIPTION:
  * 
@@ -88,7 +89,9 @@ public class MDLQA59OnlineTextAddEdit {
 		//Call setup method
 			sm = new SeleniumManager();
 			sm.startRemotes(gridHubURL, browserType);
+			//sm.startChromeDriver();
 			driver = sm.getRemoteDriver();
+			//driver = sm.getChromeDriver();
 			driver.get(moodleHomePage);
 		}
 		//PRE-REQUISITES
@@ -111,6 +114,7 @@ public class MDLQA59OnlineTextAddEdit {
 		}
 		//TEST
 		//1. Login as student and access the assignment
+		@Test
 		public void loginAsStudentAccessAssingment() {
 			user.selectLoginLink();
 			user.enterUsername(this.properties.get("studentUsername"));
@@ -120,8 +124,9 @@ public class MDLQA59OnlineTextAddEdit {
 			assignment.clickAssignmentLink(this.properties.get("MDLQA59AssignmentName"));
 			submission.assertSubmissionPage(this.properties.get("MDLQA59AssignmentName"));
 		}
+		@Test
 		//2. Click the 'Add submission' button, add some text, then click the 'Save changes' button.
-		public void addSubmission() {
+		public void addSubmission() throws Exception {
 			assignment.clickButtonEditMySubmission();
 			submission.clickCheckboxSubmissionStatement();
 			submission.enterOnlineText(this.properties.get("MDLQA59StudentSubmissionText"));
@@ -129,6 +134,7 @@ public class MDLQA59OnlineTextAddEdit {
 			submission.assertSubmissionPage(this.properties.get("MDLQA59AssignmentName"));
 			submission.assertSubmissionOnlineText(this.properties.get("MDLQA59StudentSubmissionText"));
 		}
+		@Test
 		//3. Click the 'Edit my submission' button again, edit the text, then click the 'Save changes' button.
 		public void editSubmission() {
 			assignment.clickButtonEditMySubmission();
@@ -136,11 +142,13 @@ public class MDLQA59OnlineTextAddEdit {
 			submission.enterOnlineText(this.properties.get("MDLQA59StudentEditedSubmissionText"));
 			submission.clickButtonSaveChanges();
 		}
+		@Test
 		//4. Check that the changes have been saved and the latest submission date and time is displayed.
-		public void verifyChangesSaved() {
+		public void verifyChangesSaved() throws Exception {
 			submission.assertSubmissionPage(this.properties.get("MDLQA59AssignmentName"));
-			submission.assertSubmissionOnlineText(this.properties.get("MDLQA59StudentEditedSubmissionText"));
+			submission.assertSubmissionOnlineText(this.properties.get("MDLQA59StudentSubmissionText") + this.properties.get("MDLQA59StudentEditedSubmissionText"));
 		}
+		@Test
 		//5. Check that the submission date and time is also displayed on the assignment index page.
 		public void verifySubmissionDateAndTime() throws IOException {
 			screenCapture.takeScreenshotWithGivenLocationAndName(this.properties.get("MDLQA59ScreenCaptureLocation"));
@@ -150,6 +158,7 @@ public class MDLQA59OnlineTextAddEdit {
 		@AfterClass
 		static public void Quit() {
 		//End Webdriver Session by calling teardown method
+			//sm.teardownChrome();
 			sm.teardown();
 		}
 		//

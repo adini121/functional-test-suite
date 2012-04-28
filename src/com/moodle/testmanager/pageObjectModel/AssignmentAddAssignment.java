@@ -4,8 +4,10 @@ import java.io.FileInputStream;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
+import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
@@ -54,14 +56,28 @@ public class AssignmentAddAssignment {
  * @param assignmentName The value to be entered for Assignment Name.
  */
 	public void enterAssignmentName(String assignmentName) {
-		WebElement name = driver.findElementById("id_name");
-		name.sendKeys(assignmentName);
-	}
+		boolean itemVisible = false;
+		try{
+			driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
+			WebElement name = driver.findElementById("id_name");
+			itemVisible = name.isDisplayed();
+		}
+		catch (NoSuchElementException ex){}
+		if (itemVisible) {
+			WebElement name = driver.findElementById("id_name");
+			name.sendKeys(assignmentName);
+		}
+		else{ 
+			WebElement xpathName = driver.findElementByXPath(".//div[contains(.,'Assignment name')]/div/input");
+			xpathName.sendKeys(assignmentName);
+		}
+	}	
 /**
  * Enters a value for assigment description. Should work for versions <2.3 and >=2.3.
  * @param description The value to be entered for Description.
  */
 	public void enterAssignmentDescription(String description) {
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		FormActions textAreaEntry = new FormActions(driver);
 		textAreaEntry.enterValueInTinyMCE(description);
 	}
