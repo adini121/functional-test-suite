@@ -77,6 +77,7 @@ public class AssignmentAddSubmission {
  * @param textToBeEntered The test to be entered as the online text submission.
  */
 	public void enterOnlineText(String textToBeEntered) {
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		FormActions textAreaEntry = new FormActions(driver);
 		textAreaEntry.enterValueInTinyMCE(textToBeEntered);
 	}

@@ -92,10 +92,10 @@ public class MDLQA63TeacherSetsAvailableFromDueDate {
 			String moodleHomePage = startupConfig.getProperty("moodleHomePage");
 		//Call setup method
 			sm = new SeleniumManager();
-			//sm.startRemotes(gridHubURL, browserType);
-			sm.startChromeDriver();
-			//driver = sm.getRemoteDriver();
-			driver = sm.getChromeDriver();
+			sm.startRemotes(gridHubURL, browserType);
+			//sm.startChromeDriver();
+			driver = sm.getRemoteDriver();
+			//driver = sm.getChromeDriver();
 			driver.get(moodleHomePage);
 		}
 		/*
@@ -275,7 +275,7 @@ public class MDLQA63TeacherSetsAvailableFromDueDate {
 		@AfterClass
 		static public void Quit() {
 		//End Webdriver Session by calling teardown method
-			//sm.teardown();
-			sm.teardownChrome();
+			sm.teardown();
+			//sm.teardownChrome();
 		}
 }

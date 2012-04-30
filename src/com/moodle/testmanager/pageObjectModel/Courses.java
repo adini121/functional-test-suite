@@ -178,9 +178,6 @@ public class Courses {
  * @param courseLinkText any or all of the Course Full Name passed from the test.
  */
 	public void clickCourseLink(String courseLinkText) {
-		//WebElement courseLink = driver.findElement(By .xpath("//a[contains(.,'" +
-		//		courseLinkText +
-		//		"')]"));
 		WebElement courseLink = driver.findElementByLinkText(courseLinkText);
 		courseLink.click();
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);

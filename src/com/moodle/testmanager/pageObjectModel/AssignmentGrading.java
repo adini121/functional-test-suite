@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
@@ -47,6 +48,8 @@ public class AssignmentGrading {
 		this.properties.put("errorSubmitted", dataLoad.getProperty("errorSubmitted"));
 		this.properties.put("errorFeedbackComments", dataLoad.getProperty("errorFeedbackComments"));
 		this.properties.put("errorGrade", dataLoad.getProperty("errorGrade"));
+		this.properties.put("linkTextFirstName", dataLoad.getProperty("linkTextFirstName"));
+		this.properties.put("errorSortOrderFirstName", dataLoad.getProperty("errorSortOrderFirstName"));
 		//this.properties.put("PROPERTY", dataLoad.getProperty("PROPERTY"));
 	}
 /**
@@ -200,5 +203,24 @@ public class AssignmentGrading {
 	public void assertSubmissionStatusGradingTable(String status, String studentFirstName, String studentSurname) throws Exception {
 		PassFailCriteria passFail = new PassFailCriteria(driver);
 		passFail.assertElementIsPresentByXpath("//tr[contains(.,'" + studentFirstName + " " + studentSurname + "')][contains(.,'" + status + "')]", this.properties.get("errorSubmissionStatus"), 1);
+	}
+/**
+ * Clicks the link to sort the grading table by First Name.	
+ */
+	public void clickLinkSortFirstName() {
+		WebElement link = driver.findElement(By .xpath("//a[contains(.,'" + (this.properties.get("linkTextFirstName") + "')]")));
+		link.click();
+	}
+/**
+ * Makes the test fail if the student's name does not appear in the correct place onscreen
+ * @param rowClass The class of the row in the grading table that you are expecting the students name to appear in. e.g."r1" is the first row "r2" is the second row etc.
+ * @param studentFirstName The first name of the student.
+ * @param studentSurname The surname of the student.
+ * @throws Exception Throws an exception if the name is not present in the specified table row.
+ */
+	public void assertSortOrderStudentName(String rowClass, String studentFirstName, String studentSurname) throws Exception {
+		PassFailCriteria passFail = new PassFailCriteria(driver);
+		passFail.assertElementIsPresentByXpath(".//tr[@class='" + rowClass + "']/td[@class='cell c1'][contains(.,'" + studentFirstName + " " + studentSurname + "')]",
+				studentFirstName + " " + studentSurname + " " + this.properties.get("errorSortOrderFirstName"), 2);
 	}
 }

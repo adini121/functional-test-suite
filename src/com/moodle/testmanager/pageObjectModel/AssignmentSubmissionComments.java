@@ -5,8 +5,12 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.moodle.seleniumutils.PassFailCriteria;
 /**
@@ -50,7 +54,7 @@ public class AssignmentSubmissionComments {
  * Clicks the comments link to display submission comments.
  */
 	public void clickLinkSubmissionComments() {
-		WebElement link = driver.findElementByPartialLinkText(this.properties.get("linkComments"));
+		WebElement link = driver.findElement(By .className("comment-link"));
 		link.click();
 	}
 /**
@@ -58,21 +62,28 @@ public class AssignmentSubmissionComments {
  * @param desiredComment The text that you want to enter in the comments box. Pass from the test.
  */
 	public void enterTextSubmissionComments(String desiredComment) {
-		WebElement textArea = driver.findElementByXPath("//div[@class='comment-area']/div/textarea");
+		@SuppressWarnings("unused")
+		WebElement myDynamicElement = (new WebDriverWait(driver, 10))
+				  .until(new ExpectedCondition<WebElement>(){
+					@Override
+					public WebElement apply(WebDriver d) {
+						return d.findElement(By.xpath("//div[@class='comment-area']/div/textarea"));
+					}});
+		WebElement textArea = driver.findElement(By .xpath("//div[@class='comment-area']/div/textarea"));
 		textArea.sendKeys(desiredComment);
 	}
 /**
  * Clicks the link to save a submission comment.
  */
 	public void clickLinkSaveComment() {
-		WebElement link = driver.findElementByLinkText(this.properties.get("linkSaveComment"));
+		WebElement link = driver.findElement(By .linkText(this.properties.get("linkSaveComment")));
 		link.click();
 	}
 /**
  * Clicks the link to cancel a submission comment.
  */
 	public void clickLinkCancelComment() {
-		WebElement link = driver.findElementByLinkText(this.properties.get("linkCancelComment"));
+		WebElement link = driver.findElement(By .linkText(this.properties.get("linkCancelComment")));
 		link.click();
 	}
 /**
@@ -82,7 +93,7 @@ public class AssignmentSubmissionComments {
  */
 	public void assertCommentNotSaved(String commentText) throws Exception {
 		PassFailCriteria passFail = new PassFailCriteria(driver);
-		passFail.assertElementIsNotPresentByXpath("//div[contains(.,'" + commentText + "')]", this.properties.get("exceptionMessageCommentPresentShouldNotBe"), 2);
+		passFail.assertElementIsNotPresentByXpath("//div[contains(.,'" + commentText + "')][@class='text_to_html']", this.properties.get("exceptionMessageCommentPresentShouldNotBe"), 2);
 	}
 /**
  * Makes the test fail if a given submission comment has not been saved.
@@ -91,7 +102,7 @@ public class AssignmentSubmissionComments {
  */
 	public void assertCommentSaved(String commentText) throws Exception {
 		PassFailCriteria passFail = new PassFailCriteria(driver);
-		passFail.assertElementIsPresentByXpath("//div[contains(.,'" + commentText + "')]", this.properties.get("exceptionMessageCommentNotPresent"), 2);
+		passFail.assertElementIsPresentByXpath("//div[@class='no-overflow'][contains(.,'" + commentText + "')]", this.properties.get("exceptionMessageCommentNotPresent"), 2);
 	}
 /**
  * Deletes a comment and confirms the deletion.

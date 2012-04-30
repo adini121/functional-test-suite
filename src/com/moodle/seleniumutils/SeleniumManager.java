@@ -99,8 +99,8 @@ public class SeleniumManager {
  * Run test using the Chrome driver.
  * @throws MalformedURLException Catches an exception caused by a malformed URL. All URL's are malformed so this much be caught.
  */
-	public void startChromeDriver() throws MalformedURLException {
-		System.setProperty("webdriver.chrome.driver", "/home/timnsaf/functional-test-suite/lib/chromedriver");
+	public void startChromeDriver(String chromeDriverLocation) throws MalformedURLException {
+		System.setProperty("webdriver.chrome.driver", chromeDriverLocation);
 		chromedriver = new ChromeDriver();
 	}
 /**

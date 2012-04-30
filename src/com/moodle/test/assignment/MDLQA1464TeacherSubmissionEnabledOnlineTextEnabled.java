@@ -22,18 +22,18 @@ import com.moodle.testmanager.pageObjectModel.CoursesAddAnActivity;
 import com.moodle.testmanager.pageObjectModel.Users;
 /**
  * DESCRIPTION:
- * A teacher can enable submission comments when file submissions is enabled
+ * A teacher can enable submission comments when online text is enabled
  * 
  * TEST PRE-REQUISITES:
- * An assignment exists with file submissions enabled and 'Allow submission comments' set to Yes.
+ * An assignment exists with online text enabled and 'Allow submission comments' set to Yes.
  * 
  * TEST SCENARIO:
  * 1. Login as a student and access the assignment.
- * 2. Add a submission comment and save the comment.
+ * 2. Create a submission, add a submission comment and save the comment.
  * 3. Delete the submission comment, and enter a new comment, and save your changes.
  * 4. Check that the changes have been saved.
  */
-public class MDLQA69TeacherSubmissionEnabledFileSubmissionEnabled {
+public class MDLQA1464TeacherSubmissionEnabledOnlineTextEnabled {
 	//define "driver" in a field
 		static RemoteWebDriver driver;
 		static SeleniumManager sm;
@@ -52,7 +52,7 @@ public class MDLQA69TeacherSubmissionEnabledFileSubmissionEnabled {
 		private AssignmentAddSubmission submission = new AssignmentAddSubmission(driver);
 		private AssignmentSubmissionComments submissionComments = new AssignmentSubmissionComments(driver);
 		//Load test data from properties file
-		public MDLQA69TeacherSubmissionEnabledFileSubmissionEnabled(){
+		public MDLQA1464TeacherSubmissionEnabledOnlineTextEnabled(){
 			this.loadTestData();
 		}
 		public void loadTestData() {
@@ -66,11 +66,13 @@ public class MDLQA69TeacherSubmissionEnabledFileSubmissionEnabled {
 			this.properties.put("studentUsername", testData.getProperty("studentUsername"));
 			this.properties.put("password", testData.getProperty("password"));
 			this.properties.put("courseName", testData.getProperty("courseName"));
-			this.properties.put("MDLQA69OutlineSection", testData.getProperty("MDLQA69OutlineSection"));
-			this.properties.put("MDLQA69AssignmentName", testData.getProperty("MDLQA69AssignmentName"));
-			this.properties.put("MDLQA69AssignmentText", testData.getProperty("MDLQA69AssignmentText"));
-			this.properties.put("MDLQA69StudentSubmissionComment", testData.getProperty("MDLQA69StudentSubmissionComment"));
-			this.properties.put("MDLQA69StudentSubmissionCommentEdit", testData.getProperty("MDLQA69StudentSubmissionCommentEdit"));
+			this.properties.put("courseShortname", testData.getProperty("courseShortname"));
+			this.properties.put("MDLQA1464OutlineSection", testData.getProperty("MDLQA1464OutlineSection"));
+			this.properties.put("MDLQA1464AssignmentName", testData.getProperty("MDLQA1464AssignmentName"));
+			this.properties.put("MDLQA1464AssignmentText", testData.getProperty("MDLQA1464AssignmentText"));
+			this.properties.put("MDLQA1464MDLQA1464OnlineTextSubmission", testData.getProperty("MDLQA1464OnlineTextSubmission"));
+			this.properties.put("MDLQA1464StudentSubmissionComment", testData.getProperty("MDLQA1464StudentSubmissionComment"));
+			this.properties.put("MDLQA1464StudentSubmissionCommentEdit", testData.getProperty("MDLQA1464StudentSubmissionCommentEdit"));
 		}
 		/*
 		 * START OF TEST
@@ -84,10 +86,13 @@ public class MDLQA69TeacherSubmissionEnabledFileSubmissionEnabled {
 			String gridHubURL = startupConfig.getProperty("gridHubURL");
 			String browserType = startupConfig.getProperty("browserType");
 			String moodleHomePage = startupConfig.getProperty("moodleHomePage");
+			//String chromeDriverLocation = startupConfig.getProperty("chromeDriverLocation");
 		//Call setup method
 			sm = new SeleniumManager();
 			sm.startRemotes(gridHubURL, browserType);
+			//sm.startChromeDriver(chromeDriverLocation);
 			driver = sm.getRemoteDriver();
+			//driver = sm.getChromeDriver();
 			driver.get(moodleHomePage);
 		}
 		/*
@@ -105,11 +110,11 @@ public class MDLQA69TeacherSubmissionEnabledFileSubmissionEnabled {
 			course.clickCourseLink(this.properties.get("courseName"));
 			course.clickTurnEditingOn();
 			//Add the Assignment activity
-			addActivity.selectAssignment(this.properties.get("MDLQA69OutlineSection"));
+			addActivity.selectAssignment(this.properties.get("MDLQA1464OutlineSection"));
 			//Setup Assigment activity
-			addAssignment.enterAssignmentName(this.properties.get("MDLQA69AssignmentName"));
-			addAssignment.enterAssignmentDescription(this.properties.get("MDLQA69AssignmentText"));
-			addAssignment.selectFileSubmissionsEnabledYes();
+			addAssignment.enterAssignmentName(this.properties.get("MDLQA1464AssignmentName"));
+			addAssignment.enterAssignmentDescription(this.properties.get("MDLQA1464AssignmentText"));
+			addAssignment.selectOnlineTextEnabledYes();
 			addAssignment.selectSubmissionCommentsYes();
 			addAssignment.clickSaveAndDisplay();
 			//Log Teacher out
@@ -128,34 +133,40 @@ public class MDLQA69TeacherSubmissionEnabledFileSubmissionEnabled {
 			//Click Course Link
 			course.clickCourseLink(this.properties.get("courseName"));
 			//Access the assignment
-			assignment.clickAssignmentLink(this.properties.get("MDLQA69AssignmentName"));
-			submission.assertSubmissionPage(this.properties.get("MDLQA69AssignmentName"));
+			assignment.clickAssignmentLink(this.properties.get("MDLQA1464AssignmentName"));
+			submission.assertSubmissionPage(this.properties.get("MDLQA1464AssignmentName"));
 		}
 		/*
-		 * 2. Add a submission comment and save the comment.
+		 * 2. Create a submission, add a submission comment and save the comment.
 		 */
 		@Test
 		public void addSubmissionComment() throws Exception {
-			//Student adds a file submission.
+			//Student adds an online text submission.
 			assignment.clickButtonEditMySubmission();
 			submission.clickCheckboxSubmissionStatement();
-			submission.clickButtonAdd();
-			//TODO Add steps to add a file from private files server files etc.
+			submission.enterOnlineText(this.properties.get("MDLQA1464OnlineTextSubmission"));
+			submission.clickButtonSaveChanges();
 			//Enter a submission comment.
 			submissionComments.clickLinkSubmissionComments();
-			submissionComments.enterTextSubmissionComments(this.properties.get("MDLQA69StudentSubmissionComment"));
+			submissionComments.enterTextSubmissionComments(this.properties.get("MDLQA1464StudentSubmissionComment"));
 			//Cancel it.
 			submissionComments.clickLinkCancelComment();
 			//Check that it HASN'T been saved. 
-			submissionComments.assertCommentNotSaved(this.properties.get("MDLQA69StudentSubmissionComment"));
+			submissionComments.assertCommentNotSaved(this.properties.get("MDLQA1464StudentSubmissionComment"));
 			//Enter the submission comment again.
 			submissionComments.clickLinkSubmissionComments();
-			submissionComments.enterTextSubmissionComments(this.properties.get("MDLQA69StudentSubmissionComment"));
+			submissionComments.enterTextSubmissionComments(this.properties.get("MDLQA1464StudentSubmissionComment"));
 			//This time save it.
 			submissionComments.clickLinkSaveComment();
+			//Go back to course
+			course.clickCourseBreadcrumb(this.properties.get("courseShortname"));
+			//Access the assignment
+			assignment.clickAssignmentLink(this.properties.get("MDLQA1464AssignmentName"));
+			submission.assertSubmissionPage(this.properties.get("MDLQA1464AssignmentName"));
 			//Check that this time it has been saved.
-			submissionComments.assertCommentSaved(this.properties.get("MDLQA69StudentSubmissionComment"));
 			submissionComments.clickLinkSubmissionComments();
+			submissionComments.assertCommentSaved(this.properties.get("MDLQA1464StudentSubmissionComment"));
+			//submissionComments.clickLinkSubmissionComments();
 		}
 		/*
 		 * 3. Delete the submission comment, and enter a new comment, and save your changes.
@@ -163,12 +174,18 @@ public class MDLQA69TeacherSubmissionEnabledFileSubmissionEnabled {
 		@Test
 		public void editSubmissionComment() throws Exception {
 			//Delete the old comment.
-			submissionComments.clickLinkSubmissionComments();
-			submissionComments.clickLinkDeleteSubmissionCommentAndConfirm("MDLQA69StudentSubmissionComment");
+			//submissionComments.clickLinkSubmissionComments();
+			submissionComments.clickLinkDeleteSubmissionCommentAndConfirm("MDLQA1464StudentSubmissionComment");
+			//Go back to course
+			course.clickCourseBreadcrumb(this.properties.get("courseShortname"));
+			//Access the assignment
+			assignment.clickAssignmentLink(this.properties.get("MDLQA1464AssignmentName"));
+			submission.assertSubmissionPage(this.properties.get("MDLQA1464AssignmentName"));
 			//Check that it's been deleted.
-			submissionComments.assertCommentNotSaved(this.properties.get("MDLQA69StudentSubmissionComment"));
+			submissionComments.assertCommentNotSaved(this.properties.get("MDLQA1464StudentSubmissionComment"));
 			//Enter a new comment and save it.
-			submissionComments.enterTextSubmissionComments(this.properties.get("MDLQA69StudentSubmissionCommentEdit"));
+			submissionComments.clickLinkSubmissionComments();
+			submissionComments.enterTextSubmissionComments(this.properties.get("MDLQA1464StudentSubmissionCommentEdit"));
 			submissionComments.clickLinkSaveComment();
 		}
 		/*
@@ -177,13 +194,14 @@ public class MDLQA69TeacherSubmissionEnabledFileSubmissionEnabled {
 		@Test
 		public void checkChangesMade() throws Exception {
 			//Check that it's been saved.
-			submissionComments.assertCommentSaved(this.properties.get("MDLQA69StudentSubmissionCommentEdit"));
+			submissionComments.assertCommentSaved(this.properties.get("MDLQA1464StudentSubmissionCommentEdit"));
 		}
 		//Tear Down webdriver for @Test methods
 		@AfterClass
 		static public void Quit() {
 		//End Webdriver Session by calling teardown method
 			sm.teardown();
+			//sm.teardownChrome();
 		}
 		//
 		//END OF TEST

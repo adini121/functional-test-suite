@@ -99,12 +99,12 @@ import org.openqa.selenium.support.ui.Select;
  * @param message The message to enter in the field.
  */
 		public void enterValueInTinyMCE(String message) {
-			WebElement messagebox = driver.findElement(By.tagName("iframe"));
-			driver.switchTo().frame(messagebox);
-			WebElement richTextBox = driver.findElement(By.id("tinymce"));
-			richTextBox.click();
-			richTextBox.sendKeys(message);
-			driver.switchTo().window(driver.getWindowHandle());			
+				WebElement messagebox = driver.findElement(By.tagName("iframe"));
+				driver.switchTo().frame(messagebox);
+				WebElement richTextBox = driver.findElement(By.id("tinymce"));
+				richTextBox.click();
+				richTextBox.sendKeys(message);
+				driver.switchTo().window(driver.getWindowHandle());
 	}
 /*
  * Re-usable form buttons		
