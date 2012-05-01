@@ -47,6 +47,7 @@ public class AssignmentAddAssignment {
 		this.properties.put("buttonSaveAndReturn", dataLoad.getProperty("buttonSaveAndReturn"));
 		this.properties.put("buttonSaveAndDisplay", dataLoad.getProperty("buttonSaveAndDisplay"));
 		this.properties.put("buttonCancel", dataLoad.getProperty("buttonCancel"));
+		this.properties.put("dropdownactivityCompletionCondMet", dataLoad.getProperty("dropdownactivityCompletionCondMet"));
 	}
 /*
  * 2.3 METHODS With some backwards compatability to 2.2
@@ -505,7 +506,7 @@ public class AssignmentAddAssignment {
 		checkbox.click();
 	}	
 /**
- * Clicks Save and return to course	
+ * Clicks Save and return to course.
  */
 	public void clickSaveAndRetToCourse() {
 		WebElement button = driver.findElement(By .xpath(".//*[@value='" +
@@ -514,7 +515,7 @@ public class AssignmentAddAssignment {
 		button.click();
 	}
 /**
- * Clicks Save and display
+ * Clicks Save and display.
  */
 	public void clickSaveAndDisplay() {
 		WebElement button = driver.findElement(By .xpath(".//*[@value='" +
@@ -523,12 +524,26 @@ public class AssignmentAddAssignment {
 		button.click();
 	}
 /**
- * Clicks Cancel
+ * Clicks Cancel.
  */
 	public void clickCancel() {
 		WebElement button = driver.findElement(By .xpath(".//*[@value='" +
 				this.properties.get("buttonCancel") +
 				"']"));
 		button.click();
+	}
+/**
+ * Selects the option to show activity as complete when conditions are met.
+ */
+	public void selectCompletionTrackingConditionsMet() {
+		FormActions dropdown = new FormActions(driver);
+		dropdown.selectDropdownItemByID("id_completion", this.properties.get("dropdownactivityCompletionCondMet"));
+	}
+/**
+ * Clicks the "Student must receive a grade to complete this activity" checkbox (if it's unchecked).
+ */
+	public void clickCheckboxStudentReceiveGrade() {
+		FormActions checkbox = new FormActions(driver);
+		checkbox.handleCheckboxStateAndEnterTick("id_completionusegrade");
 	}
 }

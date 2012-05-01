@@ -52,6 +52,7 @@ public class BlockSettings {
 		this.properties.put("treeEditProfile", blockSettings.getProperty("treeEditProfile"));
 		this.properties.put("treeForumAdmin", blockSettings.getProperty("treeForumAdmin"));
 		this.properties.put("treeDontTrack", blockSettings.getProperty("treeDontTrack"));
+		this.properties.put("treeAdvancedFeatures", blockSettings.getProperty("treeAdvancedFeatures"));
 		this.properties.put("treeAssignmentAdministration", blockSettings.getProperty("treeAssignmentAdministration"));
 		this.properties.put("exceptionTrackingCanBeEnabled", blockSettings.getProperty("exceptionTrackingCanBeEnabled"));
 		this.properties.put("exceptionTrackingCanBeDisabled", blockSettings.getProperty("exceptionTrackingCanBeDisabled"));
@@ -177,10 +178,17 @@ public class BlockSettings {
 /**
  * Navigates to the Edit assignment settngs page via the tree view whether it's expanded or collapsed.
  */
-	public void navigateEditSettings() {
+	public void navigateEditAssignmentSettings() {
 		Navigation navigate = new Navigation(driver);
 		navigate.navigateTree2DeepByXpath(".//li[contains(.,'" 
 		+ this.properties.get("treeAssignmentAdministration") + "')]", 
 		"//a[@title='" + this.properties.get("treeEditSettings") + "']");
+	}
+/**
+ * Navigates to Site administration/Advanced features whether the tree is collapsed or not.
+ */
+	public void treeMenuAdvancedFeatures() {
+		Navigation navigate = new Navigation(driver);
+		navigate.navigateTree2DeepByXpath("//li[contains(.,'" + this.properties.get("siteAdmin") + "')]", "//a[@title='" + this.properties.get("treeAdvancedFeatures") + "']");
 	}
 }

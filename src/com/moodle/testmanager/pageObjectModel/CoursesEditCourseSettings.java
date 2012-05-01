@@ -9,6 +9,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.Select;
+
+import com.moodle.seleniumutils.FormActions;
 /**
  * This is the page object model for the editing course settings.
  * @author Tim Barker 
@@ -39,7 +41,8 @@ public class CoursesEditCourseSettings {
 			coursesEditCourseSettings.load(new FileInputStream(activitiesData));
 		} catch (Exception e) {}
 		//put values from the properties file into hashmap
-		this.properties.put("saveChangesButton", coursesEditCourseSettings.getProperty("saveChangesButton"));		
+		this.properties.put("saveChangesButton", coursesEditCourseSettings.getProperty("saveChangesButton"));	
+		this.properties.put("dropdownOptionEnableCompletionTracking", coursesEditCourseSettings.getProperty("dropdownOptionEnableCompletionTracking"));	
 	}
 /**
  * Selects a given value for the number of items to show from the News items to show dropdown.
@@ -57,5 +60,12 @@ public class CoursesEditCourseSettings {
 				this.properties.get("saveChangesButton") +
 				"']"));
 		saveChanges.click();
+	}
+/**
+ * Turns completion tracking on.
+ */
+	public void selectCompletionTrackingEnabled() {
+		FormActions dropdown = new FormActions(driver);
+		dropdown.selectDropdownItemByID("id_enablecompletion", this.properties.get("dropdownOptionEnableCompletionTracking"));	
 	}
 }

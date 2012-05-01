@@ -48,8 +48,14 @@ public class AssignmentGrading {
 		this.properties.put("errorSubmitted", dataLoad.getProperty("errorSubmitted"));
 		this.properties.put("errorFeedbackComments", dataLoad.getProperty("errorFeedbackComments"));
 		this.properties.put("errorGrade", dataLoad.getProperty("errorGrade"));
+		this.properties.put("errorNumberOfPagesLink", dataLoad.getProperty("errorNumberOfPagesLink"));
+		this.properties.put("errorNextMissing", dataLoad.getProperty("errorNextMissing"));
+		this.properties.put("errorPreviousMissing", dataLoad.getProperty("errorPreviousMissing"));
 		this.properties.put("linkTextFirstName", dataLoad.getProperty("linkTextFirstName"));
 		this.properties.put("errorSortOrderFirstName", dataLoad.getProperty("errorSortOrderFirstName"));
+		this.properties.put("errorPaginationStillOn", dataLoad.getProperty("errorPaginationStillOn"));
+		this.properties.put("fieldHeadingFirstName", dataLoad.getProperty("fieldHeadingFirstName"));
+		this.properties.put("errorNameColumnNotHidden", dataLoad.getProperty("errorNameColumnNotHidden"));
 		//this.properties.put("PROPERTY", dataLoad.getProperty("PROPERTY"));
 	}
 /**
@@ -222,5 +228,72 @@ public class AssignmentGrading {
 		PassFailCriteria passFail = new PassFailCriteria(driver);
 		passFail.assertElementIsPresentByXpath(".//tr[@class='" + rowClass + "']/td[@class='cell c1'][contains(.,'" + studentFirstName + " " + studentSurname + "')]",
 				studentFirstName + " " + studentSurname + " " + this.properties.get("errorSortOrderFirstName"), 2);
+	}
+/**
+ * Makes the test fail if a link to the specified page does not appear onscreen.
+ * @param pageNumber The page number for the link you are looking for.
+ * @throws Exception Throws an exception if a link to the page does not appear onscreen.
+ */
+	public void assertNumberOfGradingTablePages(String pageNumber) throws Exception {
+		PassFailCriteria passFail = new PassFailCriteria(driver);
+		passFail.assertElementIsPresentByXpath("//div[@class='paging']/a[contains(.,'" + pageNumber + "')]", pageNumber + this.properties.get("errorNumberOfPagesLink"), 2);
+		}
+/**
+ * Makes the test fail if a link to the "next" page does not appear onscreen.
+ * @throws Exception Throws an exception if the link does not appear.
+ */
+	public void assertNextLink() throws Exception {
+		PassFailCriteria passFail = new PassFailCriteria(driver);
+		passFail.assertElementIsPresentByXpath("//a[@class='next']" , this.properties.get("errorNextMissing"), 2);
+	}
+/**
+ * Makes the test fail if a link to the "previous" page does not appear onscreen.
+ * @throws Exception Throws an exception if the link does not appear.
+ */
+	public void assertPreviousLink() throws Exception {
+		PassFailCriteria passFail = new PassFailCriteria(driver);
+		passFail.assertElementIsPresentByXpath("//a[@class='previous']" , this.properties.get("errorPreviousMissing"), 2);
+	}
+/**
+ * Clicks a link to a given page in the grading table.
+ * @param pageNumber The page number that you want to navigate to.
+ */
+	public void clickLinkGradingTablePageNumber(String pageNumber) {
+		WebElement link = driver.findElement(By .xpath("//div[@class='paging']/a[contains(.,'" + pageNumber + "')]"));
+		link.click();		
+	}
+/**
+ * Selects a value from the Assignments per page dropdown on the grading table page.
+ * @param itemToSelect The item to select from the dropdown. Pass this value from the test.
+ */
+	public void selectValueAssignmentsPerPage(String itemToSelect) {
+		FormActions dropdown = new FormActions(driver);
+		dropdown.selectDropdownItemByIDHandlesJS("id_perpage", itemToSelect, "id_submitbutton", 1);
+	}
+/**
+ * Makes the test fail if pagination is still turned on after it has been turned off by selecting a number higher than the number of assignments.
+ * @param pageNumber Any page number that would appear if pagination was turned on.
+ * @throws Exception Throws an exception if there is a link to the given page.
+ */
+	public void assertNoLinkGradingTablePageNumber(String pageNumber) throws Exception {
+		PassFailCriteria passFail = new PassFailCriteria(driver);
+		passFail.assertElementIsNotPresentByXpath("//div[@class='paging']/a[contains(.,'" + pageNumber + "')]", this.properties.get("errorPaginationStillOn"), 2);
+	}
+/**
+ * Hides or un-hides the name field in the grader table.
+ */
+	public void clickHideName() {
+		WebElement img = driver.findElement(By .xpath("//th[contains(.,'" + this.properties.get("fieldHeadingFirstName") + "')]/div[@class='commands']/a"));
+		img.click();
+	}
+/**
+ * Makes the test fail if the students name appears in the first name/surname column if it's hidden.
+ * @param studentFirstName The student's first name.
+ * @param studentSurname The student's surname.
+ * @throws Exception An exception is thrown if the student's name appears in the table indicating that the column is not hidden.
+ */
+	public void assertFirstAndSurnameHidden(String studentFirstName, String studentSurname) throws Exception {
+		PassFailCriteria passFail = new PassFailCriteria(driver);
+		passFail.assertElementIsNotPresentByXpath("//tr/td[@class='cell c1'][contains(.,'" + studentFirstName + " " + studentSurname + "')]", studentFirstName + " " + studentSurname + " " + this.properties.get("errorNameColumnNotHidden"), 0);
 	}
 }

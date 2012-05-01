@@ -132,7 +132,7 @@ public class MDLQA63TeacherSetsAvailableFromDueDate {
 			//Access the assignment.
 			assignment.clickAssignmentLink(this.properties.get("MDLQA63AssignmentName"));
 			//Update the assignment and set an 'Available from' date.
-			navigateSettingsBlock.navigateEditSettings();
+			navigateSettingsBlock.navigateEditAssignmentSettings();
 			//Set the Allow submissions from date into the future.
 			addAssignment.selectAllowSubmissionsFrom(this.properties.get("MDLQA63AssignmentDayFrom"), 
 														this.properties.get("MDLQA63AssignmentMonth"), 
@@ -183,7 +183,7 @@ public class MDLQA63TeacherSetsAvailableFromDueDate {
 			//Access the assignment.
 			assignment.clickAssignmentLink(this.properties.get("MDLQA63AssignmentName"));
 			//Update the assignment and set an 'Available from' date.
-			navigateSettingsBlock.navigateEditSettings();
+			navigateSettingsBlock.navigateEditAssignmentSettings();
 			//Set the Allow submissions from date into the past.
 			addAssignment.selectAllowSubmissionsFrom(this.properties.get("MDLQA63AssignmentDayFrom"), 
 														this.properties.get("MDLQA63AssignmentMonth"), 
@@ -229,7 +229,7 @@ public class MDLQA63TeacherSetsAvailableFromDueDate {
 			//Access the assignment.
 			assignment.clickAssignmentLink(this.properties.get("MDLQA63AssignmentName"));
 			//Update the assignment and set an 'Available from' date.
-			navigateSettingsBlock.navigateEditSettings();
+			navigateSettingsBlock.navigateEditAssignmentSettings();
 			//Set the Allow submissions from date into the past.
 			addAssignment.selectAllowSubmissionsFrom(this.properties.get("MDLQA63AssignmentDayFrom"), 
 														this.properties.get("MDLQA63AssignmentMonth"), 

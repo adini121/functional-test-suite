@@ -8,6 +8,8 @@ import java.util.Properties;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebDriver;
+
+import com.moodle.seleniumutils.Navigation;
 /**
  * This is the page object model for the Navigation Block. All interaction with the navigation block is contained in here.
  * @author Tim Barker 
@@ -39,6 +41,9 @@ public class BlockNavigation {
 		} catch (Exception e) {}
 		//put values from the properties file into hashmap
 		this.properties.put("home", blockNavigation.getProperty("home"));
+		this.properties.put("treeItemMyCourses", blockNavigation.getProperty("treeItemMyCourses"));
+		this.properties.put("treeItemReports", blockNavigation.getProperty("treeItemReports"));
+		this.properties.put("treeItemActivityCompletionReport", blockNavigation.getProperty("treeItemActivityCompletionReport"));
 	}
 /**
  * Clicks the home menu option where the link text is loaded from the internationalization layer.
@@ -58,5 +63,16 @@ public class BlockNavigation {
 				linkText +
 				"')]"));
 		link.click();
+	}
+/**
+ * Navigates to the activity completion report.
+ * @param courseShortname The course shortname, pass this value from the test.
+ */
+	public void navigateReportActivityCompletion(String courseShortname) {
+		Navigation navigate = new Navigation(driver);
+		navigate.navigateTree4DeepByXpath(".//li/p[contains(.,'" + this.properties.get("treeItemMyCourses") + "')]", 
+				".//li/p[contains(.,'" + courseShortname + "')]", 
+				".//li/p[contains(.,'" + this.properties.get("treeItemReports") + "')]", 
+				".//a[@title='" + this.properties.get("treeItemActivityCompletionReport") + "']");	
 	}
 }
