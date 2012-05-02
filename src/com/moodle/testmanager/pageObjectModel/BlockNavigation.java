@@ -70,9 +70,7 @@ public class BlockNavigation {
  */
 	public void navigateReportActivityCompletion(String courseShortname) {
 		Navigation navigate = new Navigation(driver);
-		navigate.navigateTree4DeepByXpath(".//li/p[contains(.,'" + this.properties.get("treeItemMyCourses") + "')]", 
-				".//li/p[contains(.,'" + courseShortname + "')]", 
-				".//li/p[contains(.,'" + this.properties.get("treeItemReports") + "')]", 
-				".//a[@title='" + this.properties.get("treeItemActivityCompletionReport") + "']");	
+		navigate.navigateTree2DeepByXpath(".//li/ul[contains(.,'" + this.properties.get("treeItemMyCourses") + "')]/li/ul[contains(.,'" + courseShortname + "')]/li/ul/li[contains(.,'" + this.properties.get("treeItemReports") + "')]", 
+				".//li/ul[contains(.,'" + this.properties.get("treeItemMyCourses") + "')]/li/ul[contains(.,'" + courseShortname + "')]/li/ul/li[contains(.,'" + this.properties.get("treeItemReports") + "')]/ul/li/p/a[@title='" + this.properties.get("treeItemActivityCompletionReport") + "']");
 	}
 }

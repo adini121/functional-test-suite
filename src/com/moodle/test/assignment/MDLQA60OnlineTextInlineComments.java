@@ -112,7 +112,7 @@ public class MDLQA60OnlineTextInlineComments {
 		@Test
 		public void viewXSubmittedAssignments() throws Exception {
 			assignment.clickButtonGradeAssignment();
-			grading.clickLinkSubmittedForGrading(this.properties.get("studentFirstname") + " " + this.properties.get("studentSurname"));
+			grading.clickLinkSubmittedForGrading(this.properties.get("studentFirstname"), this.properties.get("studentSurname"));
 			submission.assertSubmissionOnlineText(this.properties.get("MDLQA59StudentEditedSubmissionText"));
 			grading.assertSubmissionStatusGradingForm(this.properties.get("MDLQA60SubmissionStatusSubmitted"));
 		}

@@ -87,13 +87,13 @@ public class MDLQADT4GiveTeacherCoursePermissions {
 			String gridHubURL = startupConfig.getProperty("gridHubURL");
 			String browserType = startupConfig.getProperty("browserType");
 			String moodleHomePage = startupConfig.getProperty("moodleHomePage");
-			String chromeDriverLocation = startupConfig.getProperty("chromeDriverLocation");
+			//String chromeDriverLocation = startupConfig.getProperty("chromeDriverLocation");
 			//Call setup method
 			sm = new SeleniumManager();
-			//sm.startRemotes(gridHubURL, browserType);
-			sm.startChromeDriver(chromeDriverLocation);
-			//driver = sm.getRemoteDriver();
-			driver = sm.getChromeDriver();
+			sm.startRemotes(gridHubURL, browserType);
+			//sm.startChromeDriver(chromeDriverLocation);
+			driver = sm.getRemoteDriver();
+			//driver = sm.getChromeDriver();
 			driver.get(moodleHomePage);
 		}
 		//Login as default Admin user
@@ -105,7 +105,7 @@ public class MDLQADT4GiveTeacherCoursePermissions {
 			userLogin.enterPassword(this.properties.get("password"));
 			userLogin.clickLoginButton();
 		}
-		//@Test
+		@Test
 		//Enrol Teacher in course
 		public void enrolTeacher(){
 			Courses availableCourses = new Courses(driver);
@@ -118,7 +118,7 @@ public class MDLQADT4GiveTeacherCoursePermissions {
 			enrolUser.clickFinishEnrollingButton();
 			enrolUser.clickEnrolledUsersBreadcrumb();
 		}
-		//@Test
+		@Test
 		//Assign Teacher Role in Course
 		public void assignTeacherRole(){
 			UsersEnrolled userRole = new UsersEnrolled(driver);
@@ -127,7 +127,7 @@ public class MDLQADT4GiveTeacherCoursePermissions {
 			userRole.clickAddRole(this.properties.get("teacherFirstname"),this.properties.get("teacherSurname"));
 			userRole.assignTeacherRole();
 		}
-	//	@Test
+		@Test
 		//Enrol the Student1 in the course
 		public void enrolStudent(){
 			BlockSettings enrolledUser = new BlockSettings(driver);
@@ -138,7 +138,7 @@ public class MDLQADT4GiveTeacherCoursePermissions {
 			enrolUser.clickFinishEnrollingButton();
 			enrolUser.clickEnrolledUsersBreadcrumb();
 		}
-	//	@Test
+		@Test
 		public void enrolStudent2(){
 			BlockSettings enrolledUser = new BlockSettings(driver);
 			enrolledUser.navigateEnrolledUsers();
@@ -250,7 +250,7 @@ public class MDLQADT4GiveTeacherCoursePermissions {
 		@AfterClass
 		static public void Quit() {
 		//End Webdriver Session by calling teardown method
-			//sm.teardown();
-			sm.teardownChrome();
+			sm.teardown();
+			//sm.teardownChrome();
 		}		
 }

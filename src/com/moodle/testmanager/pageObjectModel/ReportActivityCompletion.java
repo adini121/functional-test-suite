@@ -7,6 +7,8 @@ import java.util.Properties;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebDriver;
+
+import com.moodle.seleniumutils.PassFailCriteria;
 /**
  * The page object model for the Assignment module.
  * @author Tim Barker 
@@ -38,10 +40,29 @@ public class ReportActivityCompletion {
 			dataLoad.load(new FileInputStream(data));
 		} catch (Exception e) {}
 		//put values from the properties file into hashmap
-		this.properties.put("<YOUR_PROPERTY>", dataLoad.getProperty("<YOUR_PROPERTY>"));
+		this.properties.put("errorCompletedTrackingAssignment", dataLoad.getProperty("errorCompletedTrackingAssignment"));
+		this.properties.put("errorNotCompletedTrackingAssignment", dataLoad.getProperty("errorNotCompletedTrackingAssignment"));
 	}
-	public void assertCompleted(String studentFirstname, String studentSurname) {
+/**
+ * Makes the test fail if a student who has completed an assignment is not marked as doing so in the Activity completion report.
+ * @param studentFirstname The first name of the student. Pass this parameter from the test.
+ * @param studentSurname The surname of the student. Pass this parameter from the test.
+ * @throws Exception Throws an exception if the student is not shown as completing the assignment in the report.
+ */
+	public void assertCompleted(String studentFirstname, String studentSurname) throws Exception {
 		PassFailCriteria passFail = new PassFailCriteria(driver);
-		
+		passFail.assertElementIsPresentByXpath(".//tr[contains(.,'" + studentFirstname + " " + studentSurname + "')]/td/img[@alt='Completed']", 
+				studentFirstname + " " + studentSurname + this.properties.get("errorCompletedTrackingAssignment"), 2);
+	}
+/**
+ * Makes the test fail if a student who has not completed an assignment is marked as doing so in the Activity completion report.
+ * @param studentFirstname The first name of the student. Pass this parameter from the test.
+ * @param studentSurname The surname of the student. Pass this parameter from the test.
+ * @throws Exception Throws an exception if the student is shown as completing the assignment in the report.
+ */
+	public void assertNotCompleted(String studentFirstname, String studentSurname) throws Exception {
+		PassFailCriteria passFail = new PassFailCriteria(driver);
+		passFail.assertElementIsPresentByXpath(".//tr[contains(.,'" + studentFirstname + " " + studentSurname + "')]/td/img[@alt='Not completed']", 
+				studentFirstname + " " + studentSurname + this.properties.get("errorNotCompletedTrackingAssignment"), 2);
 	}
 }

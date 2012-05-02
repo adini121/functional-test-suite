@@ -50,10 +50,11 @@ public class MDLQADT1AddCourse {
 				String gridHubURL = startupConfig.getProperty("gridHubURL");
 				String browserType = startupConfig.getProperty("browserType");
 				String moodleHomePage = startupConfig.getProperty("moodleHomePage");
+				//String chromeDriverLocation = startupConfig.getProperty("chromeDriverLocation");
 				//Call setup method
 				sm = new SeleniumManager();
 				sm.startRemotes(gridHubURL, browserType);
-				//sm.startChromeDriver();
+				//sm.startChromeDriver(chromeDriverLocation);
 				driver = sm.getRemoteDriver();
 				//driver = sm.getChromeDriver();
 				driver.get(moodleHomePage);
@@ -69,7 +70,7 @@ public class MDLQADT1AddCourse {
 		userLogin.clickLoginButton();
 		}
 		//Test to add a course
-	//@Test
+		@Test
 		public void addCourse() throws MalformedURLException {
 		Courses addCourse = new Courses(driver);
 		addCourse.clickAddCourse();
@@ -77,14 +78,14 @@ public class MDLQADT1AddCourse {
 		addCourse.enterShortname(this.properties.get("courseShortname"));
 		addCourse.clickSubmitButton();
 		}
-	@After
-	//Logout Method
+		@Test
+		//Logout Method
 		public void logout() {
 		Users userLogout = new Users(driver);
 		userLogout.selectLogout();
 		}
 	//Tear Down webdriver for @Test methods
-	@AfterClass
+		@AfterClass
 		static public void Quit() {
 		//End Webdriver Session by calling teardown method
 		sm.teardown();

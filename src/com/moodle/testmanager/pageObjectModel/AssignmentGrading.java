@@ -61,10 +61,8 @@ public class AssignmentGrading {
 /**
  * Clicks the Submitted for grading link.
  */
-	public void clickLinkSubmittedForGrading(String studentName) {
-		WebElement link = driver.findElementByXPath("//tr[contains(.,'" +
-				studentName +
-				"')]/td/a[@class='submissionstatussubmitted']");
+	public void clickLinkSubmittedForGrading(String studentFirstname, String studentSurname) {
+		WebElement link = driver.findElementByXPath("//tr[contains(.,'" + studentFirstname + " " + studentSurname +	"')]/td/a[@class='submissionstatussubmitted']");
 		link.click();
 	}
 /**

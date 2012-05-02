@@ -15,7 +15,6 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 import com.moodle.seleniumutils.SeleniumManager;
 import com.moodle.testmanager.pageObjectModel.Assignment;
 import com.moodle.testmanager.pageObjectModel.AssignmentAddAssignment;
-import com.moodle.testmanager.pageObjectModel.AssignmentAddSubmission;
 import com.moodle.testmanager.pageObjectModel.BlockSettings;
 import com.moodle.testmanager.pageObjectModel.Courses;
 import com.moodle.testmanager.pageObjectModel.CoursesAddAnActivity;

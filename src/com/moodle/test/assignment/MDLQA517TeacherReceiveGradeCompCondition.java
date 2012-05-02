@@ -82,6 +82,10 @@ public class MDLQA517TeacherReceiveGradeCompCondition {
 			} catch (Exception e) {}
 			this.properties.put("teacherUsername", testData.getProperty("teacherUsername"));
 			this.properties.put("studentUsername", testData.getProperty("studentUsername"));
+			this.properties.put("studentFirstname", testData.getProperty("studentFirstname"));
+			this.properties.put("studentSurname", testData.getProperty("studentSurname"));
+			this.properties.put("student2Firstname", testData.getProperty("student2Firstname"));
+			this.properties.put("student2Surname", testData.getProperty("student2Surname"));
 			this.properties.put("adminUser", testData.getProperty("adminUser"));
 			this.properties.put("password", testData.getProperty("password"));
 			this.properties.put("courseName", testData.getProperty("courseName"));
@@ -100,13 +104,13 @@ public class MDLQA517TeacherReceiveGradeCompCondition {
 			String gridHubURL = startupConfig.getProperty("gridHubURL");
 			String browserType = startupConfig.getProperty("browserType");
 			String moodleHomePage = startupConfig.getProperty("moodleHomePage");
-			String chromeDriverLocation = startupConfig.getProperty("chromeDriverLocation");
+			//String chromeDriverLocation = startupConfig.getProperty("chromeDriverLocation");
 		//Call setup method
 			sm = new SeleniumManager();
-			//sm.startRemotes(gridHubURL, browserType);
-			sm.startChromeDriver(chromeDriverLocation);
-			//driver = sm.getRemoteDriver();
-			driver = sm.getChromeDriver();
+			sm.startRemotes(gridHubURL, browserType);
+			//sm.startChromeDriver(chromeDriverLocation);
+			driver = sm.getRemoteDriver();
+			//driver = sm.getChromeDriver();
 			driver.get(moodleHomePage);
 		}
 		/*
@@ -115,7 +119,7 @@ public class MDLQA517TeacherReceiveGradeCompCondition {
 		/*
 		 * Turn completion tracking on.
 		 */
-		//@Test
+		@Test
 		public void turnTrackingOn() {
 			//Login as admin
 			user.loginToSystem(this.properties.get("adminUser"), this.properties.get("password"));
@@ -128,7 +132,7 @@ public class MDLQA517TeacherReceiveGradeCompCondition {
 		/*
 		 * Create Assignment
 		 */
-		//@Test
+		@Test
 		public void createAssignment() {
 			//Teacher logs in.
 			user.loginToSystem(this.properties.get("teacherUsername"), this.properties.get("password"));
@@ -147,7 +151,7 @@ public class MDLQA517TeacherReceiveGradeCompCondition {
 		/*
 		 * Student Makes a subission.
 		 */
-		//@Test
+		@Test
 		public void studentSubmitsAssignment() {
 			user.loginToSystem(this.properties.get("studentUsername"), this.properties.get("password"));
 			course.clickCourseLink(this.properties.get("courseName"));
@@ -211,7 +215,7 @@ public class MDLQA517TeacherReceiveGradeCompCondition {
 		@Test
 		public void gradeAssignment() {
 			assignment.clickButtonGradeAssignment();
-			grading.clickLinkSubmittedForGrading(this.properties.get("studentUsername"));
+			grading.clickLinkSubmittedForGrading(this.properties.get("studentFirstname"), this.properties.get("studentSurname"));
 			grading.enterTextStandardGrade("100");
 			grading.clickButtonSaveChanges();
 		}
@@ -219,18 +223,20 @@ public class MDLQA517TeacherReceiveGradeCompCondition {
 		 * 7. Check that the assignment is marked as complete for the student in Reports > Activity completion.
 		 */
 		@Test
-		public void checkMarkedComplete() {
+		public void checkMarkedComplete() throws Exception {
 			navigate.navigateReportActivityCompletion(this.properties.get("courseShortname"));
 			activityCompletionReport.assertCompleted(this.properties.get("studentFirstname"), this.properties.get("studentSurname"));
+			activityCompletionReport.assertNotCompleted(this.properties.get("student2Firstname"), this.properties.get("student2Surname"));
+			user.selectLogout();
 		}
 		/*
 		 * END OF TEST
 		 */
 		//Tear Down webdriver for @Test methods
-		//@AfterClass
+		@AfterClass
 		static public void Quit() {
 		//End Webdriver Session by calling teardown method
-			//sm.teardown();
-			sm.teardownChrome();
+			sm.teardown();
+			//sm.teardownChrome();
 		}
 }

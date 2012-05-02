@@ -89,7 +89,7 @@ public class MDLQADT3AssignFrontPageRoles {
 			userLogin.clickLoginButton();
 		}
 		//Add a user to the teacher role
-		//@Test
+		@Test
 		public void assignTeacherRole(){
 			BlockSettings settingsMenu = new BlockSettings(driver);	
 			settingsMenu.navigateTreeMenuToFrontPageRoles();
@@ -99,7 +99,7 @@ public class MDLQADT3AssignFrontPageRoles {
 			frontPageRoles.selectAdd();
 		}
 		//Add the first user to the student role
-	//	@Test
+		@Test
 		public void assignStudentRole(){
 			BlockSettings settingsMenu = new BlockSettings(driver);	
 			settingsMenu.navigateTreeMenuToFrontPageRoles();
@@ -109,7 +109,7 @@ public class MDLQADT3AssignFrontPageRoles {
 			frontPageRoles.selectAdd();
 		}
 		//Add the second user to the student role
-	//	@Test
+		@Test
 		public void assignStudent2Role(){
 			BlockSettings settingsMenu = new BlockSettings(driver);	
 			settingsMenu.navigateTreeMenuToFrontPageRoles();

@@ -20,7 +20,6 @@ import com.moodle.testmanager.pageObjectModel.AssignmentAddSubmission;
 import com.moodle.testmanager.pageObjectModel.Courses;
 import com.moodle.testmanager.pageObjectModel.CoursesAddAnActivity;
 import com.moodle.testmanager.pageObjectModel.Users;
-import com.opera.core.systems.OperaDriver;
 /*
  * DESCRIPTION:
  * 
