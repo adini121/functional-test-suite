@@ -127,4 +127,15 @@ public class FormActions {
 			unTicked.click();
 		}
 	}
+/**
+ * Picks a given item from the resource picker on the course page to add a resource or activity.
+ * @param outlineSection The Section that you would like to add the activity/resource in.
+ * @param radioID The id of the radio button to select to add an activity or resource.
+ */
+	public void addItemResourcePicker(String outlineSection, String radioID) {
+		driver.findElement(By .xpath("//*[@id='section-" + outlineSection + "']/*/*/*/div[@class='section-modchooser']/*/*")).click();
+		WebElement radio = driver.findElement(By .id(radioID));
+		radio.click();
+		radio.submit();
+	}
 }

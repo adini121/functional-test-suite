@@ -70,13 +70,15 @@ public class MDLQADT3AssignFrontPageRoles {
 			String gridHubURL = startupConfig.getProperty("gridHubURL");
 			String browserType = startupConfig.getProperty("browserType");
 			String moodleHomePage = startupConfig.getProperty("moodleHomePage");
-			//String chromeDriverLocation = startupConfig.getProperty("chromeDriverLocation");
+			String chromeDriverLocation = startupConfig.getProperty("chromeDriverLocation");
 			//Call setup method
 			sm = new SeleniumManager();
-			sm.startRemotes(gridHubURL, browserType);
+			//sm.startRemotes(gridHubURL, browserType);
 			//sm.startChromeDriver(chromeDriverLocation);
-			driver = sm.getRemoteDriver();
+			sm.startFirefoxDriver();
+			//driver = sm.getRemoteDriver();
 			//driver = sm.getChromeDriver();
+			driver = sm.getFirefoxDriver();
 			driver.get(moodleHomePage);
 		}
 		//Login as default Admin user
@@ -209,7 +211,8 @@ public class MDLQADT3AssignFrontPageRoles {
 		@AfterClass
 		static public void Quit() {
 		//End Webdriver Session by calling teardown method
-			sm.teardown();
+			//sm.teardown();
 			//sm.teardownChrome();
+			sm.teardownFirefox();
 		}	
 }

@@ -10,6 +10,7 @@ import java.util.Properties;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
 import com.moodle.seleniumutils.SeleniumManager;
@@ -30,7 +31,8 @@ import com.moodle.testmanager.pageObjectModel.Users;
  */
 public class MDLQA05StudentsDisplayOptions {
 //define "driver" in a field
-		static RemoteWebDriver driver;
+		//static RemoteWebDriver driver;
+		static FirefoxDriver driver; 
 		static SeleniumManager sm;
 		//TEST DATA
 		//Test Data Property Files
@@ -79,8 +81,12 @@ public class MDLQA05StudentsDisplayOptions {
 			String moodleHomePage = startupConfig.getProperty("moodleHomePage");
 		//Call setup method
 			sm = new SeleniumManager();
-			sm.startRemotes(gridHubURL, browserType);
-			driver = sm.getRemoteDriver();
+			//sm.startRemotes(gridHubURL, browserType);
+			//sm.startChromeDriver(chromeDriverLocation);
+			sm.startFirefoxDriver();
+			//driver = sm.getRemoteDriver();
+			//driver = sm.getChromeDriver();
+			driver = sm.getFirefoxDriver();
 			driver.get(moodleHomePage);
 		}
 		//CREATE TEST DATA
@@ -213,7 +219,8 @@ public class MDLQA05StudentsDisplayOptions {
 		@AfterClass
 		static public void Quit() {
 		//End Webdriver Session by calling teardown method
-			sm.teardown();
+			//sm.teardown();
+			sm.teardownFirefox();
 		}
 		//
 		//END OF TEST

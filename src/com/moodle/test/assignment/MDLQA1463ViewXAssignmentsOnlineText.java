@@ -87,10 +87,10 @@ public class MDLQA1463ViewXAssignmentsOnlineText {
 			String moodleHomePage = startupConfig.getProperty("moodleHomePage");
 		//Call setup method
 			sm = new SeleniumManager();
-			sm.startRemotes(gridHubURL, browserType);
-			//sm.startFirefoxDriver();
-			driver = sm.getRemoteDriver();
-			//driver = sm.getFirefoxDriver();
+			//sm.startRemotes(gridHubURL, browserType);
+			sm.startFirefoxDriver();
+			//driver = sm.getRemoteDriver();
+			driver = sm.getFirefoxDriver();
 			driver.get(moodleHomePage);
 		}
 		/*
@@ -132,7 +132,7 @@ public class MDLQA1463ViewXAssignmentsOnlineText {
 			//Access assignment
 			assignment.clickAssignmentLink(this.properties.get("MDLQA1463AssigmentName"));
 			//Enter Online text
-			assignment.clickButtonEditMySubmission();
+			assignment.clickButtonAddOrEditSubmission();
 			submitAssignment.clickCheckboxSubmissionStatement();
 			submitAssignment.enterOnlineText(this.properties.get("MDLQA1463AssignmentSubmissionText"));
 			submitAssignment.clickButtonSaveChanges();
@@ -172,7 +172,7 @@ public class MDLQA1463ViewXAssignmentsOnlineText {
 			//Access assignment
 			assignment.clickAssignmentLink(this.properties.get("MDLQA1463AssigmentName"));
 			//Enter Online text
-			assignment.clickButtonEditMySubmission();
+			assignment.clickButtonAddOrEditSubmission();
 			submitAssignment.clickCheckboxSubmissionStatement();
 			submitAssignment.enterOnlineText(this.properties.get("MDLQA1463AssignmentSubmissionText"));
 			submitAssignment.clickButtonSaveChanges();
@@ -201,7 +201,8 @@ public class MDLQA1463ViewXAssignmentsOnlineText {
 		@AfterClass
 		static public void Quit() {
 		//End Webdriver Session by calling teardown method
-			sm.teardown();
+			//sm.teardown();
+			sm.teardownFirefox();
 		}
 		//
 		//END OF TEST

@@ -6,6 +6,7 @@ import java.net.URL;
 import org.openqa.selenium.android.AndroidDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.iphone.IPhoneDriver;
@@ -70,7 +71,9 @@ public class SeleniumManager {
  */
 //Firefox Driver
 	public void startFirefoxDriver() throws MalformedURLException {
-		firefoxdriver = new FirefoxDriver();
+		FirefoxProfile profile = new FirefoxProfile();
+		profile.setEnableNativeEvents(true);
+		firefoxdriver = new FirefoxDriver(profile);
 	}
 /**
  * Constructor for the Firefox driver.

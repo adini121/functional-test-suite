@@ -87,13 +87,15 @@ public class MDLQADT4GiveTeacherCoursePermissions {
 			String gridHubURL = startupConfig.getProperty("gridHubURL");
 			String browserType = startupConfig.getProperty("browserType");
 			String moodleHomePage = startupConfig.getProperty("moodleHomePage");
-			//String chromeDriverLocation = startupConfig.getProperty("chromeDriverLocation");
+			String chromeDriverLocation = startupConfig.getProperty("chromeDriverLocation");
 			//Call setup method
 			sm = new SeleniumManager();
-			sm.startRemotes(gridHubURL, browserType);
+			//sm.startRemotes(gridHubURL, browserType);
 			//sm.startChromeDriver(chromeDriverLocation);
-			driver = sm.getRemoteDriver();
+			sm.startFirefoxDriver();
+			//driver = sm.getRemoteDriver();
 			//driver = sm.getChromeDriver();
+			driver = sm.getFirefoxDriver();
 			driver.get(moodleHomePage);
 		}
 		//Login as default Admin user
@@ -150,8 +152,6 @@ public class MDLQADT4GiveTeacherCoursePermissions {
 		}
 		@Test
 		public void enrolStudent3(){
-			Courses availableCourses = new Courses(driver);
-			availableCourses.clickCourseLink(this.properties.get("courseName"));
 			BlockSettings enrolledUser = new BlockSettings(driver);
 			enrolledUser.navigateEnrolledUsers();
 			UsersEnrolled enrolUser = new UsersEnrolled(driver);
@@ -250,7 +250,8 @@ public class MDLQADT4GiveTeacherCoursePermissions {
 		@AfterClass
 		static public void Quit() {
 		//End Webdriver Session by calling teardown method
-			sm.teardown();
+			//sm.teardown();
 			//sm.teardownChrome();
+			sm.teardownFirefox();
 		}		
 }

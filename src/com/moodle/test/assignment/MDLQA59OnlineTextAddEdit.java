@@ -87,10 +87,12 @@ public class MDLQA59OnlineTextAddEdit {
 			String moodleHomePage = startupConfig.getProperty("moodleHomePage");
 		//Call setup method
 			sm = new SeleniumManager();
-			sm.startRemotes(gridHubURL, browserType);
-			//sm.startChromeDriver();
-			driver = sm.getRemoteDriver();
+			//sm.startRemotes(gridHubURL, browserType);
+			//sm.startChromeDriver(chromeDriverLocation);
+			sm.startFirefoxDriver();
+			//driver = sm.getRemoteDriver();
 			//driver = sm.getChromeDriver();
+			driver = sm.getFirefoxDriver();
 			driver.get(moodleHomePage);
 		}
 		//PRE-REQUISITES
@@ -126,7 +128,7 @@ public class MDLQA59OnlineTextAddEdit {
 		@Test
 		//2. Click the 'Add submission' button, add some text, then click the 'Save changes' button.
 		public void addSubmission() throws Exception {
-			assignment.clickButtonEditMySubmission();
+			assignment.clickButtonAddOrEditSubmission();
 			submission.clickCheckboxSubmissionStatement();
 			submission.enterOnlineText(this.properties.get("MDLQA59StudentSubmissionText"));
 			submission.clickButtonSaveChanges();
@@ -136,7 +138,7 @@ public class MDLQA59OnlineTextAddEdit {
 		@Test
 		//3. Click the 'Edit my submission' button again, edit the text, then click the 'Save changes' button.
 		public void editSubmission() {
-			assignment.clickButtonEditMySubmission();
+			assignment.clickButtonAddOrEditSubmission();
 			submission.clickCheckboxSubmissionStatement();
 			submission.enterOnlineText(this.properties.get("MDLQA59StudentEditedSubmissionText"));
 			submission.clickButtonSaveChanges();
@@ -158,7 +160,8 @@ public class MDLQA59OnlineTextAddEdit {
 		static public void Quit() {
 		//End Webdriver Session by calling teardown method
 			//sm.teardownChrome();
-			sm.teardown();
+			//sm.teardown();
+			sm.teardownFirefox();
 		}
 		//
 		//END OF TEST

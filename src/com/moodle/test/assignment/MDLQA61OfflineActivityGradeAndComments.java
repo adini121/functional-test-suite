@@ -89,10 +89,12 @@ public class MDLQA61OfflineActivityGradeAndComments {
 			String moodleHomePage = startupConfig.getProperty("moodleHomePage");
 		//Call setup method
 			sm = new SeleniumManager();
-			sm.startRemotes(gridHubURL, browserType);
-			//sm.startChromeDriver();
-			driver = sm.getRemoteDriver();
+			//sm.startRemotes(gridHubURL, browserType);
+			//sm.startChromeDriver(chromeDriverLocation);
+			sm.startFirefoxDriver();
+			//driver = sm.getRemoteDriver();
 			//driver = sm.getChromeDriver();
+			driver = sm.getFirefoxDriver();
 			driver.get(moodleHomePage);
 		}
 		/*
@@ -138,7 +140,7 @@ public class MDLQA61OfflineActivityGradeAndComments {
 		 */
 		@Test
 		public void navigateToGradeAssignment() {
-			assignment.clickButtonGradeAssignment();
+			assignment.clickLinkGradeAllSub();
 		}
 		/*
 		 * 3. Add a grade and comment then click the 'Save changes' button. 
@@ -146,7 +148,7 @@ public class MDLQA61OfflineActivityGradeAndComments {
 		@Test
 		public void gradeAndComment() {
 			//Teacher grades assignment
-			gradeAssignment.clickLinkGrade(this.properties.get("studentFirstname") + " " + this.properties.get("studentSurname"));
+			gradeAssignment.clickLinkGrade(this.properties.get("studentFirstname"), this.properties.get("studentSurname"));
 			gradeAssignment.enterTextStandardGrade(this.properties.get("MDLQA61Grade"));
 			//Teacher adds comments
 			gradeAssignment.enterFeedbackComments(this.properties.get("MDLQA61FeedbackComment"));
@@ -169,8 +171,9 @@ public class MDLQA61OfflineActivityGradeAndComments {
 		@AfterClass
 		static public void Quit() {
 		//End Webdriver Session by calling teardown method
-			sm.teardown();
+			//sm.teardown();
 			//sm.teardownChrome();
+			sm.teardownFirefox();
 		}
 		//
 		//END OF TEST

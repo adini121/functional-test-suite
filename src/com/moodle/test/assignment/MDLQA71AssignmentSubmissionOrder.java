@@ -111,10 +111,12 @@ public class MDLQA71AssignmentSubmissionOrder {
 			//String chromeDriverLocation = startupConfig.getProperty("chromeDriverLocation");
 		//Call setup method
 			sm = new SeleniumManager();
-			sm.startRemotes(gridHubURL, browserType);
+			//sm.startRemotes(gridHubURL, browserType);
 			//sm.startChromeDriver(chromeDriverLocation);
-			driver = sm.getRemoteDriver();
+			sm.startFirefoxDriver();
+			//driver = sm.getRemoteDriver();
 			//driver = sm.getChromeDriver();
+			driver = sm.getFirefoxDriver();
 			driver.get(moodleHomePage);
 		}
 		/*
@@ -140,7 +142,7 @@ public class MDLQA71AssignmentSubmissionOrder {
 			user.loginToSystem(this.properties.get("studentUsername"), this.properties.get("password"));
 			course.clickCourseLink(this.properties.get("courseName"));
 			assignment.clickAssignmentLink(this.properties.get("MDLQA71AssignmentName"));
-			assignment.clickButtonEditMySubmission();
+			assignment.clickButtonAddOrEditSubmission();
 			addSubmission.clickCheckboxSubmissionStatement();
 			addSubmission.enterOnlineText(this.properties.get("MDLQA71AssignmentSubmissionA"));
 			addSubmission.clickButtonSaveChanges();
@@ -149,7 +151,7 @@ public class MDLQA71AssignmentSubmissionOrder {
 			user.loginToSystem(this.properties.get("student2Username"), this.properties.get("password"));
 			course.clickCourseLink(this.properties.get("courseName"));
 			assignment.clickAssignmentLink(this.properties.get("MDLQA71AssignmentName"));
-			assignment.clickButtonEditMySubmission();
+			assignment.clickButtonAddOrEditSubmission();
 			addSubmission.clickCheckboxSubmissionStatement();
 			addSubmission.enterOnlineText(this.properties.get("MDLQA71AssignmentSubmissionB"));
 			addSubmission.clickButtonSaveChanges();
@@ -158,7 +160,7 @@ public class MDLQA71AssignmentSubmissionOrder {
 			user.loginToSystem(this.properties.get("student3Username"), this.properties.get("password"));
 			course.clickCourseLink(this.properties.get("courseName"));
 			assignment.clickAssignmentLink(this.properties.get("MDLQA71AssignmentName"));
-			assignment.clickButtonEditMySubmission();
+			assignment.clickButtonAddOrEditSubmission();
 			addSubmission.clickCheckboxSubmissionStatement();
 			addSubmission.enterOnlineText(this.properties.get("MDLQA71AssignmentSubmissionB"));
 			addSubmission.clickButtonSaveChanges();
@@ -167,7 +169,7 @@ public class MDLQA71AssignmentSubmissionOrder {
 			user.loginToSystem(this.properties.get("student4Username"), this.properties.get("password"));
 			course.clickCourseLink(this.properties.get("courseName"));
 			assignment.clickAssignmentLink(this.properties.get("MDLQA71AssignmentName"));
-			assignment.clickButtonEditMySubmission();
+			assignment.clickButtonAddOrEditSubmission();
 			addSubmission.clickCheckboxSubmissionStatement();
 			addSubmission.enterOnlineText(this.properties.get("MDLQA71AssignmentSubmissionB"));
 			addSubmission.clickButtonSaveChanges();
@@ -176,7 +178,7 @@ public class MDLQA71AssignmentSubmissionOrder {
 			user.loginToSystem(this.properties.get("student5Username"), this.properties.get("password"));
 			course.clickCourseLink(this.properties.get("courseName"));
 			assignment.clickAssignmentLink(this.properties.get("MDLQA71AssignmentName"));
-			assignment.clickButtonEditMySubmission();
+			assignment.clickButtonAddOrEditSubmission();
 			addSubmission.clickCheckboxSubmissionStatement();
 			addSubmission.enterOnlineText(this.properties.get("MDLQA71AssignmentSubmissionB"));
 			addSubmission.clickButtonSaveChanges();
@@ -185,7 +187,7 @@ public class MDLQA71AssignmentSubmissionOrder {
 			user.loginToSystem(this.properties.get("student6Username"), this.properties.get("password"));
 			course.clickCourseLink(this.properties.get("courseName"));
 			assignment.clickAssignmentLink(this.properties.get("MDLQA71AssignmentName"));
-			assignment.clickButtonEditMySubmission();
+			assignment.clickButtonAddOrEditSubmission();
 			addSubmission.clickCheckboxSubmissionStatement();
 			addSubmission.enterOnlineText(this.properties.get("MDLQA71AssignmentSubmissionB"));
 			addSubmission.clickButtonSaveChanges();
@@ -194,7 +196,7 @@ public class MDLQA71AssignmentSubmissionOrder {
 			user.loginToSystem(this.properties.get("student7Username"), this.properties.get("password"));
 			course.clickCourseLink(this.properties.get("courseName"));
 			assignment.clickAssignmentLink(this.properties.get("MDLQA71AssignmentName"));
-			assignment.clickButtonEditMySubmission();
+			assignment.clickButtonAddOrEditSubmission();
 			addSubmission.clickCheckboxSubmissionStatement();
 			addSubmission.enterOnlineText(this.properties.get("MDLQA71AssignmentSubmissionB"));
 			addSubmission.clickButtonSaveChanges();
@@ -203,7 +205,7 @@ public class MDLQA71AssignmentSubmissionOrder {
 			user.loginToSystem(this.properties.get("student8Username"), this.properties.get("password"));
 			course.clickCourseLink(this.properties.get("courseName"));
 			assignment.clickAssignmentLink(this.properties.get("MDLQA71AssignmentName"));
-			assignment.clickButtonEditMySubmission();
+			assignment.clickButtonAddOrEditSubmission();
 			addSubmission.clickCheckboxSubmissionStatement();
 			addSubmission.enterOnlineText(this.properties.get("MDLQA71AssignmentSubmissionB"));
 			addSubmission.clickButtonSaveChanges();
@@ -212,7 +214,7 @@ public class MDLQA71AssignmentSubmissionOrder {
 			user.loginToSystem(this.properties.get("student9Username"), this.properties.get("password"));
 			course.clickCourseLink(this.properties.get("courseName"));
 			assignment.clickAssignmentLink(this.properties.get("MDLQA71AssignmentName"));
-			assignment.clickButtonEditMySubmission();
+			assignment.clickButtonAddOrEditSubmission();
 			addSubmission.clickCheckboxSubmissionStatement();
 			addSubmission.enterOnlineText(this.properties.get("MDLQA71AssignmentSubmissionB"));
 			addSubmission.clickButtonSaveChanges();
@@ -221,7 +223,7 @@ public class MDLQA71AssignmentSubmissionOrder {
 			user.loginToSystem(this.properties.get("student10Username"), this.properties.get("password"));
 			course.clickCourseLink(this.properties.get("courseName"));
 			assignment.clickAssignmentLink(this.properties.get("MDLQA71AssignmentName"));
-			assignment.clickButtonEditMySubmission();
+			assignment.clickButtonAddOrEditSubmission();
 			addSubmission.clickCheckboxSubmissionStatement();
 			addSubmission.enterOnlineText(this.properties.get("MDLQA71AssignmentSubmissionB"));
 			addSubmission.clickButtonSaveChanges();
@@ -230,7 +232,7 @@ public class MDLQA71AssignmentSubmissionOrder {
 			user.loginToSystem(this.properties.get("student11Username"), this.properties.get("password"));
 			course.clickCourseLink(this.properties.get("courseName"));
 			assignment.clickAssignmentLink(this.properties.get("MDLQA71AssignmentName"));
-			assignment.clickButtonEditMySubmission();
+			assignment.clickButtonAddOrEditSubmission();
 			addSubmission.clickCheckboxSubmissionStatement();
 			addSubmission.enterOnlineText(this.properties.get("MDLQA71AssignmentSubmissionB"));
 			addSubmission.clickButtonSaveChanges();
@@ -249,7 +251,7 @@ public class MDLQA71AssignmentSubmissionOrder {
 			//Teacher accesses course and assignment.
 			course.clickCourseLink(this.properties.get("courseName"));
 			assignment.clickAssignmentLink(this.properties.get("MDLQA71AssignmentName"));
-			assignment.clickButtonGradeAssignment();
+			assignment.clickLinkGradeAllSub();
 		}
 		/*
 		 * 2. Try sorting the submissions by first name by clicking the 'First name' heading.
@@ -260,7 +262,7 @@ public class MDLQA71AssignmentSubmissionOrder {
 			grading.clickLinkSortFirstName();
 			course.clickCourseBreadcrumb(this.properties.get("courseShortname"));
 			assignment.clickAssignmentLink(this.properties.get("MDLQA71AssignmentName"));
-			assignment.clickButtonGradeAssignment();
+			assignment.clickLinkGradeAllSub();
 			grading.assertSortOrderStudentName("r0", this.properties.get("student2Firstname"), this.properties.get("student2Surname"));
 			//grading.assertFirstAndSurnameHidden(this.properties.get("studentFirstname"), this.properties.get("studentSurname"));
 		}
@@ -272,7 +274,7 @@ public class MDLQA71AssignmentSubmissionOrder {
 			grading.clickLinkSortFirstName();
 			course.clickCourseBreadcrumb(this.properties.get("courseShortname"));
 			assignment.clickAssignmentLink(this.properties.get("MDLQA71AssignmentName"));
-			assignment.clickButtonGradeAssignment();
+			assignment.clickLinkGradeAllSub();
 			grading.assertSortOrderStudentName("r0", this.properties.get("student2Firstname"), this.properties.get("student2Surname"));
 			grading.assertSortOrderStudentName("r1", this.properties.get("student3Firstname"), this.properties.get("student3Surname"));
 			//grading.assertFirstAndSurnameHidden(this.properties.get("student11Firstname"), this.properties.get("student11Surname"));
@@ -295,7 +297,7 @@ public class MDLQA71AssignmentSubmissionOrder {
 			user.loginToSystem(this.properties.get("teacherUsername"), this.properties.get("password"));
 			course.clickCourseLink(this.properties.get("courseName"));
 			assignment.clickAssignmentLink(this.properties.get("MDLQA71AssignmentName"));
-			assignment.clickButtonGradeAssignment();
+			assignment.clickLinkGradeAllSub();
 			//Verify that, using the default 10 assignments per page that there are 2 pages.
 			grading.assertNumberOfGradingTablePages("2");
 			//Sort by First name the navigate to second page.
@@ -315,7 +317,7 @@ public class MDLQA71AssignmentSubmissionOrder {
 			grading.clickHideName();
 			course.clickCourseBreadcrumb(this.properties.get("courseShortname"));
 			assignment.clickAssignmentLink(this.properties.get("MDLQA71AssignmentName"));
-			assignment.clickButtonGradeAssignment();
+			assignment.clickLinkGradeAllSub();
 			grading.assertFirstAndSurnameHidden(this.properties.get("studentFirstname"), this.properties.get("studentSurname"));
 			grading.assertFirstAndSurnameHidden(this.properties.get("student2Firstname"), this.properties.get("student2Surname"));
 			grading.assertFirstAndSurnameHidden(this.properties.get("student3Firstname"), this.properties.get("student3Surname"));
@@ -336,7 +338,8 @@ public class MDLQA71AssignmentSubmissionOrder {
 		@AfterClass
 		static public void Quit() {
 		//End Webdriver Session by calling teardown method
-			sm.teardown();
+			//sm.teardown();
 			//sm.teardownChrome();
+			sm.teardownFirefox();
 		}
 }

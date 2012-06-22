@@ -71,8 +71,12 @@ public class MDLQA06NewCourseNewsForum {
 			String moodleHomePage = startupConfig.getProperty("moodleHomePage");
 		//Call setup method
 			sm = new SeleniumManager();
-			sm.startRemotes(gridHubURL, browserType);
-			driver = sm.getRemoteDriver();
+			//sm.startRemotes(gridHubURL, browserType);
+			//sm.startChromeDriver(chromeDriverLocation);
+			sm.startFirefoxDriver();
+			//driver = sm.getRemoteDriver();
+			//driver = sm.getChromeDriver();
+			driver = sm.getFirefoxDriver();
 			driver.get(moodleHomePage);
 		}
 		//Login as teacher
@@ -153,7 +157,7 @@ public class MDLQA06NewCourseNewsForum {
 			cannotPost.assertReplyLinkNotPresent(this.properties.get("replyMessage"));
 		}
 		//Log Student out
-		@Test
+	//	@Test
 		public void studentLogout(){
 			Users studentLogout = new Users(driver);
 			studentLogout.selectLogout();
@@ -162,7 +166,8 @@ public class MDLQA06NewCourseNewsForum {
 		@AfterClass
 		static public void Quit() {
 		//End Webdriver Session by calling teardown method
-			sm.teardown();
+			//sm.teardown();
+			sm.teardownFirefox();
 		}
 		//
 		//END OF TEST

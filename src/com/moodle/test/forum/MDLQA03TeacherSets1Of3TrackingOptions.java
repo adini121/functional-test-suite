@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 
+import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.openqa.selenium.remote.RemoteWebDriver;
@@ -80,18 +81,23 @@ public class MDLQA03TeacherSets1Of3TrackingOptions {
 		@BeforeClass
 		public static void automateTestSetup() throws FileNotFoundException,
 				IOException {
-				//Load properties required for test run
-					Properties startupConfig = new Properties();
-					startupConfig.load(new FileInputStream(runParameters));
-					String gridHubURL = startupConfig.getProperty("gridHubURL");
-					String browserType = startupConfig.getProperty("browserType");
-					String moodleHomePage = startupConfig.getProperty("moodleHomePage");
-				//Call setup method
-					sm = new SeleniumManager();
-					sm.startRemotes(gridHubURL, browserType);
-					driver = sm.getRemoteDriver();
-					driver.get(moodleHomePage);
-				}
+			//Load properties required for test run
+			Properties startupConfig = new Properties();
+			startupConfig.load(new FileInputStream(runParameters));
+			String gridHubURL = startupConfig.getProperty("gridHubURL");
+			String browserType = startupConfig.getProperty("browserType");
+			String moodleHomePage = startupConfig.getProperty("moodleHomePage");
+			String chromeDriverLocation = startupConfig.getProperty("chromeDriverLocation");
+			//Call setup method
+			sm = new SeleniumManager();
+			//sm.startRemotes(gridHubURL, browserType);
+			//sm.startChromeDriver(chromeDriverLocation);
+			sm.startFirefoxDriver();
+			//driver = sm.getRemoteDriver();
+			//driver = sm.getChromeDriver();
+			driver = sm.getFirefoxDriver();
+			driver.get(moodleHomePage);
+		}
 		//START TEST
 		//Login as teacher
 		@Test
@@ -240,15 +246,16 @@ public class MDLQA03TeacherSets1Of3TrackingOptions {
 			navigate.assertTrackingCannotBeDisabled();
 		}
 		//Log out Student
-		@Test
+		//@Test
 		public void logoutStudent(){
 			Users student = new Users(driver);
 			student.selectLogout();
 		}
-		//@AfterClass
+		@AfterClass
 		public static void Quit() {
 		//End Webdriver Session by calling teardown method
-			sm.teardown();
+			//sm.teardown();
+			sm.teardownFirefox();
 		}
 		//
 		//END OF TEST

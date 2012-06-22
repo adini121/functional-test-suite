@@ -4,7 +4,9 @@ import java.io.FileInputStream;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
+import java.util.concurrent.TimeUnit;
 
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
@@ -43,16 +45,33 @@ public class Assignment {
 		this.properties.put("buttonGradeAssignment", dataLoad.getProperty("buttonGradeAssignment"));
 		this.properties.put("buttonSubmitAssignment", dataLoad.getProperty("buttonSubmitAssignment"));
 		this.properties.put("exceptionSubmissionEnabled", dataLoad.getProperty("exceptionSubmissionEnabled"));
+		this.properties.put("linkGradeAllSubs", dataLoad.getProperty("linkGradeAllSubs"));
 		//this.properties.put("PROPERTY", dataLoad.getProperty("PROPERTY"));
 	}
 /**
  * Clicks the Edit my submission button.
  */
-	public void clickButtonEditMySubmission() {
+	public void clickButtonAddOrEditSubmission() {
+		boolean itemVisible = false;
+		try{
+			driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+			WebElement button = driver.findElementByCssSelector("input[value='" +
+					this.properties.get("buttonEditMySubmission") +
+					"']");
+			itemVisible = button.isDisplayed();
+		}
+		catch (NoSuchElementException ex){}
+		if (itemVisible){
 		WebElement button = driver.findElementByCssSelector("input[value='" +
 				this.properties.get("buttonEditMySubmission") +
 				"']");
 		button.click();
+		}
+		else{
+		WebElement submitButton = driver.findElementByCssSelector("input[value='Add submission']");
+			submitButton.click();
+		}
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 	}
 /**
  * Clicks the Grade assignment button.
@@ -80,8 +99,19 @@ public class Assignment {
 		WebElement link = driver.findElementByLinkText(assignmentName);
 		link.click();
 	}
+/**
+ * 
+ * @throws Exception
+ */
 	public void assertFileSubmisisonDisabled() throws Exception {
 		PassFailCriteria passFail = new PassFailCriteria(driver);
 		passFail.assertItemNotOnscreenByCSSSelector("input[value='" + this.properties.get("buttonEditMySubmission") + "']", this.properties.get("exceptionSubmissionEnabled"), 2);
 	}
+/**
+ * Clicks the link "View/grade all submissions" on the assignment page.
+ */
+	public void clickLinkGradeAllSub() {
+		driver.findElementByPartialLinkText(this.properties.get("linkGradeAllSubs")).click();
+	}
+
 }

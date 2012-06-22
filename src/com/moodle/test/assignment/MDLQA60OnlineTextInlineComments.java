@@ -86,10 +86,12 @@ public class MDLQA60OnlineTextInlineComments {
 			String moodleHomePage = startupConfig.getProperty("moodleHomePage");
 		//Call setup method
 			sm = new SeleniumManager();
-			//sm.startChromeDriver();
-			sm.startRemotes(gridHubURL, browserType);
+			//sm.startRemotes(gridHubURL, browserType);
+			//sm.startChromeDriver(chromeDriverLocation);
+			sm.startFirefoxDriver();
+			//driver = sm.getRemoteDriver();
 			//driver = sm.getChromeDriver();
-			driver = sm.getRemoteDriver();
+			driver = sm.getFirefoxDriver();
 			driver.get(moodleHomePage);
 		}
 		//PRE-REQUISITES
@@ -111,8 +113,9 @@ public class MDLQA60OnlineTextInlineComments {
 		// 2. Follow the 'View x submitted assignments' link and click a Grade link.
 		@Test
 		public void viewXSubmittedAssignments() throws Exception {
-			assignment.clickButtonGradeAssignment();
-			grading.clickLinkSubmittedForGrading(this.properties.get("studentFirstname"), this.properties.get("studentSurname"));
+			//assignment.clickButtonGradeAssignment();
+			assignment.clickLinkGradeAllSub();
+			grading.clickLinkGrade(this.properties.get("studentFirstname"), this.properties.get("studentSurname"));
 			submission.assertSubmissionOnlineText(this.properties.get("MDLQA59StudentEditedSubmissionText"));
 			grading.assertSubmissionStatusGradingForm(this.properties.get("MDLQA60SubmissionStatusSubmitted"));
 		}
@@ -138,8 +141,9 @@ public class MDLQA60OnlineTextInlineComments {
 		@AfterClass
 		static public void Quit() {
 		//End Webdriver Session by calling teardown method
-			sm.teardown();
+			//sm.teardown();
 			//sm.teardownChrome();
+			sm.teardownFirefox();
 		}
 		//
 		//END OF TEST

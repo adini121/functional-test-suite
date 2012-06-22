@@ -3,6 +3,8 @@ import java.io.FileInputStream;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
+import java.util.concurrent.TimeUnit;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebDriver;
@@ -43,8 +45,9 @@ public class Users {
  * Select the login link that is available when logged out
  */
 	public void selectLoginLink() {
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		WebElement login;
-		login = driver.findElement(By .partialLinkText(this.properties.get("loginLink")));
+		login = driver.findElement(By .linkText(this.properties.get("loginLink")));
 		login.click();
 	}
 /**
@@ -81,6 +84,7 @@ public class Users {
  * @param userPassword The password of the user that you want to log into the system. Pass this value from the test.
  */
 	public void loginToSystem(String uname, String userPassword) {
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		WebElement login;
 		login = driver.findElement(By .partialLinkText(this.properties.get("loginLink")));
 		login.click();

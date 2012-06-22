@@ -45,16 +45,20 @@ public class Install23 {
 	//Setup webdriver for @Test methods
 	@BeforeClass
 	static public void automateTestSetup()throws FileNotFoundException, IOException{
-		//Load properties required for test run
 		Properties startupConfig = new Properties();
 		startupConfig.load(new FileInputStream(runParameters));
 		String gridHubURL = startupConfig.getProperty("gridHubURL");
 		String browserType = startupConfig.getProperty("browserType");
 		String moodleHomePage = startupConfig.getProperty("moodleHomePage");
+		String chromeDriverLocation = startupConfig.getProperty("chromeDriverLocation");
 		//Call setup method
 		sm = new SeleniumManager();
-		sm.startRemotes(gridHubURL, browserType);
-		driver = sm.getRemoteDriver();
+		//sm.startRemotes(gridHubURL, browserType);
+		//sm.startChromeDriver(chromeDriverLocation);
+		sm.startFirefoxDriver();
+		//driver = sm.getRemoteDriver();
+		//driver = sm.getChromeDriver();
+		driver = sm.getFirefoxDriver();
 		driver.get(moodleHomePage);
 	}	
 	@Test
@@ -78,6 +82,7 @@ public class Install23 {
 	@AfterClass
 	static public void Quit() {
 		//End Webdriver Session by calling teardown method
-		sm.teardown();
+		//sm.teardown();
+		sm.teardownFirefox();
 	}		
 }

@@ -4,8 +4,13 @@ import java.io.FileInputStream;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
+import java.util.concurrent.TimeUnit;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.support.ui.Select;
 
 import com.moodle.seleniumutils.FormActions;
 /**
@@ -113,18 +118,36 @@ public class CoursesAddAnActivity {
  * ASSIGNMENTS 2.3 onwards
  */
 /**
- * Selects teh single 2.3 assignment
+ * Selects the single 2.3 assignment
  * @param outlineSection the outline section in which you want to add the activity. Pass with value from the test.
  */
 	public void selectAssignment(String outlineSection) {
-		FormActions dropdown = new FormActions(driver);
-		dropdown.selectDropdownItemByXPathHandlesJS(".//*[@id='section-" +
+		boolean itemVisible = false;
+		try{
+			driver.manage().timeouts().implicitlyWait(4, TimeUnit.SECONDS);
+			Select activityDropdown = new Select(driver.findElement(By .xpath(".//*[@id='section-" +
+				outlineSection +
+				"']/*/div[@class='section_add_menus']/div/div/form/div/select[contains(.,'" +
+				this.properties.get("activity") +
+				"')]")));
+			itemVisible = ((WebElement) activityDropdown).isDisplayed();
+		}
+		catch (NoSuchElementException ex){}
+		if (itemVisible){
+			FormActions dropdown = new FormActions(driver);
+			dropdown.selectDropdownItemByXPathHandlesJS(".//*[@id='section-" +
 				outlineSection +
 				"']/*/div[@class='section_add_menus']/div/div/form/div/select[contains(.,'" +
 				this.properties.get("activity") +
 				"')]", this.properties.get("activityAssignment"), ".//*[@id='" +
 				outlineSection +
 				"']/div/noscript/div/input", 0);
+		}
+		else {
+			FormActions picker = new FormActions(driver);
+			picker.addItemResourcePicker(outlineSection, "module_assign");
+		}
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 	}
 /**
  * Selects the Chat activity.
@@ -179,12 +202,30 @@ public class CoursesAddAnActivity {
  * @param outlineSection is the outline section in which you want to add the activity. Pass with value from the test. 
  */
 	public void selectForum(String outlineSection) {
-		FormActions dropdown = new FormActions(driver);
-		dropdown.selectDropdownItemByXpath(".//*[@id='section-" +
-				outlineSection +
-				"']/*/div[@class='section_add_menus']/div/div/form/div/select[contains(.,'" +
-				this.properties.get("activity") +
-				"')]", this.properties.get("activityForum"));
+		boolean itemVisible = false;
+		try{
+			driver.manage().timeouts().implicitlyWait(4, TimeUnit.SECONDS);
+			Select activityDropdown = new Select(driver.findElement(By .xpath(".//*[@id='section-" +
+					outlineSection +
+					"']/*/div[@class='section_add_menus']/div/div/form/div/select[contains(.,'" +
+					this.properties.get("activity") +
+					"')]")));
+			itemVisible = ((WebElement) activityDropdown).isDisplayed();
+		}
+		catch (NoSuchElementException ex){}
+		if (itemVisible){
+			FormActions dropdown = new FormActions(driver);
+			dropdown.selectDropdownItemByXpath(".//*[@id='section-" +
+					outlineSection +
+					"']/*/div[@class='section_add_menus']/div/div/form/div/select[contains(.,'" +
+					this.properties.get("activity") +
+					"')]", this.properties.get("activityForum"));
+		}
+		else {
+			FormActions picker = new FormActions(driver);
+			picker.addItemResourcePicker(outlineSection, "module_forum");
+		}
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 	}
 /**
  * Selects the Glossary activity.

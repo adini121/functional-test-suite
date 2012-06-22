@@ -71,9 +71,8 @@ public class Courses {
 			addCourseButton.click();
 		}
 		else {
-			WebElement courseTreeItemRoot = driver.findElement(By .partialLinkText("" +
-					this.properties.get("coursesNavBlock") +
-					""));
+			//WebElement courseTreeItemRoot = driver.findElement(By .partialLinkText(this.properties.get("coursesNavBlock")));
+			WebElement courseTreeItemRoot = driver.findElement(By .partialLinkText(this.properties.get("coursesNavBlock")));
 			courseTreeItemRoot.click();
 			WebElement addCourseButton = driver.findElement(By .cssSelector("input[value='" +
 					this.properties.get("addNewCourseButton") +
@@ -178,9 +177,9 @@ public class Courses {
  * @param courseLinkText any or all of the Course Full Name passed from the test.
  */
 	public void clickCourseLink(String courseLinkText) {
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		WebElement courseLink = driver.findElementByLinkText(courseLinkText);
 		courseLink.click();
-		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 	}
 /**
  * Clicks a course breadcrumb using all or part of the course shortname as a locator

@@ -89,10 +89,12 @@ public class MDLQA1464TeacherSubmissionEnabledOnlineTextEnabled {
 			//String chromeDriverLocation = startupConfig.getProperty("chromeDriverLocation");
 		//Call setup method
 			sm = new SeleniumManager();
-			sm.startRemotes(gridHubURL, browserType);
+			//sm.startRemotes(gridHubURL, browserType);
 			//sm.startChromeDriver(chromeDriverLocation);
-			driver = sm.getRemoteDriver();
+			sm.startFirefoxDriver();
+			//driver = sm.getRemoteDriver();
 			//driver = sm.getChromeDriver();
+			driver = sm.getFirefoxDriver();
 			driver.get(moodleHomePage);
 		}
 		/*
@@ -142,7 +144,7 @@ public class MDLQA1464TeacherSubmissionEnabledOnlineTextEnabled {
 		@Test
 		public void addSubmissionComment() throws Exception {
 			//Student adds an online text submission.
-			assignment.clickButtonEditMySubmission();
+			assignment.clickButtonAddOrEditSubmission();
 			submission.clickCheckboxSubmissionStatement();
 			submission.enterOnlineText(this.properties.get("MDLQA1464OnlineTextSubmission"));
 			submission.clickButtonSaveChanges();
@@ -200,8 +202,9 @@ public class MDLQA1464TeacherSubmissionEnabledOnlineTextEnabled {
 		@AfterClass
 		static public void Quit() {
 		//End Webdriver Session by calling teardown method
-			sm.teardown();
+			//sm.teardown();
 			//sm.teardownChrome();
+			sm.teardownFirefox();
 		}
 		//
 		//END OF TEST

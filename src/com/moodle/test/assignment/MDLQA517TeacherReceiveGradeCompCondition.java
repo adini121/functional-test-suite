@@ -107,10 +107,12 @@ public class MDLQA517TeacherReceiveGradeCompCondition {
 			//String chromeDriverLocation = startupConfig.getProperty("chromeDriverLocation");
 		//Call setup method
 			sm = new SeleniumManager();
-			sm.startRemotes(gridHubURL, browserType);
+			//sm.startRemotes(gridHubURL, browserType);
 			//sm.startChromeDriver(chromeDriverLocation);
-			driver = sm.getRemoteDriver();
+			sm.startFirefoxDriver();
+			//driver = sm.getRemoteDriver();
 			//driver = sm.getChromeDriver();
+			driver = sm.getFirefoxDriver();
 			driver.get(moodleHomePage);
 		}
 		/*
@@ -156,7 +158,7 @@ public class MDLQA517TeacherReceiveGradeCompCondition {
 			user.loginToSystem(this.properties.get("studentUsername"), this.properties.get("password"));
 			course.clickCourseLink(this.properties.get("courseName"));
 			assignment.clickAssignmentLink(this.properties.get("MDLQA517AssignmentName"));
-			assignment.clickButtonEditMySubmission();
+			assignment.clickButtonAddOrEditSubmission();
 			addSubmission.clickCheckboxSubmissionStatement();
 			addSubmission.enterOnlineText(this.properties.get("MDLQA517AssignmentText"));
 			addSubmission.clickButtonSaveChanges();
@@ -214,8 +216,8 @@ public class MDLQA517TeacherReceiveGradeCompCondition {
 		 */
 		@Test
 		public void gradeAssignment() {
-			assignment.clickButtonGradeAssignment();
-			grading.clickLinkSubmittedForGrading(this.properties.get("studentFirstname"), this.properties.get("studentSurname"));
+			assignment.clickLinkGradeAllSub();
+			grading.clickLinkGrade(this.properties.get("studentFirstname"), this.properties.get("studentSurname"));
 			grading.enterTextStandardGrade("100");
 			grading.clickButtonSaveChanges();
 		}
@@ -236,7 +238,8 @@ public class MDLQA517TeacherReceiveGradeCompCondition {
 		@AfterClass
 		static public void Quit() {
 		//End Webdriver Session by calling teardown method
-			sm.teardown();
+			//sm.teardown();
 			//sm.teardownChrome();
+			sm.teardownFirefox();
 		}
 }
