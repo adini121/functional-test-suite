@@ -17,11 +17,7 @@ import com.moodle.seleniumutils.FormActions;
  * @author Tim Barker 
  * @see <a href="http://www.gnu.org/copyleft/gpl.html">License: GNU GPL v3 or later</a>
  */
-public class AssignmentAddAssignment {
-	//Internationalization file location
-	public static String data = "properties/data/static/assignmentAddAssignment.properties";
-	private RemoteWebDriver driver;
-	private Map<String, String> properties = new HashMap<String, String>();
+public class AssignmentAddAssignment extends FormSettings{
 /**
  * Constructor for the page object.	
  * @param driver The driver that is used for the test. There is no need to specify the value for the driver here as the driver
@@ -29,17 +25,19 @@ public class AssignmentAddAssignment {
  * loadObjectData constructs internationalization layer in the context of this page object.
  */
 	public AssignmentAddAssignment(RemoteWebDriver driver) {
-		this.driver = driver;
-		this.loadObjectData();
+		super(driver);
+		//Internationalization file location
+		staticData = "properties/data/static/assignmentAddAssignment.properties";
 	}
 /**
  * Loads data for the page object from the internationalization layer /properties/data/static/assignmentAddAssignment.properties
  * where a selector requires a text string visible through the user interface e.g. value=button text, or link text.
  */
+	@Override
 	public void loadObjectData() {
 		Properties dataLoad = new Properties();
 		try {
-			dataLoad.load(new FileInputStream(data));
+			dataLoad.load(new FileInputStream(staticData));
 		} catch (Exception e) {}
 		//put values from the properties file into hashmap
 		this.properties.put("yes", dataLoad.getProperty("yes"));
@@ -48,39 +46,6 @@ public class AssignmentAddAssignment {
 		this.properties.put("buttonSaveAndDisplay", dataLoad.getProperty("buttonSaveAndDisplay"));
 		this.properties.put("buttonCancel", dataLoad.getProperty("buttonCancel"));
 		this.properties.put("dropdownactivityCompletionCondMet", dataLoad.getProperty("dropdownactivityCompletionCondMet"));
-	}
-/*
- * 2.3 METHODS With some backwards compatability to 2.2
- */
-/**
- * Enters a value for assignment name. Should work for versions <2.3 and >=2.3.
- * @param assignmentName The value to be entered for Assignment Name.
- */
-	public void enterAssignmentName(String assignmentName) {
-		boolean itemVisible = false;
-		try{
-			driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
-			WebElement name = driver.findElementById("id_name");
-			itemVisible = name.isDisplayed();
-		}
-		catch (NoSuchElementException ex){}
-		if (itemVisible) {
-			WebElement name = driver.findElementById("id_name");
-			name.sendKeys(assignmentName);
-		}
-		else{ 
-			WebElement xpathName = driver.findElementByXPath(".//div[contains(.,'Assignment name')]/div/input");
-			xpathName.sendKeys(assignmentName);
-		}
-	}	
-/**
- * Enters a value for assigment description. Should work for versions <2.3 and >=2.3.
- * @param description The value to be entered for Description.
- */
-	public void enterAssignmentDescription(String description) {
-		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-		FormActions textAreaEntry = new FormActions(driver);
-		textAreaEntry.enterValueInTinyMCE(description);
 	}
 /**
  * Clicks the show description on course page checkbox. Should work for versions <2.3 and >=2.3.
@@ -505,33 +470,6 @@ public class AssignmentAddAssignment {
 		WebElement checkbox = driver.findElementByName("availableuntil[enabled]");
 		checkbox.click();
 	}	
-/**
- * Clicks Save and return to course.
- */
-	public void clickSaveAndRetToCourse() {
-		WebElement button = driver.findElement(By .xpath(".//*[@value='" +
-				this.properties.get("buttonSaveAndReturn") +
-				"']"));
-		button.click();
-	}
-/**
- * Clicks Save and display.
- */
-	public void clickSaveAndDisplay() {
-		WebElement button = driver.findElement(By .xpath(".//*[@value='" +
-				this.properties.get("buttonSaveAndDisplay") +
-				"']"));
-		button.click();
-	}
-/**
- * Clicks Cancel.
- */
-	public void clickCancel() {
-		WebElement button = driver.findElement(By .xpath(".//*[@value='" +
-				this.properties.get("buttonCancel") +
-				"']"));
-		button.click();
-	}
 /**
  * Selects the option to show activity as complete when conditions are met.
  */

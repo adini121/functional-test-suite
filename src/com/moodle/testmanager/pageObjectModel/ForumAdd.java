@@ -1,11 +1,8 @@
 package com.moodle.testmanager.pageObjectModel;
 
 import java.io.FileInputStream;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Properties;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.Select;
 
@@ -15,11 +12,7 @@ import com.moodle.seleniumutils.FormActions;
  * @author Tim Barker 
  * @see <a href="http://www.gnu.org/copyleft/gpl.html">License: GNU GPL v3 or later</a>
  */
-public class ForumAdd {
-	//Internationalization file location
-	public static String forumAddData = "properties/data/static/forumAdd.properties";
-	private RemoteWebDriver driver;
-	private Map<String, String> properties = new HashMap<String, String>();
+public class ForumAdd extends FormSettings {
 /**
  * Constructor for the page object.	
  * @param driver The driver that is used for the test. There is no need to specify the value for the driver here as the driver
@@ -27,53 +20,35 @@ public class ForumAdd {
  * loadObjectData constructs internationalization layer in the context of this page object.
  */
 	public ForumAdd(RemoteWebDriver driver) {
-		this.driver = driver;
-		this.loadTestData();
+		super(driver);
+		//Internationalization file location
+		staticData = "properties/data/static/forumAdd.properties";
 	}
 /**
- * Loads data for the page object from the internationalization layer /properties/data/static/blockNavigation.properties
+ * Loads data for the page object from the internationalization layer
  * where a selector requires a text string visible through the user interface e.g. value=button text, or link text.
  */
-	public void loadTestData() {
-		Properties addForum = new Properties();
+	@Override
+	public void loadObjectData() {
+		Properties dataLoad = new Properties();
 		try {
-			addForum.load(new FileInputStream(forumAddData));
+			dataLoad.load(new FileInputStream(staticData));
 		} catch (Exception e) {}
-		this.properties.put("forumTypeSingleSimple", addForum.getProperty("forumTypeSingleSimple"));
-		this.properties.put("forumTypeEachPersonOneDiscussion", addForum.getProperty("forumTypeEachPersonOneDiscussion"));	
-		this.properties.put("forumTypeQA", addForum.getProperty("forumTypeQA"));	
-		this.properties.put("forumTypeStandardBlog", addForum.getProperty("forumTypeStandardBlog"));	
-		this.properties.put("forumTypeStandardGeneral", addForum.getProperty("forumTypeStandardGeneral"));	
-		this.properties.put("subscriptionTypeSelectionOptional", addForum.getProperty("subscriptionTypeSelectionOptional"));
-		this.properties.put("subscriptionTypeSelectionForced", addForum.getProperty("subscriptionTypeSelectionForced"));
-		this.properties.put("subscriptionTypeSelectionAuto", addForum.getProperty("subscriptionTypeSelectionAuto"));
-		this.properties.put("subscriptionTypeSelectionDisabled", addForum.getProperty("subscriptionTypeSelectionDisabled"));
-		this.properties.put("noRatings", addForum.getProperty("noRatings"));
-		this.properties.put("aveRatings", addForum.getProperty("aveRatings"));
-		this.properties.put("countRatings", addForum.getProperty("countRatings"));
-		this.properties.put("maxRatings", addForum.getProperty("maxRatings"));
-		this.properties.put("minRatings", addForum.getProperty("minRatings"));
-		this.properties.put("sumRatings", addForum.getProperty("sumRatings"));
-	}
-/**
- * 	Enter a value in the forum name field.
- * @param name The value to be entered passed from the test.
- */
-	public void enterForumName(String name) {
-		WebElement forumName = driver.findElement(By .id("id_name"));
-		forumName.sendKeys(name);
-	}
-/**
- * Enter a value in the Forum introduction field.
- * @param text The value to be entered passed from the test.
- */
-	public void enterForumIntro(String text) {
-		WebElement frame = driver.findElement(By .id("id_introeditor_ifr"));
-		driver.switchTo().frame(frame);
-		WebElement messagebox = driver.findElement(By.id("tinymce"));
-		messagebox.click();
-		messagebox.sendKeys(text);
-		driver.switchTo().window(driver.getWindowHandle());
+		this.properties.put("forumTypeSingleSimple", dataLoad.getProperty("forumTypeSingleSimple"));
+		this.properties.put("forumTypeEachPersonOneDiscussion", dataLoad.getProperty("forumTypeEachPersonOneDiscussion"));	
+		this.properties.put("forumTypeQA", dataLoad.getProperty("forumTypeQA"));	
+		this.properties.put("forumTypeStandardBlog", dataLoad.getProperty("forumTypeStandardBlog"));	
+		this.properties.put("forumTypeStandardGeneral", dataLoad.getProperty("forumTypeStandardGeneral"));	
+		this.properties.put("subscriptionTypeSelectionOptional", dataLoad.getProperty("subscriptionTypeSelectionOptional"));
+		this.properties.put("subscriptionTypeSelectionForced", dataLoad.getProperty("subscriptionTypeSelectionForced"));
+		this.properties.put("subscriptionTypeSelectionAuto", dataLoad.getProperty("subscriptionTypeSelectionAuto"));
+		this.properties.put("subscriptionTypeSelectionDisabled", dataLoad.getProperty("subscriptionTypeSelectionDisabled"));
+		this.properties.put("noRatings", dataLoad.getProperty("noRatings"));
+		this.properties.put("aveRatings", dataLoad.getProperty("aveRatings"));
+		this.properties.put("countRatings", dataLoad.getProperty("countRatings"));
+		this.properties.put("maxRatings", dataLoad.getProperty("maxRatings"));
+		this.properties.put("minRatings", dataLoad.getProperty("minRatings"));
+		this.properties.put("sumRatings", dataLoad.getProperty("sumRatings"));
 	}
 /**
  * 	Select optional subscription type option.
@@ -138,13 +113,6 @@ public class ForumAdd {
 		Select forumType = new Select(driver.findElement(By .id("id_type")));
 		forumType.selectByVisibleText(this.properties.get("forumTypeStandardGeneral"));
 	}	
-/**
- * Select Save and return to course.
- */
-	public void clickSaveAndRetToCourse() {
-		WebElement save = driver.findElement(By .xpath(".//*[@value='Save and return to course']"));
-		save.click();
-	}
 /**
  * Selects an option from the Read Tracking dropdown.
  * @param trackingOption
