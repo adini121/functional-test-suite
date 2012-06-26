@@ -7,20 +7,10 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
-import org.junit.Test;
-import org.openqa.selenium.remote.RemoteWebDriver;
 
-import com.moodle.seleniumutils.SeleniumManager;
-import com.moodle.testmanager.pageObjectModel.BlockNavigation;
-import com.moodle.testmanager.pageObjectModel.Courses;
-import com.moodle.testmanager.pageObjectModel.CoursesAddAnActivity;
-import com.moodle.testmanager.pageObjectModel.Forum;
-import com.moodle.testmanager.pageObjectModel.ForumAddForum;
-import com.moodle.testmanager.pageObjectModel.ForumPosts;
-import com.moodle.testmanager.pageObjectModel.ForumSplit;
-import com.moodle.testmanager.pageObjectModel.Users;
+import org.junit.Test;
+
+import com.moodle.test.TestRunSettings;
 /**
  * TEST SCENARIO:
  * Teachers can split discussions and move discussions between forums in the same course 
@@ -32,13 +22,8 @@ import com.moodle.testmanager.pageObjectModel.Users;
  * 5. Move it to another forum by selecting the forum in the 'Move this discussion to...' dropdown menu and then clicking the Move button.
  * 6. Check that the thread has been moved to the selected forum.
  */
-public class MDLQA04TeacherSplitAndMoveDiscussions {
-	//define "driver" in a field
-		static RemoteWebDriver driver;
-		static SeleniumManager sm;
-		//TEST DATA
+public class MDLQA04TeacherSplitAndMoveDiscussions extends TestRunSettings {
 		//Test Data Property Files
-		public static String runParameters = "properties/runParameters.properties";
 		public static String forumData = "properties/data/user/Forum/forumData.properties";
 		private Map<String, String> properties = new HashMap<String, String>();
 		//Load test data from properties file
@@ -72,110 +57,73 @@ public class MDLQA04TeacherSplitAndMoveDiscussions {
 			this.properties.put("studentsPostReplyMessage", forumTestData.getProperty("studentsReplyMessageMDLQA04"));
 			this.properties.put("newName", forumTestData.getProperty("newName"));
 		}
-		//Setup webdriver for @Test methods
-		@BeforeClass
-		static public void automateTestSetup()throws FileNotFoundException, IOException{
-		//Load properties required for test run
-			Properties startupConfig = new Properties();
-			startupConfig.load(new FileInputStream(runParameters));
-			String gridHubURL = startupConfig.getProperty("gridHubURL");
-			String browserType = startupConfig.getProperty("browserType");
-			String moodleHomePage = startupConfig.getProperty("moodleHomePage");
-		//Call setup method
-			sm = new SeleniumManager();
-			//sm.startRemotes(gridHubURL, browserType);
-			//sm.startChromeDriver(chromeDriverLocation);
-			sm.startFirefoxDriver();
-			//driver = sm.getRemoteDriver();
-			//driver = sm.getChromeDriver();
-			driver = sm.getFirefoxDriver();
-			driver.get(moodleHomePage);
-		}
 		//Login as teacher
 		@Test
 		public void loginAsTeacher() throws FileNotFoundException, IOException{
 		//Run test
-			Users teacherLogin = new Users(driver);
-			teacherLogin.selectLoginLink();
-			teacherLogin.enterUsername(this.properties.get("teacherUsername"));
-			teacherLogin.enterPassword(this.properties.get("password"));
-			teacherLogin.clickLoginButton();
+			user.loginToSystem(this.properties.get("teacherUsername"), this.properties.get("password"));
 		}
 		//SETUP TEST DATA
 		//Start a discussion in a standard forum
 		@Test
 		public void startDiscussion(){
 		//Select the course
-			Courses course = new Courses(driver);
 			course.clickCourseLink(this.properties.get("courseName"));
 			course.clickTurnEditingOn();
 		//select forum activity from drop down on courses page 
-			CoursesAddAnActivity activity = new CoursesAddAnActivity(driver);
-			activity.selectForum(this.properties.get("outlineSection"));
+			addActivity.selectForum(this.properties.get("outlineSection"));
 		//Adding a new forum
-			ForumAddForum addForum = new ForumAddForum(driver);
-			addForum.enterForumName(this.properties.get("nameOfForum"));
-			addForum.enterForumIntro(this.properties.get("introTextOfForum"));
+			addForum.enterNameField(this.properties.get("nameOfForum"));
+			addForum.enterIntroField(this.properties.get("introTextOfForum"));
 			addForum.selectSubscriptionTypeForced();
 			addForum.selectForumTypeStandardGeneral();
 			addForum.clickSaveAndRetToCourse();
 		//Adding a second forum
-			activity.selectForum(this.properties.get("outlineSection"));
-			addForum.enterForumName(this.properties.get("nameOfForumForMove"));
-			addForum.enterForumIntro(this.properties.get("introTextOfForumForMove"));
+			addActivity.selectForum(this.properties.get("outlineSection"));
+			addForum.enterNameField(this.properties.get("nameOfForumForMove"));
+			addForum.enterIntroField(this.properties.get("introTextOfForumForMove"));
 			addForum.selectSubscriptionTypeForced();
 			addForum.selectForumTypeStandardGeneral();
 			addForum.clickSaveAndRetToCourse();
 			course.clickTurnEditingOff();
 		//Adding a discussion
-			Forum forum = new Forum(driver);
 			forum.clickForumLink(this.properties.get("nameOfForum"));
 			forum.clickAddNewDiscussionTopicButton();
-			ForumPosts discussion = new ForumPosts(driver);
-			discussion.enterSubject(this.properties.get("discussSplitSubject"));
-			discussion.enterMessage(this.properties.get("discussSplitMessage"));
-			discussion.clickPostToForum();
+			forumPosts.enterSubjectField(this.properties.get("discussSplitSubject"));
+			forumPosts.enterMessage(this.properties.get("discussSplitMessage"));
+			forumPosts.clickPostToForum();
 		//Reply to discussion
-			discussion.clickDiscussionLink(this.properties.get("discussSplitSubject"));
-			discussion.clickReplyToPostLink(this.properties.get("discussSplitMessage"));
-			discussion.enterSubject(this.properties.get("teachersPostReplySubject"));
-			discussion.enterMessage(this.properties.get("teachersPostReplyMessage"));
-			discussion.clickPostToForum();
+			forumPosts.clickDiscussionLink(this.properties.get("discussSplitSubject"));
+			forumPosts.clickReplyToPostLink(this.properties.get("discussSplitMessage"));
+			forumPosts.enterSubjectField(this.properties.get("teachersPostReplySubject"));
+			forumPosts.enterMessage(this.properties.get("teachersPostReplyMessage"));
+			forumPosts.clickPostToForum();
 		}
 		//Log Teacher out
 		@Test
 		public void teacherLogout(){
-			Users teacherLogout = new Users(driver);
-			teacherLogout.selectLogout();
+			user.selectLogout();
 		}
 		//Login as a student
 		@Test
 		public void loginAsStudent() throws FileNotFoundException, IOException{
-			Users studentLogin = new Users(driver);
-			studentLogin.selectLoginLink();
-			studentLogin.enterUsername(this.properties.get("studentUsername"));
-			studentLogin.enterPassword(this.properties.get("password"));
-			studentLogin.clickLoginButton();
+			user.loginToSystem(this.properties.get("studentUsername"), this.properties.get("password"));
 		}
 		//Reply to the discussion
 		@Test
 		public void replyToDiscussionToBeSplit(){
-			Courses selectCourse = new Courses(driver);
-			selectCourse.clickCourseLink(this.properties.get("courseName"));
-			Forum forum = new Forum(driver);
+			course.clickCourseLink(this.properties.get("courseName"));
 			forum.clickForumLink(this.properties.get("nameOfForum"));
-			ForumPosts discussion = new ForumPosts(driver);
-			discussion.clickDiscussionLink(this.properties.get("discussSplitSubject"));
-			discussion.clickReplyToPostLink(this.properties.get("discussSplitMessage"));
-			discussion.enterSubject(this.properties.get("studentsPostReplySubject"));
-			discussion.enterMessage(this.properties.get("studentsPostReplyMessage"));
-			discussion.clickPostToForum();
+			forumPosts.clickDiscussionLink(this.properties.get("discussSplitSubject"));
+			forumPosts.clickReplyToPostLink(this.properties.get("discussSplitMessage"));
+			forumPosts.enterSubjectField(this.properties.get("studentsPostReplySubject"));
+			forumPosts.enterMessage(this.properties.get("studentsPostReplyMessage"));
+			forumPosts.clickPostToForum();
 		}
 		//Log Student out
 		@Test
 		public void studentLogout(){
-			Users studentLogout = new Users(driver);
-			studentLogout.selectLogout();
+			user.selectLogout();
 		}
 		//
 		//START OF TEST
@@ -184,54 +132,31 @@ public class MDLQA04TeacherSplitAndMoveDiscussions {
 		@Test
 		public void loginAsTeacherAgain() throws FileNotFoundException, IOException{
 		//Run test
-			Users teacherLogin = new Users(driver);
-			teacherLogin.selectLoginLink();
-			teacherLogin.enterUsername(this.properties.get("teacherUsername"));
-			teacherLogin.enterPassword(this.properties.get("password"));
-			teacherLogin.clickLoginButton();
+			user.loginToSystem(this.properties.get("teacherUsername"), this.properties.get("password"));
 		}
 		//Split Discussion and verify that split has occued with one having a new title
 		@Test
 		public void splitDiscussion(){
-			Courses course = new Courses(driver);
 			course.clickCourseLink(this.properties.get("courseName"));
-			Forum forum = new Forum(driver);
 			forum.clickForumLink(this.properties.get("nameOfForum"));
-			ForumPosts discussion = new ForumPosts(driver);
-			discussion.clickDiscussionLink(this.properties.get("discussSplitSubject"));
-			discussion.clickSplitLink(this.properties.get("studentsPostReplySubject"));
-			ForumSplit splitDiscussion = new ForumSplit(driver);
-			splitDiscussion.enterDiscussionName(this.properties.get("newName"));
-			splitDiscussion.clickSplitButton();
+			forumPosts.clickDiscussionLink(this.properties.get("discussSplitSubject"));
+			forumPosts.clickSplitLink(this.properties.get("studentsPostReplySubject"));
+			splitForum.enterDiscussionName(this.properties.get("newName"));
+			splitForum.clickSplitButton();
 			course.clickCourseBreadcrumb(this.properties.get("courseShortname"));	
 			forum.clickForumLink(this.properties.get("nameOfForum"));
-			//Test Pass/Fail Criteria
 			forum.assertDiscussionPresent(this.properties.get("discussSplitSubject"));
 			forum.assertDiscussionPresent(this.properties.get("newName"));
 		}
 		//Move discussion to new forum and verify that the discussion has been moved
 		@Test
 		public void moveDiscussion(){
-			ForumPosts discussion = new ForumPosts(driver);
-			discussion.clickDiscussionLink(this.properties.get("newName"));
-			discussion.selectValueFromMoveDropdown(this.properties.get("nameOfForumForMove"));
-			discussion.clickMoveButton();
-			BlockNavigation navigate = new BlockNavigation(driver);
-			navigate.clickHome();
-			Courses course = new Courses(driver);
+			forumPosts.clickDiscussionLink(this.properties.get("newName"));
+			forumPosts.selectValueFromMoveDropdown(this.properties.get("nameOfForumForMove"));
+			forumPosts.clickMoveButton();
+			navigationBlock.clickHome();
 			course.clickCourseLink(this.properties.get("courseName"));
-			Forum forum = new Forum(driver);
 			forum.clickForumLink(this.properties.get("nameOfForumForMove"));
 			forum.assertDiscussionPresent(this.properties.get("newName"));
 		}
-		//Tear Down webdriver for @Test methods
-		@AfterClass
-		static public void Quit() {
-		//End Webdriver Session by calling teardown method
-			//sm.teardown();
-			sm.teardownFirefox();
-		}
-		//
-		//END OF TEST
-		//
 }

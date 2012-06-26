@@ -15,7 +15,7 @@ import com.moodle.seleniumutils.SeleniumManager;
 import com.moodle.testmanager.pageObjectModel.Courses;
 import com.moodle.testmanager.pageObjectModel.CoursesAddAnActivity;
 import com.moodle.testmanager.pageObjectModel.Forum;
-import com.moodle.testmanager.pageObjectModel.ForumAddForum;
+import com.moodle.testmanager.pageObjectModel.ForumAddForm;
 import com.moodle.testmanager.pageObjectModel.ForumPosts;
 import com.moodle.testmanager.pageObjectModel.Users;
 /**
@@ -112,9 +112,9 @@ public class MDLQA11QAForumStudentPostBeforeView {
 			CoursesAddAnActivity activity = new CoursesAddAnActivity(driver);
 			activity.selectForum(this.properties.get("outlineSection"));
 		//Adding a new forum
-			ForumAddForum addForum = new ForumAddForum(driver);
-			addForum.enterForumName(this.properties.get("nameOfForum"));
-			addForum.enterForumIntro(this.properties.get("introTextOfForum"));
+			ForumAddForm addForum = new ForumAddForm(driver);
+			addForum.enterNameField(this.properties.get("nameOfForum"));
+			addForum.enterIntroField(this.properties.get("introTextOfForum"));
 			addForum.selectForumTypeQA();
 			addForum.clickSaveAndRetToCourse();
 			course.clickTurnEditingOff();
@@ -127,7 +127,7 @@ public class MDLQA11QAForumStudentPostBeforeView {
 			forum.clickForumLink(this.properties.get("nameOfForum"));
 			forum.clickAddNewQuestionButton();
 			ForumPosts discussion = new ForumPosts(driver);
-			discussion.enterSubject(this.properties.get("teacherSubject"));
+			discussion.enterSubjectField(this.properties.get("teacherSubject"));
 			discussion.enterMessage(this.properties.get("teacherMessage"));
 			discussion.clickPostToForum();
 		}
@@ -156,7 +156,7 @@ public class MDLQA11QAForumStudentPostBeforeView {
 			ForumPosts discussion = new ForumPosts(driver);
 			discussion.clickDiscussionLink(this.properties.get("teacherSubject"));
 			discussion.clickReplyToPostLink(this.properties.get("teacherMessage"));
-			discussion.enterSubject(this.properties.get("studentSubject"));
+			discussion.enterSubjectField(this.properties.get("studentSubject"));
 			discussion.enterMessage(this.properties.get("studentMessage"));
 			discussion.clickPostToForum();
 			discussion.assertForumPostSubjectSuccessful(this.properties.get("studentSubject"));
@@ -195,7 +195,7 @@ public class MDLQA11QAForumStudentPostBeforeView {
 		public void student2RepliesToPost(){
 			ForumPosts discussion = new ForumPosts(driver);
 			discussion.clickReplyToPostLink(this.properties.get("teacherMessage"));
-			discussion.enterSubject(this.properties.get("student2Subject"));
+			discussion.enterSubjectField(this.properties.get("student2Subject"));
 			discussion.enterMessage(this.properties.get("student2Message"));
 			discussion.clickPostToForum();
 			discussion.assertForumPostSubjectSuccessful(this.properties.get("student2Subject"));

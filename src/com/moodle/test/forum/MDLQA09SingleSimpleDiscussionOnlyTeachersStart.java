@@ -6,35 +6,20 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
-import org.junit.Test;
-import org.openqa.selenium.remote.RemoteWebDriver;
 
-import com.moodle.seleniumutils.SeleniumManager;
-import com.moodle.testmanager.pageObjectModel.Courses;
-import com.moodle.testmanager.pageObjectModel.CoursesAddAnActivity;
-import com.moodle.testmanager.pageObjectModel.Forum;
-import com.moodle.testmanager.pageObjectModel.ForumAddForum;
-import com.moodle.testmanager.pageObjectModel.ForumPosts;
-import com.moodle.testmanager.pageObjectModel.Users;
+import org.junit.Test;
+
+import com.moodle.test.TestRunSettings;
 /**
  * A teacher can set one of 4 possible forum subscription options
- * TEST SCENARIO:
- * 1. Login as a teacher and start a discussion in a single simple discussion forum.
- * 2. Login as a teacher and reply to the discussion.
- * 3. Check that, as a student, it is not possible to start a discussion.
+ *<br>TEST SCENARIO:
+ *<br>1. Login as a teacher and start a discussion in a single simple discussion forum.
+ *<br>2. Login as a teacher and reply to the discussion.
+ *<br>3. Check that, as a student, it is not possible to start a discussion.
  */
-public class MDLQA09SingleSimpleDiscussionOnlyTeachersStart {
-	//define "driver" in a field
-		static RemoteWebDriver driver;
-		static SeleniumManager sm;
-		//TEST DATA
+public class MDLQA09SingleSimpleDiscussionOnlyTeachersStart extends TestRunSettings{
 		//Test Data Property Files
-		public static String runParameters = "properties/runParameters.properties";
 		public static String forumData = "properties/data/user/Forum/forumData.properties";
-		//Weekly outline section
-		//public String outlineSection = "1";
 		private Map<String, String> properties = new HashMap<String, String>();
 		//Load test data from properties file
 		public MDLQA09SingleSimpleDiscussionOnlyTeachersStart(){
@@ -56,105 +41,50 @@ public class MDLQA09SingleSimpleDiscussionOnlyTeachersStart {
 			this.properties.put("replySubject", forumTestData.getProperty("simpleForumReplySubject"));
 			this.properties.put("replyText", forumTestData.getProperty("simpleForumReplyText"));
 		}
-		//
-		//START OF TEST
-		//
-		//Setup webdriver for @Test methods
-		@BeforeClass
-		static public void automateTestSetup()throws FileNotFoundException, IOException{
-		//Load properties required for test run
-			Properties startupConfig = new Properties();
-			startupConfig.load(new FileInputStream(runParameters));
-			String gridHubURL = startupConfig.getProperty("gridHubURL");
-			String browserType = startupConfig.getProperty("browserType");
-			String moodleHomePage = startupConfig.getProperty("moodleHomePage");
-		//Call setup method
-			sm = new SeleniumManager();
-			//sm.startRemotes(gridHubURL, browserType);
-			//sm.startChromeDriver(chromeDriverLocation);
-			sm.startFirefoxDriver();
-			//driver = sm.getRemoteDriver();
-			//driver = sm.getChromeDriver();
-			driver = sm.getFirefoxDriver();
-			driver.get(moodleHomePage);
-		}
 		//Login as teacher
 		@Test
 		public void loginAsTeacher() throws FileNotFoundException, IOException{
 		//Run test
-			Users teacherLogin = new Users(driver);
-			teacherLogin.selectLoginLink();
-			teacherLogin.enterUsername(this.properties.get("teacherUsername"));
-			teacherLogin.enterPassword(this.properties.get("password"));
-			teacherLogin.clickLoginButton();
+			user.loginToSystem(this.properties.get("teacherUsername"), this.properties.get("password"));
 		}
 		//Start a discussion in a single simple forum
 		@Test
 		public void startDiscussion(){
 		//Select the course
-			Courses selectCourse = new Courses(driver);
-			selectCourse.clickCourseLink(this.properties.get("courseName"));
-			selectCourse.clickTurnEditingOn();
+			course.clickCourseLink(this.properties.get("courseName"));
+			course.clickTurnEditingOn();
 		//select activity drop down on courses page 
-			CoursesAddAnActivity activity = new CoursesAddAnActivity(driver);
-			activity.selectForum(this.properties.get("outlineSection"));
+			addActivity.selectForum(this.properties.get("outlineSection"));
 		//Adding a new forum
-			ForumAddForum addForum = new ForumAddForum(driver);
-			addForum.enterForumName(this.properties.get("nameSimple"));
-			addForum.enterForumIntro(this.properties.get("introText"));
+			addForum.enterNameField(this.properties.get("nameSimple"));
+			addForum.enterIntroField(this.properties.get("introText"));
 			addForum.selectForumTypeSimple();
 			addForum.clickSaveAndRetToCourse();
 		}
 		//Log Teacher out
 		@Test
 		public void teacherLogout(){
-			Users teacherLogout = new Users(driver);
-			teacherLogout.selectLogout();
+			user.selectLogout();
 		}
 		//Login as student
 		@Test
 		public void loginAsStudent() throws FileNotFoundException, IOException{
-		//Run test
-			Users studentLogin = new Users(driver);
-			studentLogin.selectLoginLink();
-			studentLogin.enterUsername(this.properties.get("studentUsername"));
-			studentLogin.enterPassword(this.properties.get("password"));
-			studentLogin.clickLoginButton();
+			user.loginToSystem(this.properties.get("studentUsername"), this.properties.get("password"));
 		}
 		//Reply to the discussion
 		@Test
 		public void replyToDiscussion(){
-			Courses selectCourse = new Courses(driver);
-			selectCourse.clickCourseLink(this.properties.get("courseName"));
-			Forum forum = new Forum(driver);
+			course.clickCourseLink(this.properties.get("courseName"));
 			forum.clickForumLink(this.properties.get("nameSimple"));
-			ForumPosts reply = new ForumPosts(driver);
-			reply.clickReplyToPostLink(this.properties.get("introText"));
-			reply.enterSubject(this.properties.get("replySubject"));
-			reply.enterMessage(this.properties.get("replyText"));
-			reply.clickPostToForum();
+			forumPosts.clickReplyToPostLink(this.properties.get("introText"));
+			forumPosts.enterSubjectField(this.properties.get("replySubject"));
+			forumPosts.enterMessage(this.properties.get("replyText"));
+			forumPosts.clickPostToForum();
 		}
 		//Try to start a new discussion
 		@Test
 		public void tryToStartANewDiscussion() throws Exception{
-			Courses studentCantAddDiscussion = new Courses(driver);
-			studentCantAddDiscussion.clickCourseBreadcrumb(this.properties.get("courseShortname"));
-			studentCantAddDiscussion.assertTurnEditingOnIsDisabled();
+			course.clickCourseBreadcrumb(this.properties.get("courseShortname"));
+			course.assertTurnEditingOnIsDisabled();
 		}
-		//Log Student out
-		@Test
-		public void studentLogout(){
-			Users studentLogout = new Users(driver);
-			studentLogout.selectLogout();
-		}
-		//Tear Down webdriver for @Test methods
-		@AfterClass
-		static public void Quit() {
-		//End Webdriver Session by calling teardown method
-			//sm.teardown();
-			sm.teardownFirefox();
-		}
-		//
-		//END OF TEST
-		//
 }

@@ -6,31 +6,20 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
-import org.junit.Test;
-import org.openqa.selenium.remote.RemoteWebDriver;
 
-import com.moodle.seleniumutils.SeleniumManager;
-import com.moodle.testmanager.pageObjectModel.Courses;
-import com.moodle.testmanager.pageObjectModel.Forum;
-import com.moodle.testmanager.pageObjectModel.ForumPosts;
-import com.moodle.testmanager.pageObjectModel.Users;
+import org.junit.Test;
+
+import com.moodle.test.TestRunSettings;
 /**
  * TEST SCENARIO:
- * By default, a new course contains a news forum in which only teachers can post and subscription is forced
- * TEST STEPS:
- * 1. Login as a teacher and check that you can start a discussion and post a reply in the news forum.
- * 2. Login as a student and check that there is no option to post in the news forum.
- * 3. Check that the news forum forces everyone to be subscribed.
+ *<br>By default, a new course contains a news forum in which only teachers can post and subscription is forced
+ *<br>TEST STEPS:
+ *<br>1. Login as a teacher and check that you can start a discussion and post a reply in the news forum.
+ *<br>2. Login as a student and check that there is no option to post in the news forum.
+ *<br>3. Check that the news forum forces everyone to be subscribed.
  */
-public class MDLQA06NewCourseNewsForum {
-	//define "driver" in a field
-		static RemoteWebDriver driver;
-		static SeleniumManager sm;
-		//TEST DATA
+public class MDLQA06NewCourseNewsForum extends TestRunSettings {
 		//Test Data Property Files
-		public static String runParameters = "properties/runParameters.properties";
 		public static String forumData = "properties/data/user/Forum/forumData.properties";
 		private Map<String, String> properties = new HashMap<String, String>();
 		//Load test data from properties file
@@ -57,119 +46,64 @@ public class MDLQA06NewCourseNewsForum {
 			this.properties.put("replySubject", forumTestData.getProperty("replySubjectMDLQA06"));
 			this.properties.put("replyMessage", forumTestData.getProperty("replyMessageMDLQA06"));
 		}
-		//
-		//START OF TEST
-		//
-		//Setup webdriver for @Test methods
-		@BeforeClass
-		static public void automateTestSetup()throws FileNotFoundException, IOException{
-		//Load properties required for test run
-			Properties startupConfig = new Properties();
-			startupConfig.load(new FileInputStream(runParameters));
-			String gridHubURL = startupConfig.getProperty("gridHubURL");
-			String browserType = startupConfig.getProperty("browserType");
-			String moodleHomePage = startupConfig.getProperty("moodleHomePage");
-		//Call setup method
-			sm = new SeleniumManager();
-			//sm.startRemotes(gridHubURL, browserType);
-			//sm.startChromeDriver(chromeDriverLocation);
-			sm.startFirefoxDriver();
-			//driver = sm.getRemoteDriver();
-			//driver = sm.getChromeDriver();
-			driver = sm.getFirefoxDriver();
-			driver.get(moodleHomePage);
-		}
 		//Login as teacher
 		@Test
 		public void loginAsTeacher() throws FileNotFoundException, IOException{
 		//Run test
-			Users teacherLogin = new Users(driver);
-			teacherLogin.selectLoginLink();
-			teacherLogin.enterUsername(this.properties.get("teacherUsername"));
-			teacherLogin.enterPassword(this.properties.get("password"));
-			teacherLogin.clickLoginButton();
+			user.loginToSystem(this.properties.get("teacherUsername"), this.properties.get("password"));
 		}
 		//Start Discussion in news forum
 		@Test
 		public void startDiscussionNews(){
-			Courses course = new Courses(driver);
 			course.clickCourseLink(this.properties.get("courseName"));
-			Forum newsForum = new Forum(driver);
-			newsForum.clickForumLink(this.properties.get("newsForum"));
-			newsForum.clickAddNewTopicButton();
-			ForumPosts newsDiscussion = new ForumPosts(driver);
-			newsDiscussion.enterSubject(this.properties.get("newsSubject"));
-			newsDiscussion.enterMessage(this.properties.get("newsMessage"));
-			newsDiscussion.clickPostToForum();
-			newsDiscussion.clickDiscussionLink(this.properties.get("newsSubject"));
-			newsDiscussion.assertForumPostSubjectSuccessful(this.properties.get("newsSubject"));
-			newsDiscussion.assertForumPostMessageSuccessful(this.properties.get("newsMessage"));
+			forum.clickForumLink(this.properties.get("newsForum"));
+			forum.clickAddNewTopicButton();
+			forumPosts.enterSubjectField(this.properties.get("newsSubject"));
+			forumPosts.enterMessage(this.properties.get("newsMessage"));
+			forumPosts.clickPostToForum();
+			forumPosts.clickDiscussionLink(this.properties.get("newsSubject"));
+			forumPosts.assertForumPostSubjectSuccessful(this.properties.get("newsSubject"));
+			forumPosts.assertForumPostMessageSuccessful(this.properties.get("newsMessage"));
 		}
 		//Post Reply in news forum
 		@Test
 		public void postReply(){
-			ForumPosts postReply = new ForumPosts(driver);
-			postReply.clickDiscussionLink(this.properties.get("newsSubject"));
-			postReply.clickReplyToPostLink(this.properties.get("newsMessage"));
-			postReply.enterSubject(this.properties.get("replySubject"));
-			postReply.enterMessage(this.properties.get("replyMessage"));
-			postReply.clickPostToForum();
-			postReply.assertForumPostSubjectSuccessful(this.properties.get("replySubject"));
-			postReply.assertForumPostMessageSuccessful(this.properties.get("replyMessage"));
+			forumPosts.clickDiscussionLink(this.properties.get("newsSubject"));
+			forumPosts.clickReplyToPostLink(this.properties.get("newsMessage"));
+			forumPosts.enterSubjectField(this.properties.get("replySubject"));
+			forumPosts.enterMessage(this.properties.get("replyMessage"));
+			forumPosts.clickPostToForum();
+			forumPosts.assertForumPostSubjectSuccessful(this.properties.get("replySubject"));
+			forumPosts.assertForumPostMessageSuccessful(this.properties.get("replyMessage"));
 		}
 		//Log Teacher out
 		@Test
 		public void teacherLogout(){
-			Users teacherLogout = new Users(driver);
-			teacherLogout.selectLogout();
+			user.selectLogout();
 		}
 		//Login as student
 		@Test
 		public void loginAsStudent() throws FileNotFoundException, IOException{
 		//Run test
-			Users studentLogin = new Users(driver);
-			studentLogin.selectLoginLink();
-			studentLogin.enterUsername(this.properties.get("studentUsername"));
-			studentLogin.enterPassword(this.properties.get("password"));
-			studentLogin.clickLoginButton();
+			user.loginToSystem(this.properties.get("studentUsername"), this.properties.get("password"));
 		}
 		//News forces subscription
 		@Test
 		public void subscriptionForced(){
-			Courses course = new Courses(driver);
 			course.clickCourseLink(this.properties.get("courseName"));
-			Forum newsForum = new Forum(driver);
-			newsForum.clickForumLink(this.properties.get("newsForum"));
-			newsForum.assertSubscriptionForced();
+			forum.clickForumLink(this.properties.get("newsForum"));
+			forum.assertSubscriptionForced();
 		}
 		//Student cannot post
 		@Test
 		public void studentCannotPost() throws Exception{
-			Forum cantCreateDiscussion = new Forum(driver);
-			cantCreateDiscussion.assertAddNewTopicButtonDisabled();
-			cantCreateDiscussion.clickForumLink(this.properties.get("newsForum"));
-			ForumPosts cannotPost = new ForumPosts(driver);
-			cannotPost.clickDiscussionLink(this.properties.get("newsSubject"));
-			cannotPost.assertForumPostSubjectSuccessful(this.properties.get("newsSubject"));
-			cannotPost.assertForumPostMessageSuccessful(this.properties.get("newsMessage"));
-			cannotPost.assertForumPostMessageSuccessful(this.properties.get("replyMessage"));
-			cannotPost.assertReplyLinkNotPresent(this.properties.get("newsMessage"));
-			cannotPost.assertReplyLinkNotPresent(this.properties.get("replyMessage"));
+			forum.assertAddNewTopicButtonDisabled();
+			forum.clickForumLink(this.properties.get("newsForum"));
+			forumPosts.clickDiscussionLink(this.properties.get("newsSubject"));
+			forumPosts.assertForumPostSubjectSuccessful(this.properties.get("newsSubject"));
+			forumPosts.assertForumPostMessageSuccessful(this.properties.get("newsMessage"));
+			forumPosts.assertForumPostMessageSuccessful(this.properties.get("replyMessage"));
+			forumPosts.assertReplyLinkNotPresent(this.properties.get("newsMessage"));
+			forumPosts.assertReplyLinkNotPresent(this.properties.get("replyMessage"));
 		}
-		//Log Student out
-	//	@Test
-		public void studentLogout(){
-			Users studentLogout = new Users(driver);
-			studentLogout.selectLogout();
-		}
-		//Tear Down webdriver for @Test methods
-		@AfterClass
-		static public void Quit() {
-		//End Webdriver Session by calling teardown method
-			//sm.teardown();
-			sm.teardownFirefox();
-		}
-		//
-		//END OF TEST
-		//
 }

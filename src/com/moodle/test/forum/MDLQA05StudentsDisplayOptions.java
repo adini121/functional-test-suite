@@ -1,42 +1,26 @@
 package com.moodle.test.forum;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
 import org.junit.Test;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.remote.RemoteWebDriver;
 
-import com.moodle.seleniumutils.SeleniumManager;
-import com.moodle.testmanager.pageObjectModel.BlockNavigation;
-import com.moodle.testmanager.pageObjectModel.Courses;
-import com.moodle.testmanager.pageObjectModel.Forum;
-import com.moodle.testmanager.pageObjectModel.ForumPosts;
-import com.moodle.testmanager.pageObjectModel.Users;
+import com.moodle.test.TestRunSettings;
 /**
  * TEST SCENARIO:
- * Students can choose from 4 discussion dispay options and their choice is remembered
- * PREREQUISITES:
- * Re-uses data fom MDLQA-4 which must run first.
- * TEST STEPS:
- * 1. Login as a student and view a discussion thread containing several replies.
- * 2. Select a display option - nested, flat or threaded, oldest or newest first.
- * 3. View a different discussion thread and check that the display option is the same as previously selected.
+ *<br>Students can choose from 4 discussion dispay options and their choice is remembered
+ *<br>PREREQUISITES:
+ *<br>Re-uses data fom MDLQA-4 which must run first.
+ *<br>TEST STEPS:
+ *<br>1. Login as a student and view a discussion thread containing several replies.
+ *<br>2. Select a display option - nested, flat or threaded, oldest or newest first.
+ *<br>3. View a different discussion thread and check that the display option is the same as previously selected.
  */
-public class MDLQA05StudentsDisplayOptions {
-//define "driver" in a field
-		//static RemoteWebDriver driver;
-		static FirefoxDriver driver; 
-		static SeleniumManager sm;
-		//TEST DATA
+public class MDLQA05StudentsDisplayOptions extends TestRunSettings {
 		//Test Data Property Files
-		public static String runParameters = "properties/runParameters.properties";
 		public static String forumData = "properties/data/user/Forum/forumData.properties";
 		private Map<String, String> properties = new HashMap<String, String>();
 		//Load test data from properties file
@@ -67,162 +51,101 @@ public class MDLQA05StudentsDisplayOptions {
 			this.properties.put("forum2Subject", forumTestData.getProperty("studentsReplySubjectMDLQA04"));
 			this.properties.put("discussion2Message", forumTestData.getProperty("studentsReplyMessageMDLQA04"));
 			this.properties.put("discussion2Subject", forumTestData.getProperty("newName"));
-			//Screen Dump locations
-			
 		}
-		//Setup webdriver for @Test methods
-		@BeforeClass
-		static public void automateTestSetup()throws FileNotFoundException, IOException{
-		//Load properties required for test run
-			Properties startupConfig = new Properties();
-			startupConfig.load(new FileInputStream(runParameters));
-			String gridHubURL = startupConfig.getProperty("gridHubURL");
-			String browserType = startupConfig.getProperty("browserType");
-			String moodleHomePage = startupConfig.getProperty("moodleHomePage");
-		//Call setup method
-			sm = new SeleniumManager();
-			//sm.startRemotes(gridHubURL, browserType);
-			//sm.startChromeDriver(chromeDriverLocation);
-			sm.startFirefoxDriver();
-			//driver = sm.getRemoteDriver();
-			//driver = sm.getChromeDriver();
-			driver = sm.getFirefoxDriver();
-			driver.get(moodleHomePage);
-		}
-		//CREATE TEST DATA
-
 		//Log in as a Student
 		@Test
 		public void studentLogin(){
-			Users studentLogin = new Users(driver);
-			studentLogin.selectLoginLink();
-			studentLogin.enterUsername(this.properties.get("studentUsername"));
-			studentLogin.enterPassword(this.properties.get("password"));
-			studentLogin.clickLoginButton();
+			user.loginToSystem(this.properties.get("studentUsername"), this.properties.get("password"));
 		}
 		//Add an additional reply to first discussion
 		@Test
 		public void addReplyToFirstForum(){
-			Courses course = new Courses(driver);
 			course.clickCourseLink(this.properties.get("courseName"));
-			Forum forum = new Forum(driver);
 			forum.clickForumLink(this.properties.get("nameOfFirstForum"));
-			ForumPosts discussion = new ForumPosts(driver);
-			discussion.clickDiscussionLink(this.properties.get("discussion1Subject"));
-			discussion.clickReplyToPostLink(this.properties.get("forum1OriginalReply"));
-			discussion.enterSubject(this.properties.get("forum1OriginalReply"));
-			discussion.enterMessage(this.properties.get("forum1OriginalMessage"));
-			discussion.clickPostToForum();
+			forumPosts.clickDiscussionLink(this.properties.get("discussion1Subject"));
+			forumPosts.clickReplyToPostLink(this.properties.get("forum1OriginalReply"));
+			forumPosts.enterSubjectField(this.properties.get("forum1OriginalReply"));
+			forumPosts.enterMessage(this.properties.get("forum1OriginalMessage"));
+			forumPosts.clickPostToForum();
 		}
 		//Add an additional reply to second discussion
 		@Test
 		public void addReplyToSecondForum(){
-			BlockNavigation navigate = new BlockNavigation(driver);
-			navigate.clickExposedLink(this.properties.get("nameOfSecondForum"));
-			ForumPosts discussion = new ForumPosts(driver);
-			discussion.clickDiscussionLink(this.properties.get("discussion2Subject"));
-			discussion.clickReplyToPostLink(this.properties.get("discussion2Message"));
-			discussion.enterSubject(this.properties.get("forum1OriginalReply"));
-			discussion.enterMessage(this.properties.get("forum1OriginalMessage"));
-			discussion.clickPostToForum();
+			navigationBlock.clickExposedLink(this.properties.get("nameOfSecondForum"));
+			forumPosts.clickDiscussionLink(this.properties.get("discussion2Subject"));
+			forumPosts.clickReplyToPostLink(this.properties.get("discussion2Message"));
+			forumPosts.enterSubjectField(this.properties.get("forum1OriginalReply"));
+			forumPosts.enterMessage(this.properties.get("forum1OriginalMessage"));
+			forumPosts.clickPostToForum();
 		}
 		//START TEST
 		//Navigate to Discussion Thread
 		@Test
 		public void navigateToDiscussionThread(){
-			Courses course = new Courses(driver);
 			course.clickCourseBreadcrumb(this.properties.get("courseShortname"));
-			Forum forum = new Forum(driver);
 			forum.clickForumLink(this.properties.get("nameOfFirstForum"));
-			ForumPosts discussion = new ForumPosts(driver);
-			discussion.clickDiscussionLink(this.properties.get("discussion1Subject"));			
+			forumPosts.clickDiscussionLink(this.properties.get("discussion1Subject"));			
 		}
 		//Change display option to "Display replies flat, with oldest first" and assert display correct
 		@Test
 		public void displayFlatOldest() throws IOException{
-			ForumPosts display = new ForumPosts(driver);
-			display.selectDisplayOptionDropdownFlatOldest();
-			display.assertFlatOldestOptionSelected();
+			forumPosts.selectDisplayOptionDropdownFlatOldest();
+			forumPosts.assertFlatOldestOptionSelected();
 		}
 		//Verify display option is retained in second forum
 		@Test
 		public void verifyDisplayFlatOldestRetained() throws IOException{
-			BlockNavigation navigate = new BlockNavigation(driver);
-			navigate.clickExposedLink(this.properties.get("nameOfSecondForum"));
-			ForumPosts discussion = new ForumPosts(driver);
-			discussion.clickDiscussionLink(this.properties.get("discussion2Subject"));
-			discussion.assertFlatOldestOptionSelected();
+			navigationBlock.clickExposedLink(this.properties.get("nameOfSecondForum"));
+			forumPosts.clickDiscussionLink(this.properties.get("discussion2Subject"));
+			forumPosts.assertFlatOldestOptionSelected();
 		}
 
 		//Change display option to "Display replies flat, with newest first" and assert display correct
 		@Test
 		public void displayFlatNewest() throws IOException{
-			BlockNavigation navigate = new BlockNavigation(driver);
-			navigate.clickExposedLink(this.properties.get("nameOfFirstForum"));
-			ForumPosts display = new ForumPosts(driver);
-			display.clickDiscussionLink(this.properties.get("discussion1Subject"));
-			display.selectDisplayOptionDropdownFlatNewest();
-			display.assertFlatNewestOptionSelected();
+			navigationBlock.clickExposedLink(this.properties.get("nameOfFirstForum"));
+			forumPosts.clickDiscussionLink(this.properties.get("discussion1Subject"));
+			forumPosts.selectDisplayOptionDropdownFlatNewest();
+			forumPosts.assertFlatNewestOptionSelected();
 		}
 		//Verify display option is retained in second forum
 		@Test
 		public void verifyDisplayFlatNewestRetained() throws IOException{
-			BlockNavigation navigate = new BlockNavigation(driver);
-			navigate.clickExposedLink(this.properties.get("nameOfSecondForum"));
-			ForumPosts discussion = new ForumPosts(driver);
-			discussion.clickDiscussionLink(this.properties.get("discussion2Subject"));
-			discussion.assertFlatNewestOptionSelected();
+			navigationBlock.clickExposedLink(this.properties.get("nameOfSecondForum"));
+			forumPosts.clickDiscussionLink(this.properties.get("discussion2Subject"));
+			forumPosts.assertFlatNewestOptionSelected();
 		}	
 		//Change display option to "Display replies in threaded form" and assert display correct
 		@Test
 		public void displayThreaded() throws IOException{
-			BlockNavigation navigate = new BlockNavigation(driver);
-			navigate.clickExposedLink(this.properties.get("nameOfFirstForum"));
-			ForumPosts discussion = new ForumPosts(driver);
-			discussion.clickDiscussionLink(this.properties.get("discussion1Subject"));
-			ForumPosts display = new ForumPosts(driver);
-			display.selectDisplayOptionDropdownThreaded();
-			display.assertThreadedOptionSelected();
-			display.assertThreadedLink(this.properties.get("forum1OriginalReply"));
+			navigationBlock.clickExposedLink(this.properties.get("nameOfFirstForum"));
+			forumPosts.clickDiscussionLink(this.properties.get("discussion1Subject"));
+			forumPosts.selectDisplayOptionDropdownThreaded();
+			forumPosts.assertThreadedOptionSelected();
+			forumPosts.assertThreadedLink(this.properties.get("forum1OriginalReply"));
 		}
 		//Verify display option is retained in second forum
 		@Test
 		public void verifyDisplayThreadedRetained() throws IOException{
-			BlockNavigation navigate = new BlockNavigation(driver);
-			navigate.clickExposedLink(this.properties.get("nameOfSecondForum"));
-			ForumPosts discussion = new ForumPosts(driver);
-			discussion.clickDiscussionLink(this.properties.get("discussion2Subject"));
-			discussion.assertThreadedOptionSelected();
-			discussion.assertThreadedLink(this.properties.get("forum1OriginalReply"));
+			navigationBlock.clickExposedLink(this.properties.get("nameOfSecondForum"));
+			forumPosts.clickDiscussionLink(this.properties.get("discussion2Subject"));
+			forumPosts.assertThreadedOptionSelected();
+			forumPosts.assertThreadedLink(this.properties.get("forum1OriginalReply"));
 			
 		}
 		//Change display option to "Display replies in nested form" and assert display correct
 		@Test
 		public void displayNested(){
-			BlockNavigation navigate = new BlockNavigation(driver);
-			navigate.clickExposedLink(this.properties.get("nameOfFirstForum"));
-			ForumPosts display = new ForumPosts(driver);
-			display.clickDiscussionLink(this.properties.get("discussion1Subject"));
-			display.selectDisplayOptionNested();
-			display.assertNestedOptionSelected();
+			navigationBlock.clickExposedLink(this.properties.get("nameOfFirstForum"));
+			forumPosts.clickDiscussionLink(this.properties.get("discussion1Subject"));
+			forumPosts.selectDisplayOptionNested();
+			forumPosts.assertNestedOptionSelected();
 		}
 		//Verify display option is retained in second forum
 		@Test
 		public void verifyDisplayNestedRetained(){
-			BlockNavigation navigate = new BlockNavigation(driver);
-			navigate.clickExposedLink(this.properties.get("nameOfSecondForum"));
-			ForumPosts discussion = new ForumPosts(driver);
-			discussion.clickDiscussionLink(this.properties.get("discussion2Subject"));
-			discussion.assertNestedOptionSelected();
+			navigationBlock.clickExposedLink(this.properties.get("nameOfSecondForum"));
+			forumPosts.clickDiscussionLink(this.properties.get("discussion2Subject"));
+			forumPosts.assertNestedOptionSelected();
 		}	
-		//Tear Down webdriver for @Test methods
-		@AfterClass
-		static public void Quit() {
-		//End Webdriver Session by calling teardown method
-			//sm.teardown();
-			sm.teardownFirefox();
-		}
-		//
-		//END OF TEST
-		//
 }

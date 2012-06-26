@@ -1,42 +1,24 @@
 package com.moodle.test.forum;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
-import org.junit.Test;
-import org.openqa.selenium.remote.RemoteWebDriver;
 
-import com.moodle.seleniumutils.SeleniumManager;
-import com.moodle.testmanager.pageObjectModel.BlockNavigation;
-import com.moodle.testmanager.pageObjectModel.Courses;
-import com.moodle.testmanager.pageObjectModel.CoursesAddAnActivity;
-import com.moodle.testmanager.pageObjectModel.Forum;
-import com.moodle.testmanager.pageObjectModel.ForumAddForum;
-import com.moodle.testmanager.pageObjectModel.ForumPosts;
-import com.moodle.testmanager.pageObjectModel.Users;
+import org.junit.Test;
+
+import com.moodle.test.TestRunSettings;
 /**
  * TEST SCENARIO:
- * In a 'Each person posts one discussion' forum students can start exactly one discussion and can reply to all discussions
- * TEST STEPS:
- * 1. Login as a student and start a discussion in a 'Each person posts one discussion' forum.
- * 2. Check that it is not possible to start another discussion in the forum.
- * 3. Reply to several discussions.
+ *<br>In a 'Each person posts one discussion' forum students can start exactly one discussion and can reply to all discussions
+ *<br>TEST STEPS:
+ *<br>1. Login as a student and start a discussion in a 'Each person posts one discussion' forum.
+ *<br>2. Check that it is not possible to start another discussion in the forum.
+ *<br>3. Reply to several discussions.
  */
-public class MDLQA10EachPersonPosts1Discussion {
-	//define "driver" in a field
-		static RemoteWebDriver driver;
-		static SeleniumManager sm;
-		//TEST DATA
+public class MDLQA10EachPersonPosts1Discussion extends TestRunSettings {
 		//Test Data Property Files
-		public static String runParameters = "properties/runParameters.properties";
 		public static String forumData = "properties/data/user/Forum/forumData.properties";
-		//Weekly outline section
-		//public String outlineSection = "1";
 		private Map<String, String> properties = new HashMap<String, String>();
 		//Load test data from properties file
 		public MDLQA10EachPersonPosts1Discussion(){
@@ -68,52 +50,22 @@ public class MDLQA10EachPersonPosts1Discussion {
 			this.properties.put("replySubjectTeacher", forumTestData.getProperty("MDLQA10replySubjectTeacher"));
 			this.properties.put("replyMessageTeacher", forumTestData.getProperty("MDLQA10replyMessageTeacher"));
 		}
-		//
-		//START OF TEST
-		//
-		//Setup webdriver for @Test methods
-		@BeforeClass
-		static public void automateTestSetup()throws FileNotFoundException, IOException{
-		//Load properties required for test run
-			Properties startupConfig = new Properties();
-			startupConfig.load(new FileInputStream(runParameters));
-			String gridHubURL = startupConfig.getProperty("gridHubURL");
-			String browserType = startupConfig.getProperty("browserType");
-			String moodleHomePage = startupConfig.getProperty("moodleHomePage");
-		//Call setup method
-			sm = new SeleniumManager();
-			//sm.startRemotes(gridHubURL, browserType);
-			//sm.startChromeDriver(chromeDriverLocation);
-			sm.startFirefoxDriver();
-			//driver = sm.getRemoteDriver();
-			//driver = sm.getChromeDriver();
-			driver = sm.getFirefoxDriver();
-			driver.get(moodleHomePage);
-		}
-		//START TEST
 		//Login as teacher
 		@Test
 		public void loginAsTeacher() {
-			Users teacherLogin = new Users(driver);
-			teacherLogin.selectLoginLink();
-			teacherLogin.enterUsername(this.properties.get("teacherUsername"));
-			teacherLogin.enterPassword(this.properties.get("password"));
-			teacherLogin.clickLoginButton();
+			user.loginToSystem(this.properties.get("teacherUsername"), this.properties.get("password"));
 		}
 		//Create Each person posts one discussion forum
 		@Test
 		public void createForum(){
 		//Select the course
-			Courses course = new Courses(driver);
 			course.clickCourseLink(this.properties.get("courseName"));
 			course.clickTurnEditingOn();
 		//select forum activity from drop down on courses page 
-			CoursesAddAnActivity activity = new CoursesAddAnActivity(driver);
-			activity.selectForum(this.properties.get("outlineSection"));
+			addActivity.selectForum(this.properties.get("outlineSection"));
 		//Adding a new forum
-			ForumAddForum addForum = new ForumAddForum(driver);
-			addForum.enterForumName(this.properties.get("nameOfForum"));
-			addForum.enterForumIntro(this.properties.get("introTextOfForum"));
+			addForum.enterNameField(this.properties.get("nameOfForum"));
+			addForum.enterIntroField(this.properties.get("introTextOfForum"));
 			addForum.selectForumTypeEachPerson();
 			addForum.clickSaveAndRetToCourse();
 			course.clickTurnEditingOff();
@@ -122,81 +74,57 @@ public class MDLQA10EachPersonPosts1Discussion {
 		@Test
 		public void teacherCreateDiscussion() {
 			//Adding a discussion
-			Forum forum = new Forum(driver);
 			forum.clickForumLink(this.properties.get("nameOfForum"));
 			forum.clickAddNewDiscussionTopicButton();
-			ForumPosts discussion = new ForumPosts(driver);
-			discussion.enterSubject(this.properties.get("teacherSubject"));
-			discussion.enterMessage(this.properties.get("teacherMessage"));
-			discussion.clickPostToForum();
+			forumPosts.enterSubjectField(this.properties.get("teacherSubject"));
+			forumPosts.enterMessage(this.properties.get("teacherMessage"));
+			forumPosts.clickPostToForum();
 		}
 		//Logout teacher
 		@Test
 		public void logoutTeacher(){
-			Users teacherLogout = new Users(driver);
-			teacherLogout.selectLogout();
+			user.selectLogout();
 		}
 		//Login as a student
 		@Test
 		public void loginAsStudent(){
-			Users studentLogin = new Users(driver);
-			studentLogin.selectLoginLink();
-			studentLogin.enterUsername(this.properties.get("studentUsername"));
-			studentLogin.enterPassword(this.properties.get("password"));
-			studentLogin.clickLoginButton();
+			user.loginToSystem(this.properties.get("studentUsername"), this.properties.get("password"));
 		}
 		//Start a Discussion
 		@Test
 		public void startDiscussion(){
-			Courses course = new Courses(driver);
 			course.clickCourseLink(this.properties.get("courseName"));
 			//Adding a discussion
-			Forum forum = new Forum(driver);
 			forum.clickForumLink(this.properties.get("nameOfForum"));
 			forum.clickAddNewDiscussionTopicButton();
-			ForumPosts discussion = new ForumPosts(driver);
-			discussion.enterSubject(this.properties.get("studentSubject"));
-			discussion.enterMessage(this.properties.get("studentMessage"));
-			discussion.clickPostToForum();
+			forumPosts.enterSubjectField(this.properties.get("studentSubject"));
+			forumPosts.enterMessage(this.properties.get("studentMessage"));
+			forumPosts.clickPostToForum();
 		}
 		//Check that it is not possible to start another discussion in the forum.
 		@Test
 		public void checkNoDiscussion() throws Exception{
-			Forum forum = new Forum(driver);
 			forum.assertAddNewTopicButtonDisabled();
 		}
 		//Reply to several discussions
 		@Test
 		public void replyDiscussions(){
-			ForumPosts discussion = new ForumPosts(driver);
-			discussion.clickDiscussionLink(this.properties.get("studentSubject"));
-			discussion.clickReplyToPostLink(this.properties.get("studentMessage"));
-			discussion.enterSubject(this.properties.get("replySubjectStudent"));
-			discussion.enterMessage(this.properties.get("replyMessageStudent"));
-			discussion.clickPostToForum();
-			discussion.assertForumPostSubjectSuccessful(this.properties.get("replySubjectStudent"));
-			discussion.assertForumPostMessageSuccessful(this.properties.get("replyMessageStudent"));
-			BlockNavigation navigation = new BlockNavigation(driver);
-			navigation.clickHome();
-			navigation.clickExposedLink(this.properties.get("courseName"));
-			Forum forum = new Forum(driver);
+			forumPosts.clickDiscussionLink(this.properties.get("studentSubject"));
+			forumPosts.clickReplyToPostLink(this.properties.get("studentMessage"));
+			forumPosts.enterSubjectField(this.properties.get("replySubjectStudent"));
+			forumPosts.enterMessage(this.properties.get("replyMessageStudent"));
+			forumPosts.clickPostToForum();
+			forumPosts.assertForumPostSubjectSuccessful(this.properties.get("replySubjectStudent"));
+			forumPosts.assertForumPostMessageSuccessful(this.properties.get("replyMessageStudent"));
+			navigationBlock.clickHome();
+			navigationBlock.clickExposedLink(this.properties.get("courseName"));
 			forum.clickForumLink(this.properties.get("nameOfForum"));
-			discussion.clickDiscussionLink(this.properties.get("teacherSubject"));
-			discussion.clickReplyToPostLink(this.properties.get("teacherMessage"));
-			discussion.enterSubject(this.properties.get("replySubjectTeacher"));
-			discussion.enterMessage(this.properties.get("replyMessageTeacher"));
-			discussion.clickPostToForum();
-			discussion.assertForumPostSubjectSuccessful(this.properties.get("replySubjectTeacher"));
-			discussion.assertForumPostMessageSuccessful(this.properties.get("replyMessageTeacher"));
+			forumPosts.clickDiscussionLink(this.properties.get("teacherSubject"));
+			forumPosts.clickReplyToPostLink(this.properties.get("teacherMessage"));
+			forumPosts.enterSubjectField(this.properties.get("replySubjectTeacher"));
+			forumPosts.enterMessage(this.properties.get("replyMessageTeacher"));
+			forumPosts.clickPostToForum();
+			forumPosts.assertForumPostSubjectSuccessful(this.properties.get("replySubjectTeacher"));
+			forumPosts.assertForumPostMessageSuccessful(this.properties.get("replyMessageTeacher"));
 		}
-		//Tear Down webdriver for @Test methods
-		@AfterClass
-		static public void Quit() {
-		//End Webdriver Session by calling teardown method
-			//sm.teardown();
-			sm.teardownFirefox();
-		}
-		//
-		//END OF TEST
-		//
 }

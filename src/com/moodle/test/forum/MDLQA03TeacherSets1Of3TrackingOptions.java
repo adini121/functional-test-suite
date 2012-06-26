@@ -1,44 +1,26 @@
 package com.moodle.test.forum;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
 import org.junit.Test;
-import org.openqa.selenium.remote.RemoteWebDriver;
 
-import com.moodle.seleniumutils.SeleniumManager;
-import com.moodle.testmanager.pageObjectModel.BlockSettings;
-import com.moodle.testmanager.pageObjectModel.Courses;
-import com.moodle.testmanager.pageObjectModel.CoursesAddAnActivity;
-import com.moodle.testmanager.pageObjectModel.Forum;
-import com.moodle.testmanager.pageObjectModel.ForumAddForum;
-import com.moodle.testmanager.pageObjectModel.ForumPosts;
-import com.moodle.testmanager.pageObjectModel.ProfileEdit;
-import com.moodle.testmanager.pageObjectModel.Users;
+import com.moodle.test.TestRunSettings;
 /**
  * TEST SCENARIO:
- * A teacher can set one of 3 possible options for tracking read forum posts
- * TEST STEPS:
- * 1. Login as a teacher and create a forum with 'Read tracking for this forum' set to Optional in the forum settings.
- * 2. Login as a student and check you can choose whether to turn tracking on or off. The link to do this should be in the Settings block under Forum administration.
- * 3. Login as a teacher and create a forum with 'Read tracking for this forum' set to Off.
- * 4. Login as a student and check that read forum posts are not tracked and that you have no option to enable the feature.
- * 5. Login as a teacher and create a forum with 'Read tracking for this forum' set to On.
- * 6. Login as a student and check that read forum posts are tracked and that you have no option to disable the feature.
+ *<br>A teacher can set one of 3 possible options for tracking read forum posts
+ *<br>TEST STEPS:
+ *<br>1. Login as a teacher and create a forum with 'Read tracking for this forum' set to Optional in the forum settings.
+ *<br>2. Login as a student and check you can choose whether to turn tracking on or off. The link to do this should be in the Settings block under Forum administration.
+ *<br>3. Login as a teacher and create a forum with 'Read tracking for this forum' set to Off.
+ *<br>4. Login as a student and check that read forum posts are not tracked and that you have no option to enable the feature.
+ *<br>5. Login as a teacher and create a forum with 'Read tracking for this forum' set to On.
+ *<br>6. Login as a student and check that read forum posts are tracked and that you have no option to disable the feature.
  */
-public class MDLQA03TeacherSets1Of3TrackingOptions {
-	//define "driver" in a field
-		static RemoteWebDriver driver;
-		static SeleniumManager sm;
-		//TEST DATA
+public class MDLQA03TeacherSets1Of3TrackingOptions extends TestRunSettings {
 		//Test Data Property Files
-		public static String runParameters = "properties/runParameters.properties";
 		public static String forumData = "properties/data/user/Forum/forumData.properties";
 		public static String usersData = "properties/data/user/Users/usersData.properties";
 		private Map<String, String> properties = new HashMap<String, String>();
@@ -78,186 +60,113 @@ public class MDLQA03TeacherSets1Of3TrackingOptions {
 			this.properties.put("off", forumTestData.getProperty("off"));
 			this.properties.put("on", forumTestData.getProperty("on"));
 		}
-		@BeforeClass
-		public static void automateTestSetup() throws FileNotFoundException,
-				IOException {
-			//Load properties required for test run
-			Properties startupConfig = new Properties();
-			startupConfig.load(new FileInputStream(runParameters));
-			String gridHubURL = startupConfig.getProperty("gridHubURL");
-			String browserType = startupConfig.getProperty("browserType");
-			String moodleHomePage = startupConfig.getProperty("moodleHomePage");
-			String chromeDriverLocation = startupConfig.getProperty("chromeDriverLocation");
-			//Call setup method
-			sm = new SeleniumManager();
-			//sm.startRemotes(gridHubURL, browserType);
-			//sm.startChromeDriver(chromeDriverLocation);
-			sm.startFirefoxDriver();
-			//driver = sm.getRemoteDriver();
-			//driver = sm.getChromeDriver();
-			driver = sm.getFirefoxDriver();
-			driver.get(moodleHomePage);
-		}
 		//START TEST
 		//Login as teacher
 		@Test
 		public void loginAsTeacher() {
-			Users teacherLogin = new Users(driver);
-			teacherLogin.selectLoginLink();
-			teacherLogin.enterUsername(this.properties.get("teacherUsername"));
-			teacherLogin.enterPassword(this.properties.get("password"));
-			teacherLogin.clickLoginButton();
+			user.loginToSystem(this.properties.get("teacherUsername"), this.properties.get("password"));
 		}
 		//Create a forum with 'Read tracking for this forum' set to Optional in the forum settings.
 		@Test
 		public void createForumOptional(){
-		//Select the course
-			Courses course = new Courses(driver);
 			course.clickCourseLink(this.properties.get("courseName"));
 			course.clickTurnEditingOn();
-		//select forum activity from drop down on courses page 
-			CoursesAddAnActivity activity = new CoursesAddAnActivity(driver);
-			activity.selectForum(this.properties.get("outlineSection"));
-		//Adding a new forum
-			ForumAddForum addForum = new ForumAddForum(driver);
+			addActivity.selectForum(this.properties.get("outlineSection"));
 			addForum.selectForumTypeStandardGeneral();
-			addForum.enterForumName(this.properties.get("nameOfForumOptional"));
-			addForum.enterForumIntro(this.properties.get("introTextOfForumOptional"));
+			addForum.enterNameField(this.properties.get("nameOfForumOptional"));
+			addForum.enterIntroField(this.properties.get("introTextOfForumOptional"));
 			addForum.clickSaveAndRetToCourse();
-			//Adding a discussion
-			Forum forum = new Forum(driver);
 			forum.clickForumLink(this.properties.get("nameOfForumOptional"));
 			forum.clickAddNewDiscussionTopicButton();
-			ForumPosts discussion = new ForumPosts(driver);
-			discussion.enterSubject(this.properties.get("teacherSubjectOptional"));
-			discussion.enterMessage(this.properties.get("teacherMessageOptional"));
-			discussion.clickPostToForum();
+			forumPosts.enterSubjectField(this.properties.get("teacherSubjectOptional"));
+			forumPosts.enterMessage(this.properties.get("teacherMessageOptional"));
+			forumPosts.clickPostToForum();
 		}
 		//Create a forum with 'Read tracking for this forum' set to Off.
 		@Test
 		public void createForumOff(){
-		//Select the course
-			Courses course = new Courses(driver);
 			course.clickCourseLink(this.properties.get("courseShortname"));
-		//select forum activity from drop down on courses page 
-			CoursesAddAnActivity activity = new CoursesAddAnActivity(driver);
-			activity.selectForum(this.properties.get("outlineSection"));
-		//Adding a new forum
-			ForumAddForum addForum = new ForumAddForum(driver);
-			addForum.enterForumName(this.properties.get("nameOfForumOff"));
-			addForum.enterForumIntro(this.properties.get("introTextOfForumOff"));
+			addActivity.selectForum(this.properties.get("outlineSection"));
+			addForum.enterNameField(this.properties.get("nameOfForumOff"));
+			addForum.enterIntroField(this.properties.get("introTextOfForumOff"));
 			addForum.selectForumTypeStandardGeneral();
 			addForum.selectReadTrackingOption(this.properties.get("off"));
 			addForum.clickSaveAndRetToCourse();
 		//Adding a discussion
-			Forum forum = new Forum(driver);
 			forum.clickForumLink(this.properties.get("nameOfForumOff"));
 			forum.clickAddNewDiscussionTopicButton();
-			ForumPosts discussion = new ForumPosts(driver);
-			discussion.enterSubject(this.properties.get("teacherSubjectOff"));
-			discussion.enterMessage(this.properties.get("teacherMessageOff"));
-			discussion.clickPostToForum();
+			forumPosts.enterSubjectField(this.properties.get("teacherSubjectOff"));
+			forumPosts.enterMessage(this.properties.get("teacherMessageOff"));
+			forumPosts.clickPostToForum();
 		}
 		//Create a forum with 'Read tracking for this forum' set to On.
 		@Test
 		public void createForumOn(){
 		//Select the course
-			Courses course = new Courses(driver);
 			course.clickCourseLink(this.properties.get("courseShortname"));
 		//select forum activity from drop down on courses page 
-			CoursesAddAnActivity activity = new CoursesAddAnActivity(driver);
-			activity.selectForum(this.properties.get("outlineSection"));
+			addActivity.selectForum(this.properties.get("outlineSection"));
 		//Adding a new forum
-			ForumAddForum addForum = new ForumAddForum(driver);
-			addForum.enterForumName(this.properties.get("nameOfForumOn"));
-			addForum.enterForumIntro(this.properties.get("introTextOfForumOn"));
+			addForum.enterNameField(this.properties.get("nameOfForumOn"));
+			addForum.enterIntroField(this.properties.get("introTextOfForumOn"));
 			addForum.selectForumTypeStandardGeneral();
 			addForum.selectReadTrackingOption(this.properties.get("on"));
 			addForum.clickSaveAndRetToCourse();
 			//Adding a discussion
-			Forum forum = new Forum(driver);
 			forum.clickForumLink(this.properties.get("nameOfForumOn"));
 			forum.clickAddNewDiscussionTopicButton();
-			ForumPosts discussion = new ForumPosts(driver);
-			discussion.enterSubject(this.properties.get("teacherSubjectOn"));
-			discussion.enterMessage(this.properties.get("teacherMessageOn"));
-			discussion.clickPostToForum();
+			forumPosts.enterSubjectField(this.properties.get("teacherSubjectOn"));
+			forumPosts.enterMessage(this.properties.get("teacherMessageOn"));
+			forumPosts.clickPostToForum();
 			course.clickCourseLink(this.properties.get("courseShortname"));
 			course.clickTurnEditingOff();
 		}
 		//Logout teacher
 		@Test
 		public void logoutTeacher(){
-			Users teacherLogout = new Users(driver);
-			teacherLogout.selectLogout();
+			user.selectLogout();
 		}
 		//Login as a student
 		@Test
 		public void loginAsStudent(){
-			Users studentLogin = new Users(driver);
-			studentLogin.selectLoginLink();
-			studentLogin.enterUsername(this.properties.get("studentUsername"));
-			studentLogin.enterPassword(this.properties.get("password"));
-			studentLogin.clickLoginButton();
+			user.loginToSystem(this.properties.get("studentUsername"), this.properties.get("password"));
 		}
 		//Ensure yes highlight new posts is set to yes
 		@Test
 		public void readTrackingTurnedOn(){
-			Courses course = new Courses(driver);
 			course.clickCourseLink(this.properties.get("courseName"));
-			BlockSettings profile = new BlockSettings(driver);
-			profile.navigateEditProfile();
-			ProfileEdit profileEdit = new ProfileEdit(driver);
-			profileEdit.selectForumTrackingOn();
-			profileEdit.clickUpdateProfile();
+			settingsBlock.navigateEditProfile();
+			editProfile.selectForumTrackingOn();
+			editProfile.clickUpdateProfile();
 		}
 		//check you can choose whether to turn tracking on or off. The link to do this should be in the Settings block under Forum administration.
 		@Test
 		public void trackingOptional() throws Exception{
-			Courses course = new Courses(driver);
 			course.clickCourseBreadcrumb(this.properties.get("courseShortname"));
 			course.assertTrackingEnabled(this.properties.get("nameOfForumOptional"));
-			Forum forum = new Forum(driver);
 			forum.clickForumLink(this.properties.get("nameOfForumOptional"));
-			BlockSettings settings = new BlockSettings(driver);
-			settings.navigateDontTrackUnread();
+			settingsBlock.navigateDontTrackUnread();
 			course.clickCourseBreadcrumb(this.properties.get("courseShortname"));
 			course.assertTrackingDisabled(this.properties.get("nameOfForumOptional"));
 		}
 		//Check that read forum posts are not tracked and that you have no option to enable the feature.
 		@Test
 		public void trackingOff() throws Exception{
-			Courses course = new Courses(driver);
 			course.assertTrackingDisabled(this.properties.get("nameOfForumOff"));
-			Forum forum = new Forum(driver);
 			forum.clickForumLink(this.properties.get("nameOfForumOff"));
-			BlockSettings navigate = new BlockSettings(driver);
-			navigate.assertTrackingCannotBeEnabled();
+			settingsBlock.assertTrackingCannotBeEnabled();
 			course.clickCourseLink(this.properties.get("courseShortname"));
 		}
 		//Check that read forum posts are tracked and that you have no option to disable the feature.
 		@Test
 		public void trackingOn() throws Exception{
-			Courses course = new Courses(driver);
 			course.assertTrackingEnabled(this.properties.get("nameOfForumOn"));
-			Forum forum = new Forum(driver);
 			forum.clickForumLink(this.properties.get("nameOfForumOff"));
-			BlockSettings navigate = new BlockSettings(driver);
-			navigate.assertTrackingCannotBeDisabled();
+			settingsBlock.assertTrackingCannotBeDisabled();
 		}
 		//Log out Student
 		//@Test
 		public void logoutStudent(){
-			Users student = new Users(driver);
-			student.selectLogout();
+			user.selectLogout();
 		}
-		@AfterClass
-		public static void Quit() {
-		//End Webdriver Session by calling teardown method
-			//sm.teardown();
-			sm.teardownFirefox();
-		}
-		//
-		//END OF TEST
-		//
 }

@@ -1,62 +1,36 @@
 package com.moodle.test.assignment;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
 import org.junit.Test;
-import org.openqa.selenium.remote.RemoteWebDriver;
 
-import com.moodle.seleniumutils.SeleniumManager;
-import com.moodle.testmanager.pageObjectModel.Assignment;
-import com.moodle.testmanager.pageObjectModel.AssignmentAddAssignment;
-import com.moodle.testmanager.pageObjectModel.AssignmentAddSubmission;
-import com.moodle.testmanager.pageObjectModel.AssignmentGrading;
-import com.moodle.testmanager.pageObjectModel.Courses;
-import com.moodle.testmanager.pageObjectModel.CoursesAddAnActivity;
-import com.moodle.testmanager.pageObjectModel.Users;
-/**
- * DESCRIPTION:
- * A teacher can change the order in which assignment submissions are listed.
- * 
- * TEST PRE-REQUISITES:
- * This test requires an assignment with several submissions.
- * 
- * TEST SCENARIO:
- * 1. Login as a teacher, access the assignment and follow the 'View x submitted assignments' link.
- * 2. Try sorting the submissions by first name by clicking the 'First name' heading.
- * 3. Click the 'First name' heading again and check that the submissions are now sorted in the reverse order.
- * 4. Change the submissions shown per page to 2 and click the 'Save preferences' button.
- * 5. Check that the submissions page now displays only 2 submissions.
- * 6. Try hiding one of the columns by clicking the hide icon next to a particular column heading. 
- */
-public class MDLQA71AssignmentSubmissionOrder {
-		//The WebDriver
-		static RemoteWebDriver driver;
-		//The Selenium Manager class
-		static SeleniumManager sm;
-		//Test Data Property Files
-		//Run parameters are static and apply to all tests
-		public static String runParameters = "properties/runParameters.properties";
+import com.moodle.test.TestRunSettings;
+
+public class MDLQA71AssignmentSubmissionOrder extends TestRunSettings {
+		/**
+		 * DESCRIPTION:
+		 * A teacher can change the order in which assignment submissions are listed.
+		 * 
+		 * TEST PRE-REQUISITES:
+		 * This test requires an assignment with several submissions.
+		 * 
+		 * TEST SCENARIO:
+		 * 1. Login as a teacher, access the assignment and follow the 'View x submitted assignments' link.
+		 * 2. Try sorting the submissions by first name by clicking the 'First name' heading.
+		 * 3. Click the 'First name' heading again and check that the submissions are now sorted in the reverse order.
+		 * 4. Change the submissions shown per page to 2 and click the 'Save preferences' button.
+		 * 5. Check that the submissions page now displays only 2 submissions.
+		 * 6. Try hiding one of the columns by clicking the hide icon next to a particular column heading. 
+		 */
 		//Test data files.
 		public static String usersTestData = "properties/data/user/Users/usersData.properties";
 		public static String courseTestData = "properties/data/user/Courses/courseData.properties";
 		public static String assignmentTestData = "properties/data/user/Assignment/assignmentData.properties";
 		//Data Hashmap
 		private Map<String, String> properties = new HashMap<String, String>();
-		//Construct page objects e.g. Users.
-		private Users user = new Users(driver);
-		private Courses course = new Courses(driver);
-		private CoursesAddAnActivity addActivity = new CoursesAddAnActivity(driver);
-		private Assignment assignment = new Assignment(driver);
-		private AssignmentAddAssignment addAssignment = new AssignmentAddAssignment(driver);
-		private AssignmentAddSubmission addSubmission = new AssignmentAddSubmission(driver);
-		private AssignmentGrading grading = new AssignmentGrading(driver);
 		//Load test data from properties file
 		public MDLQA71AssignmentSubmissionOrder(){
 			this.loadTestData();
@@ -98,27 +72,6 @@ public class MDLQA71AssignmentSubmissionOrder {
 			this.properties.put("MDLQA71AssignmentSubmissionB", testData.getProperty("MDLQA71AssignmentSubmissionB"));
 			this.properties.put("MDLQA71Twenty", testData.getProperty("MDLQA71Twenty"));
 		}
-		
-		//Setup webdriver for @Test methods
-		@BeforeClass
-		static public void automateTestSetup()throws FileNotFoundException, IOException{
-		//Load properties required for test run
-			Properties startupConfig = new Properties();
-			startupConfig.load(new FileInputStream(runParameters));
-			String gridHubURL = startupConfig.getProperty("gridHubURL");
-			String browserType = startupConfig.getProperty("browserType");
-			String moodleHomePage = startupConfig.getProperty("moodleHomePage");
-			//String chromeDriverLocation = startupConfig.getProperty("chromeDriverLocation");
-		//Call setup method
-			sm = new SeleniumManager();
-			//sm.startRemotes(gridHubURL, browserType);
-			//sm.startChromeDriver(chromeDriverLocation);
-			sm.startFirefoxDriver();
-			//driver = sm.getRemoteDriver();
-			//driver = sm.getChromeDriver();
-			driver = sm.getFirefoxDriver();
-			driver.get(moodleHomePage);
-		}
 		/*
 		 * PRE-REQUISITES:
 		 * This test requires an assignment with several submissions.
@@ -132,8 +85,8 @@ public class MDLQA71AssignmentSubmissionOrder {
 			course.clickTurnEditingOn();
 			//Teacher creates an online text assignment.
 			addActivity.selectAssignment(this.properties.get("MDLQA71OutlineSection"));
-			addAssignment.enterAssignmentName(this.properties.get("MDLQA71AssignmentName"));
-			addAssignment.enterAssignmentDescription(this.properties.get("MDLQA71AssignmentText"));
+			addAssignment.enterNameField(this.properties.get("MDLQA71AssignmentName"));
+			addAssignment.enterIntroField(this.properties.get("MDLQA71AssignmentText"));
 			addAssignment.selectOnlineTextEnabledYes();
 			addAssignment.clickSaveAndDisplay();
 			//Teacher logs out
@@ -143,99 +96,99 @@ public class MDLQA71AssignmentSubmissionOrder {
 			course.clickCourseLink(this.properties.get("courseName"));
 			assignment.clickAssignmentLink(this.properties.get("MDLQA71AssignmentName"));
 			assignment.clickButtonAddOrEditSubmission();
-			addSubmission.clickCheckboxSubmissionStatement();
-			addSubmission.enterOnlineText(this.properties.get("MDLQA71AssignmentSubmissionA"));
-			addSubmission.clickButtonSaveChanges();
+			submitAssignment.clickCheckboxSubmissionStatement();
+			submitAssignment.enterOnlineText(this.properties.get("MDLQA71AssignmentSubmissionA"));
+			submitAssignment.clickButtonSaveChanges();
 			user.selectLogout();
 			//
 			user.loginToSystem(this.properties.get("student2Username"), this.properties.get("password"));
 			course.clickCourseLink(this.properties.get("courseName"));
 			assignment.clickAssignmentLink(this.properties.get("MDLQA71AssignmentName"));
 			assignment.clickButtonAddOrEditSubmission();
-			addSubmission.clickCheckboxSubmissionStatement();
-			addSubmission.enterOnlineText(this.properties.get("MDLQA71AssignmentSubmissionB"));
-			addSubmission.clickButtonSaveChanges();
+			submitAssignment.clickCheckboxSubmissionStatement();
+			submitAssignment.enterOnlineText(this.properties.get("MDLQA71AssignmentSubmissionB"));
+			submitAssignment.clickButtonSaveChanges();
 			user.selectLogout();
 			////
 			user.loginToSystem(this.properties.get("student3Username"), this.properties.get("password"));
 			course.clickCourseLink(this.properties.get("courseName"));
 			assignment.clickAssignmentLink(this.properties.get("MDLQA71AssignmentName"));
 			assignment.clickButtonAddOrEditSubmission();
-			addSubmission.clickCheckboxSubmissionStatement();
-			addSubmission.enterOnlineText(this.properties.get("MDLQA71AssignmentSubmissionB"));
-			addSubmission.clickButtonSaveChanges();
+			submitAssignment.clickCheckboxSubmissionStatement();
+			submitAssignment.enterOnlineText(this.properties.get("MDLQA71AssignmentSubmissionB"));
+			submitAssignment.clickButtonSaveChanges();
 			user.selectLogout();
 			//
 			user.loginToSystem(this.properties.get("student4Username"), this.properties.get("password"));
 			course.clickCourseLink(this.properties.get("courseName"));
 			assignment.clickAssignmentLink(this.properties.get("MDLQA71AssignmentName"));
 			assignment.clickButtonAddOrEditSubmission();
-			addSubmission.clickCheckboxSubmissionStatement();
-			addSubmission.enterOnlineText(this.properties.get("MDLQA71AssignmentSubmissionB"));
-			addSubmission.clickButtonSaveChanges();
+			submitAssignment.clickCheckboxSubmissionStatement();
+			submitAssignment.enterOnlineText(this.properties.get("MDLQA71AssignmentSubmissionB"));
+			submitAssignment.clickButtonSaveChanges();
 			user.selectLogout();
 			//
 			user.loginToSystem(this.properties.get("student5Username"), this.properties.get("password"));
 			course.clickCourseLink(this.properties.get("courseName"));
 			assignment.clickAssignmentLink(this.properties.get("MDLQA71AssignmentName"));
 			assignment.clickButtonAddOrEditSubmission();
-			addSubmission.clickCheckboxSubmissionStatement();
-			addSubmission.enterOnlineText(this.properties.get("MDLQA71AssignmentSubmissionB"));
-			addSubmission.clickButtonSaveChanges();
+			submitAssignment.clickCheckboxSubmissionStatement();
+			submitAssignment.enterOnlineText(this.properties.get("MDLQA71AssignmentSubmissionB"));
+			submitAssignment.clickButtonSaveChanges();
 			user.selectLogout();
 			//
 			user.loginToSystem(this.properties.get("student6Username"), this.properties.get("password"));
 			course.clickCourseLink(this.properties.get("courseName"));
 			assignment.clickAssignmentLink(this.properties.get("MDLQA71AssignmentName"));
 			assignment.clickButtonAddOrEditSubmission();
-			addSubmission.clickCheckboxSubmissionStatement();
-			addSubmission.enterOnlineText(this.properties.get("MDLQA71AssignmentSubmissionB"));
-			addSubmission.clickButtonSaveChanges();
+			submitAssignment.clickCheckboxSubmissionStatement();
+			submitAssignment.enterOnlineText(this.properties.get("MDLQA71AssignmentSubmissionB"));
+			submitAssignment.clickButtonSaveChanges();
 			user.selectLogout();
 			//
 			user.loginToSystem(this.properties.get("student7Username"), this.properties.get("password"));
 			course.clickCourseLink(this.properties.get("courseName"));
 			assignment.clickAssignmentLink(this.properties.get("MDLQA71AssignmentName"));
 			assignment.clickButtonAddOrEditSubmission();
-			addSubmission.clickCheckboxSubmissionStatement();
-			addSubmission.enterOnlineText(this.properties.get("MDLQA71AssignmentSubmissionB"));
-			addSubmission.clickButtonSaveChanges();
+			submitAssignment.clickCheckboxSubmissionStatement();
+			submitAssignment.enterOnlineText(this.properties.get("MDLQA71AssignmentSubmissionB"));
+			submitAssignment.clickButtonSaveChanges();
 			user.selectLogout();
 			//
 			user.loginToSystem(this.properties.get("student8Username"), this.properties.get("password"));
 			course.clickCourseLink(this.properties.get("courseName"));
 			assignment.clickAssignmentLink(this.properties.get("MDLQA71AssignmentName"));
 			assignment.clickButtonAddOrEditSubmission();
-			addSubmission.clickCheckboxSubmissionStatement();
-			addSubmission.enterOnlineText(this.properties.get("MDLQA71AssignmentSubmissionB"));
-			addSubmission.clickButtonSaveChanges();
+			submitAssignment.clickCheckboxSubmissionStatement();
+			submitAssignment.enterOnlineText(this.properties.get("MDLQA71AssignmentSubmissionB"));
+			submitAssignment.clickButtonSaveChanges();
 			user.selectLogout();
 			//
 			user.loginToSystem(this.properties.get("student9Username"), this.properties.get("password"));
 			course.clickCourseLink(this.properties.get("courseName"));
 			assignment.clickAssignmentLink(this.properties.get("MDLQA71AssignmentName"));
 			assignment.clickButtonAddOrEditSubmission();
-			addSubmission.clickCheckboxSubmissionStatement();
-			addSubmission.enterOnlineText(this.properties.get("MDLQA71AssignmentSubmissionB"));
-			addSubmission.clickButtonSaveChanges();
+			submitAssignment.clickCheckboxSubmissionStatement();
+			submitAssignment.enterOnlineText(this.properties.get("MDLQA71AssignmentSubmissionB"));
+			submitAssignment.clickButtonSaveChanges();
 			user.selectLogout();
 			//
 			user.loginToSystem(this.properties.get("student10Username"), this.properties.get("password"));
 			course.clickCourseLink(this.properties.get("courseName"));
 			assignment.clickAssignmentLink(this.properties.get("MDLQA71AssignmentName"));
 			assignment.clickButtonAddOrEditSubmission();
-			addSubmission.clickCheckboxSubmissionStatement();
-			addSubmission.enterOnlineText(this.properties.get("MDLQA71AssignmentSubmissionB"));
-			addSubmission.clickButtonSaveChanges();
+			submitAssignment.clickCheckboxSubmissionStatement();
+			submitAssignment.enterOnlineText(this.properties.get("MDLQA71AssignmentSubmissionB"));
+			submitAssignment.clickButtonSaveChanges();
 			user.selectLogout();
 			//
 			user.loginToSystem(this.properties.get("student11Username"), this.properties.get("password"));
 			course.clickCourseLink(this.properties.get("courseName"));
 			assignment.clickAssignmentLink(this.properties.get("MDLQA71AssignmentName"));
 			assignment.clickButtonAddOrEditSubmission();
-			addSubmission.clickCheckboxSubmissionStatement();
-			addSubmission.enterOnlineText(this.properties.get("MDLQA71AssignmentSubmissionB"));
-			addSubmission.clickButtonSaveChanges();
+			submitAssignment.clickCheckboxSubmissionStatement();
+			submitAssignment.enterOnlineText(this.properties.get("MDLQA71AssignmentSubmissionB"));
+			submitAssignment.clickButtonSaveChanges();
 			user.selectLogout();
 		}
 		/*
@@ -330,16 +283,5 @@ public class MDLQA71AssignmentSubmissionOrder {
 			grading.assertFirstAndSurnameHidden(this.properties.get("student10Firstname"), this.properties.get("student10Surname"));
 			grading.assertFirstAndSurnameHidden(this.properties.get("student11Firstname"), this.properties.get("student11Surname"));
 			user.selectLogout();
-		}
-		/*
-		 * END OF TEST
-		 */
-		//Tear Down webdriver for @Test methods
-		@AfterClass
-		static public void Quit() {
-		//End Webdriver Session by calling teardown method
-			//sm.teardown();
-			//sm.teardownChrome();
-			sm.teardownFirefox();
 		}
 }

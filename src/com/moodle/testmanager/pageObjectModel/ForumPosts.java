@@ -21,9 +21,8 @@ import com.moodle.seleniumutils.PassFailCriteria;
  */
 public class ForumPosts {
 	//Internationalization file location
-	public static String forumData = "properties/data/static/forumPosts.properties";
-	private RemoteWebDriver driver;
 	private Map<String, String> properties = new HashMap<String, String>();
+	private RemoteWebDriver driver;
 /**
  * Constructor for the page object.	
  * @param driver The driver that is used for the test. There is no need to specify the value for the driver here as the driver
@@ -32,39 +31,39 @@ public class ForumPosts {
  */
 	public ForumPosts(RemoteWebDriver driver) {
 		this.driver = driver;
-		this.loadObjectData();
+		this.loadObjectData("properties/data/static/forumPosts.properties");
 	}
 /**
  * Loads data for the page object from the internationalization layer /properties/data/static/blockNavigation.properties
  * where a selector requires a text string visible through the user interface e.g. value=button text, or link text.
  */
-	public void loadObjectData() {
-		Properties forum = new Properties();
+	public void loadObjectData(String datafile) {
+		Properties dataLoad = new Properties();
 		try {
-			forum.load(new FileInputStream(forumData));
+			dataLoad.load(new FileInputStream("properties/data/static/forumPosts.properties"));
 		} catch (Exception e) {}
 		//put values from the properties file into hashmap
-		this.properties.put("replyLink", forum.getProperty("replyLink"));
-		this.properties.put("splitLink", forum.getProperty("splitLink"));
-		this.properties.put("editLink", forum.getProperty("editLink"));
-		this.properties.put("deleteLink", forum.getProperty("deleteLink"));
-		this.properties.put("continueButton", forum.getProperty("continueButton"));
-		this.properties.put("saveChangesButton", forum.getProperty("saveChangesButton"));
-		this.properties.put("moveButton", forum.getProperty("moveButton"));
-		this.properties.put("flatOldestFirst", forum.getProperty("flatOldestFirst"));
-		this.properties.put("flatNewestFirst", forum.getProperty("flatNewestFirst"));
-		this.properties.put("threaded", forum.getProperty("threaded"));
-		this.properties.put("nested", forum.getProperty("nested"));
-		this.properties.put("subjectHidden", forum.getProperty("subjectHidden"));
-		this.properties.put("messageHidden", forum.getProperty("messageHidden"));
-		this.properties.put("deleteLink", forum.getProperty("deleteLink"));
-		this.properties.put("editTeacherException", forum.getProperty("editTeacherException"));
+		this.properties.put("replyLink", dataLoad.getProperty("replyLink"));
+		this.properties.put("splitLink", dataLoad.getProperty("splitLink"));
+		this.properties.put("editLink", dataLoad.getProperty("editLink"));
+		this.properties.put("deleteLink", dataLoad.getProperty("deleteLink"));
+		this.properties.put("continueButton", dataLoad.getProperty("continueButton"));
+		this.properties.put("saveChangesButton", dataLoad.getProperty("saveChangesButton"));
+		this.properties.put("moveButton", dataLoad.getProperty("moveButton"));
+		this.properties.put("flatOldestFirst", dataLoad.getProperty("flatOldestFirst"));
+		this.properties.put("flatNewestFirst", dataLoad.getProperty("flatNewestFirst"));
+		this.properties.put("threaded", dataLoad.getProperty("threaded"));
+		this.properties.put("nested", dataLoad.getProperty("nested"));
+		this.properties.put("subjectHidden", dataLoad.getProperty("subjectHidden"));
+		this.properties.put("messageHidden", dataLoad.getProperty("messageHidden"));
+		this.properties.put("deleteLink", dataLoad.getProperty("deleteLink"));
+		this.properties.put("editTeacherException", dataLoad.getProperty("editTeacherException"));
 	}
 /**
  * Enter a value for subject
  * @param subject The value for subject is passed fromthe test.
  */
-	public void enterSubject(String subject) {
+	public void enterSubjectField(String subject) {
 		WebElement subjectField = driver.findElement(By .xpath(".//input[@id='id_subject']"));
 		subjectField.clear();
 		subjectField.sendKeys(subject);

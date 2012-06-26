@@ -27,9 +27,9 @@ import org.junit.Test;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import com.moodle.seleniumutils.SeleniumManager;
 import com.moodle.testmanager.pageObjectModel.CoursesAddAnActivity;
-import com.moodle.testmanager.pageObjectModel.ForumAddForum;
 import com.moodle.testmanager.pageObjectModel.Courses;
 import com.moodle.testmanager.pageObjectModel.Forum;
+import com.moodle.testmanager.pageObjectModel.ForumAddForm;
 import com.moodle.testmanager.pageObjectModel.Users;
 
 public class MDLQA12TeacherSet4PossibleForumSubscription {
@@ -109,9 +109,9 @@ public class MDLQA12TeacherSet4PossibleForumSubscription {
 		CoursesAddAnActivity activity = new CoursesAddAnActivity(driver);
 		activity.selectForum(this.properties.get("outlineSection"));
 	//Adding a new forum
-		ForumAddForum addForum = new ForumAddForum(driver);
-		addForum.enterForumName(this.properties.get("nameOfForumOptional"));
-		addForum.enterForumIntro(this.properties.get("entryTextOptional"));
+		ForumAddForm addForum = new ForumAddForm(driver);
+		addForum.enterNameField(this.properties.get("nameOfForumOptional"));
+		addForum.enterIntroField(this.properties.get("entryTextOptional"));
 		addForum.selectSubscriptionTypeOptional();
 		addForum.clickSaveAndRetToCourse();
 	}
@@ -122,9 +122,9 @@ public class MDLQA12TeacherSet4PossibleForumSubscription {
 		CoursesAddAnActivity activity = new CoursesAddAnActivity(driver);
 		activity.selectForum(this.properties.get("outlineSection"));
 	//Adding a new forum
-		ForumAddForum addForum = new ForumAddForum(driver);
-		addForum.enterForumName(this.properties.get("nameOfForumForced"));
-		addForum.enterForumIntro(this.properties.get("entryTextForced"));
+		ForumAddForm addForum = new ForumAddForm(driver);
+		addForum.enterNameField(this.properties.get("nameOfForumForced"));
+		addForum.enterIntroField(this.properties.get("entryTextForced"));
 		addForum.selectSubscriptionTypeForced();
 		addForum.clickSaveAndRetToCourse();
 	}
@@ -135,9 +135,9 @@ public class MDLQA12TeacherSet4PossibleForumSubscription {
 		CoursesAddAnActivity activity = new CoursesAddAnActivity(driver);
 		activity.selectForum(this.properties.get("outlineSection"));
 	//Adding a new forum
-		ForumAddForum addForum = new ForumAddForum(driver);
-		addForum.enterForumName(this.properties.get("nameOfForumAuto"));
-		addForum.enterForumIntro(this.properties.get("entryTextAuto"));
+		ForumAddForm addForum = new ForumAddForm(driver);
+		addForum.enterNameField(this.properties.get("nameOfForumAuto"));
+		addForum.enterIntroField(this.properties.get("entryTextAuto"));
 		addForum.selectSubscriptionTypeAuto();
 		addForum.clickSaveAndRetToCourse();
 	}
@@ -148,9 +148,9 @@ public class MDLQA12TeacherSet4PossibleForumSubscription {
 		CoursesAddAnActivity activity = new CoursesAddAnActivity(driver);
 		activity.selectForum(this.properties.get("outlineSection"));
 	//Adding a new forum
-		ForumAddForum addForum = new ForumAddForum(driver);
-		addForum.enterForumName(this.properties.get("nameOfForumDisabled"));
-		addForum.enterForumIntro(this.properties.get("entryTextDisabled"));
+		ForumAddForm addForum = new ForumAddForm(driver);
+		addForum.enterNameField(this.properties.get("nameOfForumDisabled"));
+		addForum.enterIntroField(this.properties.get("entryTextDisabled"));
 		addForum.selectSubscriptionTypeDisabled();
 		addForum.clickSaveAndRetToCourse();
 	}

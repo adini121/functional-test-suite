@@ -1,0 +1,106 @@
+package com.moodle.test;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.Properties;
+
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.openqa.selenium.remote.RemoteWebDriver;
+
+import com.moodle.seleniumutils.SeleniumManager;
+import com.moodle.seleniumutils.Toolkit;
+import com.moodle.testmanager.pageObjectModel.Assignment;
+import com.moodle.testmanager.pageObjectModel.AssignmentAddAssignmentForm;
+import com.moodle.testmanager.pageObjectModel.AssignmentAddSubmission;
+import com.moodle.testmanager.pageObjectModel.AssignmentAdminUpgradeAssignments;
+import com.moodle.testmanager.pageObjectModel.AssignmentGrading;
+import com.moodle.testmanager.pageObjectModel.AssignmentPluginManageFeedback;
+import com.moodle.testmanager.pageObjectModel.AssignmentPluginManageSubmission;
+import com.moodle.testmanager.pageObjectModel.AssignmentSubmissionComments;
+import com.moodle.testmanager.pageObjectModel.BlockNavigation;
+import com.moodle.testmanager.pageObjectModel.BlockNews;
+import com.moodle.testmanager.pageObjectModel.BlockSettings;
+import com.moodle.testmanager.pageObjectModel.Courses;
+import com.moodle.testmanager.pageObjectModel.CoursesAddAnActivity;
+import com.moodle.testmanager.pageObjectModel.CoursesEditCourseSettings;
+import com.moodle.testmanager.pageObjectModel.Databases;
+import com.moodle.testmanager.pageObjectModel.DatabasesAddDatabase;
+import com.moodle.testmanager.pageObjectModel.DatabasesFields;
+import com.moodle.testmanager.pageObjectModel.Forum;
+import com.moodle.testmanager.pageObjectModel.ForumAddForm;
+import com.moodle.testmanager.pageObjectModel.ForumPosts;
+import com.moodle.testmanager.pageObjectModel.ForumSplit;
+import com.moodle.testmanager.pageObjectModel.FrontPageRoles;
+import com.moodle.testmanager.pageObjectModel.Installation;
+import com.moodle.testmanager.pageObjectModel.ProfileEdit;
+import com.moodle.testmanager.pageObjectModel.ReportActivityCompletion;
+import com.moodle.testmanager.pageObjectModel.SiteAdministration;
+import com.moodle.testmanager.pageObjectModel.Users;
+import com.moodle.testmanager.pageObjectModel.UsersAddNewUser;
+import com.moodle.testmanager.pageObjectModel.UsersEnrolled;
+
+public class TestRunSettings {
+	static RemoteWebDriver driver;
+	static SeleniumManager sm;
+	public static String runParameters = "properties/runParameters.properties";
+	protected Assignment assignment = new Assignment(driver);
+	protected AssignmentAddAssignmentForm addAssignment = new AssignmentAddAssignmentForm(driver);
+	protected AssignmentAddSubmission submitAssignment = new AssignmentAddSubmission(driver);
+	protected AssignmentAdminUpgradeAssignments upgradeAssignment = new AssignmentAdminUpgradeAssignments(driver); 
+	protected AssignmentGrading grading = new AssignmentGrading(driver);
+	protected AssignmentPluginManageFeedback manageFeedbackPlugin = new AssignmentPluginManageFeedback(driver);
+	protected AssignmentPluginManageSubmission manageSubmissionPlugin = new AssignmentPluginManageSubmission(driver);
+	protected AssignmentSubmissionComments submissionComments = new AssignmentSubmissionComments(driver);
+	protected BlockNavigation navigationBlock = new BlockNavigation(driver);
+	protected BlockNews newsBlock = new BlockNews(driver);
+	protected BlockSettings settingsBlock = new BlockSettings(driver);
+	protected Courses course = new Courses(driver);
+	protected CoursesAddAnActivity addActivity = new CoursesAddAnActivity(driver);
+	protected CoursesEditCourseSettings editCourseSettings = new CoursesEditCourseSettings(driver);
+	protected Databases databases = new Databases(driver);
+	protected DatabasesAddDatabase addDatabase = new DatabasesAddDatabase(driver);
+	protected DatabasesFields databaseFields = new DatabasesFields(driver);
+	protected Forum forum = new Forum(driver);
+	protected ForumAddForm addForum = new ForumAddForm(driver);
+	protected ForumPosts forumPosts = new ForumPosts(driver);
+	protected ForumSplit splitForum = new ForumSplit(driver);
+	protected FrontPageRoles frontPageRoles = new FrontPageRoles(driver);
+	protected Installation installation = new Installation(driver);
+	protected ProfileEdit editProfile = new ProfileEdit(driver);
+	protected ReportActivityCompletion activityCompletionReport = new ReportActivityCompletion(driver);
+	protected SiteAdministration siteAdmin = new SiteAdministration(driver);
+	protected Users user = new Users(driver);
+	protected UsersAddNewUser addNewUser = new UsersAddNewUser(driver);
+	protected UsersEnrolled enrolledUsers = new UsersEnrolled(driver);
+	protected Toolkit frameworkTools = new Toolkit(driver);
+
+	@BeforeClass
+	public static void automateTestSetup() throws FileNotFoundException, IOException {
+		//Load properties required for test run
+			Properties startupConfig = new Properties();
+			startupConfig.load(new FileInputStream(runParameters));
+			//String gridHubURL = startupConfig.getProperty("gridHubURL");
+			//String browserType = startupConfig.getProperty("browserType");
+			String moodleHomePage = startupConfig.getProperty("moodleHomePage");
+		//Call setup method
+			sm = new SeleniumManager();
+			//sm.startRemotes(gridHubURL, browserType);
+			//sm.startChromeDriver(chromeDriverLocation);
+			sm.startFirefoxDriver();
+			//driver = sm.getRemoteDriver();
+			//driver = sm.getChromeDriver();
+			driver = sm.getFirefoxDriver();
+			driver.get(moodleHomePage);
+	}
+	@AfterClass
+	public static void Quit() {
+	//End Webdriver Session by calling teardown method
+			//sm.teardown();
+			sm.teardownFirefox();
+	}
+	public TestRunSettings() {
+		super();
+	}
+}
