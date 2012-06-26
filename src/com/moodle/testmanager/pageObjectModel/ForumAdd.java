@@ -1,6 +1,8 @@
 package com.moodle.testmanager.pageObjectModel;
 
 import java.io.FileInputStream;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Properties;
 import org.openqa.selenium.By;
 import org.openqa.selenium.remote.RemoteWebDriver;
@@ -12,7 +14,8 @@ import com.moodle.seleniumutils.FormActions;
  * @author Tim Barker 
  * @see <a href="http://www.gnu.org/copyleft/gpl.html">License: GNU GPL v3 or later</a>
  */
-public class ForumAdd extends FormSettings {
+public class ForumAdd extends FormAddEditSettings {
+	protected Map<String, String> properties = new HashMap<String, String>();
 /**
  * Constructor for the page object.	
  * @param driver The driver that is used for the test. There is no need to specify the value for the driver here as the driver
@@ -22,17 +25,16 @@ public class ForumAdd extends FormSettings {
 	public ForumAdd(RemoteWebDriver driver) {
 		super(driver);
 		//Internationalization file location
-		staticData = "properties/data/static/forumAdd.properties";
-	}
+		this.loadObjectData("properties/data/static/forumAdd.properties");
+		}
 /**
  * Loads data for the page object from the internationalization layer
  * where a selector requires a text string visible through the user interface e.g. value=button text, or link text.
  */
-	@Override
-	public void loadObjectData() {
+	public void loadObjectData(String datafile) {
 		Properties dataLoad = new Properties();
 		try {
-			dataLoad.load(new FileInputStream(staticData));
+			dataLoad.load(new FileInputStream("properties/data/static/forumAdd.properties"));
 		} catch (Exception e) {}
 		this.properties.put("forumTypeSingleSimple", dataLoad.getProperty("forumTypeSingleSimple"));
 		this.properties.put("forumTypeEachPersonOneDiscussion", dataLoad.getProperty("forumTypeEachPersonOneDiscussion"));	

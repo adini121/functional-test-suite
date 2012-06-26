@@ -1,16 +1,3 @@
-/**
- * A teacher can set one of 4 possible forum subscription options
- * TEST SCENARIO:
- * By default, a new course contains a news forum in which only teachers can post and subscription is forced.
- * 1. Login as a teacher and create a forum with 'Subscription Mode' set to 'Optional subscription'.
- * 2. Login as a student and check that you can choose to subscribe/unsubscribe.
- * 3. Login as a teacher and create a forum with 'Subscription Mode' set to 'Forced Subscription'.
- * 4. Login as a student and check that you are subscribed with no option to unsubscribe.
- * 5. Login as a teacher and create a forum with 'Subscription Mode' set to 'Auto subscription'.
- * 6. Login as a student and check that you are subscribed initially but have the option to unsubscribe.
- * 7. Login as a teacher and create a forum with 'Subscription Mode' set to 'Subscription disabled'.
- * 8. Login as a student and check that you have no option to subscribe.
- */
 package com.moodle.test.forum;
 
 import java.io.FileInputStream;
@@ -20,25 +7,24 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 
-
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
 import org.junit.Test;
-import org.openqa.selenium.remote.RemoteWebDriver;
-import com.moodle.seleniumutils.SeleniumManager;
-import com.moodle.testmanager.pageObjectModel.CoursesAddAnActivity;
-import com.moodle.testmanager.pageObjectModel.Courses;
-import com.moodle.testmanager.pageObjectModel.Forum;
-import com.moodle.testmanager.pageObjectModel.ForumAddForm;
-import com.moodle.testmanager.pageObjectModel.Users;
 
-public class MDLQA12TeacherSet4PossibleForumSubscription {
-	//define "driver" in a field
-	static RemoteWebDriver driver;
-	static SeleniumManager sm;
-	//TEST DATA
+import com.moodle.test.TestRunSettings;
+/**
+ * A teacher can set one of 4 possible forum subscription options
+ *<br>TEST SCENARIO:
+ *<br>By default, a new course contains a news forum in which only teachers can post and subscription is forced.
+ *<br>1. Login as a teacher and create a forum with 'Subscription Mode' set to 'Optional subscription'.
+ *<br>2. Login as a student and check that you can choose to subscribe/unsubscribe.
+ *<br>3. Login as a teacher and create a forum with 'Subscription Mode' set to 'Forced Subscription'.
+ *<br>4. Login as a student and check that you are subscribed with no option to unsubscribe.
+ *<br>5. Login as a teacher and create a forum with 'Subscription Mode' set to 'Auto subscription'.
+ *<br>6. Login as a student and check that you are subscribed initially but have the option to unsubscribe.
+ *<br>7. Login as a teacher and create a forum with 'Subscription Mode' set to 'Subscription disabled'.
+ *<br>8. Login as a student and check that you have no option to subscribe.
+ */
+public class MDLQA12TeacherSet4PossibleForumSubscription extends TestRunSettings {
 	//Test Data Property Files
-	public static String runParameters = "properties/runParameters.properties";
 	public static String forumData = "properties/data/user/Forum/forumData.properties";
 	private Map<String, String> properties = new HashMap<String, String>();
 	//Load test data from properties files
@@ -66,50 +52,21 @@ public class MDLQA12TeacherSet4PossibleForumSubscription {
 		this.properties.put("courseShortname", forumTestData.getProperty("courseShortname"));
 		this.properties.put("outlineSection", forumTestData.getProperty("outlineSection"));
 	}
-	//
-	//START OF TEST
-	//
-	//Setup webdriver for @Test methods
-	@BeforeClass
-	static public void automateTestSetup()throws FileNotFoundException, IOException{
-	//Load properties required for test run
-		Properties startupConfig = new Properties();
-		startupConfig.load(new FileInputStream(runParameters));
-		String gridHubURL = startupConfig.getProperty("gridHubURL");
-		String browserType = startupConfig.getProperty("browserType");
-		String moodleHomePage = startupConfig.getProperty("moodleHomePage");
-	//Call setup method
-		sm = new SeleniumManager();
-		//sm.startRemotes(gridHubURL, browserType);
-		//sm.startChromeDriver(chromeDriverLocation);
-		sm.startFirefoxDriver();
-		//driver = sm.getRemoteDriver();
-		//driver = sm.getChromeDriver();
-		driver = sm.getFirefoxDriver();
-		driver.get(moodleHomePage);
-	}
 	//Login as teacher
 	@Test
 	public void loginAsTeacher() throws FileNotFoundException, IOException{
 	//Run test
-		Users teacherLogin = new Users(driver);
-		teacherLogin.selectLoginLink();
-		teacherLogin.enterUsername(this.properties.get("teacherUsername"));
-		teacherLogin.enterPassword(this.properties.get("password"));
-		teacherLogin.clickLoginButton();
+		user.loginToSystem(this.properties.get("teacherUsername"), this.properties.get("password"));
 	}
 	//Start a discussion with the 'subscription mode' set to 'Optional subscription'.
 	@Test
 	public void startDiscussionOptional() throws FileNotFoundException, IOException{
 	//Select the course
-		Courses selectCourse = new Courses(driver);
-		selectCourse.clickCourseLink(this.properties.get("courseName"));
-		selectCourse.clickTurnEditingOn();
+		course.clickCourseLink(this.properties.get("courseName"));
+		course.clickTurnEditingOn();
 	//select activity drop down on courses page 
-		CoursesAddAnActivity activity = new CoursesAddAnActivity(driver);
-		activity.selectForum(this.properties.get("outlineSection"));
+		addActivity.selectForum(this.properties.get("outlineSection"));
 	//Adding a new forum
-		ForumAddForm addForum = new ForumAddForm(driver);
 		addForum.enterNameField(this.properties.get("nameOfForumOptional"));
 		addForum.enterIntroField(this.properties.get("entryTextOptional"));
 		addForum.selectSubscriptionTypeOptional();
@@ -119,10 +76,8 @@ public class MDLQA12TeacherSet4PossibleForumSubscription {
 	@Test
 	public void startDiscussionForced() throws FileNotFoundException, IOException{
 	//select activity drop down on courses page 
-		CoursesAddAnActivity activity = new CoursesAddAnActivity(driver);
-		activity.selectForum(this.properties.get("outlineSection"));
+		addActivity.selectForum(this.properties.get("outlineSection"));
 	//Adding a new forum
-		ForumAddForm addForum = new ForumAddForm(driver);
 		addForum.enterNameField(this.properties.get("nameOfForumForced"));
 		addForum.enterIntroField(this.properties.get("entryTextForced"));
 		addForum.selectSubscriptionTypeForced();
@@ -132,10 +87,8 @@ public class MDLQA12TeacherSet4PossibleForumSubscription {
 	@Test
 	public void startDiscussionAuto() throws FileNotFoundException, IOException{
 	//select activity drop down on courses page 
-		CoursesAddAnActivity activity = new CoursesAddAnActivity(driver);
-		activity.selectForum(this.properties.get("outlineSection"));
+		addActivity.selectForum(this.properties.get("outlineSection"));
 	//Adding a new forum
-		ForumAddForm addForum = new ForumAddForm(driver);
 		addForum.enterNameField(this.properties.get("nameOfForumAuto"));
 		addForum.enterIntroField(this.properties.get("entryTextAuto"));
 		addForum.selectSubscriptionTypeAuto();
@@ -145,10 +98,8 @@ public class MDLQA12TeacherSet4PossibleForumSubscription {
 	@Test
 	public void startDiscussionSubscriptionDisabled() throws FileNotFoundException, IOException{
 	//select activity drop down on courses page 
-		CoursesAddAnActivity activity = new CoursesAddAnActivity(driver);
-		activity.selectForum(this.properties.get("outlineSection"));
+		addActivity.selectForum(this.properties.get("outlineSection"));
 	//Adding a new forum
-		ForumAddForm addForum = new ForumAddForm(driver);
 		addForum.enterNameField(this.properties.get("nameOfForumDisabled"));
 		addForum.enterIntroField(this.properties.get("entryTextDisabled"));
 		addForum.selectSubscriptionTypeDisabled();
@@ -157,26 +108,19 @@ public class MDLQA12TeacherSet4PossibleForumSubscription {
 	//Log Teacher out
 	@Test
 	public void teacherLogout(){
-		Users teacherLogout = new Users(driver);
-		teacherLogout.selectLogout();
+		user.selectLogout();
 	}
 	//Login as student
 	@Test
 	public void loginAsStudent() throws FileNotFoundException, IOException{
 	//Run test
-		Users studentLogin = new Users(driver);
-		studentLogin.selectLoginLink();
-		studentLogin.enterUsername(this.properties.get("studentUsername"));
-		studentLogin.enterPassword(this.properties.get("password"));
-		studentLogin.clickLoginButton();
+		user.loginToSystem(this.properties.get("studentUsername"), this.properties.get("password"));
 	}
 	//Subscribe to optional
 	@Test
 	public void subscribeOptional() throws FileNotFoundException, IOException{
 	//Run test
-		Courses selectCourse = new Courses(driver);
-		selectCourse.clickCourseLink(this.properties.get("courseName"));
-		Forum forum = new Forum(driver);
+		course.clickCourseLink(this.properties.get("courseName"));
 		forum.clickForumLink(this.properties.get("nameOfForumOptional"));
 	//Test Pass/Fail Criteria
 		forum.assertSubscriptionOptional();
@@ -187,26 +131,22 @@ public class MDLQA12TeacherSet4PossibleForumSubscription {
 		forum.assertUnsubscribeOptionPresent();
 	//Unsubscribe from Discussion
 		forum.unsubscribe();
-		selectCourse.clickCourseBreadcrumb(this.properties.get("courseShortname"));
+		course.clickCourseBreadcrumb(this.properties.get("courseShortname"));
 	}
 	//Verify forced subscription
 	@Test
 	public void subscribeForced() throws FileNotFoundException, IOException{
 	//Run test
-		Courses selectCourse = new Courses(driver);
-		Forum forum = new Forum(driver);
 		forum.clickForumLink(this.properties.get("nameOfForumForced"));
 	//Test Pass/Fail Criteria
 		forum.assertSubscriptionForced();
 	//Back to course outline
-		selectCourse.clickCourseBreadcrumb(this.properties.get("courseShortname"));
+		course.clickCourseBreadcrumb(this.properties.get("courseShortname"));
 	}
 	//Verify Auto Subscription
 	@Test
 	public void subscribeAuto() throws FileNotFoundException, IOException{
 	//Run test
-		Courses selectCourse = new Courses(driver);
-		Forum forum = new Forum(driver);
 		forum.clickForumLink(this.properties.get("nameOfForumAuto"));
 	//Test Pass/Fail Criteria
 		forum.assertSubscriptionAuto();
@@ -218,31 +158,16 @@ public class MDLQA12TeacherSet4PossibleForumSubscription {
 		forum.assertSubscribeOptionPresent();
 	//Subscribe to discussion
 		forum.subscribe();
-		selectCourse.clickCourseBreadcrumb(this.properties.get("courseShortname"));
+		course.clickCourseBreadcrumb(this.properties.get("courseShortname"));
 	}	
 	//Verify subscription disabled
 	@Test
 	public void subscribeDisabled() throws FileNotFoundException, IOException{
 	//Run test
-		Courses selectCourse = new Courses(driver);
-		Forum forum = new Forum(driver);
 		forum.clickForumLink(this.properties.get("nameOfForumDisabled"));
 	//Test Pass/Fail Criteria
 		forum.assertSubscriptionDisabled();
 	//Back to course outline
-		selectCourse.clickCourseBreadcrumb(this.properties.get("courseShortname"));
+		course.clickCourseBreadcrumb(this.properties.get("courseShortname"));
 	}
-	//Log Student out
-	@Test
-	public void studentLogout(){
-		Users studentLogout = new Users(driver);
-		studentLogout.selectLogout();
-	}
-	//Tear Down webdriver for @Test methods
-	@AfterClass
-	static public void Quit() {
-	//End Webdriver Session by calling teardown method
-		//sm.teardown();
-		sm.teardownFirefox();
-	}	
 }
