@@ -4,6 +4,7 @@ import java.io.FileInputStream;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
+import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -48,6 +49,7 @@ public class UsersAddNewUser {
  * @param newPassword The desired password, this value is passed from the test.
  */
 	public void enterPassword(String newPassword) {
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		WebElement newPasswordField = driver.findElement(By .cssSelector("#id_newpassword"));
 		newPasswordField.sendKeys(newPassword);
 	}

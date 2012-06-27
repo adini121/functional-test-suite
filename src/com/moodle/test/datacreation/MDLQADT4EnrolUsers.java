@@ -9,14 +9,14 @@ import org.junit.Test;
 
 import com.moodle.test.TestRunSettings;
 
-public class MDLQADT4GiveTeacherCoursePermissions extends TestRunSettings {
+public class MDLQADT4EnrolUsers extends TestRunSettings {
 		//Test Data Property Files
 		public static String usersData = "properties/data/user/Users/usersData.properties";
 		public static String courseData = "properties/data/user/Courses/courseData.properties";
 		//Weekly outline section
 		private Map<String, String> properties = new HashMap<String, String>();
 		//Load test data from properties file
-		public MDLQADT4GiveTeacherCoursePermissions(){
+		public MDLQADT4EnrolUsers(){
 			this.loadTestData();
 		}
 		public void loadTestData() {
@@ -164,5 +164,9 @@ public class MDLQADT4GiveTeacherCoursePermissions extends TestRunSettings {
 			enrolledUsers.selectUserToEnrol(this.properties.get("student11Firstname"),this.properties.get("student11Surname"));
 			enrolledUsers.clickFinishEnrollingButton();
 			enrolledUsers.clickEnrolledUsersBreadcrumb();
+		}
+		public void enrolManager() {
+			// TODO Auto-generated method stub
+			
 		}	
 }

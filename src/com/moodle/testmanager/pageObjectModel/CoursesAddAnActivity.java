@@ -154,48 +154,120 @@ public class CoursesAddAnActivity {
  * @param outlineSection is the outline section in which you want to add the activity. Pass with value from the test. 
  */
 	public void selectChat(String outlineSection) {
-		FormActions dropdown = new FormActions(driver);
-		dropdown.selectDropdownItemByXpath(".//*[@id='section-" +
+		boolean itemVisible = false;
+		try{
+			driver.manage().timeouts().implicitlyWait(4, TimeUnit.SECONDS);
+			Select activityDropdown = new Select(driver.findElement(By .xpath(".//*[@id='section-" +
 				outlineSection +
 				"']/*/div[@class='section_add_menus']/div/div/form/div/select[contains(.,'" +
 				this.properties.get("activity") +
-				"')]", this.properties.get("activityChat"));
+				"')]")));
+			itemVisible = ((WebElement) activityDropdown).isDisplayed();
+		}
+		catch (NoSuchElementException ex){}
+		if (itemVisible){
+			FormActions dropdown = new FormActions(driver);
+			dropdown.selectDropdownItemByXpath(".//*[@id='section-" +
+					outlineSection +
+					"']/*/div[@class='section_add_menus']/div/div/form/div/select[contains(.,'" +
+					this.properties.get("activity") +
+					"')]", this.properties.get("activityChat"));
+		}
+		else {
+			FormActions picker = new FormActions(driver);
+			picker.addItemResourcePicker(outlineSection, "module_chat");
+		}
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 	}
 /**
  * Selects the Choice activity.
  * @param outlineSection is the outline section in which you want to add the activity. Pass with value from the test. 
  */
 	public void selectChoice(String outlineSection) {
-		FormActions dropdown = new FormActions(driver);
-		dropdown.selectDropdownItemByXpath(".//*[@id='section-" +
+		boolean itemVisible = false;
+		try{
+			driver.manage().timeouts().implicitlyWait(4, TimeUnit.SECONDS);
+			Select activityDropdown = new Select(driver.findElement(By .xpath(".//*[@id='section-" +
 				outlineSection +
 				"']/*/div[@class='section_add_menus']/div/div/form/div/select[contains(.,'" +
 				this.properties.get("activity") +
-				"')]", this.properties.get("activityChoice"));
+				"')]")));
+			itemVisible = ((WebElement) activityDropdown).isDisplayed();
+		}
+		catch (NoSuchElementException ex){}
+		if (itemVisible){
+			FormActions dropdown = new FormActions(driver);
+			dropdown.selectDropdownItemByXpath(".//*[@id='section-" +
+					outlineSection +
+					"']/*/div[@class='section_add_menus']/div/div/form/div/select[contains(.,'" +
+					this.properties.get("activity") +
+					"')]", this.properties.get("activityChoice"));
+		}
+		else {
+			FormActions picker = new FormActions(driver);
+			picker.addItemResourcePicker(outlineSection, "module_choice");
+		}
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 	}
 /**
  * Selects the Database activity.
  * @param outlineSection is the outline section in which you want to add the activity. Pass with value from the test. 
  */
 	public void selectDatabase(String outlineSection) {
-		FormActions dropdown = new FormActions(driver);
-		dropdown.selectDropdownItemByXpath(".//*[@id='section-" +
+		boolean itemVisible = false;
+		try{
+			driver.manage().timeouts().implicitlyWait(4, TimeUnit.SECONDS);
+			Select activityDropdown = new Select(driver.findElement(By .xpath(".//*[@id='section-" +
 				outlineSection +
 				"']/*/div[@class='section_add_menus']/div/div/form/div/select[contains(.,'" +
 				this.properties.get("activity") +
-				"')]", this.properties.get("activityDatabase"));
+				"')]")));
+			itemVisible = ((WebElement) activityDropdown).isDisplayed();
+		}
+		catch (NoSuchElementException ex){}
+		if (itemVisible){
+			FormActions dropdown = new FormActions(driver);
+			dropdown.selectDropdownItemByXpath(".//*[@id='section-" +
+					outlineSection +
+					"']/*/div[@class='section_add_menus']/div/div/form/div/select[contains(.,'" +
+					this.properties.get("activity") +
+					"')]", this.properties.get("activityDatabase"));
+		}
+		else {
+			FormActions picker = new FormActions(driver);
+			picker.addItemResourcePicker(outlineSection, "module_data");
+		}
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 	}
 /**
  * Selects the Exernal Tool activity.
  * @param outlineSection is the outline section in which you want to add the activity. Pass with value from the test. 
  */
 	public void selectExternalTool(String outlineSection) {
-		FormActions dropdown = new FormActions(driver);
-		dropdown.selectDropdownItemByXpath(".//*[@id='section-" +
+		boolean itemVisible = false;
+		try{
+			driver.manage().timeouts().implicitlyWait(4, TimeUnit.SECONDS);
+			Select activityDropdown = new Select(driver.findElement(By .xpath(".//*[@id='section-" +
 				outlineSection +
 				"']/*/div[@class='section_add_menus']/div/div/form/div/select[contains(.,'" +
 				this.properties.get("activity") +
-				"')]", this.properties.get("activityExternalTool"));
+				"')]")));
+			itemVisible = ((WebElement) activityDropdown).isDisplayed();
+		}
+		catch (NoSuchElementException ex){}
+		if (itemVisible){
+			FormActions dropdown = new FormActions(driver);
+			dropdown.selectDropdownItemByXpath(".//*[@id='section-" +
+					outlineSection +
+					"']/*/div[@class='section_add_menus']/div/div/form/div/select[contains(.,'" +
+					this.properties.get("activity") +
+					"')]", this.properties.get("activityExternalTool"));
+		}
+		else {
+			FormActions picker = new FormActions(driver);
+			picker.addItemResourcePicker(outlineSection, "module_lti");
+		}
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 	}
 /**
  * Selects the 'add forum activity option'. 
@@ -232,83 +304,209 @@ public class CoursesAddAnActivity {
  * @param outlineSection is the outline section in which you want to add the activity. Pass with value from the test. 
  */
 	public void selectGlossary(String outlineSection) {
-		FormActions dropdown = new FormActions(driver);
-		dropdown.selectDropdownItemByXpath(".//*[@id='section-" +
+		boolean itemVisible = false;
+		try{
+			driver.manage().timeouts().implicitlyWait(4, TimeUnit.SECONDS);
+			Select activityDropdown = new Select(driver.findElement(By .xpath(".//*[@id='section-" +
 				outlineSection +
 				"']/*/div[@class='section_add_menus']/div/div/form/div/select[contains(.,'" +
 				this.properties.get("activity") +
-				"')]", this.properties.get("activityGlossary"));
+				"')]")));
+			itemVisible = ((WebElement) activityDropdown).isDisplayed();
+		}
+		catch (NoSuchElementException ex){}
+		if (itemVisible){
+			FormActions dropdown = new FormActions(driver);
+			dropdown.selectDropdownItemByXpath(".//*[@id='section-" +
+					outlineSection +
+					"']/*/div[@class='section_add_menus']/div/div/form/div/select[contains(.,'" +
+					this.properties.get("activity") +
+					"')]", this.properties.get("activityGlossary"));
+		}
+		else {
+			FormActions picker = new FormActions(driver);
+			picker.addItemResourcePicker(outlineSection, "module_glossary");
+		}
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 	}
 /**
  * Selects the Lesson activity.
  * @param outlineSection is the outline section in which you want to add the activity. Pass with value from the test. 
  */
 	public void selectLesson(String outlineSection) {
-		FormActions dropdown = new FormActions(driver);
-		dropdown.selectDropdownItemByXpath(".//*[@id='section-" +
+		boolean itemVisible = false;
+		try{
+			driver.manage().timeouts().implicitlyWait(4, TimeUnit.SECONDS);
+			Select activityDropdown = new Select(driver.findElement(By .xpath(".//*[@id='section-" +
 				outlineSection +
 				"']/*/div[@class='section_add_menus']/div/div/form/div/select[contains(.,'" +
 				this.properties.get("activity") +
-				"')]", this.properties.get("activityLesson"));
+				"')]")));
+			itemVisible = ((WebElement) activityDropdown).isDisplayed();
+		}
+		catch (NoSuchElementException ex){}
+		if (itemVisible){
+			FormActions dropdown = new FormActions(driver);
+			dropdown.selectDropdownItemByXpath(".//*[@id='section-" +
+					outlineSection +
+					"']/*/div[@class='section_add_menus']/div/div/form/div/select[contains(.,'" +
+					this.properties.get("activity") +
+					"')]", this.properties.get("activityLesson"));
+		}
+		else {
+			FormActions picker = new FormActions(driver);
+			picker.addItemResourcePicker(outlineSection, "module_lesson");
+		}
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 	}
 /**
  * Selects the Quiz activity.
  * @param outlineSection is the outline section in which you want to add the activity. Pass with value from the test. 
  */
 	public void selectQuiz(String outlineSection) {
-		FormActions dropdown = new FormActions(driver);
-		dropdown.selectDropdownItemByXpath(".//*[@id='section-" +
+		boolean itemVisible = false;
+		try{
+			driver.manage().timeouts().implicitlyWait(4, TimeUnit.SECONDS);
+			Select activityDropdown = new Select(driver.findElement(By .xpath(".//*[@id='section-" +
 				outlineSection +
 				"']/*/div[@class='section_add_menus']/div/div/form/div/select[contains(.,'" +
 				this.properties.get("activity") +
-				"')]", this.properties.get("activityQuiz"));
+				"')]")));
+			itemVisible = ((WebElement) activityDropdown).isDisplayed();
+		}
+		catch (NoSuchElementException ex){}
+		if (itemVisible){
+			FormActions dropdown = new FormActions(driver);
+			dropdown.selectDropdownItemByXpath(".//*[@id='section-" +
+					outlineSection +
+					"']/*/div[@class='section_add_menus']/div/div/form/div/select[contains(.,'" +
+					this.properties.get("activity") +
+					"')]", this.properties.get("activityQuiz"));
+		}
+		else {
+			FormActions picker = new FormActions(driver);
+			picker.addItemResourcePicker(outlineSection, "module_quiz");
+		}
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 	}
 /**
  * Selects the SCORM package activity.
  * @param outlineSection is the outline section in which you want to add the activity. Pass with value from the test. 
  */
 	public void selectSCORMPackage(String outlineSection) {
-		FormActions dropdown = new FormActions(driver);
-		dropdown.selectDropdownItemByXpath(".//*[@id='section-" +
+		boolean itemVisible = false;
+		try{
+			driver.manage().timeouts().implicitlyWait(4, TimeUnit.SECONDS);
+			Select activityDropdown = new Select(driver.findElement(By .xpath(".//*[@id='section-" +
 				outlineSection +
 				"']/*/div[@class='section_add_menus']/div/div/form/div/select[contains(.,'" +
 				this.properties.get("activity") +
-				"')]", this.properties.get("activitySCORMPackage"));
+				"')]")));
+			itemVisible = ((WebElement) activityDropdown).isDisplayed();
+		}
+		catch (NoSuchElementException ex){}
+		if (itemVisible){
+			FormActions dropdown = new FormActions(driver);
+			dropdown.selectDropdownItemByXpath(".//*[@id='section-" +
+					outlineSection +
+					"']/*/div[@class='section_add_menus']/div/div/form/div/select[contains(.,'" +
+					this.properties.get("activity") +
+					"')]", this.properties.get("activitySCORMPackage"));
+		}
+		else {
+			FormActions picker = new FormActions(driver);
+			picker.addItemResourcePicker(outlineSection, "module_scorm");
+		}
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 	}
 /**
  * Selects the Survey activity.
  * @param outlineSection is the outline section in which you want to add the activity. Pass with value from the test. 
  */
 	public void selectSurvey(String outlineSection) {
-		FormActions dropdown = new FormActions(driver);
-		dropdown.selectDropdownItemByXpath(".//*[@id='section-" +
+		boolean itemVisible = false;
+		try{
+			driver.manage().timeouts().implicitlyWait(4, TimeUnit.SECONDS);
+			Select activityDropdown = new Select(driver.findElement(By .xpath(".//*[@id='section-" +
 				outlineSection +
 				"']/*/div[@class='section_add_menus']/div/div/form/div/select[contains(.,'" +
 				this.properties.get("activity") +
-				"')]", this.properties.get("activitySurvey"));
+				"')]")));
+			itemVisible = ((WebElement) activityDropdown).isDisplayed();
+		}
+		catch (NoSuchElementException ex){}
+		if (itemVisible){
+			FormActions dropdown = new FormActions(driver);
+			dropdown.selectDropdownItemByXpath(".//*[@id='section-" +
+					outlineSection +
+					"']/*/div[@class='section_add_menus']/div/div/form/div/select[contains(.,'" +
+					this.properties.get("activity") +
+					"')]", this.properties.get("activitySurvey"));
+		}
+		else {
+			FormActions picker = new FormActions(driver);
+			picker.addItemResourcePicker(outlineSection, "module_survey");
+		}
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 	}
 /**
  * Selects the Wiki activity.
  * @param outlineSection is the outline section in which you want to add the activity. Pass with value from the test. 
  */
 	public void selectWiki(String outlineSection) {
-		FormActions dropdown = new FormActions(driver);
-		dropdown.selectDropdownItemByXpath(".//*[@id='section-" +
+		boolean itemVisible = false;
+		try{
+			driver.manage().timeouts().implicitlyWait(4, TimeUnit.SECONDS);
+			Select activityDropdown = new Select(driver.findElement(By .xpath(".//*[@id='section-" +
 				outlineSection +
 				"']/*/div[@class='section_add_menus']/div/div/form/div/select[contains(.,'" +
 				this.properties.get("activity") +
-				"')]", this.properties.get("activityWiki"));
+				"')]")));
+			itemVisible = ((WebElement) activityDropdown).isDisplayed();
+		}
+		catch (NoSuchElementException ex){}
+		if (itemVisible){
+			FormActions dropdown = new FormActions(driver);
+			dropdown.selectDropdownItemByXpath(".//*[@id='section-" +
+					outlineSection +
+					"']/*/div[@class='section_add_menus']/div/div/form/div/select[contains(.,'" +
+					this.properties.get("activity") +
+					"')]", this.properties.get("activityWiki"));
+		}
+		else {
+			FormActions picker = new FormActions(driver);
+			picker.addItemResourcePicker(outlineSection, "module_wiki");
+		}
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 	}
 /**
  * Selects the Workshop activity.
  * @param outlineSection is the outline section in which you want to add the activity. Pass with value from the test.
  */
 	public void selectWorkshop(String outlineSection) {
-		FormActions dropdown = new FormActions(driver);
-		dropdown.selectDropdownItemByXpath(".//*[@id='section-" +
+		boolean itemVisible = false;
+		try{
+			driver.manage().timeouts().implicitlyWait(4, TimeUnit.SECONDS);
+			Select activityDropdown = new Select(driver.findElement(By .xpath(".//*[@id='section-" +
 				outlineSection +
 				"']/*/div[@class='section_add_menus']/div/div/form/div/select[contains(.,'" +
 				this.properties.get("activity") +
-				"')]", this.properties.get("activityWorkshop"));
+				"')]")));
+			itemVisible = ((WebElement) activityDropdown).isDisplayed();
+		}
+		catch (NoSuchElementException ex){}
+		if (itemVisible){
+			FormActions dropdown = new FormActions(driver);
+			dropdown.selectDropdownItemByXpath(".//*[@id='section-" +
+					outlineSection +
+					"']/*/div[@class='section_add_menus']/div/div/form/div/select[contains(.,'" +
+					this.properties.get("activity") +
+					"')]", this.properties.get("activityWorkshop"));
+		}
+		else {
+			FormActions picker = new FormActions(driver);
+			picker.addItemResourcePicker(outlineSection, "module_workshop");
+		}
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 	}
 }

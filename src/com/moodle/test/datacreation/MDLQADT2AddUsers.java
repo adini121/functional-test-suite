@@ -258,5 +258,9 @@ public class MDLQADT2AddUsers extends TestRunSettings {
 			addNewUser.enterCountry(this.properties.get("country"));
 			//Re-use submit button object from Courses
 			course.clickSubmitButton();			
-	}		
+	}
+		public void addManager() {
+			// TODO Auto-generated method stub
+			
+		}		
 }

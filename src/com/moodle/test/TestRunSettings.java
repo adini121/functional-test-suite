@@ -22,6 +22,7 @@ import com.moodle.testmanager.pageObjectModel.AssignmentSubmissionComments;
 import com.moodle.testmanager.pageObjectModel.BlockNavigation;
 import com.moodle.testmanager.pageObjectModel.BlockNews;
 import com.moodle.testmanager.pageObjectModel.BlockSettings;
+import com.moodle.testmanager.pageObjectModel.ChatAddForm;
 import com.moodle.testmanager.pageObjectModel.Courses;
 import com.moodle.testmanager.pageObjectModel.CoursesAddAnActivity;
 import com.moodle.testmanager.pageObjectModel.CoursesEditCourseSettings;
@@ -42,7 +43,7 @@ import com.moodle.testmanager.pageObjectModel.UsersAddNewUser;
 import com.moodle.testmanager.pageObjectModel.UsersEnrolled;
 
 public class TestRunSettings {
-	static RemoteWebDriver driver;
+	protected static RemoteWebDriver driver;
 	static SeleniumManager sm;
 	public static String runParameters = "properties/runParameters.properties";
 	protected Assignment assignment = new Assignment(driver);
@@ -56,6 +57,7 @@ public class TestRunSettings {
 	protected BlockNavigation navigationBlock = new BlockNavigation(driver);
 	protected BlockNews newsBlock = new BlockNews(driver);
 	protected BlockSettings settingsBlock = new BlockSettings(driver);
+	protected ChatAddForm addChat = new ChatAddForm(driver);
 	protected Courses course = new Courses(driver);
 	protected CoursesAddAnActivity addActivity = new CoursesAddAnActivity(driver);
 	protected CoursesEditCourseSettings editCourseSettings = new CoursesEditCourseSettings(driver);

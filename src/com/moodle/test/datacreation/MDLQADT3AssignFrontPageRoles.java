@@ -139,4 +139,8 @@ public class MDLQADT3AssignFrontPageRoles extends TestRunSettings {
 			frontPageRoles.selectPotentialUser(this.properties.get("student11Firstname"));
 			frontPageRoles.selectAdd();
 		}
+		public void assignManagerRole() {
+			// TODO Auto-generated method stub
+			
+		}
 }
