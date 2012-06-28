@@ -23,6 +23,7 @@ import com.moodle.testmanager.pageObjectModel.BlockNavigation;
 import com.moodle.testmanager.pageObjectModel.BlockNews;
 import com.moodle.testmanager.pageObjectModel.BlockSettings;
 import com.moodle.testmanager.pageObjectModel.ChatAddForm;
+import com.moodle.testmanager.pageObjectModel.ChoiceAddForm;
 import com.moodle.testmanager.pageObjectModel.Courses;
 import com.moodle.testmanager.pageObjectModel.CoursesAddAnActivity;
 import com.moodle.testmanager.pageObjectModel.CoursesEditCourseSettings;
@@ -58,6 +59,7 @@ public class TestRunSettings {
 	protected BlockNews newsBlock = new BlockNews(driver);
 	protected BlockSettings settingsBlock = new BlockSettings(driver);
 	protected ChatAddForm addChat = new ChatAddForm(driver);
+	protected ChoiceAddForm addChoice = new ChoiceAddForm(driver);
 	protected Courses course = new Courses(driver);
 	protected CoursesAddAnActivity addActivity = new CoursesAddAnActivity(driver);
 	protected CoursesEditCourseSettings editCourseSettings = new CoursesEditCourseSettings(driver);

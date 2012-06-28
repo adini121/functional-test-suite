@@ -44,6 +44,10 @@ public class MDLQASmokeTestOfMoodle extends TestRunSettings {
 		//Smoke Data
 		this.properties.put("assignmentName", testData.getProperty("assignmentName"));
 		this.properties.put("assignmentDescription", testData.getProperty("assignmentDescription"));
+		this.properties.put("chatName", testData.getProperty("chatName"));
+		this.properties.put("chatDescription", testData.getProperty("chatDescription"));
+		this.properties.put("choiceName", testData.getProperty("choiceName"));
+		this.properties.put("choiceDescription", testData.getProperty("choiceDescription"));
 		}
 	@Test
 	public void installation() {
@@ -128,6 +132,15 @@ public class MDLQASmokeTestOfMoodle extends TestRunSettings {
 	@Test
 	public void addChat() {
 		addActivity.selectChat("2");
-		
+		addChat.enterNameField(this.properties.get("chatName"));
+		addChat.enterIntroField(this.properties.get("chatDescription"));
+		addChat.clickSaveAndRetToCourse();
+	}
+	@Test
+	public void addChoice() {
+		addActivity.selectChoice("2");
+		addChoice.enterNameField(this.properties.get("choiceDescription"));
+		addChoice.enterIntroField(this.properties.get("choiceName"));
+		addChoice.clickSaveAndRetToCourse();
 	}
 }

@@ -138,4 +138,70 @@ public class FormActions {
 		radio.click();
 		radio.submit();
 	}
+/**
+ * Enters text in a repeating form element by ID.
+ * @param idPrefix The prefix to the option number e.g. id_option_ for id_option_1
+ * @param itemNumber The item number as it appears to the user on the form e.g. the first element generated is option 0 but it will actually be option 1.
+ * @param optionText The text that you would like to enter in the text field of the repeating element.
+ */
+	public void enterTextByIDRepeatingElement(String idPrefix, int itemNumber, String optionText) {
+		int optionID = itemNumber - 1;
+		driver.findElementById(idPrefix + optionID).sendKeys(optionText);
+	}
+/**
+ * Selects a full date in a date field from a dropdown. 
+ * @param day The day that you want to enter.
+ * @param month The month that you want to enter.
+ * @param year The year that you want to enter.
+ * @param hour The hour that you want to enter.
+ * @param minute The minute that you want to enter.
+ * @param idPrefix The The prefix to the option number e.g. id_timeopen_ for id_timeopen_day, id_timeopen_month etc.
+ */
+	public void selectDateByID(String day, String month, String year, String hour, String minute, String idPrefix) {
+		selectDay(day, idPrefix);
+		selectMonth(month, idPrefix);
+		selectYear(year, idPrefix);
+		selectHour(hour, idPrefix);
+		selectMin(minute, idPrefix);
+	}
+/**
+ * Selects a value only for the day dropdown of the "Next chat time".
+ * @param day The value that you would like to select for day.
+ * @param idPrefix The The prefix to the option number e.g. id_timeopen_ for id_timeopen_day, id_timeopen_month etc.
+ */
+	public void selectDay(String day, String idPrefix) {
+		selectDropdownItemByID(idPrefix + "day", day);
+	}
+/**
+ * Selects a value only for the month dropdown of the "Next chat time".
+ * @param month The value that you would like to select for month.
+ * @param idPrefix The The prefix to the option number e.g. id_timeopen_ for id_timeopen_day, id_timeopen_month etc.
+ */
+	public void selectMonth(String month, String idPrefix) {
+		selectDropdownItemByID(idPrefix + "month", month);
+	}
+/**
+ * Selects a value only for the year dropdown of the "Next chat time".
+ * @param year The value that you would like to select for year.
+ * @param idPrefix The The prefix to the option number e.g. id_timeopen_ for id_timeopen_day, id_timeopen_month etc.
+ */
+	public void selectYear(String year, String idPrefix) {
+		selectDropdownItemByID(idPrefix + "year", year);
+	}
+/**
+ * Selects a value only for the hour dropdown of the "Next chat time".
+ * @param hour The value that you would like to select for hour.
+ * @param idPrefix The The prefix to the option number e.g. id_timeopen_ for id_timeopen_day, id_timeopen_month etc.
+ */
+	public void selectHour(String hour, String idPrefix) {
+		selectDropdownItemByID(idPrefix + "hour", hour);
+	}
+/**
+ * Selects a value only for the minute dropdown of the "Next chat time".
+ * @param minute The value that you would like to select for minute.
+ * @param idPrefix The The prefix to the option number e.g. id_timeopen_ for id_timeopen_day, id_timeopen_month etc.
+ */
+	public void selectMin(String minute, String idPrefix) {
+		selectDropdownItemByID(idPrefix + "minute", minute);
+	}
 }

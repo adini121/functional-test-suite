@@ -1,61 +1,90 @@
 package com.moodle.testmanager.pageObjectModel;
 
-import java.io.FileInputStream;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Properties;
-import org.openqa.selenium.By;
 import org.openqa.selenium.remote.RemoteWebDriver;
-import org.openqa.selenium.support.ui.Select;
-
-import com.moodle.seleniumutils.FormActions;
 /**
- * This is the page object model for the add forum form.
+ * This is the page object model for the add chat form.
  * @author Tim Barker 
  * @see <a href="http://www.gnu.org/copyleft/gpl.html">License: GNU GPL v3 or later</a>
  */
 public class ChatAddForm extends FormAddEditSettings {
-	protected Map<String, String> properties = new HashMap<String, String>();
+/**
+ * Locator variables.
+ */
+	private String locChatTime = "id_chattime_";
+	private String locRepSessions = "id_schedule";
+	private String locSavePast = "id_keepdays";
+	private String locEveryoneViewPast = "id_studentlogs";
 /**
  * Constructor for the page object.	
  */
 	public ChatAddForm(RemoteWebDriver driver) {
 		super(driver);
-		this.loadObjectData("properties/data/static/forumAdd.properties");
 	}
 /**
- * Loads data for the page object from the internationalization layer
- * where a selector requires a text string visible through the user interface e.g. value=button text, or link text.
+ * Selects a combination of values for "Next chat time" using the dropdowns. 
+ * @param day The value for day that you want to select.
+ * @param month The value for month that you want to select.
+ * @param year The value for year that you want to select.
+ * @param hour The value for hour that you want to select.
+ * @param minute The value for minute that you want to select.
  */
-	public void loadObjectData(String datafile) {
-		Properties dataLoad = new Properties();
-		try {
-			dataLoad.load(new FileInputStream("properties/data/static/forumAdd.properties"));
-		} catch (Exception e) {}
-		this.properties.put("xxxx", dataLoad.getProperty("xxxx"));
+	public void selectNextChatTime(String day, String month, String year, String hour, String minute){
+		formActions.selectDateByID(day, month, year, hour, minute, locChatTime);
 	}
-	public void checkboxDescOnCourse(){
-		//TODO
+/**
+ * Selects a value only for the day dropdown of the "Next chat time".
+ * @param day The value that you would like to select for day.
+ */
+	public void selectNextChatDay(String day) {
+		formActions.selectDay(day, locChatTime);
 	}
-	public void selectNextChatTime(){
-		//TODO
+/**
+ * Selects a value only for the month dropdown of the "Next chat time".
+ * @param month The value that you would like to select for month.
+ */
+	public void selectNextChatMonth(String month) {
+		formActions.selectMonth(month, locChatTime);
 	}
-	public void selectRepeatSessions(){
-		//TODO
+/**
+ * Selects a value only for the year dropdown of the "Next chat time".
+ * @param year The value that you would like to select for year.
+ */
+	public void selectNextChatYear(String year) {
+		formActions.selectYear(year, locChatTime);
 	}
-	public void selectSavePastSessions(){
-		//TODO
+/**
+ * Selects a value only for the hour dropdown of the "Next chat time".
+ * @param hour The value that you would like to select for hour.
+ */
+	public void selectNextChatHour(String hour) {
+		formActions.selectHour(hour, locChatTime);
 	}
-	public void selectEveryoneCanViewPastSessions(){
-		//TODO
+/**
+ * Selects a value only for the minute dropdown of the "Next chat time".
+ * @param minute The value that you would like to select for minute.
+ */
+	public void selectNextChatMin(String minute) {
+		formActions.selectMin(minute, locChatTime);
 	}
-	public void selectGroupMode(){
-		//TODO
+/**
+ * Selects a value for the Repeat sessions dropdown.
+ * @param itemToSelect The value that you would like to select from the dropdown.
+ */
+	public void selectRepeatSessions(String itemToSelect){
+		formActions.selectDropdownItemByID(locRepSessions, itemToSelect);
 	}
-	public void selectVisible(){
-		//TODO
+/**
+ * Selects a value for the Save past sessions dropdown.
+ * @param itemToSelect The value that you would like to select from the dropdown.
+ */
+	public void selectSavePastSessions(String itemToSelect){
+		formActions.selectDropdownItemByID(locSavePast, itemToSelect);
 	}
-	public void idNumber(){
-		//TODO
+/**
+ * Selects a value from the "Everyone can view past sessions" dropdown.
+ * @param itemToSelect The value that you would like to select from the dropdown.
+ */
+	public void selectEveryoneCanViewPastSessions(String itemToSelect){
+		formActions.selectDropdownItemByID(locEveryoneViewPast, itemToSelect);
 	}
 }

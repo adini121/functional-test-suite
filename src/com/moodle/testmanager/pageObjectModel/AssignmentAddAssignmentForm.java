@@ -45,13 +45,6 @@ public class AssignmentAddAssignmentForm extends FormAddEditSettings{
 		this.properties.put("dropdownactivityCompletionCondMet", dataLoad.getProperty("dropdownactivityCompletionCondMet"));
 	}
 /**
- * Clicks the show description on course page checkbox. Should work for versions <2.3 and >=2.3.
- */
-	public void checkboxDescOnCoursePage() {
-		WebElement checkbox = this.driver.findElementById("id_showdescription");
-		checkbox.click();
-	}
-/**
  * Selects a value for the Allow Submissions from Field. May only work for versions <2.3 as the form has changed for 2.3.
  * @param day The day to be selected.
  * @param month The Month to be selected.
