@@ -1,8 +1,6 @@
 package com.moodle.testmanager.pageObjectModel;
 
 import java.io.FileInputStream;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Properties;
 
 import org.openqa.selenium.remote.RemoteWebDriver;
@@ -11,7 +9,7 @@ import org.openqa.selenium.remote.RemoteWebDriver;
  * @author Tim Barker 
  * @see <a href="http://www.gnu.org/copyleft/gpl.html">License: GNU GPL v3 or later</a>
  */
-public class ChoiceAddForm extends FormAddEditSettings{
+public class ChoiceAddForm extends FormAddEditSettingsDescAndGroupMode{
 /**
  * Locator variables.
  */

@@ -14,6 +14,11 @@ import org.openqa.selenium.support.ui.Select;
  */
 public class FormActions {
 	private RemoteWebDriver driver;
+	private String locDay = "day";
+	private String locMonth = "month";
+	private String locYear = "year";
+	private String locHour = "hour";
+	private String locMin = "min";
 /**
  * Constructor for the FormActions utility class.	
  * @param driver The driver that is used for the test. There is no need to specify the value for the driver here as the driver
@@ -170,7 +175,7 @@ public class FormActions {
  * @param idPrefix The The prefix to the option number e.g. id_timeopen_ for id_timeopen_day, id_timeopen_month etc.
  */
 	public void selectDay(String day, String idPrefix) {
-		selectDropdownItemByID(idPrefix + "day", day);
+		selectDropdownItemByID(idPrefix + locDay, day);
 	}
 /**
  * Selects a value only for the month dropdown of the "Next chat time".
@@ -178,7 +183,7 @@ public class FormActions {
  * @param idPrefix The The prefix to the option number e.g. id_timeopen_ for id_timeopen_day, id_timeopen_month etc.
  */
 	public void selectMonth(String month, String idPrefix) {
-		selectDropdownItemByID(idPrefix + "month", month);
+		selectDropdownItemByID(idPrefix + locMonth, month);
 	}
 /**
  * Selects a value only for the year dropdown of the "Next chat time".
@@ -186,7 +191,7 @@ public class FormActions {
  * @param idPrefix The The prefix to the option number e.g. id_timeopen_ for id_timeopen_day, id_timeopen_month etc.
  */
 	public void selectYear(String year, String idPrefix) {
-		selectDropdownItemByID(idPrefix + "year", year);
+		selectDropdownItemByID(idPrefix + locYear, year);
 	}
 /**
  * Selects a value only for the hour dropdown of the "Next chat time".
@@ -194,7 +199,7 @@ public class FormActions {
  * @param idPrefix The The prefix to the option number e.g. id_timeopen_ for id_timeopen_day, id_timeopen_month etc.
  */
 	public void selectHour(String hour, String idPrefix) {
-		selectDropdownItemByID(idPrefix + "hour", hour);
+		selectDropdownItemByID(idPrefix + locHour, hour);
 	}
 /**
  * Selects a value only for the minute dropdown of the "Next chat time".
@@ -202,6 +207,20 @@ public class FormActions {
  * @param idPrefix The The prefix to the option number e.g. id_timeopen_ for id_timeopen_day, id_timeopen_month etc.
  */
 	public void selectMin(String minute, String idPrefix) {
-		selectDropdownItemByID(idPrefix + "minute", minute);
+		selectDropdownItemByID(idPrefix + locMin, minute);
+	}
+/**
+ * Selects a value from all dropdowns of a short date field.
+ * @param day The desired value for day.
+ * @param month The desired value for month.
+ * @param year The desired value for year.
+ * @param locDay The locator for Day.
+ * @param locMonth The locator for Month.
+ * @param locYear The locator for Year.
+ */
+	public void selectShortDateByID(String day, String month, String year, String idPrefix) {
+		selectDay(day, idPrefix);
+		selectMonth(month, idPrefix);
+		selectYear(year, idPrefix);
 	}
 }

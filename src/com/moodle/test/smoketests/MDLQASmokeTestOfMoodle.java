@@ -29,6 +29,7 @@ public class MDLQASmokeTestOfMoodle extends TestRunSettings {
 		try {
 			testData.load(new FileInputStream(usersData));
 			testData.load(new FileInputStream(courseData));
+			testData.load(new FileInputStream(smokeData));
 		} catch (Exception e) {}
 		//User Data
 		this.properties.put("adminUser", testData.getProperty("adminUser"));
@@ -48,18 +49,24 @@ public class MDLQASmokeTestOfMoodle extends TestRunSettings {
 		this.properties.put("chatDescription", testData.getProperty("chatDescription"));
 		this.properties.put("choiceName", testData.getProperty("choiceName"));
 		this.properties.put("choiceDescription", testData.getProperty("choiceDescription"));
+		this.properties.put("databaseName", testData.getProperty("databaseName"));
+		this.properties.put("databaseDescription", testData.getProperty("databaseDescription"));
+		this.properties.put("forumName", testData.getProperty("forumName"));
+		this.properties.put("forumDescription", testData.getProperty("forumDescription"));
+		this.properties.put("glossaryName", testData.getProperty("glossaryName"));
+		this.properties.put("glossaryDescription", testData.getProperty("glossaryDescription"));
 		}
-	@Test
+	//@Test
 	public void installation() {
 		Install23 install23 = new Install23();
 		install23.install();
 	}
-	@Test
+	//@Test
 	public void addCourse() throws MalformedURLException {
 		MDLQADT1AddCourse addCourse = new MDLQADT1AddCourse();
 		addCourse.addCourse();
 	}
-	@Test
+	//@Test
 	public void addUsers() throws Exception {
 		MDLQADT2AddUsers addUsers = new MDLQADT2AddUsers();
 		addUsers.addTeacher();
@@ -77,7 +84,7 @@ public class MDLQASmokeTestOfMoodle extends TestRunSettings {
 		//TODO Create Add Manager Step
 		//addUsers.addManager();
 	}
-	@Test
+	//@Test
 	public void assignFrontPageRoles() {
 		MDLQADT3AssignFrontPageRoles roles = new MDLQADT3AssignFrontPageRoles();
 		roles.assignTeacherRole();
@@ -96,7 +103,7 @@ public class MDLQASmokeTestOfMoodle extends TestRunSettings {
 		//TODO Create Add manager role step
 		//roles.assignManagerRole();
 	}
-	@Test
+	//@Test
 	public void enrolUsers() {
 		MDLQADT4EnrolUsers enrol = new MDLQADT4EnrolUsers();
 		//TODO re-write the enrol teacher step so you don't have to use the ajax buttons
@@ -119,7 +126,7 @@ public class MDLQASmokeTestOfMoodle extends TestRunSettings {
 	}
 	@Test
 	public void addAssignment() {
-		user.loginToSystem(this.properties.get("teacherUsername"), this.properties.get("password"));
+		user.loginToSystem(this.properties.get("teacher"), this.properties.get("password"));
 		course.clickCourseLink(this.properties.get("courseName"));
 		course.clickTurnEditingOn();
 		addActivity.selectAssignment("2");
@@ -139,8 +146,33 @@ public class MDLQASmokeTestOfMoodle extends TestRunSettings {
 	@Test
 	public void addChoice() {
 		addActivity.selectChoice("2");
-		addChoice.enterNameField(this.properties.get("choiceDescription"));
-		addChoice.enterIntroField(this.properties.get("choiceName"));
+		addChoice.enterNameField(this.properties.get("choiceName"));
+		addChoice.enterIntroField(this.properties.get("choiceDescription"));
 		addChoice.clickSaveAndRetToCourse();
 	}
+	@Test
+	public void addDatabase() {
+		addActivity.selectDatabase("2");
+		addDatabase.enterNameField(this.properties.get("databaseName"));
+		addDatabase.enterIntroField(this.properties.get("databaseDescription"));
+		addDatabase.clickSaveAndRetToCourse();
+	}
+	//@Test
+	public void addLTI() {
+		//TODO will come back to this as it isn't a priority and we will need some setup doing in advance
+	}
+	@Test
+	public void addForum() {
+		addActivity.selectForum("2");
+		addForum.enterNameField(this.properties.get("forumName"));
+		addForum.enterIntroField(this.properties.get("forumDescription"));
+		addForum.clickSaveAndRetToCourse();
+	}
+	@Test
+	public void addGlossary() {
+		addActivity.selectGlossary("2");
+		addGlossary.enterNameField(this.properties.get("glossaryName"));
+		addGlossary.enterIntroField(this.properties.get("glossaryDescription"));
+		addGlossary.clickSaveAndRetToCourse();
+	}	
 }

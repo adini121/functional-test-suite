@@ -6,37 +6,57 @@ import java.util.Map;
 import java.util.Properties;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebDriver;
-
-import com.moodle.seleniumutils.FormActions;
 /**
  * This is the page object model for adding a Database activity to a course.
  * @author Tim Barker 
  * @see <a href="http://www.gnu.org/copyleft/gpl.html">License: GNU GPL v3 or later</a>
  */
-public class DatabasesAddDatabase {
-	//Internationalization file location
-	public static String databasesAddData = "properties/data/static/databasesAddDatabase.properties";
-	private RemoteWebDriver driver;
+public class DatabasesAddDatabase extends FormAddEditSettingsDescAndGroupMode {
+/**
+ * Hashmap for language file.
+ */
 	private Map<String, String> properties = new HashMap<String, String>();
+/**
+ * Language file location.
+ */
+	private String langFile =  "properties/data/static/databasesAddDatabase.properties";
+/**
+ * Locator variables.
+ */
+	private String locCheckboxEnabled = "enabled";
+	private String locAvailFromPrefix = "id_timeavailablefrom_";
+	private String locAvailToPrefix = "id_timeavailableto_";
+	private String locReadOnlyFromPrefix = "id_timeavailableto_";
+	private String locReadOnlyToPrefix = "id_timeavailableto_";
+	private String locReqEntries = "id_requiredentries";
+	private String locEntriesReqView = "id_requiredentriestoview";
+	private String locMaxEntries = "id_maxentries";
+	private String locComments = "id_comments";
+	private String locReqApproval = "id_approval";
+	private String locGradeCategory ="id_gradecat";
+	private String locAggregateType = "id_assessed";
+	private String locScale = "id_assessed";
+	private String locRatingRestrictCheckbox = "id_ratingtime";
+	private String locRestrictRatingFromPrefix = "id_assesstimestart_";
+	private String locRestrictRatingToPrefix = "id_assesstimefinish_";
 /**
  * Constructor for the page object.	
  * @param driver The driver that is used for the test. There is no need to specify the value for the driver here as the driver
  * is instantiated in the test using one of the com.moodle.seleniumutils.SeleniumManager constructors.
  */
 	public DatabasesAddDatabase(RemoteWebDriver driver) {
-		this.driver = driver;
-		this.loadObjectData();
+		super(driver);
+		this.loadObjectData(langFile);
 	}
 /**
  * Loads data for the page object from the internationalization layer /properties/data/static/blockNavigation.properties
  * where a selector requires a text string visible through the user interface e.g. value=button text, or link text.
  */
-	public void loadObjectData() {
+	public void loadObjectData(String datafile) {
 		Properties databaseAddData = new Properties();
 		try {
-			databaseAddData.load(new FileInputStream(databasesAddData));
+			databaseAddData.load(new FileInputStream(langFile));
 		} catch (Exception e) {}
 		//put values from the properties file into hashmap
 		this.properties.put("showAdvanced", databaseAddData.getProperty("showAdvanced"));
@@ -46,34 +66,10 @@ public class DatabasesAddDatabase {
 		this.properties.put("cancel", databaseAddData.getProperty("cancel"));
 	}
 /**
- * Enters a value for database name in the field.
- * @param name The database name required for testing. The data is passed from the test.
- */
-	public void fieldDatabaseName(String name) {
-		WebElement dbName = driver.findElement(By .id("id_name"));
-		dbName.sendKeys(name);
-	}
-/**
- * Enters a value in the Introduction field.
- * @param introText The text to be entered in the introduction field.
- */
-	public void fieldIntroduction(String introText) {
-		FormActions intro = new FormActions(driver);
-		intro.enterValueInTinyMCE(introText);
-	}
-/**
- * Selects the Display description on course page checkbox.
- */
-	public void checkboxDisplayDescription() {
-		WebElement checkbox = driver.findElement(By .id("id_showdescription"));
-		checkbox.click();
-	}
-/**
  * Selects the Enable checkbox for Available from.
  */
 	public void checkboxClickAvailableFrom() {
-		WebElement checkbox = driver.findElement(By .id("id_timeavailablefrom_enabled"));
-		checkbox.click();
+		driver.findElement(By .id(locAvailFromPrefix + locCheckboxEnabled)).click();
 	}
 /**
  * Selects a value for the date fore "Available from".
@@ -82,17 +78,13 @@ public class DatabasesAddDatabase {
  * @param year The year to be selected from the year dropdown.
  */
 	public void selectDateAvailableFrom(String day, String month, String year) {
-		FormActions dropdown = new FormActions(driver);
-		dropdown.selectDropdownItemByID("id_timeavailablefrom_day", day);
-		dropdown.selectDropdownItemByID("id_timeavailablefrom_month", month);
-		dropdown.selectDropdownItemByID("id_timeavailablefrom_year", year);
+		formActions.selectShortDateByID(day, month, year, locAvailFromPrefix);
 	}
 /**
  * Selects the Enable checkbox for Available to.
  */
 	public void checkboxClickAvailableTo() {
-		WebElement checkbox = driver.findElement(By .id("id_timeavailableto_enabled"));
-		checkbox.click();
+		driver.findElement(By .id(locAvailToPrefix + locCheckboxEnabled)).click();
 	}
 /**
  * Selects a value for the date fore "Available to".
@@ -101,17 +93,13 @@ public class DatabasesAddDatabase {
  * @param year The year to be selected from the year dropdown.
  */
 	public void selectDateAvailableTo(String day, String month, String year) {
-		FormActions dropdown = new FormActions(driver);
-		dropdown.selectDropdownItemByID("id_timeavailableto_day", day);
-		dropdown.selectDropdownItemByID("id_timeavailableto_month", month);
-		dropdown.selectDropdownItemByID("id_timeavailableto_year", year);
+		formActions.selectShortDateByID(day, month, year, locAvailToPrefix);
 	}
 /**
  * Selects the Enable checkbox for Read only from.
  */
 	public void checkboxClickReadOnlyFrom() {
-		WebElement checkbox = driver.findElement(By .id("id_timeavailableto_enabled"));
-		checkbox.click();
+		driver.findElement(By .id(locReadOnlyFromPrefix + locCheckboxEnabled)).click();
 	}
 /**
  * Selects a value for the date fore "Available to".
@@ -120,17 +108,13 @@ public class DatabasesAddDatabase {
  * @param year The year to be selected from the year dropdown.
  */
 	public void selectDateReadOnlyFrom(String day, String month, String year) {
-		FormActions dropdown = new FormActions(driver);
-		dropdown.selectDropdownItemByID("id_timeviewfrom_day", day);
-		dropdown.selectDropdownItemByID("id_timeviewfrom_month", month);
-		dropdown.selectDropdownItemByID("id_timeviewfrom_year", year);
+		formActions.selectShortDateByID(day, month, year, locReadOnlyFromPrefix);
 	}
 /**
  * Selects the Enable checkbox for Read only from.
  */
 	public void checkboxClickReadOnlyTo() {
-		WebElement checkbox = driver.findElement(By .id("id_timeavailableto_enabled"));
-		checkbox.click();
+		driver.findElement(By .id(locReadOnlyToPrefix + locCheckboxEnabled)).click();
 	}
 /**
  * Selects a value for the date fore "Available to".
@@ -139,81 +123,69 @@ public class DatabasesAddDatabase {
  * @param year The year to be selected from the year dropdown.
  */
 	public void selectDateReadOnlyTo(String day, String month, String year) {
-		FormActions dropdown = new FormActions(driver);
-		dropdown.selectDropdownItemByID("id_timeviewto_day", day);
-		dropdown.selectDropdownItemByID("id_timeviewto_month", month);
-		dropdown.selectDropdownItemByID("id_timeviewto_year", year);
+		formActions.selectShortDateByID(day, month, year, locReadOnlyToPrefix);
 	}
 /**
  * Selects a value for Required Entries.
  * @param requiredEntries The number of required entries to be selected.
  */
 	public void selectRequiredEntries(String requiredEntries) {
-		FormActions dropdown = new FormActions(driver);
-		dropdown.selectDropdownItemByID("id_requiredentries", requiredEntries);
+		formActions.selectDropdownItemByID(locReqEntries, requiredEntries);
 	}
 /**
  * Selects a value for Entries required before viewing.
  * @param entriesBeforeViewing The number of entries to be selected.
  */
 	public void selectEntriesBeforeViewing(String entriesBeforeViewing) {
-		FormActions dropdown = new FormActions(driver);
-		dropdown.selectDropdownItemByID("id_requiredentriestoview", entriesBeforeViewing);
+		formActions.selectDropdownItemByID(locEntriesReqView, entriesBeforeViewing);
 	}
 /**
  * Selects the value for Maximum entries.
  * @param maximumEntries The maxium number of entries.
  */
 	public void selectMaximumEntries(String maximumEntries) {
-		FormActions dropdown = new FormActions(driver);
-		dropdown.selectDropdownItemByID("id_maxentries", maximumEntries);
+		formActions.selectDropdownItemByID(locMaxEntries, maximumEntries);
 	}
 /**
  * Selects the value for Comments.
  * @param comments The value for comments.
  */
 	public void selectComments(String comments) {
-		FormActions dropdown = new FormActions(driver);
-		dropdown.selectDropdownItemByID("id_comments", comments);
+		formActions.selectDropdownItemByID(locComments, comments);
 	}
 /**
  * Selects a value for Require approval.
  * @param approval The value for Require approval; Yes or No.
  */
 	public void selectRequireApproval(String approval) {
-		FormActions dropdown = new FormActions(driver);
-		dropdown.selectDropdownItemByID("id_approval", approval);
+		formActions.selectDropdownItemByID(locReqApproval, approval);
 	}
 /**
  * Selects a value for Grade category.
  * @param category The value for category.
  */
 	public void selectGradeCategory(String category) {
-		FormActions dropdown = new FormActions(driver);
-		dropdown.selectDropdownItemByID("id_gradecat", category);
+		formActions.selectDropdownItemByID(locGradeCategory, category);
 	}
 /**
  * Selects a value for Aggregate type.
  * @param type The required value for Aggregate type.
  */
 	public void selectAggregateType(String type) {
-		FormActions dropdown = new FormActions(driver);
-		dropdown.selectDropdownItemByID("id_assessed", type);
+		formActions.selectDropdownItemByID(locAggregateType, type);
 	}
 /**
  * Selects a value for Scale.
  * @param scale The requires value for Scale.
  */
 	public void selectScale(String scale) {
-		FormActions dropdown = new FormActions(driver);
-		dropdown.selectDropdownItemByID("id_assessed", scale);
+		formActions.selectDropdownItemByID(locScale, scale);
 	}
 /**
  * Selects or de-selects the REstric ratings to items with dates in this range checkbox.
  */
 	public void checkboxClickRestrictRatings() {
-		WebElement checkbox = driver.findElement(By .id("id_ratingtime"));
-		checkbox.click();
+		driver.findElement(By .id(locRatingRestrictCheckbox)).click();
 	}
 /**
  * Selects the from date for restricting ratings.
@@ -224,12 +196,7 @@ public class DatabasesAddDatabase {
  * @param mm The value for minutes.
  */
 	public void selectRestrictDateRangeFrom(String dd, String month, String yyyy, String hh, String mm) {
-		FormActions dropdown = new FormActions(driver);
-		dropdown.selectDropdownItemByID("id_assesstimestart_day", dd);
-		dropdown.selectDropdownItemByID("id_assesstimestart_month", month);
-		dropdown.selectDropdownItemByID("id_assesstimestart_year", yyyy);
-		dropdown.selectDropdownItemByID("id_assesstimestart_hour", hh);
-		dropdown.selectDropdownItemByID("id_assesstimestart_minute", mm);
+		formActions.selectDateByID(dd, month, yyyy, hh, mm, locRestrictRatingFromPrefix);
 	}
 /**
  * Selects the to date for restricting ratings.
@@ -240,72 +207,6 @@ public class DatabasesAddDatabase {
  * @param mm The value for minutes.
  */
 	public void selectRestrictDateRangeTo(String dd, String month, String yyyy, String hh, String mm) {
-		FormActions dropdown = new FormActions(driver);
-		dropdown.selectDropdownItemByID("id_assesstimefinish_day", dd);
-		dropdown.selectDropdownItemByID("id_assesstimefinish_month", month);
-		dropdown.selectDropdownItemByID("id_assesstimefinish_year", yyyy);
-		dropdown.selectDropdownItemByID("id_assesstimefinish_hour", hh);
-		dropdown.selectDropdownItemByID("id_assesstimefinish_minute", mm);
+		formActions.selectDateByID(dd, month, yyyy, hh, mm, locRestrictRatingToPrefix);
 	}
-/**
- * Selects the value for Group mode.
- * @param groupMode The required value for Group mode.
- */
-	public void selectGroupMode(String groupMode) {
-		FormActions dropdown = new FormActions(driver);
-		dropdown.selectDropdownItemByID("id_groupmode", groupMode);
-	}
-/**
- * Selects the value for Visible.
- * @param visible The required value for Visible.
- */
-	public void selectVisible(String visible) {
-		FormActions dropdown = new FormActions(driver);
-		dropdown.selectDropdownItemByID("id_visible", visible);
-	}
-/**
- * Enters a value for ID in the ID number field.
- * @param ID The value to be entered for ID.
- */
-	public void enterIDNumber(String ID) {
-		WebElement idNumber = driver.findElement(By .id("id_cmidnumber"));
-		idNumber.sendKeys(ID);
-	}
-/**
- * Clicks the show advanced button.
- */
-	public void buttonClickShowAdvanced() {
-		WebElement button = driver.findElement(By .cssSelector("input[value='" +
-				this.properties.get("showAdvanced") +
-				"']"));
-		button.click();
-	}
-/**
- * Clicks the Save and return to course button.
- */
-	public void buttonSaveAndReturn() {
-		WebElement button = driver.findElement(By .cssSelector("input[value='" +
-				this.properties.get("saveAndReturn") +
-				"']"));
-		button.click();
-	}
-/**
- * Clicks the Save and display to course button.
- */
-	public void buttonSaveAndDisplay() {
-		WebElement button = driver.findElement(By .cssSelector("input[value='" +
-				this.properties.get("saveAndDisplay") +
-				"']"));
-		button.click();
-	}
-/**
- * Clicks the cancel button.
- */
-	public void buttonCancel() {
-		WebElement button = driver.findElement(By .cssSelector("input[value='" +
-				this.properties.get("cancel") +
-				"']"));
-		button.click();
-	}
-
 }

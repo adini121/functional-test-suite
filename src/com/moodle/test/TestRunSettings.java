@@ -35,6 +35,7 @@ import com.moodle.testmanager.pageObjectModel.ForumAddForm;
 import com.moodle.testmanager.pageObjectModel.ForumPosts;
 import com.moodle.testmanager.pageObjectModel.ForumSplit;
 import com.moodle.testmanager.pageObjectModel.FrontPageRoles;
+import com.moodle.testmanager.pageObjectModel.GlossaryAddForm;
 import com.moodle.testmanager.pageObjectModel.Installation;
 import com.moodle.testmanager.pageObjectModel.ProfileEdit;
 import com.moodle.testmanager.pageObjectModel.ReportActivityCompletion;
@@ -71,6 +72,7 @@ public class TestRunSettings {
 	protected ForumPosts forumPosts = new ForumPosts(driver);
 	protected ForumSplit splitForum = new ForumSplit(driver);
 	protected FrontPageRoles frontPageRoles = new FrontPageRoles(driver);
+	protected GlossaryAddForm addGlossary = new GlossaryAddForm(driver);
 	protected Installation installation = new Installation(driver);
 	protected ProfileEdit editProfile = new ProfileEdit(driver);
 	protected ReportActivityCompletion activityCompletionReport = new ReportActivityCompletion(driver);
