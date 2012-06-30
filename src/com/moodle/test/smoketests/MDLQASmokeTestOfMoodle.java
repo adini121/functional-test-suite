@@ -124,7 +124,7 @@ public class MDLQASmokeTestOfMoodle extends TestRunSettings {
 		//enrol.enrolManager();
 		user.selectLogout();
 	}
-	@Test
+	//@Test
 	public void addAssignment() {
 		user.loginToSystem(this.properties.get("teacher"), this.properties.get("password"));
 		course.clickCourseLink(this.properties.get("courseName"));
@@ -136,7 +136,7 @@ public class MDLQASmokeTestOfMoodle extends TestRunSettings {
 		addAssignment.selectOnlineTextEnabledYes();
 		addAssignment.clickSaveAndRetToCourse();
 	}
-	@Test
+	//@Test
 	public void addChat() {
 		addActivity.selectChat("2");
 		addChat.enterNameField(this.properties.get("chatName"));
@@ -145,9 +145,17 @@ public class MDLQASmokeTestOfMoodle extends TestRunSettings {
 	}
 	@Test
 	public void addChoice() {
+		user.loginToSystem(this.properties.get("teacher"), this.properties.get("password"));
+		course.clickCourseLink(this.properties.get("courseName"));
+		course.clickTurnEditingOn();
 		addActivity.selectChoice("2");
 		addChoice.enterNameField(this.properties.get("choiceName"));
 		addChoice.enterIntroField(this.properties.get("choiceDescription"));
+<<<<<<< .merge_file_NpvXAa
+		addChoice.enterOptionField("0", "option1");
+		addChoice.enterOptionField("1", "option2");
+=======
+>>>>>>> .merge_file_DndxS9
 		addChoice.clickSaveAndRetToCourse();
 	}
 	@Test

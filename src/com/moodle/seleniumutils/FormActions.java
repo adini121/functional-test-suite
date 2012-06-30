@@ -149,10 +149,15 @@ public class FormActions {
  * @param itemNumber The item number as it appears to the user on the form e.g. the first element generated is option 0 but it will actually be option 1.
  * @param optionText The text that you would like to enter in the text field of the repeating element.
  */
-	public void enterTextByIDRepeatingElement(String idPrefix, int itemNumber, String optionText) {
-		int optionID = itemNumber - 1;
-		driver.findElementById(idPrefix + optionID).sendKeys(optionText);
+	public void enterTextByIDRepeatingElement(String idPrefix, String itemNumber, String optionText) {
+		//int optionIDInt = itemNumber - 1;
+		//String optionID = convertInteger(optionIDInt);
+		this.driver.findElementById(idPrefix + itemNumber).sendKeys(optionText);
 	}
+/*	public static String convertInteger(int i) {
+		return "" + i;
+	}*/
+	
 /**
  * Selects a full date in a date field from a dropdown. 
  * @param day The day that you want to enter.

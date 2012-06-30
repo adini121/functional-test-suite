@@ -14,7 +14,7 @@ public class ChoiceAddForm extends FormAddEditSettingsDescAndGroupMode{
  * Locator variables.
  */
 	private String locLimitAnswers = "id_limitanswers";
-	private String locOptions = "id_option_";
+	public String locOptions = "id_option_";
 	private String locLimit = "id_limit_";
 	private String loc3Fields = "id_option_add_fields";
 	private String locRestrictAnsPeriod = "id_timerestrict";
@@ -56,15 +56,15 @@ public class ChoiceAddForm extends FormAddEditSettingsDescAndGroupMode{
  * @param optionNumber The option number that you want to enter text into as displayed on the form.
  * @param optionText The text that you want to enter.
  */
-	public void fieldEnterOption(int optionNumber, String optionText) {
-		formActions.enterTextByIDRepeatingElement(locOptions, optionNumber, optionText);
+	public void enterOptionField(String optionNumber, String optionText) {
+		driver.findElementById(locOptions + optionNumber).sendKeys(optionText);
 	}
 /**
  * Enters a value for limit in a given limit field.
  * @param optionNumber The option number that you want to enter value for limit into as displayed on the form.
  * @param limit The numeric value you want to enter int he limit field.
  */
-	public void fieldEnterLimit(int optionNumber, String limit) {
+	public void enterLimitField(String optionNumber, String limit) {
 		formActions.enterTextByIDRepeatingElement(locLimit, optionNumber, limit);
 	}
 /**

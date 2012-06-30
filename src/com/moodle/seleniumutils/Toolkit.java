@@ -47,4 +47,12 @@ public class Toolkit {
 		File screenshot = ((TakesScreenshot)augmentedDriver).getScreenshotAs(OutputType.FILE);
 		FileUtils.copyFile(screenshot, new File(fileDest));
 	}
+/**
+ * WebDriver locators will not accept integer values so it if you need to use an integer anywhere you need to cast it to a string to use it in a locator.
+ * @param i The integer variable that you want to convert.
+ * @return The string that is returned following the conversion.
+ */
+	public String convertInteger(int i) {
+		return Integer.toString(i);
+	}
 }
