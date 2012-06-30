@@ -38,5 +38,4 @@ The only WebDrivers that have been tested with Moodle are:
 RemoteWebdriver; for use with Selenium Server(RC).
 ChromeDriver; For local Chrome installations.
 FirefoxDriver; For local Firefox installations.
-Currently Chrome, both locally and via Remote works best.
-There is currently an issue with Firefox when entering text in TinyMCE rich text fields in Moodle. I have raised a Bug with SeleniumHQ regarding this: http://code.google.com/p/selenium/issues/detail?id=3569. Are there any devs out there that want to fix this for me?
+All are fully functional.
