@@ -8,7 +8,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.Select;
 
-import com.moodle.seleniumutils.FormActions;
+import com.moodle.test.FormActions;
 /**
  * This is the page object model for the add forum form.
  * @author Tim Barker 

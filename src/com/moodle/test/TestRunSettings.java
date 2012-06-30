@@ -9,8 +9,6 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
-import com.moodle.seleniumutils.SeleniumManager;
-import com.moodle.seleniumutils.Toolkit;
 import com.moodle.testmanager.pageObjectModel.Assignment;
 import com.moodle.testmanager.pageObjectModel.AssignmentAddAssignmentForm;
 import com.moodle.testmanager.pageObjectModel.AssignmentAddSubmission;

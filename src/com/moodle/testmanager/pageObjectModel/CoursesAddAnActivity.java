@@ -12,7 +12,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.Select;
 
-import com.moodle.seleniumutils.FormActions;
+import com.moodle.test.FormActions;
 /**
  * This is the page object model for the adding activities to a course.
  * @author Tim Barker 

@@ -7,8 +7,8 @@ import java.util.Properties;
 
 import org.openqa.selenium.remote.RemoteWebDriver;
 
-import com.moodle.seleniumutils.Navigation;
 import com.moodle.seleniumutils.PassFailCriteria;
+import com.moodle.test.Navigation;
 /**
  * This is the page object model for the Settings Block. All interaction with the settings block is contained in here.
  * @author Tim Barker 

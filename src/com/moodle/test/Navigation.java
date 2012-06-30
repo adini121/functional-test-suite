@@ -1,4 +1,4 @@
-package com.moodle.seleniumutils;
+package com.moodle.test;
 
 import java.util.concurrent.TimeUnit;
 

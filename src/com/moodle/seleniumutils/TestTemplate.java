@@ -11,6 +11,7 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
+import com.moodle.test.SeleniumManager;
 import com.moodle.testmanager.pageObjectModel.Users;
 /**
  * DESCRIPTION:

@@ -9,8 +9,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
-import com.moodle.seleniumutils.FormActions;
 import com.moodle.seleniumutils.PassFailCriteria;
+import com.moodle.test.FormActions;
 /**
  * The page object model for the Assignment Grading.
  * @author Tim Barker 

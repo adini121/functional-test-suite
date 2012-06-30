@@ -10,7 +10,7 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
-import com.moodle.seleniumutils.FormActions;
+import com.moodle.test.FormActions;
 /**
  * This is the page object model for the database fields tab.
  * @author Tim Barker 

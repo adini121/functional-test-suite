@@ -8,7 +8,7 @@ import java.util.Properties;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
-import com.moodle.seleniumutils.FormActions;
+import com.moodle.test.FormActions;
 /**
  * The page object model for the Add Assignment form.
  * @author Tim Barker 
