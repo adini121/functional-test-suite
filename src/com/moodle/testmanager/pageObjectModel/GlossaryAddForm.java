@@ -11,11 +11,7 @@ import org.openqa.selenium.remote.RemoteWebDriver;
  * @author Tim Barker 
  * @see <a href="http://www.gnu.org/copyleft/gpl.html">License: GNU GPL v3 or later</a>
  */
-<<<<<<< .merge_file_usP61n
-public class GlossaryAddForm extends FormAddEditSettings {
-=======
 public class GlossaryAddForm extends FormAddEditSettingsWithDesc {
->>>>>>> .merge_file_rMgfDg
 /**
  * Hashmap for language file.
  */

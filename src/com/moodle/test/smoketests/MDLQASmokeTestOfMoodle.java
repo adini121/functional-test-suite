@@ -151,11 +151,8 @@ public class MDLQASmokeTestOfMoodle extends TestRunSettings {
 		addActivity.selectChoice("2");
 		addChoice.enterNameField(this.properties.get("choiceName"));
 		addChoice.enterIntroField(this.properties.get("choiceDescription"));
-<<<<<<< .merge_file_NpvXAa
 		addChoice.enterOptionField("0", "option1");
 		addChoice.enterOptionField("1", "option2");
-=======
->>>>>>> .merge_file_DndxS9
 		addChoice.clickSaveAndRetToCourse();
 	}
 	@Test
