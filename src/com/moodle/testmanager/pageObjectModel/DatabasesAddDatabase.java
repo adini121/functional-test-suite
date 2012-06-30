@@ -12,7 +12,7 @@ import org.openqa.selenium.remote.RemoteWebDriver;
  * @author Tim Barker 
  * @see <a href="http://www.gnu.org/copyleft/gpl.html">License: GNU GPL v3 or later</a>
  */
-public class DatabasesAddDatabase extends FormAddEditSettingsDescAndGroupMode {
+public class DatabasesAddDatabase extends FormAddEditSettings {
 /**
  * Hashmap for language file.
  */

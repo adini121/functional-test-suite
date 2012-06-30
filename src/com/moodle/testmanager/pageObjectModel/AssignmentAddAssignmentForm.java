@@ -14,7 +14,7 @@ import com.moodle.test.FormActions;
  * @author Tim Barker 
  * @see <a href="http://www.gnu.org/copyleft/gpl.html">License: GNU GPL v3 or later</a>
  */
-public class AssignmentAddAssignmentForm extends FormAddEditSettingsDescAndGroupMode{
+public class AssignmentAddAssignmentForm extends FormAddEditSettings{
 	protected Map<String, String> properties = new HashMap<String, String>();
 /**
  * Constructor for the page object.	

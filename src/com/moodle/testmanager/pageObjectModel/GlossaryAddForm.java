@@ -11,7 +11,7 @@ import org.openqa.selenium.remote.RemoteWebDriver;
  * @author Tim Barker 
  * @see <a href="http://www.gnu.org/copyleft/gpl.html">License: GNU GPL v3 or later</a>
  */
-public class GlossaryAddForm extends FormAddEditSettingsWithDesc {
+public class GlossaryAddForm extends FormAddEditSettings {
 /**
  * Hashmap for language file.
  */

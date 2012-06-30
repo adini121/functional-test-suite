@@ -56,17 +56,17 @@ public class MDLQASmokeTestOfMoodle extends TestRunSettings {
 		this.properties.put("glossaryName", testData.getProperty("glossaryName"));
 		this.properties.put("glossaryDescription", testData.getProperty("glossaryDescription"));
 		}
-	//@Test
+	@Test
 	public void installation() {
 		Install23 install23 = new Install23();
 		install23.install();
 	}
-	//@Test
+	@Test
 	public void addCourse() throws MalformedURLException {
 		MDLQADT1AddCourse addCourse = new MDLQADT1AddCourse();
 		addCourse.addCourse();
 	}
-	//@Test
+	@Test
 	public void addUsers() throws Exception {
 		MDLQADT2AddUsers addUsers = new MDLQADT2AddUsers();
 		addUsers.addTeacher();
@@ -84,7 +84,7 @@ public class MDLQASmokeTestOfMoodle extends TestRunSettings {
 		//TODO Create Add Manager Step
 		//addUsers.addManager();
 	}
-	//@Test
+	@Test
 	public void assignFrontPageRoles() {
 		MDLQADT3AssignFrontPageRoles roles = new MDLQADT3AssignFrontPageRoles();
 		roles.assignTeacherRole();
@@ -103,7 +103,7 @@ public class MDLQASmokeTestOfMoodle extends TestRunSettings {
 		//TODO Create Add manager role step
 		//roles.assignManagerRole();
 	}
-	//@Test
+	@Test
 	public void enrolUsers() {
 		MDLQADT4EnrolUsers enrol = new MDLQADT4EnrolUsers();
 		//TODO re-write the enrol teacher step so you don't have to use the ajax buttons
@@ -124,7 +124,7 @@ public class MDLQASmokeTestOfMoodle extends TestRunSettings {
 		//enrol.enrolManager();
 		user.selectLogout();
 	}
-	//@Test
+	@Test
 	public void addAssignment() {
 		user.loginToSystem(this.properties.get("teacher"), this.properties.get("password"));
 		course.clickCourseLink(this.properties.get("courseName"));
@@ -136,7 +136,7 @@ public class MDLQASmokeTestOfMoodle extends TestRunSettings {
 		addAssignment.selectOnlineTextEnabledYes();
 		addAssignment.clickSaveAndRetToCourse();
 	}
-	//@Test
+	@Test
 	public void addChat() {
 		addActivity.selectChat("2");
 		addChat.enterNameField(this.properties.get("chatName"));
@@ -145,9 +145,6 @@ public class MDLQASmokeTestOfMoodle extends TestRunSettings {
 	}
 	@Test
 	public void addChoice() {
-		user.loginToSystem(this.properties.get("teacher"), this.properties.get("password"));
-		course.clickCourseLink(this.properties.get("courseName"));
-		course.clickTurnEditingOn();
 		addActivity.selectChoice("2");
 		addChoice.enterNameField(this.properties.get("choiceName"));
 		addChoice.enterIntroField(this.properties.get("choiceDescription"));
