@@ -7,7 +7,7 @@ import java.util.Properties;
 
 import org.openqa.selenium.remote.RemoteWebDriver;
 /**
- * This is the page object model for adding a Database activity to a course.
+ * This is the page object model for adding a Lesson activity to a course.
  * @author Tim Barker 
  * @param <hideIntroField>
  * @see <a href="http://www.gnu.org/copyleft/gpl.html">License: GNU GPL v3 or later</a>
@@ -20,7 +20,7 @@ public class LessonAddForm extends FormAddEditSettings {
 /**
  * Language file location.
  */
-	private String langFile =  "properties/data/static/GlossaryAddForm.properties";
+	private String langFile =  "properties/data/static/LessonAddForm.properties";
 /**
  * Locator variables.
  */
@@ -67,7 +67,7 @@ public class LessonAddForm extends FormAddEditSettings {
 			databaseAddData.load(new FileInputStream(langFile));
 		} catch (Exception e) {}
 		//put values from the properties file into hashmap
-		this.properties.put("showAdvanced", databaseAddData.getProperty("showAdvanced"));
+		this.properties.put("PROPERTY", databaseAddData.getProperty("PROPERTY"));
 	}
 /*
  * Overriding unused, inherited methods.
@@ -240,7 +240,7 @@ public class LessonAddForm extends FormAddEditSettings {
  * Enters a value in the "Time spent" field.
  * @param timeSpent The desired value that you would like to enter.
  */
-	public void enterTimeSpentField(CharSequence[] timeSpent) {
+	public void enterTimeSpentField(String timeSpent) {
 		driver.findElementById(locTimeSpent).sendKeys(timeSpent);
 	}
 /**

@@ -56,6 +56,9 @@ public class MDLQASmokeTestOfMoodle extends TestRunSettings {
 		this.properties.put("glossaryName", testData.getProperty("glossaryName"));
 		this.properties.put("glossaryDescription", testData.getProperty("glossaryDescription"));
 		this.properties.put("lessonName", testData.getProperty("lessonName"));
+		this.properties.put("surveyName", testData.getProperty("surveyName"));
+		this.properties.put("surveyDescription", testData.getProperty("surveyDescription"));
+		this.properties.put("surveyType", testData.getProperty("surveyType"));
 		}
 	//@Test
 	public void installation() {
@@ -178,13 +181,21 @@ public class MDLQASmokeTestOfMoodle extends TestRunSettings {
 		addGlossary.enterIntroField(this.properties.get("glossaryDescription"));
 		addGlossary.clickSaveAndRetToCourse();
 	}
-	@Test
+	//@Test
 	public void addLesson() {
+		addActivity.selectLesson("2");
+		addLesson.enterNameField(this.properties.get("lessonName"));
+		addLesson.clickSaveAndRetToCourse();
+	}
+	@Test
+	public void addSurvey() {
 		user.loginToSystem(this.properties.get("teacher"), this.properties.get("password"));
 		course.clickCourseLink(this.properties.get("courseName"));
 		course.clickTurnEditingOn();
-		addActivity.selectLesson("2");
-		addLesson.enterNameField(this.properties.get("lessonName"));
+		addActivity.selectSurvey("2");
+		addSurvey.enterNameField(this.properties.get("surveyName"));
+		addSurvey.enterIntroField(this.properties.get("surveyDescription"));
+		addSurvey.selectSurveyType(this.properties.get("surveyType"));
 		addLesson.clickSaveAndRetToCourse();
 	}
 }

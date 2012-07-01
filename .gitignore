@@ -3,5 +3,5 @@ test-output*
 bin/*
 *.log
 .settings/*
-
+buildfiles/*
 

@@ -34,7 +34,7 @@ public class FormActions {
  * @param itemToSelect The literal text of the item to be selected.
  */
 	public void selectDropdownItemByID(String fieldID, String itemToSelect) {
-		Select dropdown = new Select(driver.findElement(By .id(fieldID)));
+		Select dropdown = new Select(this.driver.findElement(By .id(fieldID)));
 		dropdown.selectByVisibleText(itemToSelect);
 	}	
 /**
