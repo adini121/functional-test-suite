@@ -84,6 +84,26 @@ public abstract class FormAddEditSettings {
 		driver.findElementById("id_cmidnumber").sendKeys(idNumber);
 	}
 /**
+ * Selects a value for grade from the Grade dropdown.
+ * @param grade The value for grade to be passed from the test. Valid values in a default Moodle install are currently:
+ * A range from 1 to 100
+ * "No Grade"
+ * "Scale: Separate and Connected ways of knowing"
+ */
+	public void selectGrade(String grade) {
+		FormActions dropdown = new FormActions(driver);
+		dropdown.selectDropdownItemByID("id_grade", grade);
+	}
+/**
+ * Selects a value for Grade category from the Grade category dropdown.
+ * @param gradeCategory The value for Grade category to be passed from the test. Valid values in a default Moodle install are currently:
+ * "Uncategorised"
+ */
+	public void selectGradeCategory(String gradeCategory) {
+		FormActions dropdown = new FormActions(driver);
+		dropdown.selectDropdownItemByID("id_gradecat", gradeCategory);
+	}
+/**
  * Select Save and return to course.
  */
 	public void clickSaveAndRetToCourse() {

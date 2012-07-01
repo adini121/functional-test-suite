@@ -333,18 +333,6 @@ public class AssignmentAddAssignmentForm extends FormAddEditSettings{
 		dropdown.selectDropdownItemByID("id_assignfeedback_file_enabled", this.properties.get("no"));
 	}
 /**
- * Selects a value for grade from the Grade dropdown.
- * @param grade The value for grade to be passed from the test. Valid values in a default Moodle install are currently:
- * A range from 1 to 100
- * "No Grade"
- * "Scale: Competencies"
- * "Scale: Separate and Connected ways of knowing"
- */
-	public void selectGrade(String grade) {
-		FormActions dropdown = new FormActions(driver);
-		dropdown.selectDropdownItemByID("id_grade", grade);
-	}
-/**
  * Selects a value for grade from the Grading method dropdown.
  * @param gradingMethod The value for Grading method to be passed from the test. Valid values in a default Moodle install are currently:
  * "Simple direct grading"
@@ -353,26 +341,6 @@ public class AssignmentAddAssignmentForm extends FormAddEditSettings{
 	public void selectGradingMethod(String gradingMethod) {
 		FormActions dropdown = new FormActions(driver);
 		dropdown.selectDropdownItemByID("id_advancedgradingmethod_submissions", gradingMethod);
-	}
-/**
- * Selects a value for Grade category from the Grade category dropdown.
- * @param gradeCategory The value for Grade category to be passed from the test. Valid values in a default Moodle install are currently:
- * "Uncategorised"
- */
-	public void selectGradeCategory(String gradeCategory) {
-		FormActions dropdown = new FormActions(driver);
-		dropdown.selectDropdownItemByID("id_gradecat", gradeCategory);
-	}
-/**
- * Selects a value for Group mode from the Group mode dropdown.
- * @param mode The value for Group mode to be passed from the test. Valid values in a default Moodle install are currently:
- * "No groups"
- * "Separate groups"
- * "Visible groups"
- */
-	public void selectGroupMode(String mode) {
-		FormActions dropdown = new FormActions(driver);
-		dropdown.selectDropdownItemByID("id_groupmode", mode);
 	}
 /**
  * Selects a value from grouping from the Grouping dropdown.
@@ -388,16 +356,6 @@ public class AssignmentAddAssignmentForm extends FormAddEditSettings{
 	public void checkboxAvailableGroupOnly() {
 		WebElement checkbox = this.driver.findElementById("id_groupmembersonly");
 		checkbox.click();
-	}
-/**
- * Selects a value for Visible from the Visible dropdown.
- * @param showHide The value for Visible that is passed from the test. Valid values are:
- * "Show"
- * "Hide"
- */
-	public void selectVisible(String showHide) {
-		FormActions dropdown = new FormActions(driver);
-		dropdown.selectDropdownItemByID("id_visible", showHide);
 	}
 /**
  * Enters a string the is passed from the test in the ID number field.
