@@ -15,7 +15,6 @@ import com.moodle.test.FormActions;
  * @author Tim Barker 
  * @see <a href="http://www.gnu.org/copyleft/gpl.html">License: GNU GPL v3 or later</a>
  */
-@SuppressWarnings("unused")
 public class SiteAdministration {
 	//Internationalization file location
 	public static String data = "properties/data/static/SiteAdministration.properties";

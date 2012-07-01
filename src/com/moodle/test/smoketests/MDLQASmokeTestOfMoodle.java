@@ -60,17 +60,17 @@ public class MDLQASmokeTestOfMoodle extends TestRunSettings {
 		this.properties.put("surveyDescription", testData.getProperty("surveyDescription"));
 		this.properties.put("surveyType", testData.getProperty("surveyType"));
 		}
-	//@Test
+	@Test
 	public void installation() {
 		Install23 install23 = new Install23();
 		install23.install();
 	}
-	//@Test
+	@Test
 	public void addCourse() throws MalformedURLException {
 		MDLQADT1AddCourse addCourse = new MDLQADT1AddCourse();
 		addCourse.addCourse();
 	}
-	//@Test
+	@Test
 	public void addUsers() throws Exception {
 		MDLQADT2AddUsers addUsers = new MDLQADT2AddUsers();
 		addUsers.addTeacher();
@@ -88,7 +88,7 @@ public class MDLQASmokeTestOfMoodle extends TestRunSettings {
 		//TODO Create Add Manager Step
 		//addUsers.addManager();
 	}
-	//@Test
+	@Test
 	public void assignFrontPageRoles() {
 		MDLQADT3AssignFrontPageRoles roles = new MDLQADT3AssignFrontPageRoles();
 		roles.assignTeacherRole();
@@ -107,7 +107,7 @@ public class MDLQASmokeTestOfMoodle extends TestRunSettings {
 		//TODO Create Add manager role step
 		//roles.assignManagerRole();
 	}
-	//@Test
+	@Test
 	public void enrolUsers() {
 		MDLQADT4EnrolUsers enrol = new MDLQADT4EnrolUsers();
 		//TODO re-write the enrol teacher step so you don't have to use the ajax buttons
@@ -128,7 +128,7 @@ public class MDLQASmokeTestOfMoodle extends TestRunSettings {
 		//enrol.enrolManager();
 		user.selectLogout();
 	}
-	//@Test
+	@Test
 	public void addAssignment() {
 		user.loginToSystem(this.properties.get("teacher"), this.properties.get("password"));
 		course.clickCourseLink(this.properties.get("courseName"));
@@ -140,14 +140,14 @@ public class MDLQASmokeTestOfMoodle extends TestRunSettings {
 		addAssignment.selectOnlineTextEnabledYes();
 		addAssignment.clickSaveAndRetToCourse();
 	}
-	//@Test
+	@Test
 	public void addChat() {
 		addActivity.selectChat("2");
 		addChat.enterNameField(this.properties.get("chatName"));
 		addChat.enterIntroField(this.properties.get("chatDescription"));
 		addChat.clickSaveAndRetToCourse();
 	}
-	//@Test
+	@Test
 	public void addChoice() {
 		addActivity.selectChoice("2");
 		addChoice.enterNameField(this.properties.get("choiceName"));
@@ -156,32 +156,32 @@ public class MDLQASmokeTestOfMoodle extends TestRunSettings {
 		addChoice.enterOptionField("1", "option2");
 		addChoice.clickSaveAndRetToCourse();
 	}
-	//@Test
+	@Test
 	public void addDatabase() {
 		addActivity.selectDatabase("2");
 		addDatabase.enterNameField(this.properties.get("databaseName"));
 		addDatabase.enterIntroField(this.properties.get("databaseDescription"));
 		addDatabase.clickSaveAndRetToCourse();
 	}
-	//@Test
+	@Test
 	public void addLTI() {
 		//TODO will come back to this as it isn't a priority and we will need some setup doing in advance
 	}
-	//@Test
+	@Test
 	public void addForum() {
 		addActivity.selectForum("2");
 		addForum.enterNameField(this.properties.get("forumName"));
 		addForum.enterIntroField(this.properties.get("forumDescription"));
 		addForum.clickSaveAndRetToCourse();
 	}
-	//@Test
+	@Test
 	public void addGlossary() {
 		addActivity.selectGlossary("2");
 		addGlossary.enterNameField(this.properties.get("glossaryName"));
 		addGlossary.enterIntroField(this.properties.get("glossaryDescription"));
 		addGlossary.clickSaveAndRetToCourse();
 	}
-	//@Test
+	@Test
 	public void addLesson() {
 		addActivity.selectLesson("2");
 		addLesson.enterNameField(this.properties.get("lessonName"));
@@ -189,9 +189,6 @@ public class MDLQASmokeTestOfMoodle extends TestRunSettings {
 	}
 	@Test
 	public void addSurvey() {
-		user.loginToSystem(this.properties.get("teacher"), this.properties.get("password"));
-		course.clickCourseLink(this.properties.get("courseName"));
-		course.clickTurnEditingOn();
 		addActivity.selectSurvey("2");
 		addSurvey.enterNameField(this.properties.get("surveyName"));
 		addSurvey.enterIntroField(this.properties.get("surveyDescription"));
