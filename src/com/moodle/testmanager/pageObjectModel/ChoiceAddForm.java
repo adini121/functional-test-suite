@@ -4,6 +4,8 @@ import java.io.FileInputStream;
 import java.util.Properties;
 
 import org.openqa.selenium.remote.RemoteWebDriver;
+
+import com.moodle.test.FormActions;
 /**
  * This is the page object model for the add choice form.
  * @author Tim Barker 
@@ -25,6 +27,7 @@ public class ChoiceAddForm extends FormAddEditSettings{
 	private String locPrivacy = "id_publish";
 	private String locAllowUpd = "id_allowupdate";
 	private String locColUnanswered = "id_showunanswered";
+	private FormActions formActions = new FormActions(driver);
 /**
  * Constructor for the page object.	
  */

@@ -1,6 +1,8 @@
 package com.moodle.testmanager.pageObjectModel;
 
 import org.openqa.selenium.remote.RemoteWebDriver;
+
+import com.moodle.test.FormActions;
 /**
  * This is the page object model for the add chat form.
  * @author Tim Barker 
@@ -14,6 +16,7 @@ public class ChatAddForm extends FormAddEditSettings {
 	private String locRepSessions = "id_schedule";
 	private String locSavePast = "id_keepdays";
 	private String locEveryoneViewPast = "id_studentlogs";
+	private FormActions formActions = new FormActions(driver);
 /**
  * Constructor for the page object.	
  */

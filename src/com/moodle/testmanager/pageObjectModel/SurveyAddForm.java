@@ -13,10 +13,13 @@ import com.moodle.test.FormActions;
  */
 public class SurveyAddForm extends FormAddEditSettings{
 /**
+ * Constructors
+ */
+	private FormActions formActions = new FormActions(driver);
+/**
  * Locator variables.
  */
 	private String locSurveyType = "id_template";
-	private FormActions formActions = new FormActions(driver);
 /**
  * Constructor for the page object.	
  */

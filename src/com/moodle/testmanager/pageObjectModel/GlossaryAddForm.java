@@ -6,12 +6,18 @@ import java.util.Map;
 import java.util.Properties;
 
 import org.openqa.selenium.remote.RemoteWebDriver;
+
+import com.moodle.test.FormActions;
 /**
  * This is the page object model for adding a Database activity to a course.
  * @author Tim Barker 
  * @see <a href="http://www.gnu.org/copyleft/gpl.html">License: GNU GPL v3 or later</a>
  */
 public class GlossaryAddForm extends FormAddEditSettings {
+/**
+ * Constructors
+ */
+	private FormActions formActions = new FormActions(driver);
 /**
  * Hashmap for language file.
  */
