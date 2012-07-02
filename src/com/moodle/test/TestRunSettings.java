@@ -37,6 +37,7 @@ import com.moodle.testmanager.pageObjectModel.GlossaryAddForm;
 import com.moodle.testmanager.pageObjectModel.Installation;
 import com.moodle.testmanager.pageObjectModel.LessonAddForm;
 import com.moodle.testmanager.pageObjectModel.ProfileEdit;
+import com.moodle.testmanager.pageObjectModel.QuizAddForm;
 import com.moodle.testmanager.pageObjectModel.ReportActivityCompletion;
 import com.moodle.testmanager.pageObjectModel.SiteAdministration;
 import com.moodle.testmanager.pageObjectModel.SurveyAddForm;
@@ -77,6 +78,7 @@ public class TestRunSettings {
 	protected Installation installation = new Installation(driver);
 	protected SurveyAddForm addSurvey = new SurveyAddForm(driver);
 	protected ProfileEdit editProfile = new ProfileEdit(driver);
+	protected QuizAddForm addQuiz = new QuizAddForm(driver);
 	protected ReportActivityCompletion activityCompletionReport = new ReportActivityCompletion(driver);
 	protected SiteAdministration siteAdmin = new SiteAdministration(driver);
 	protected Users user = new Users(driver);

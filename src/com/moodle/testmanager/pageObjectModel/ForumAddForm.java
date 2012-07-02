@@ -16,7 +16,6 @@ import com.moodle.test.FormActions;
  */
 public class ForumAddForm extends FormAddEditSettings {
 	protected Map<String, String> properties = new HashMap<String, String>();
-	private FormActions formActions = new FormActions(driver);
 /**
  * Constructor for the page object.	
  */

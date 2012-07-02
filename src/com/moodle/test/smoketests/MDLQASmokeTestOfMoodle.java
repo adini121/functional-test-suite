@@ -56,6 +56,8 @@ public class MDLQASmokeTestOfMoodle extends TestRunSettings {
 		this.properties.put("glossaryName", testData.getProperty("glossaryName"));
 		this.properties.put("glossaryDescription", testData.getProperty("glossaryDescription"));
 		this.properties.put("lessonName", testData.getProperty("lessonName"));
+		this.properties.put("quizName", testData.getProperty("quizName"));
+		this.properties.put("quizDescription", testData.getProperty("quizDescription"));
 		this.properties.put("surveyName", testData.getProperty("surveyName"));
 		this.properties.put("surveyDescription", testData.getProperty("surveyDescription"));
 		this.properties.put("surveyType", testData.getProperty("surveyType"));
@@ -194,5 +196,12 @@ public class MDLQASmokeTestOfMoodle extends TestRunSettings {
 		addSurvey.enterIntroField(this.properties.get("surveyDescription"));
 		addSurvey.selectSurveyType(this.properties.get("surveyType"));
 		addLesson.clickSaveAndRetToCourse();
+	}
+	@Test
+	public void addQuiz() {
+		addActivity.selectQuiz("2");
+		addQuiz.enterNameField(this.properties.get("quizName"));
+		addQuiz.enterIntroField(this.properties.get("quizDescription"));
+		addQuiz.clickSaveAndRetToCourse();
 	}
 }
