@@ -49,6 +49,10 @@ import com.moodle.testmanager.pageObjectModel.WikiAddForm;
 import com.moodle.testmanager.pageObjectModel.WorkshopAddForm;
 
 public class TestRunSettings {
+	//Load test data from properties file
+	public TestRunSettings() {
+		super();
+	}
 	protected static RemoteWebDriver driver;
 	static SeleniumManager sm;
 	public static String runParameters = "properties/runParameters.properties";
@@ -116,7 +120,5 @@ public class TestRunSettings {
 			//sm.teardown();
 			sm.teardownFirefox();
 	}
-	public TestRunSettings() {
-		super();
-	}
+
 }
