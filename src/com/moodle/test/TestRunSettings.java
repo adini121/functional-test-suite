@@ -23,7 +23,7 @@ import com.moodle.testmanager.pageObjectModel.BlockSettings;
 import com.moodle.testmanager.pageObjectModel.ChatAddForm;
 import com.moodle.testmanager.pageObjectModel.ChoiceAddForm;
 import com.moodle.testmanager.pageObjectModel.Courses;
-import com.moodle.testmanager.pageObjectModel.CoursesAddAnActivity;
+import com.moodle.testmanager.pageObjectModel.CoursesAddActivityResource;
 import com.moodle.testmanager.pageObjectModel.CoursesEditCourseSettings;
 import com.moodle.testmanager.pageObjectModel.Databases;
 import com.moodle.testmanager.pageObjectModel.DatabasesAddDatabase;
@@ -44,6 +44,8 @@ import com.moodle.testmanager.pageObjectModel.SurveyAddForm;
 import com.moodle.testmanager.pageObjectModel.Users;
 import com.moodle.testmanager.pageObjectModel.UsersAddNewUser;
 import com.moodle.testmanager.pageObjectModel.UsersEnrolled;
+import com.moodle.testmanager.pageObjectModel.WikiAddForm;
+import com.moodle.testmanager.pageObjectModel.WorkshopAddForm;
 
 public class TestRunSettings {
 	protected static RemoteWebDriver driver;
@@ -63,7 +65,7 @@ public class TestRunSettings {
 	protected ChatAddForm addChat = new ChatAddForm(driver);
 	protected ChoiceAddForm addChoice = new ChoiceAddForm(driver);
 	protected Courses course = new Courses(driver);
-	protected CoursesAddAnActivity addActivity = new CoursesAddAnActivity(driver);
+	protected CoursesAddActivityResource addActivity = new CoursesAddActivityResource(driver);
 	protected CoursesEditCourseSettings editCourseSettings = new CoursesEditCourseSettings(driver);
 	protected Databases databases = new Databases(driver);
 	protected DatabasesAddDatabase addDatabase = new DatabasesAddDatabase(driver);
@@ -85,6 +87,8 @@ public class TestRunSettings {
 	protected UsersAddNewUser addNewUser = new UsersAddNewUser(driver);
 	protected UsersEnrolled enrolledUsers = new UsersEnrolled(driver);
 	protected Toolkit frameworkTools = new Toolkit(driver);
+	protected WikiAddForm addWiki = new WikiAddForm(driver);
+	protected WorkshopAddForm addWorkshop = new WorkshopAddForm(driver);
 
 	@BeforeClass
 	public static void automateTestSetup() throws FileNotFoundException, IOException {

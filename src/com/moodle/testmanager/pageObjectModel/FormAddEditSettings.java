@@ -22,6 +22,7 @@ public abstract class FormAddEditSettings {
 	RemoteWebDriver driver;
 	protected Map<String, String> properties = new HashMap<String, String>();
 	protected FormActions formActions = new FormActions(driver);
+	private String locAdvBtn = "showadvancedbtn";
 	public FormAddEditSettings(RemoteWebDriver driver) {
 		super();
 		this.driver = driver;
@@ -102,6 +103,13 @@ public abstract class FormAddEditSettings {
 	public void selectGradeCategory(String gradeCategory) {
 		FormActions dropdown = new FormActions(driver);
 		dropdown.selectDropdownItemByID("id_gradecat", gradeCategory);
+	}
+/**
+ * Selects the show advanced button by class name.
+ */
+	public void clickShowHideAdvanced(){
+		WebElement advButton = driver.findElementByClassName(locAdvBtn);
+		advButton.click();
 	}
 /**
  * Select Save and return to course.

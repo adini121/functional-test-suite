@@ -61,18 +61,23 @@ public class MDLQASmokeTestOfMoodle extends TestRunSettings {
 		this.properties.put("surveyName", testData.getProperty("surveyName"));
 		this.properties.put("surveyDescription", testData.getProperty("surveyDescription"));
 		this.properties.put("surveyType", testData.getProperty("surveyType"));
+		this.properties.put("wikiName", testData.getProperty("wikiName"));
+		this.properties.put("wikiDescription", testData.getProperty("wikiDescription"));
+		this.properties.put("wikiFirstPageName", testData.getProperty("wikiFirstPageName"));
+		this.properties.put("workshopName", testData.getProperty("workshopName"));
+		this.properties.put("workshopDescription", testData.getProperty("workshopDescription"));
 		}
-	@Test
+	//@Test
 	public void installation() {
 		Install23 install23 = new Install23();
 		install23.install();
 	}
-	@Test
+	//@Test
 	public void addCourse() throws MalformedURLException {
 		MDLQADT1AddCourse addCourse = new MDLQADT1AddCourse();
 		addCourse.addCourse();
 	}
-	@Test
+	//@Test
 	public void addUsers() throws Exception {
 		MDLQADT2AddUsers addUsers = new MDLQADT2AddUsers();
 		addUsers.addTeacher();
@@ -90,7 +95,7 @@ public class MDLQASmokeTestOfMoodle extends TestRunSettings {
 		//TODO Create Add Manager Step
 		//addUsers.addManager();
 	}
-	@Test
+	//@Test
 	public void assignFrontPageRoles() {
 		MDLQADT3AssignFrontPageRoles roles = new MDLQADT3AssignFrontPageRoles();
 		roles.assignTeacherRole();
@@ -109,7 +114,7 @@ public class MDLQASmokeTestOfMoodle extends TestRunSettings {
 		//TODO Create Add manager role step
 		//roles.assignManagerRole();
 	}
-	@Test
+	//@Test
 	public void enrolUsers() {
 		MDLQADT4EnrolUsers enrol = new MDLQADT4EnrolUsers();
 		//TODO re-write the enrol teacher step so you don't have to use the ajax buttons
@@ -203,5 +208,20 @@ public class MDLQASmokeTestOfMoodle extends TestRunSettings {
 		addQuiz.enterNameField(this.properties.get("quizName"));
 		addQuiz.enterIntroField(this.properties.get("quizDescription"));
 		addQuiz.clickSaveAndRetToCourse();
+	}
+	@Test
+	public void addWiki() {
+		addActivity.selectWiki("2");
+		addWiki.enterNameField(this.properties.get("wikiName"));
+		addWiki.enterIntroField(this.properties.get("wikiDescription"));
+		addWiki.enterFirstPageNameField(this.properties.get("wikiFirstPageName"));
+		addWiki.clickSaveAndRetToCourse();
+	}
+	@Test
+	public void addWorkshop() {
+		addActivity.selectWorkshop("2");
+		addWorkshop.enterNameField(this.properties.get("workshopName"));
+		addWorkshop.enterIntroField(this.properties.get("workshopDescription"));
+		addWorkshop.clickSaveAndRetToCourse();
 	}
 }
