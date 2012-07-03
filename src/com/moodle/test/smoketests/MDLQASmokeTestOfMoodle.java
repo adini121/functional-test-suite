@@ -12,18 +12,45 @@ import com.moodle.test.datacreation.MDLQADT4EnrolUsers;
 import com.moodle.test.moodleinstallation.Install23;
 
 public class MDLQASmokeTestOfMoodle extends TestDataLoad {
-	
-	//@Test
+	private String teacher = this.properties.get("teacher");
+	private String password = this.properties.get("password");
+	private String courseName = this.properties.get("courseName");
+	private String assignmentName = this.properties.get("assignmentName");
+	private String assignmentDescription = this.properties.get("assignmentDescription");
+	private String chatName = this.properties.get("chatName");
+	private String chatDescription = this.properties.get("chatDescription");
+	private String choiceName = this.properties.get("choiceName");
+	private String choiceDescription = this.properties.get("choiceDescription");
+	private String databaseName = this.properties.get("databaseName");
+	private String databaseDescription = this.properties.get("databaseDescription");
+	private String forumName = this.properties.get("forumName");
+	private String forumDescription = this.properties.get("forumDescription");
+	private String glossaryName = this.properties.get("glossaryName");
+	private String glossaryDescription = this.properties.get("glossaryDescription");
+	private String lessonName = this.properties.get("lessonName");
+	private String quizName = this.properties.get("quizName");
+	private String quizDescription = this.properties.get("quizDescription");
+	private String surveyName = this.properties.get("surveyName");
+	private String surveyDescription = this.properties.get("surveyDescription");
+	private String surveyType = this.properties.get("surveyType");
+	private String wikiName = this.properties.get("wikiName");
+	private String wikiDescription = this.properties.get("wikiDescription");
+	private String wikiFirstPageName = this.properties.get("wikiFirstPageName");
+	private String workshopName = this.properties.get("workshopName");
+	private String workshopDescription = this.properties.get("workshopDescription");
+	private String bookName = this.properties.get("bookName");
+	private String bookDescription = this.properties.get("bookDescription");	
+	@Test
 	public void installation() {
 		Install23 install23 = new Install23();
 		install23.install();
 	}
-	//@Test
+	@Test
 	public void addCourse() throws MalformedURLException {
 		MDLQADT1AddCourse addCourse = new MDLQADT1AddCourse();
 		addCourse.addCourse();
 	}
-	//@Test
+	@Test
 	public void addUsers() throws Exception {
 		MDLQADT2AddUsers addUsers = new MDLQADT2AddUsers();
 		addUsers.addTeacher();
@@ -41,7 +68,7 @@ public class MDLQASmokeTestOfMoodle extends TestDataLoad {
 		//TODO Create Add Manager Step
 		//addUsers.addManager();
 	}
-	//@Test
+	@Test
 	public void assignFrontPageRoles() {
 		MDLQADT3AssignFrontPageRoles roles = new MDLQADT3AssignFrontPageRoles();
 		roles.assignTeacherRole();
@@ -60,7 +87,7 @@ public class MDLQASmokeTestOfMoodle extends TestDataLoad {
 		//TODO Create Add manager role step
 		//roles.assignManagerRole();
 	}
-	//@Test
+	@Test
 	public void enrolUsers() {
 		MDLQADT4EnrolUsers enrol = new MDLQADT4EnrolUsers();
 		//TODO re-write the enrol teacher step so you don't have to use the ajax buttons
@@ -81,103 +108,100 @@ public class MDLQASmokeTestOfMoodle extends TestDataLoad {
 		//enrol.enrolManager();
 		user.selectLogout();
 	}
-	//@Test
+	@Test
 	public void addAssignment() {
-		user.loginToSystem(this.properties.get("teacher"), this.properties.get("password"));
-		course.clickCourseLink(this.properties.get("courseName"));
+		user.loginToSystem(teacher, password);
+		course.clickCourseLink(courseName);
 		course.clickTurnEditingOn();
 		addActivity.selectAssignment("2");
-		addAssignment.enterNameField(this.properties.get("assignmentName"));
-		addAssignment.enterIntroField(this.properties.get("assignmentDescription"));
+		addAssignment.enterNameField(assignmentName);
+		addAssignment.enterIntroField(assignmentDescription);
 		addAssignment.selectFileSubmissionsEnabledNo();
 		addAssignment.selectOnlineTextEnabledYes();
 		addAssignment.clickSaveAndRetToCourse();
 	}
-	//@Test
+	@Test
 	public void addChat() {
 		addActivity.selectChat("2");
-		addChat.enterNameField(this.properties.get("chatName"));
-		addChat.enterIntroField(this.properties.get("chatDescription"));
+		addChat.enterNameField(chatName);
+		addChat.enterIntroField(chatDescription);
 		addChat.clickSaveAndRetToCourse();
 	}
-	//@Test
+	@Test
 	public void addChoice() {
 		addActivity.selectChoice("2");
-		addChoice.enterNameField(this.properties.get("choiceName"));
-		addChoice.enterIntroField(this.properties.get("choiceDescription"));
+		addChoice.enterNameField(choiceName);
+		addChoice.enterIntroField(choiceDescription);
 		addChoice.enterOptionField("0", "option1");
 		addChoice.enterOptionField("1", "option2");
 		addChoice.clickSaveAndRetToCourse();
 	}
-	//@Test
+	@Test
 	public void addDatabase() {
 		addActivity.selectDatabase("2");
-		addDatabase.enterNameField(this.properties.get("databaseName"));
-		addDatabase.enterIntroField(this.properties.get("databaseDescription"));
+		addDatabase.enterNameField(databaseName);
+		addDatabase.enterIntroField(databaseDescription);
 		addDatabase.clickSaveAndRetToCourse();
 	}
-	//@Test
+	@Test
 	public void addLTI() {
 		//TODO will come back to this as it isn't a priority and we will need some setup doing in advance
 	}
-	//@Test
+	@Test
 	public void addForum() {
 		addActivity.selectForum("2");
-		addForum.enterNameField(this.properties.get("forumName"));
-		addForum.enterIntroField(this.properties.get("forumDescription"));
+		addForum.enterNameField(forumName);
+		addForum.enterIntroField(forumDescription);
 		addForum.clickSaveAndRetToCourse();
 	}
-	//@Test
+	@Test
 	public void addGlossary() {
 		addActivity.selectGlossary("2");
-		addGlossary.enterNameField(this.properties.get("glossaryName"));
-		addGlossary.enterIntroField(this.properties.get("glossaryDescription"));
+		addGlossary.enterNameField(glossaryName);
+		addGlossary.enterIntroField(glossaryDescription);
 		addGlossary.clickSaveAndRetToCourse();
 	}
-	//@Test
+	@Test
 	public void addLesson() {
 		addActivity.selectLesson("2");
-		addLesson.enterNameField(this.properties.get("lessonName"));
+		addLesson.enterNameField(lessonName);
 		addLesson.clickSaveAndRetToCourse();
 	}
-	//@Test
+	@Test
 	public void addSurvey() {
 		addActivity.selectSurvey("2");
-		addSurvey.enterNameField(this.properties.get("surveyName"));
-		addSurvey.enterIntroField(this.properties.get("surveyDescription"));
-		addSurvey.selectSurveyType(this.properties.get("surveyType"));
+		addSurvey.enterNameField(surveyName);
+		addSurvey.enterIntroField(surveyDescription);
+		addSurvey.selectSurveyType(surveyType);
 		addLesson.clickSaveAndRetToCourse();
 	}
-	//@Test
+	@Test
 	public void addQuiz() {
 		addActivity.selectQuiz("2");
-		addQuiz.enterNameField(this.properties.get("quizName"));
-		addQuiz.enterIntroField(this.properties.get("quizDescription"));
+		addQuiz.enterNameField(quizName);
+		addQuiz.enterIntroField(quizDescription);
 		addQuiz.clickSaveAndRetToCourse();
 	}
-	//@Test
+	@Test
 	public void addWiki() {
 		addActivity.selectWiki("2");
-		addWiki.enterNameField(this.properties.get("wikiName"));
-		addWiki.enterIntroField(this.properties.get("wikiDescription"));
-		addWiki.enterFirstPageNameField(this.properties.get("wikiFirstPageName"));
+		addWiki.enterNameField(wikiName);
+		addWiki.enterIntroField(wikiDescription);
+		addWiki.enterFirstPageNameField(wikiFirstPageName);
 		addWiki.clickSaveAndRetToCourse();
 	}
-	//@Test
+	@Test
 	public void addWorkshop() {
 		addActivity.selectWorkshop("2");
-		addWorkshop.enterNameField(this.properties.get("workshopName"));
-		addWorkshop.enterIntroField(this.properties.get("workshopDescription"));
+		addWorkshop.enterNameField(workshopName);
+		addWorkshop.enterIntroField(workshopDescription);
 		addWorkshop.clickSaveAndRetToCourse();
 	}
 	@Test
 	public void addBook() {
-		user.loginToSystem(this.properties.get("teacher"), this.properties.get("password"));
-		course.clickCourseLink(this.properties.get("courseName"));
-		course.clickTurnEditingOn();
 		addActivity.selectBook("3");
-		addBook.enterNameField(this.properties.get("bookName"));
-		addBook.enterIntroField(this.properties.get("bookDescription"));
+		addBook.enterNameField(bookName);
+		addBook.enterIntroField(bookDescription);
 		addBook.clickSaveAndRetToCourse();
 	}
 }
