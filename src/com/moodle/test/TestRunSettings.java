@@ -20,6 +20,7 @@ import com.moodle.testmanager.pageObjectModel.AssignmentSubmissionComments;
 import com.moodle.testmanager.pageObjectModel.BlockNavigation;
 import com.moodle.testmanager.pageObjectModel.BlockNews;
 import com.moodle.testmanager.pageObjectModel.BlockSettings;
+import com.moodle.testmanager.pageObjectModel.BookAddForm;
 import com.moodle.testmanager.pageObjectModel.ChatAddForm;
 import com.moodle.testmanager.pageObjectModel.ChoiceAddForm;
 import com.moodle.testmanager.pageObjectModel.Courses;
@@ -62,6 +63,7 @@ public class TestRunSettings {
 	protected BlockNavigation navigationBlock = new BlockNavigation(driver);
 	protected BlockNews newsBlock = new BlockNews(driver);
 	protected BlockSettings settingsBlock = new BlockSettings(driver);
+	protected BookAddForm addBook = new BookAddForm(driver);
 	protected ChatAddForm addChat = new ChatAddForm(driver);
 	protected ChoiceAddForm addChoice = new ChoiceAddForm(driver);
 	protected Courses course = new Courses(driver);
@@ -89,7 +91,7 @@ public class TestRunSettings {
 	protected Toolkit frameworkTools = new Toolkit(driver);
 	protected WikiAddForm addWiki = new WikiAddForm(driver);
 	protected WorkshopAddForm addWorkshop = new WorkshopAddForm(driver);
-
+	
 	@BeforeClass
 	public static void automateTestSetup() throws FileNotFoundException, IOException {
 		//Load properties required for test run

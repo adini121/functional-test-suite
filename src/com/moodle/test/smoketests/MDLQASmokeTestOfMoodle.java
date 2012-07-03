@@ -66,6 +66,8 @@ public class MDLQASmokeTestOfMoodle extends TestRunSettings {
 		this.properties.put("wikiFirstPageName", testData.getProperty("wikiFirstPageName"));
 		this.properties.put("workshopName", testData.getProperty("workshopName"));
 		this.properties.put("workshopDescription", testData.getProperty("workshopDescription"));
+		this.properties.put("bookName", testData.getProperty("bookName"));
+		this.properties.put("bookDescription", testData.getProperty("bookDescription"));
 		}
 	//@Test
 	public void installation() {
@@ -135,7 +137,7 @@ public class MDLQASmokeTestOfMoodle extends TestRunSettings {
 		//enrol.enrolManager();
 		user.selectLogout();
 	}
-	@Test
+	//@Test
 	public void addAssignment() {
 		user.loginToSystem(this.properties.get("teacher"), this.properties.get("password"));
 		course.clickCourseLink(this.properties.get("courseName"));
@@ -147,14 +149,14 @@ public class MDLQASmokeTestOfMoodle extends TestRunSettings {
 		addAssignment.selectOnlineTextEnabledYes();
 		addAssignment.clickSaveAndRetToCourse();
 	}
-	@Test
+	//@Test
 	public void addChat() {
 		addActivity.selectChat("2");
 		addChat.enterNameField(this.properties.get("chatName"));
 		addChat.enterIntroField(this.properties.get("chatDescription"));
 		addChat.clickSaveAndRetToCourse();
 	}
-	@Test
+	//@Test
 	public void addChoice() {
 		addActivity.selectChoice("2");
 		addChoice.enterNameField(this.properties.get("choiceName"));
@@ -163,38 +165,38 @@ public class MDLQASmokeTestOfMoodle extends TestRunSettings {
 		addChoice.enterOptionField("1", "option2");
 		addChoice.clickSaveAndRetToCourse();
 	}
-	@Test
+	//@Test
 	public void addDatabase() {
 		addActivity.selectDatabase("2");
 		addDatabase.enterNameField(this.properties.get("databaseName"));
 		addDatabase.enterIntroField(this.properties.get("databaseDescription"));
 		addDatabase.clickSaveAndRetToCourse();
 	}
-	@Test
+	//@Test
 	public void addLTI() {
 		//TODO will come back to this as it isn't a priority and we will need some setup doing in advance
 	}
-	@Test
+	//@Test
 	public void addForum() {
 		addActivity.selectForum("2");
 		addForum.enterNameField(this.properties.get("forumName"));
 		addForum.enterIntroField(this.properties.get("forumDescription"));
 		addForum.clickSaveAndRetToCourse();
 	}
-	@Test
+	//@Test
 	public void addGlossary() {
 		addActivity.selectGlossary("2");
 		addGlossary.enterNameField(this.properties.get("glossaryName"));
 		addGlossary.enterIntroField(this.properties.get("glossaryDescription"));
 		addGlossary.clickSaveAndRetToCourse();
 	}
-	@Test
+	//@Test
 	public void addLesson() {
 		addActivity.selectLesson("2");
 		addLesson.enterNameField(this.properties.get("lessonName"));
 		addLesson.clickSaveAndRetToCourse();
 	}
-	@Test
+	//@Test
 	public void addSurvey() {
 		addActivity.selectSurvey("2");
 		addSurvey.enterNameField(this.properties.get("surveyName"));
@@ -202,14 +204,14 @@ public class MDLQASmokeTestOfMoodle extends TestRunSettings {
 		addSurvey.selectSurveyType(this.properties.get("surveyType"));
 		addLesson.clickSaveAndRetToCourse();
 	}
-	@Test
+	//@Test
 	public void addQuiz() {
 		addActivity.selectQuiz("2");
 		addQuiz.enterNameField(this.properties.get("quizName"));
 		addQuiz.enterIntroField(this.properties.get("quizDescription"));
 		addQuiz.clickSaveAndRetToCourse();
 	}
-	@Test
+	//@Test
 	public void addWiki() {
 		addActivity.selectWiki("2");
 		addWiki.enterNameField(this.properties.get("wikiName"));
@@ -217,11 +219,21 @@ public class MDLQASmokeTestOfMoodle extends TestRunSettings {
 		addWiki.enterFirstPageNameField(this.properties.get("wikiFirstPageName"));
 		addWiki.clickSaveAndRetToCourse();
 	}
-	@Test
+	//@Test
 	public void addWorkshop() {
 		addActivity.selectWorkshop("2");
 		addWorkshop.enterNameField(this.properties.get("workshopName"));
 		addWorkshop.enterIntroField(this.properties.get("workshopDescription"));
 		addWorkshop.clickSaveAndRetToCourse();
+	}
+	@Test
+	public void addBook() {
+		user.loginToSystem(this.properties.get("teacher"), this.properties.get("password"));
+		course.clickCourseLink(this.properties.get("courseName"));
+		course.clickTurnEditingOn();
+		addActivity.selectBook("3");
+		addBook.enterNameField(this.properties.get("bookName"));
+		addBook.enterIntroField(this.properties.get("bookDescription"));
+		addBook.clickSaveAndRetToCourse();
 	}
 }
