@@ -74,7 +74,7 @@ public class MDLQA03TeacherSets1Of3TrackingOptions extends TestRunSettings {
 			addActivity.selectForum(this.properties.get("outlineSection"));
 			addForum.selectForumTypeStandardGeneral();
 			addForum.enterNameField(this.properties.get("nameOfForumOptional"));
-			addForum.enterIntroField(this.properties.get("introTextOfForumOptional"));
+			addForum.enterDescriptionField(this.properties.get("introTextOfForumOptional"));
 			addForum.clickSaveAndRetToCourse();
 			forum.clickForumLink(this.properties.get("nameOfForumOptional"));
 			forum.clickAddNewDiscussionTopicButton();
@@ -88,7 +88,7 @@ public class MDLQA03TeacherSets1Of3TrackingOptions extends TestRunSettings {
 			course.clickCourseLink(this.properties.get("courseShortname"));
 			addActivity.selectForum(this.properties.get("outlineSection"));
 			addForum.enterNameField(this.properties.get("nameOfForumOff"));
-			addForum.enterIntroField(this.properties.get("introTextOfForumOff"));
+			addForum.enterDescriptionField(this.properties.get("introTextOfForumOff"));
 			addForum.selectForumTypeStandardGeneral();
 			addForum.selectReadTrackingOption(this.properties.get("off"));
 			addForum.clickSaveAndRetToCourse();
@@ -108,7 +108,7 @@ public class MDLQA03TeacherSets1Of3TrackingOptions extends TestRunSettings {
 			addActivity.selectForum(this.properties.get("outlineSection"));
 		//Adding a new forum
 			addForum.enterNameField(this.properties.get("nameOfForumOn"));
-			addForum.enterIntroField(this.properties.get("introTextOfForumOn"));
+			addForum.enterDescriptionField(this.properties.get("introTextOfForumOn"));
 			addForum.selectForumTypeStandardGeneral();
 			addForum.selectReadTrackingOption(this.properties.get("on"));
 			addForum.clickSaveAndRetToCourse();

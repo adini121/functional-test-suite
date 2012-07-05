@@ -87,7 +87,7 @@ public class MDLQA517TeacherReceiveGradeCompCondition extends TestRunSettings {
 			//Teacher creates an online text assignment.
 			addActivity.selectAssignment(this.properties.get("MDLQA517OutlineSection"));
 			addAssignment.enterNameField(this.properties.get("MDLQA517AssignmentName"));
-			addAssignment.enterIntroField(this.properties.get("MDLQA517AssignmentText"));
+			addAssignment.enterDescriptionField(this.properties.get("MDLQA517AssignmentText"));
 			addAssignment.selectOnlineTextEnabledYes();
 			addAssignment.clickSaveAndDisplay();
 			//Teacher logs out

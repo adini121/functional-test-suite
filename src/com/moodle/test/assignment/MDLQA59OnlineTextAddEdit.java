@@ -63,7 +63,7 @@ public class MDLQA59OnlineTextAddEdit extends TestRunSettings {
 			course.clickTurnEditingOn();
 			addActivity.selectAssignment(this.properties.get("MDLQA59OutlineSection"));
 			addAssignment.enterNameField(this.properties.get("MDLQA59AssignmentName"));
-			addAssignment.enterIntroField(this.properties.get("MDLQA59AssignmentDescription"));
+			addAssignment.enterDescriptionField(this.properties.get("MDLQA59AssignmentDescription"));
 			addAssignment.selectOnlineTextEnabledYes();
 			addAssignment.selectFeedbackCommentsYes();
 			addAssignment.clickSaveAndDisplay();

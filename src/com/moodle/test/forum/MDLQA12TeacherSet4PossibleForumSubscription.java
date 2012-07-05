@@ -68,7 +68,7 @@ public class MDLQA12TeacherSet4PossibleForumSubscription extends TestRunSettings
 		addActivity.selectForum(this.properties.get("outlineSection"));
 	//Adding a new forum
 		addForum.enterNameField(this.properties.get("nameOfForumOptional"));
-		addForum.enterIntroField(this.properties.get("entryTextOptional"));
+		addForum.enterDescriptionField(this.properties.get("entryTextOptional"));
 		addForum.selectSubscriptionTypeOptional();
 		addForum.clickSaveAndRetToCourse();
 	}
@@ -79,7 +79,7 @@ public class MDLQA12TeacherSet4PossibleForumSubscription extends TestRunSettings
 		addActivity.selectForum(this.properties.get("outlineSection"));
 	//Adding a new forum
 		addForum.enterNameField(this.properties.get("nameOfForumForced"));
-		addForum.enterIntroField(this.properties.get("entryTextForced"));
+		addForum.enterDescriptionField(this.properties.get("entryTextForced"));
 		addForum.selectSubscriptionTypeForced();
 		addForum.clickSaveAndRetToCourse();
 	}
@@ -90,7 +90,7 @@ public class MDLQA12TeacherSet4PossibleForumSubscription extends TestRunSettings
 		addActivity.selectForum(this.properties.get("outlineSection"));
 	//Adding a new forum
 		addForum.enterNameField(this.properties.get("nameOfForumAuto"));
-		addForum.enterIntroField(this.properties.get("entryTextAuto"));
+		addForum.enterDescriptionField(this.properties.get("entryTextAuto"));
 		addForum.selectSubscriptionTypeAuto();
 		addForum.clickSaveAndRetToCourse();
 	}
@@ -101,7 +101,7 @@ public class MDLQA12TeacherSet4PossibleForumSubscription extends TestRunSettings
 		addActivity.selectForum(this.properties.get("outlineSection"));
 	//Adding a new forum
 		addForum.enterNameField(this.properties.get("nameOfForumDisabled"));
-		addForum.enterIntroField(this.properties.get("entryTextDisabled"));
+		addForum.enterDescriptionField(this.properties.get("entryTextDisabled"));
 		addForum.selectSubscriptionTypeDisabled();
 		addForum.clickSaveAndRetToCourse();
 	}

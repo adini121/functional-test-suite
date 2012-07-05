@@ -69,7 +69,7 @@ public class MDLQA11QAForumStudentPostBeforeView extends TestRunSettings {
 			addActivity.selectForum(this.properties.get("outlineSection"));
 		//Adding a new forum
 			addForum.enterNameField(this.properties.get("nameOfForum"));
-			addForum.enterIntroField(this.properties.get("introTextOfForum"));
+			addForum.enterDescriptionField(this.properties.get("introTextOfForum"));
 			addForum.selectForumTypeQA();
 			addForum.clickSaveAndRetToCourse();
 			course.clickTurnEditingOff();

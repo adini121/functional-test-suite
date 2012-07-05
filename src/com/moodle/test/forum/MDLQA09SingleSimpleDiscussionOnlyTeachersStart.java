@@ -57,7 +57,7 @@ public class MDLQA09SingleSimpleDiscussionOnlyTeachersStart extends TestRunSetti
 			addActivity.selectForum(this.properties.get("outlineSection"));
 		//Adding a new forum
 			addForum.enterNameField(this.properties.get("nameSimple"));
-			addForum.enterIntroField(this.properties.get("introText"));
+			addForum.enterDescriptionField(this.properties.get("introText"));
 			addForum.selectForumTypeSimple();
 			addForum.clickSaveAndRetToCourse();
 		}

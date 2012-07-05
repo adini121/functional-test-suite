@@ -86,7 +86,7 @@ public class MDLQA71AssignmentSubmissionOrder extends TestRunSettings {
 			//Teacher creates an online text assignment.
 			addActivity.selectAssignment(this.properties.get("MDLQA71OutlineSection"));
 			addAssignment.enterNameField(this.properties.get("MDLQA71AssignmentName"));
-			addAssignment.enterIntroField(this.properties.get("MDLQA71AssignmentText"));
+			addAssignment.enterDescriptionField(this.properties.get("MDLQA71AssignmentText"));
 			addAssignment.selectOnlineTextEnabledYes();
 			addAssignment.clickSaveAndDisplay();
 			//Teacher logs out

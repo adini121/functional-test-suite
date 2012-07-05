@@ -42,20 +42,20 @@ public abstract class FormAddEditSettings {
 		this.properties.put("formButtonCancel", dataLoad.getProperty("formButtonCancel"));
 	}
 /**
- * 	Enter a value in the forum name field.
- * @param name The value to be entered passed from the test.
+ * Enter a value in the name field of the form.
+ * @param name The value that yo want to enter in the name field.
  */
 	public void enterNameField(String name) {
 		WebElement nameField = this.driver.findElement(By .id("id_name"));
 		nameField.sendKeys(name);
 	}
 /**
- * Enter a value in the Forum introduction field.
- * @param text The value to be entered passed from the test.
+ * The value that you would like to enter in the Intro/Description field.
+ * @param text The value that you would like to enter.
  */
-	public void enterIntroField(String message) {
+	public void enterDescriptionField(String text) {
 		FormActions richText = new FormActions(driver);
-		richText.enterValueInTinyMCE(message);	
+		richText.enterValueInTinyMCE(text);	
 	}
 /**
  * Selects or deselects the "Display description on page" checkbox.  

@@ -74,14 +74,14 @@ public class MDLQA04TeacherSplitAndMoveDiscussions extends TestRunSettings {
 			addActivity.selectForum(this.properties.get("outlineSection"));
 		//Adding a new forum
 			addForum.enterNameField(this.properties.get("nameOfForum"));
-			addForum.enterIntroField(this.properties.get("introTextOfForum"));
+			addForum.enterDescriptionField(this.properties.get("introTextOfForum"));
 			addForum.selectSubscriptionTypeForced();
 			addForum.selectForumTypeStandardGeneral();
 			addForum.clickSaveAndRetToCourse();
 		//Adding a second forum
 			addActivity.selectForum(this.properties.get("outlineSection"));
 			addForum.enterNameField(this.properties.get("nameOfForumForMove"));
-			addForum.enterIntroField(this.properties.get("introTextOfForumForMove"));
+			addForum.enterDescriptionField(this.properties.get("introTextOfForumForMove"));
 			addForum.selectSubscriptionTypeForced();
 			addForum.selectForumTypeStandardGeneral();
 			addForum.clickSaveAndRetToCourse();

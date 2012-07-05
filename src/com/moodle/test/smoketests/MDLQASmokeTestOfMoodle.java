@@ -116,7 +116,7 @@ public class MDLQASmokeTestOfMoodle extends TestDataLoad {
 		course.clickTurnEditingOn();
 		addActivity.selectAssignment("2");
 		addAssignment.enterNameField(assignmentName);
-		addAssignment.enterIntroField(assignmentDescription);
+		addAssignment.enterDescriptionField(assignmentDescription);
 		addAssignment.selectFileSubmissionsEnabledNo();
 		addAssignment.selectOnlineTextEnabledYes();
 		addAssignment.clickSaveAndRetToCourse();
@@ -125,14 +125,14 @@ public class MDLQASmokeTestOfMoodle extends TestDataLoad {
 	public void addChat() {
 		addActivity.selectChat("2");
 		addChat.enterNameField(chatName);
-		addChat.enterIntroField(chatDescription);
+		addChat.enterDescriptionField(chatDescription);
 		addChat.clickSaveAndRetToCourse();
 	}
 	@Test
 	public void addChoice() {
 		addActivity.selectChoice("2");
 		addChoice.enterNameField(choiceName);
-		addChoice.enterIntroField(choiceDescription);
+		addChoice.enterDescriptionField(choiceDescription);
 		addChoice.enterOptionField("0", "option1");
 		addChoice.enterOptionField("1", "option2");
 		addChoice.clickSaveAndRetToCourse();
@@ -141,7 +141,7 @@ public class MDLQASmokeTestOfMoodle extends TestDataLoad {
 	public void addDatabase() {
 		addActivity.selectDatabase("2");
 		addDatabase.enterNameField(databaseName);
-		addDatabase.enterIntroField(databaseDescription);
+		addDatabase.enterDescriptionField(databaseDescription);
 		addDatabase.clickSaveAndRetToCourse();
 	}
 	@Test
@@ -152,14 +152,14 @@ public class MDLQASmokeTestOfMoodle extends TestDataLoad {
 	public void addForum() {
 		addActivity.selectForum("2");
 		addForum.enterNameField(forumName);
-		addForum.enterIntroField(forumDescription);
+		addForum.enterDescriptionField(forumDescription);
 		addForum.clickSaveAndRetToCourse();
 	}
 	@Test
 	public void addGlossary() {
 		addActivity.selectGlossary("2");
 		addGlossary.enterNameField(glossaryName);
-		addGlossary.enterIntroField(glossaryDescription);
+		addGlossary.enterDescriptionField(glossaryDescription);
 		addGlossary.clickSaveAndRetToCourse();
 	}
 	@Test
@@ -172,7 +172,7 @@ public class MDLQASmokeTestOfMoodle extends TestDataLoad {
 	public void addSurvey() {
 		addActivity.selectSurvey("2");
 		addSurvey.enterNameField(surveyName);
-		addSurvey.enterIntroField(surveyDescription);
+		addSurvey.enterDescriptionField(surveyDescription);
 		addSurvey.selectSurveyType(surveyType);
 		addLesson.clickSaveAndRetToCourse();
 	}
@@ -180,14 +180,14 @@ public class MDLQASmokeTestOfMoodle extends TestDataLoad {
 	public void addQuiz() {
 		addActivity.selectQuiz("2");
 		addQuiz.enterNameField(quizName);
-		addQuiz.enterIntroField(quizDescription);
+		addQuiz.enterDescriptionField(quizDescription);
 		addQuiz.clickSaveAndRetToCourse();
 	}
 	@Test
 	public void addWiki() {
 		addActivity.selectWiki("2");
 		addWiki.enterNameField(wikiName);
-		addWiki.enterIntroField(wikiDescription);
+		addWiki.enterDescriptionField(wikiDescription);
 		addWiki.enterFirstPageNameField(wikiFirstPageName);
 		addWiki.clickSaveAndRetToCourse();
 	}
@@ -195,14 +195,14 @@ public class MDLQASmokeTestOfMoodle extends TestDataLoad {
 	public void addWorkshop() {
 		addActivity.selectWorkshop("2");
 		addWorkshop.enterNameField(workshopName);
-		addWorkshop.enterIntroField(workshopDescription);
+		addWorkshop.enterDescriptionField(workshopDescription);
 		addWorkshop.clickSaveAndRetToCourse();
 	}
 	@Test
 	public void addBook() {
 		addActivity.selectBook("3");
 		addBook.enterNameField(bookName);
-		addBook.enterIntroField(bookDescription);
+		addBook.enterDescriptionField(bookDescription);
 		addBook.clickSaveAndRetToCourse();
 	}
 	@Test

@@ -65,7 +65,7 @@ public class MDLQA10EachPersonPosts1Discussion extends TestRunSettings {
 			addActivity.selectForum(this.properties.get("outlineSection"));
 		//Adding a new forum
 			addForum.enterNameField(this.properties.get("nameOfForum"));
-			addForum.enterIntroField(this.properties.get("introTextOfForum"));
+			addForum.enterDescriptionField(this.properties.get("introTextOfForum"));
 			addForum.selectForumTypeEachPerson();
 			addForum.clickSaveAndRetToCourse();
 			course.clickTurnEditingOff();

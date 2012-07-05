@@ -70,7 +70,7 @@ public class MDLQA61OfflineActivityGradeAndComments extends TestRunSettings {
 			addActivity.selectAssignment(this.properties.get("MDLQA61OutlineSection"));
 			//Teacher sets up assignment
 			addAssignment.enterNameField(this.properties.get("MDLQA61AssignmentName"));
-			addAssignment.enterIntroField(this.properties.get("MDLQA61AssignmentDescription"));
+			addAssignment.enterDescriptionField(this.properties.get("MDLQA61AssignmentDescription"));
 			addAssignment.selectFeedbackCommentsYes();
 			addAssignment.clickSaveAndDisplay();
 			//Teacher logs out

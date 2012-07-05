@@ -67,7 +67,7 @@ public class MDLQA1463ViewXAssignmentsOnlineText extends TestRunSettings {
 			addActivity.selectAssignment(this.properties.get("MDLQA1463OutlineSection"));
 			//Setup the assignment
 			addAssignment.enterNameField(this.properties.get("MDLQA1463AssigmentName"));
-			addAssignment.enterIntroField(this.properties.get("MDLQA1463AssignmentDescription"));
+			addAssignment.enterDescriptionField(this.properties.get("MDLQA1463AssignmentDescription"));
 			addAssignment.selectOnlineTextEnabledYes();
 			addAssignment.clickSaveAndDisplay();
 			//Log the teacher out

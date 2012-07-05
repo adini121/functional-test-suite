@@ -68,7 +68,7 @@ public class MDLQA1464TeacherSubmissionEnabledOnlineTextEnabled extends TestRunS
 			addActivity.selectAssignment(this.properties.get("MDLQA1464OutlineSection"));
 			//Setup Assigment activity
 			addAssignment.enterNameField(this.properties.get("MDLQA1464AssignmentName"));
-			addAssignment.enterIntroField(this.properties.get("MDLQA1464AssignmentText"));
+			addAssignment.enterDescriptionField(this.properties.get("MDLQA1464AssignmentText"));
 			addAssignment.selectOnlineTextEnabledYes();
 			addAssignment.selectSubmissionCommentsYes();
 			addAssignment.clickSaveAndDisplay();

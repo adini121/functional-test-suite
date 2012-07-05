@@ -67,7 +67,7 @@ public class MDLQA69TeacherSubmissionEnabledFileSubmissionEnabled extends TestRu
 			addActivity.selectAssignment(this.properties.get("MDLQA69OutlineSection"));
 			//Setup Assigment activity
 			addAssignment.enterNameField(this.properties.get("MDLQA69AssignmentName"));
-			addAssignment.enterIntroField(this.properties.get("MDLQA69AssignmentText"));
+			addAssignment.enterDescriptionField(this.properties.get("MDLQA69AssignmentText"));
 			addAssignment.selectFileSubmissionsEnabledYes();
 			addAssignment.selectSubmissionCommentsYes();
 			addAssignment.clickSaveAndDisplay();
