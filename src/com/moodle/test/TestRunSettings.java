@@ -29,6 +29,7 @@ import com.moodle.testmanager.pageObjectModel.CoursesEditCourseSettings;
 import com.moodle.testmanager.pageObjectModel.Databases;
 import com.moodle.testmanager.pageObjectModel.DatabasesAddDatabase;
 import com.moodle.testmanager.pageObjectModel.DatabasesFields;
+import com.moodle.testmanager.pageObjectModel.FolderAddForm;
 import com.moodle.testmanager.pageObjectModel.Forum;
 import com.moodle.testmanager.pageObjectModel.ForumAddForm;
 import com.moodle.testmanager.pageObjectModel.ForumPosts;
@@ -76,6 +77,7 @@ public class TestRunSettings {
 	protected Databases databases = new Databases(driver);
 	protected DatabasesAddDatabase addDatabase = new DatabasesAddDatabase(driver);
 	protected DatabasesFields databaseFields = new DatabasesFields(driver);
+	protected FolderAddForm addFolder = new FolderAddForm(driver);
 	protected Forum forum = new Forum(driver);
 	protected ForumAddForm addForum = new ForumAddForm(driver);
 	protected ForumPosts forumPosts = new ForumPosts(driver);

@@ -40,7 +40,7 @@ public class MDLQASmokeTestOfMoodle extends TestDataLoad {
 	private String workshopDescription = this.properties.get("workshopDescription");
 	private String bookName = this.properties.get("bookName");
 	private String bookDescription = this.properties.get("bookDescription");	
-	@Test
+	//@Test
 	public void installation() {
 		Install23 install23 = new Install23();
 		install23.install();
@@ -48,6 +48,7 @@ public class MDLQASmokeTestOfMoodle extends TestDataLoad {
 	@Test
 	public void addCourse() throws MalformedURLException {
 		MDLQADT1AddCourse addCourse = new MDLQADT1AddCourse();
+		addCourse.login();
 		addCourse.addCourse();
 	}
 	@Test
@@ -203,5 +204,30 @@ public class MDLQASmokeTestOfMoodle extends TestDataLoad {
 		addBook.enterNameField(bookName);
 		addBook.enterIntroField(bookDescription);
 		addBook.clickSaveAndRetToCourse();
+	}
+	@Test
+	public void addFile() {
+		//TODO Will need to start seeding database and some files objects.
+	}
+	@Test
+	public void addFolder() {
+		addActivity.selectFolder("3");
+		
+	}
+	@Test
+	public void addIMSContentPackage() {
+		//TODO
+	}
+	@Test
+	public void addLabel() {
+		//TODO
+	}
+	@Test
+	public void addPage() {
+		//TODO
+	}
+	@Test
+	public void addURL() {
+		//TODO
 	}
 }
