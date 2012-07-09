@@ -13,7 +13,7 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.Select;
 
 import com.moodle.seleniumutils.PassFailCriteria;
-import com.moodle.test.FormActions;
+import com.moodle.testmanager.FormActions;
 /**
  * This is the page object model for the Posting to a forum.
  * @author Tim Barker 

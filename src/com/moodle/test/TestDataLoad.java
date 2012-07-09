@@ -61,5 +61,9 @@ public class TestDataLoad extends TestRunSettings{
 	this.properties.put("workshopDescription", testData.getProperty("workshopDescription"));
 	this.properties.put("bookName", testData.getProperty("bookName"));
 	this.properties.put("bookDescription", testData.getProperty("bookDescription"));
+	this.properties.put("folderName", testData.getProperty("folderName"));
+	this.properties.put("folderDescription", testData.getProperty("folderDescription"));
+	this.properties.put("subFolderName", testData.getProperty("subFolderName"));
+	this.properties.put("label", testData.getProperty("label"));
 	}
 }

@@ -7,7 +7,7 @@ import java.util.Properties;
 
 import org.openqa.selenium.remote.RemoteWebDriver;
 
-import com.moodle.test.FormActions;
+import com.moodle.testmanager.FormActions;
 /**
  * This is the page object model for adding a Lesson activity to a course.
  * @author Tim Barker 

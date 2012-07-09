@@ -11,7 +11,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
 import com.moodle.seleniumutils.PassFailCriteria;
-import com.moodle.test.FormActions;
+import com.moodle.testmanager.FormActions;
 /**
  * The page object model for the Add Submission.
  * @author Tim Barker 

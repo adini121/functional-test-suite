@@ -2,7 +2,7 @@ package com.moodle.testmanager.pageObjectModel;
 
 import org.openqa.selenium.remote.RemoteWebDriver;
 
-import com.moodle.test.FormActions;
+import com.moodle.testmanager.FormActions;
 /**
  * This is the page object model for the add chat form.
  * @author Tim Barker 

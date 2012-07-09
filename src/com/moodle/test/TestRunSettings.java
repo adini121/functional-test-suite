@@ -37,6 +37,7 @@ import com.moodle.testmanager.pageObjectModel.ForumSplit;
 import com.moodle.testmanager.pageObjectModel.FrontPageRoles;
 import com.moodle.testmanager.pageObjectModel.GlossaryAddForm;
 import com.moodle.testmanager.pageObjectModel.Installation;
+import com.moodle.testmanager.pageObjectModel.LabelAddForm;
 import com.moodle.testmanager.pageObjectModel.LessonAddForm;
 import com.moodle.testmanager.pageObjectModel.ProfileEdit;
 import com.moodle.testmanager.pageObjectModel.QuizAddForm;
@@ -84,6 +85,7 @@ public class TestRunSettings {
 	protected ForumSplit splitForum = new ForumSplit(driver);
 	protected FrontPageRoles frontPageRoles = new FrontPageRoles(driver);
 	protected GlossaryAddForm addGlossary = new GlossaryAddForm(driver);
+	protected LabelAddForm addLabel = new LabelAddForm(driver);
 	protected LessonAddForm addLesson = new LessonAddForm(driver);
 	protected Installation installation = new Installation(driver);
 	protected SurveyAddForm addSurvey = new SurveyAddForm(driver);

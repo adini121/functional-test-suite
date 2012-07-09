@@ -1,4 +1,4 @@
-package com.moodle.test;
+package com.moodle.testmanager;
 
 import java.util.concurrent.TimeUnit;
 

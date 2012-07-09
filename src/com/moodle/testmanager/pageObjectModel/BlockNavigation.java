@@ -9,7 +9,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
-import com.moodle.test.Navigation;
+import com.moodle.testmanager.Navigation;
 /**
  * This is the page object model for the Navigation Block. All interaction with the navigation block is contained in here.
  * @author Tim Barker 

@@ -2,7 +2,6 @@ package com.moodle.testmanager;
 
 import org.openqa.selenium.remote.RemoteWebDriver;
 
-import com.moodle.test.FormActions;
 /**
  * Re-used form objects in one place.
  * @author Tim Barker 

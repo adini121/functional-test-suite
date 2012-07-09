@@ -10,7 +10,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.Select;
 
-import com.moodle.test.FormActions;
+import com.moodle.testmanager.FormActions;
 /**
  * This is the page object model for the editing course settings.
  * @author Tim Barker 

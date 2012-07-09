@@ -5,16 +5,16 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebDriver;
+
+import com.moodle.testmanager.FilesElements;
 /**
  * This is the page object model for adding a Folder resource to a course.
  * @author Tim Barker 
  * @see <a href="http://www.gnu.org/copyleft/gpl.html">License: GNU GPL v3 or later</a>
  */
 public class FilePicker{
-	RemoteWebDriver driver;
+	public RemoteWebDriver driver;
 /**
  * Hashmap for language file.
  */
@@ -22,7 +22,7 @@ public class FilePicker{
 /**
  * Constructors for imported classes.
  */
-	private FileManager fileElement = new FileManager(driver); 
+	private FilesElements filePicker = new FilesElements(driver);
 /**
  * Language file location.
  */
@@ -58,46 +58,43 @@ public class FilePicker{
 		this.properties.put("PROPERTY", databaseAddData.getProperty("PROPERTY"));
 	}
 /*
- * Object templates
- */
-/*
  * Specific object methods.
  */
 	/**
 	 * Clicks the file manager form element "Add..." button.
 	 */
 	public void clickAddButton() {
-		fileElement.fileManButton(locAddButton);
+		filePicker.fileManButton(locAddButton);
 	}
 	/**
 	 * Clicks the file manager form element "Create folder" button.
 	 */
 	public void clickCreateFolderButton() {
-		fileElement.fileManButton(locCreateFolderButton);
+		filePicker.fileManButton(locCreateFolderButton);
 	}
 	/**
 	 * Clicks the file manager form element icon view button regardless of it's state.
 	 */
 	public void clickIconViewButton() {
-		fileElement.stickyButton(locIconBtn);
+		filePicker.stickyButton(locIconBtn);
 	}
 	/**
 	 * Clicks the file manager form element detail view button regardless of it's state.
 	 */
 	public void clickDetailViewButton() {
-		fileElement.stickyButton(locDetailBtn);
+		filePicker.stickyButton(locDetailBtn);
 	}
 	/**
 	 * Clicks the file manager form element tree view button regardless of it's state.
 	 */
 	public void clickTreeViewButton() {
-		fileElement.stickyButton(locTreeBtn);
+		filePicker.stickyButton(locTreeBtn);
 	}
 	/**
 	 * Clicks a given folder breadcrumb.
 	 * @param folderName The name of the folder that you would like to click.
 	 */
 	public void clickBreadcrumb(String folderName) {
-		fileElement.clickBreadcrumb(folderName);
+		filePicker.clickBreadcrumb(folderName);
 	}
 }

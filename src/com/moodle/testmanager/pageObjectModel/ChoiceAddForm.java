@@ -5,7 +5,7 @@ import java.util.Properties;
 
 import org.openqa.selenium.remote.RemoteWebDriver;
 
-import com.moodle.test.FormActions;
+import com.moodle.testmanager.FormActions;
 /**
  * This is the page object model for the add choice form.
  * @author Tim Barker 

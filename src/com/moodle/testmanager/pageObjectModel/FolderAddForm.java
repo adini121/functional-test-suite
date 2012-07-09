@@ -11,7 +11,7 @@ import org.openqa.selenium.remote.RemoteWebDriver;
  * @author Tim Barker 
  * @see <a href="http://www.gnu.org/copyleft/gpl.html">License: GNU GPL v3 or later</a>
  */
-public class FolderAddForm extends FileManager {
+public class FolderAddForm extends FormAddEditSettingsFileManager {
 /**
  * Hashmap for language file.
  */
@@ -33,14 +33,14 @@ public class FolderAddForm extends FileManager {
  * Loads data for the page object from the internationalization layer /properties/data/static/blockNavigation.properties
  * where a selector requires a text string visible through the user interface e.g. value=button text, or link text.
  */
-	public void loadObjectData(String datafile) {
+	/*public void loadObjectData(String datafile) {
 		Properties databaseAddData = new Properties();
 		try {
 			databaseAddData.load(new FileInputStream(langFile));
 		} catch (Exception e) {}
 		//put values from the properties file into hashmap
 		this.properties.put("PROPERTY", databaseAddData.getProperty("PROPERTY"));
-	}
+	}*/
 /*
  * Override unused methods from super.
  */

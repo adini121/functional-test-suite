@@ -5,16 +5,13 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebDriver;
-
-import com.moodle.testmanager.FormActions;
 /**
  * This is the page object model for adding a Book resource to a course.
  * @author Tim Barker 
  * @see <a href="http://www.gnu.org/copyleft/gpl.html">License: GNU GPL v3 or later</a>
  */
-public class BookAddForm extends FormAddEditSettings {
+public class LabelAddForm extends FormAddEditSettings {
 /**
  * Hashmap for language file.
  */
@@ -22,19 +19,13 @@ public class BookAddForm extends FormAddEditSettings {
 /**
  * Language file location.
  */
-	private String langFile =  "properties/data/static/BookAddForm.properties";
-/**
- * Locator variables.
- */
-	private String locChapterFormatting="id_numbering";
-	private String locCustom="id_customtitles";
-
+	private String langFile =  "properties/data/static/LabelAddForm.properties";
 /**
  * Constructor for the page object.	
  * @param driver The driver that is used for the test. There is no need to specify the value for the driver here as the driver
  * is instantiated in the test using one of the com.moodle.seleniumutils.SeleniumManager constructors.
  */
-	public BookAddForm(RemoteWebDriver driver) {
+	public LabelAddForm(RemoteWebDriver driver) {
 		super(driver);
 		this.loadObjectData(langFile);
 	}
@@ -68,43 +59,36 @@ public class BookAddForm extends FormAddEditSettings {
 		gradeCategory = null;
 	}
 /**
- * selectGRoupMode is not used.
+ * selectGroupMode is not used.
  */
 	@Override
 	public void selectGroupMode(String itemToSelect){
 		itemToSelect=null;
 	}
-/*
- * Specific object methods.
- */
 /**
- * Generic checkbox click method for re-use in this class.
- * @param cboxLocator The locator of the checkbox, using ID only.
+ * Method is not used.
  */
-	private void checkboxBook(String cboxLocator){
-		WebElement checkbox = driver.findElementById(cboxLocator);
-		checkbox.click();
+	@Override
+	public void checkboxDescOnCourse() {	
 	}
 /**
- * Generic dropdown method for re-use in this class.
- * @param dropdownLocator The locator of the dropdown. With everything here is an id.
- * @param itemToSelect The item that is to be selected.
+ * Method is not used.
  */
-	private void dropdownBook(String dropdownLocator, String itemToSelect){
-		FormActions dropdown = new FormActions(driver);
-		dropdown.selectDropdownItemByID(dropdownLocator, itemToSelect);
+	@Override
+	public void clickShowHideAdvanced() {	
 	}
 /**
- * Selects a value from the Chapter formatting dropdown.
- * @param format
+ * Method is not used.
  */
-	public void selectChapterFormatting(String format){
-		dropdownBook(locChapterFormatting, format);
+	@Override
+	public void enterNameField(String name) {
+		name=null;
 	}
 /**
- * Selects/de-selects the Custom titles checkbox.
+ * Method is not used.
  */
-	public void clickCustomTitlesCheckbox(){
-		checkboxBook(locCustom);
+	@Override
+	public void idNumber(String idNumber) {
+		idNumber=null;
 	}
 }

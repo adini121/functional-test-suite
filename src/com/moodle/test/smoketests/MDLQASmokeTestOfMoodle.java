@@ -40,18 +40,22 @@ public class MDLQASmokeTestOfMoodle extends TestDataLoad {
 	private String workshopDescription = this.properties.get("workshopDescription");
 	private String bookName = this.properties.get("bookName");
 	private String bookDescription = this.properties.get("bookDescription");	
+	private String folderName = this.properties.get("folderName");
+	private String folderDescription = this.properties.get("folderDescription");
+	private String subFolderName = this.properties.get("subFolderName");
+	private String label = this.properties.get("label");
 	//@Test
 	public void installation() {
 		Install23 install23 = new Install23();
 		install23.install();
 	}
-	@Test
+	//@Test
 	public void addCourse() throws MalformedURLException {
 		MDLQADT1AddCourse addCourse = new MDLQADT1AddCourse();
 		addCourse.login();
 		addCourse.addCourse();
 	}
-	@Test
+	//@Test
 	public void addUsers() throws Exception {
 		MDLQADT2AddUsers addUsers = new MDLQADT2AddUsers();
 		addUsers.addTeacher();
@@ -69,7 +73,7 @@ public class MDLQASmokeTestOfMoodle extends TestDataLoad {
 		//TODO Create Add Manager Step
 		//addUsers.addManager();
 	}
-	@Test
+	//@Test
 	public void assignFrontPageRoles() {
 		MDLQADT3AssignFrontPageRoles roles = new MDLQADT3AssignFrontPageRoles();
 		roles.assignTeacherRole();
@@ -88,7 +92,7 @@ public class MDLQASmokeTestOfMoodle extends TestDataLoad {
 		//TODO Create Add manager role step
 		//roles.assignManagerRole();
 	}
-	@Test
+//	@Test
 	public void enrolUsers() {
 		MDLQADT4EnrolUsers enrol = new MDLQADT4EnrolUsers();
 		//TODO re-write the enrol teacher step so you don't have to use the ajax buttons
@@ -109,7 +113,7 @@ public class MDLQASmokeTestOfMoodle extends TestDataLoad {
 		//enrol.enrolManager();
 		user.selectLogout();
 	}
-	@Test
+//	@Test
 	public void addAssignment() {
 		user.loginToSystem(teacher, password);
 		course.clickCourseLink(courseName);
@@ -121,14 +125,14 @@ public class MDLQASmokeTestOfMoodle extends TestDataLoad {
 		addAssignment.selectOnlineTextEnabledYes();
 		addAssignment.clickSaveAndRetToCourse();
 	}
-	@Test
+//	@Test
 	public void addChat() {
 		addActivity.selectChat("2");
 		addChat.enterNameField(chatName);
 		addChat.enterDescriptionField(chatDescription);
 		addChat.clickSaveAndRetToCourse();
 	}
-	@Test
+//	@Test
 	public void addChoice() {
 		addActivity.selectChoice("2");
 		addChoice.enterNameField(choiceName);
@@ -137,38 +141,38 @@ public class MDLQASmokeTestOfMoodle extends TestDataLoad {
 		addChoice.enterOptionField("1", "option2");
 		addChoice.clickSaveAndRetToCourse();
 	}
-	@Test
+//	@Test
 	public void addDatabase() {
 		addActivity.selectDatabase("2");
 		addDatabase.enterNameField(databaseName);
 		addDatabase.enterDescriptionField(databaseDescription);
 		addDatabase.clickSaveAndRetToCourse();
 	}
-	@Test
+//	@Test
 	public void addLTI() {
 		//TODO will come back to this as it isn't a priority and we will need some setup doing in advance
 	}
-	@Test
+//	@Test
 	public void addForum() {
 		addActivity.selectForum("2");
 		addForum.enterNameField(forumName);
 		addForum.enterDescriptionField(forumDescription);
 		addForum.clickSaveAndRetToCourse();
 	}
-	@Test
+//	@Test
 	public void addGlossary() {
 		addActivity.selectGlossary("2");
 		addGlossary.enterNameField(glossaryName);
 		addGlossary.enterDescriptionField(glossaryDescription);
 		addGlossary.clickSaveAndRetToCourse();
 	}
-	@Test
+//	@Test
 	public void addLesson() {
 		addActivity.selectLesson("2");
 		addLesson.enterNameField(lessonName);
 		addLesson.clickSaveAndRetToCourse();
 	}
-	@Test
+//	@Test
 	public void addSurvey() {
 		addActivity.selectSurvey("2");
 		addSurvey.enterNameField(surveyName);
@@ -176,14 +180,14 @@ public class MDLQASmokeTestOfMoodle extends TestDataLoad {
 		addSurvey.selectSurveyType(surveyType);
 		addLesson.clickSaveAndRetToCourse();
 	}
-	@Test
+//	@Test
 	public void addQuiz() {
 		addActivity.selectQuiz("2");
 		addQuiz.enterNameField(quizName);
 		addQuiz.enterDescriptionField(quizDescription);
 		addQuiz.clickSaveAndRetToCourse();
 	}
-	@Test
+//	@Test
 	public void addWiki() {
 		addActivity.selectWiki("2");
 		addWiki.enterNameField(wikiName);
@@ -191,42 +195,52 @@ public class MDLQASmokeTestOfMoodle extends TestDataLoad {
 		addWiki.enterFirstPageNameField(wikiFirstPageName);
 		addWiki.clickSaveAndRetToCourse();
 	}
-	@Test
+//	@Test
 	public void addWorkshop() {
 		addActivity.selectWorkshop("2");
 		addWorkshop.enterNameField(workshopName);
 		addWorkshop.enterDescriptionField(workshopDescription);
 		addWorkshop.clickSaveAndRetToCourse();
 	}
-	@Test
+//	@Test
 	public void addBook() {
 		addActivity.selectBook("3");
 		addBook.enterNameField(bookName);
 		addBook.enterDescriptionField(bookDescription);
 		addBook.clickSaveAndRetToCourse();
 	}
-	@Test
+//	@Test
 	public void addFile() {
 		//TODO Will need to start seeding database and some files objects.
 	}
 	@Test
 	public void addFolder() {
+		user.loginToSystem(teacher, password);
+		course.clickCourseLink(courseName);
+		course.clickTurnEditingOn();
 		addActivity.selectFolder("3");
-		
+		addFolder.enterNameField(folderName);
+		addFolder.enterDescriptionField(folderDescription);
+		addFolder.clickCreateFolderIconButton();
+		addFolder.enterNewSubFolderName(subFolderName);
+		addFolder.clickCreateFolderButton();
+		addFolder.clickSaveAndRetToCourse();
 	}
-	@Test
+//	@Test
 	public void addIMSContentPackage() {
 		//TODO
 	}
 	@Test
 	public void addLabel() {
-		//TODO
+		addActivity.selectLabel("3");
+		addLabel.enterDescriptionField(label);
+		addLabel.clickSaveAndDisplay();
 	}
-	@Test
+//	@Test
 	public void addPage() {
 		//TODO
 	}
-	@Test
+//	@Test
 	public void addURL() {
 		//TODO
 	}
