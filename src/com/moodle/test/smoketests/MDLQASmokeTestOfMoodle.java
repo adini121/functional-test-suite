@@ -236,9 +236,10 @@ public class MDLQASmokeTestOfMoodle extends TestDataLoad {
 		addLabel.enterDescriptionField(label);
 		addLabel.clickSaveAndDisplay();
 	}
-//	@Test
+	@Test
 	public void addPage() {
-		//TODO
+		addActivity.selectPage("3");
+		
 	}
 //	@Test
 	public void addURL() {

@@ -19,6 +19,9 @@ public class FormActions {
 	private String locYear = "year";
 	private String locHour = "hour";
 	private String locMin = "min";
+//Generic locators
+	private String locGenXpathPrefix=".//table[@id='";
+	private String locGenXpathSuffix="']/*/*/*/iframe";
 /**
  * Constructor for the FormActions utility class.	
  * @param driver The driver that is used for the test. There is no need to specify the value for the driver here as the driver
@@ -227,5 +230,14 @@ public class FormActions {
 		selectDay(day, idPrefix);
 		selectMonth(month, idPrefix);
 		selectYear(year, idPrefix);
+	}
+	public void enterValueGenericTinyMCE(CharSequence message, String tableID) {
+		WebElement messagebox = driver.findElement(By.xpath(locGenXpathPrefix + tableID + locGenXpathSuffix));
+		driver.switchTo().frame(messagebox);
+		WebElement richTextBox = driver.findElement(By.id("tinymce"));
+		richTextBox.click();
+		richTextBox.sendKeys(message);
+		driver.switchTo().window(driver.getWindowHandle());
+		
 	}
 }

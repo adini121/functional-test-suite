@@ -9,6 +9,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.moodle.seleniumutils.PassFailCriteria;
 /**
@@ -56,6 +58,7 @@ public class Courses {
  * the page object locates an alternative Add a new course button.
  */
 	public void clickAddCourse() {
+		driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
 		boolean itemVisible = false;
 		try {
 			WebElement addCourseButton = driver.findElement(By .cssSelector("input[value='" +
@@ -79,6 +82,7 @@ public class Courses {
 					"']"));
 			addCourseButton.click();
 		}
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 	}
 /**
  * Enters a value passed from the test into the fullname field.

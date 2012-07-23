@@ -33,9 +33,9 @@ public class Install23 extends TestRunSettings {
 		}
 	@Test
 	public void install (){
-		installation.clickNext();
-		installation.clickNext();
-		installation.clickNext();
+		installation.clickContinue();
+		installation.clickContinue();
+		installation.clickContinue();
 		addNewUser.enterPassword(this.properties.get("password"));
 		addNewUser.enterEmail(this.properties.get("adminEmail"));
 		addNewUser.enterCity(this.properties.get("city"));
