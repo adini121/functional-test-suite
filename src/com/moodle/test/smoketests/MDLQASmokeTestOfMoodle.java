@@ -44,18 +44,18 @@ public class MDLQASmokeTestOfMoodle extends TestDataLoad {
 	private String folderDescription = this.properties.get("folderDescription");
 	private String subFolderName = this.properties.get("subFolderName");
 	private String label = this.properties.get("label");
-	@Test
+	//@Test
 	public void installation() {
 		Install23 install23 = new Install23();
 		install23.install();
 	}
-	@Test
+	//@Test
 	public void addCourse() throws MalformedURLException {
 		MDLQADT1AddCourse addCourse = new MDLQADT1AddCourse();
 		addCourse.login();
 		addCourse.addCourse();
 	}
-	@Test
+	//@Test
 	public void addUsers() throws Exception {
 		MDLQADT2AddUsers addUsers = new MDLQADT2AddUsers();
 		addUsers.addTeacher();
@@ -73,7 +73,7 @@ public class MDLQASmokeTestOfMoodle extends TestDataLoad {
 		//TODO Create Add Manager Step
 		//addUsers.addManager();
 	}
-	@Test
+	//@Test
 	public void assignFrontPageRoles() {
 		MDLQADT3AssignFrontPageRoles roles = new MDLQADT3AssignFrontPageRoles();
 		roles.assignTeacherRole();
@@ -92,7 +92,7 @@ public class MDLQASmokeTestOfMoodle extends TestDataLoad {
 		//TODO Create Add manager role step
 		//roles.assignManagerRole();
 	}
-	@Test
+	//@Test
 	public void enrolUsers() {
 		MDLQADT4EnrolUsers enrol = new MDLQADT4EnrolUsers();
 		//TODO re-write the enrol teacher step so you don't have to use the ajax buttons
