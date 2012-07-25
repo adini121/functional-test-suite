@@ -67,11 +67,11 @@
 		<junit printsummary="yes" fork="yes" errorproperty="junit.error" failureproperty="junit.error">
 			<classpath refid="junit.class.path"/>
 			<formatter type="xml" />
-			<!--<test todir="${testresults}" name="com.moodle.test.moodleinstallation.Install23"/>-->
+			<test todir="${testresults}" name="com.moodle.test.moodleinstallation.Install23"/>
 			<test todir="${testresults}" name="com.moodle.test.datacreation.MDLQADT1AddCourse"/>
 			<test todir="${testresults}" name="com.moodle.test.datacreation.MDLQADT2AddUsers"/>
 			<test todir="${testresults}" name="com.moodle.test.datacreation.MDLQADT3AssignFrontPageRoles"/>
-			<test todir="${testresults}" name="com.moodle.test.datacreation.MDLQADT4GiveTeacherCoursePermissions"/>
+			<test todir="${testresults}" name="com.moodle.test.datacreation.MDLQADT4EnrolUsers"/>
 		<!--<test todir="${testresults}" name="com.moodle.test.forum.MDLQA03TeacherSets1Of3TrackingOptions"/>
 			<test todir="${testresults}" name="com.moodle.test.forum.MDLQA04TeacherSplitAndMoveDiscussions"/>
 			<test todir="${testresults}" name="com.moodle.test.forum.MDLQA05StudentsDisplayOptions"/>

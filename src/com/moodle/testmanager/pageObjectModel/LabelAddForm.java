@@ -91,4 +91,8 @@ public class LabelAddForm extends FormAddEditSettings {
 	public void idNumber(String idNumber) {
 		idNumber=null;
 	}
+	@Override
+	public void clickSaveAndDisplay() {
+		clickSaveAndRetToCourse();
+	}
 }
