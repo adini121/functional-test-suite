@@ -39,6 +39,7 @@ import com.moodle.testmanager.pageObjectModel.GlossaryAddForm;
 import com.moodle.testmanager.pageObjectModel.Installation;
 import com.moodle.testmanager.pageObjectModel.LabelAddForm;
 import com.moodle.testmanager.pageObjectModel.LessonAddForm;
+import com.moodle.testmanager.pageObjectModel.PluginsManageEditors;
 import com.moodle.testmanager.pageObjectModel.ProfileEdit;
 import com.moodle.testmanager.pageObjectModel.QuizAddForm;
 import com.moodle.testmanager.pageObjectModel.ReportActivityCompletion;
@@ -89,6 +90,7 @@ public class TestRunSettings {
 	protected LessonAddForm addLesson = new LessonAddForm(driver);
 	protected Installation installation = new Installation(driver);
 	protected SurveyAddForm addSurvey = new SurveyAddForm(driver);
+	protected PluginsManageEditors manageEditors = new PluginsManageEditors(driver);
 	protected ProfileEdit editProfile = new ProfileEdit(driver);
 	protected QuizAddForm addQuiz = new QuizAddForm(driver);
 	protected ReportActivityCompletion activityCompletionReport = new ReportActivityCompletion(driver);
@@ -110,19 +112,19 @@ public class TestRunSettings {
 			String moodleHomePage = startupConfig.getProperty("moodleHomePage");
 		//Call setup method
 			sm = new SeleniumManager();
-			sm.startRemotes(gridHubURL, browserType);
+			//sm.startRemotes(gridHubURL, browserType);
 			//sm.startChromeDriver(chromeDriverLocation);
-			//sm.startFirefoxDriver();
-			driver = sm.getRemoteDriver();
+			sm.startFirefoxDriver();
+			//driver = sm.getRemoteDriver();
 			//driver = sm.getChromeDriver();
-			//driver = sm.getFirefoxDriver();
+			driver = sm.getFirefoxDriver();
 			driver.get(moodleHomePage);
 	}
 	@AfterClass
 	public static void Quit() {
 	//End Webdriver Session by calling teardown method
-			sm.teardown();
-			//sm.teardownFirefox();
+			//sm.teardown();
+			sm.teardownFirefox();
 	}
 
 }
