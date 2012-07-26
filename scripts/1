@@ -1,0 +1,5 @@
+26/07/2012 11:26:56 AM org.openqa.grid.selenium.GridLauncher main
+INFO: Launching a selenium grid server
+2012-07-26 11:26:56.708:INFO:osjs.Server:jetty-7.x.y-SNAPSHOT
+2012-07-26 11:26:56.735:INFO:osjsh.ContextHandler:started o.s.j.s.ServletContextHandler{/,null}
+2012-07-26 11:26:56.740:INFO:osjs.AbstractConnector:Started SocketConnector@0.0.0.0:4444
