@@ -4,7 +4,6 @@
 package com.moodle.test.datacreation;
 
 import java.io.FileInputStream;
-import java.net.MalformedURLException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;

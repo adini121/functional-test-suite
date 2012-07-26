@@ -112,19 +112,19 @@ public class TestRunSettings {
 			String moodleHomePage = startupConfig.getProperty("moodleHomePage");
 		//Call setup method
 			sm = new SeleniumManager();
-			//sm.startRemotes(gridHubURL, browserType);
+			sm.startRemotes(gridHubURL, browserType);
 			//sm.startChromeDriver(chromeDriverLocation);
-			sm.startFirefoxDriver();
-			//driver = sm.getRemoteDriver();
+			//sm.startFirefoxDriver();
+			driver = sm.getRemoteDriver();
 			//driver = sm.getChromeDriver();
-			driver = sm.getFirefoxDriver();
+			//driver = sm.getFirefoxDriver();
 			driver.get(moodleHomePage);
 	}
 	@AfterClass
 	public static void Quit() {
 	//End Webdriver Session by calling teardown method
-			//sm.teardown();
-			sm.teardownFirefox();
+			sm.teardown();
+			//sm.teardownFirefox();
 	}
 
 }

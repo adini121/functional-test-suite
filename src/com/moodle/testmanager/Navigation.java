@@ -29,6 +29,7 @@ public class Navigation {
 	public void navigateTree2DeepByXpath(String level1, String level2){
 		boolean itemVisible = false;
 		try{
+			driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
 			WebElement e = driver.findElement(By .xpath(level2));
 			itemVisible = e.isDisplayed();
 		}
@@ -43,7 +44,7 @@ public class Navigation {
 			level1Element.click();
 			WebElement level2Element = driver.findElement(By .xpath(level2));
 			level2Element.click();
-			driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+			driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		}
 	}
 /**
@@ -55,6 +56,7 @@ public class Navigation {
 	public void navigateTree3DeepByXpath(String level1, String level2, String level3){
 		boolean itemVisible = false;
 		try{
+			driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
 			WebElement e = driver.findElement(By .xpath(level3));
 			itemVisible = e.isDisplayed();
 		}
@@ -71,6 +73,7 @@ public class Navigation {
 			WebElement level3Element = driver.findElement(By .xpath(level3));
 			level3Element.click();
 		}
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 	}
 /**
  * Intelligently navigates to a tree menu to an item that is 4 levels deep e.g. "Add a new user". 
@@ -83,6 +86,7 @@ public class Navigation {
 			String level3, String level4) {
 		boolean itemVisible = false;
 		try{
+			driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
 			WebElement e = driver.findElement(By .xpath(level4));
 			itemVisible = e.isDisplayed();
 		}
@@ -101,7 +105,7 @@ public class Navigation {
 			level3Element.click();
 			WebElement level4Element =  driver.findElement(By .xpath(level4));
 			level4Element.click();
-			driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+			driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		}
 	}
 }

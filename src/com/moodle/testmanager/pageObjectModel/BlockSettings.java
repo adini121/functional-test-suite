@@ -19,8 +19,6 @@ public class BlockSettings {
 	public static String blockSettingsData = "properties/data/static/blockSettings.properties";
 	private Map<String, String> properties = new HashMap<String, String>();
 	RemoteWebDriver driver;
-	protected Navigation navigate = new Navigation(driver);
-	protected PassFailCriteria passFail = new PassFailCriteria(driver);
 /**
  * Constructor for the page object.	
  * @param driver The driver that is used for the test. There is no need to specify the value for the driver here as the driver
@@ -30,10 +28,6 @@ public class BlockSettings {
 	public BlockSettings(RemoteWebDriver driver) {
 		this.driver = driver;
 		this.loadObjectData();
-		this.locSiteAdmin = null;
-		this.locManageEditors = null;
-		this.locPlugins = null;
-		this.locTextEditors = null;
 	}
 /**
  * Loads data for the page object from the internationalization layer /properties/data/static/blockNavigation.properties
@@ -66,37 +60,25 @@ public class BlockSettings {
 		this.properties.put("treeTextEditors", blockSettings.getProperty("treeTextEditors"));
 		this.properties.put("treeManageEditors", blockSettings.getProperty("treeManageEditors"));
 	}
-	private String locSiteAdmin = this.properties.get("siteAdmin");
-	private String locPlugins = this.properties.get("treePlugins");
-	private String locTextEditors = this.properties.get("treeTextEditors");
-	private String locManageEditors = this.properties.get("treeManageEditors");
+	
 /**
  * Intelligently navigate through the tree menu to 'Add New User'
  * i.e. if 'Add New User' option is available then click it, if not then navigate through the tree to find it.
  */
 	public void navigateTreeMenuToAddNewUserPage() {
-		navigate.navigateTree4DeepByXpath(".//span[contains(.,'" +
-			this.properties.get("siteAdmin") +
-			"')]",
-			".//li[contains(.,'" +
-			this.properties.get("siteAdmin") +
-			"')]/ul//span[contains(.,'" +
-			this.properties.get("treeUsers") +
-			"')]",
-			".//li[contains(.,'" +
-			this.properties.get("siteAdmin") +
-			"')]/ul//span[contains(.,'" +
-			this.properties.get("treeAccounts") +
-			"')]",
-			"//a[@title='" +
-			this.properties.get("addNewUser") +
-			"']");
+		Navigation navigate = new Navigation(driver);
+		navigate.navigateTree4DeepByXpath(
+				".//span[contains(.,'" + this.properties.get("siteAdmin") +	"')]",
+				".//li[contains(.,'" + this.properties.get("siteAdmin") + "')]/ul//span[contains(.,'" + this.properties.get("treeUsers") +	"')]",
+				".//li[contains(.,'" + this.properties.get("siteAdmin") + "')]/ul//span[contains(.,'" + this.properties.get("treeAccounts") + "')]",
+				"//a[@title='" + this.properties.get("addNewUser") + "']");
 	}
 /**
 * Intelligently navigate through the tree menu to 'Front Page Roles'
 * i.e. if 'Front Page Roles' option is available then click it, if not then navigate through the tree to find it.
 */
 	public void navigateTreeMenuToFrontPageRoles() {
+		Navigation navigate = new Navigation(driver);
 		navigate.navigateTree3DeepByXpath(".//span[contains(.,'" +
 			this.properties.get("siteAdmin") +
 			"')]", ".//li[contains(.,'" +
@@ -112,7 +94,8 @@ public class BlockSettings {
  * i.e. if 'Enrolled Users' option is available then click it, if not then navigate through the tree to find it.
  */
 	public void navigateEnrolledUsers() {
-			navigate.navigateTree2DeepByXpath(
+		Navigation navigate = new Navigation(driver);
+		navigate.navigateTree2DeepByXpath(
 			"//span[contains(.,'" +
 			this.properties.get("treeUsers") +
 			"')]", "//a[@title='" +
@@ -124,6 +107,7 @@ public class BlockSettings {
  * i.e. if 'Edit course settings' option is available then click it, if not then navigate through the tree to find it.
  */
 	public void navigateEditCourseSettings() {
+		Navigation navigate = new Navigation(driver);
 		navigate.navigateTree2DeepByXpath("//span[contains(.,'" +
 			this.properties.get("treeCourseAdministration") +
 			"')]", ".//li[contains(.,'" +
@@ -137,6 +121,7 @@ public class BlockSettings {
  * i.e. if 'Edit profile' option is available then click it, if not then navigate through the tree to find it.
  */
 	public void navigateEditProfile() {
+		Navigation navigate = new Navigation(driver);
 		navigate.navigateTree2DeepByXpath("//span[contains(.,'" +
 			this.properties.get("treeMyProfileSettings") +
 			"')]", ".//li[contains(.,'" +
@@ -150,6 +135,7 @@ public class BlockSettings {
  * i.e. if 'Don't track unread posts' option is available then click it, if not then navigate through the tree to find it.
  */
 	public void navigateDontTrackUnread() {
+		Navigation navigate = new Navigation(driver);
 		navigate.navigateTree2DeepByXpath("//span[contains(.,'" +
 				this.properties.get("treeForumAdmin") +
 				"')]", ".//li[contains(.,'" +
@@ -163,6 +149,7 @@ public class BlockSettings {
  * @throws Exception An exception is thrown if tracking can be enabled.
  */
 	public void assertTrackingCannotBeEnabled() throws Exception {
+		PassFailCriteria passFail = new PassFailCriteria(driver);
 		passFail.assertElementIsNotPresentByXpath(".//li[contains(.,'" +
 				this.properties.get("treeForumAdmin") +
 				"')]/ul/li/*/a[contains(.,'" +
@@ -174,6 +161,7 @@ public class BlockSettings {
  * @throws Exception An exception is thrown if tracking can be disabled.
  */
 	public void assertTrackingCannotBeDisabled() throws Exception {
+		PassFailCriteria passFail = new PassFailCriteria(driver);
 		passFail.assertElementIsNotPresentByXpath(".//li[contains(.,'" +
 				this.properties.get("treeForumAdmin") +
 				"')]/ul/li/*/a[contains(.,'" +
@@ -184,6 +172,7 @@ public class BlockSettings {
  * Navigates to the Edit assignment settngs page via the tree view whether it's expanded or collapsed.
  */
 	public void navigateEditAssignmentSettings() {
+		Navigation navigate = new Navigation(driver);
 		navigate.navigateTree2DeepByXpath(".//li[contains(.,'" 
 		+ this.properties.get("treeAssignmentAdministration") + "')]", 
 		"//a[@title='" + this.properties.get("treeEditSettings") + "']");
@@ -192,13 +181,16 @@ public class BlockSettings {
  * Navigates to Site administration/Advanced features whether the tree is collapsed or not.
  */
 	public void treeMenuAdvancedFeatures() {
+		Navigation navigate = new Navigation(driver);
 		navigate.navigateTree2DeepByXpath("//li[contains(.,'" + this.properties.get("siteAdmin") + "')]", "//a[@title='" + this.properties.get("treeAdvancedFeatures") + "']");
 	}
 	public void navigateBlockManageEditors() {
+		Navigation navigate = new Navigation(driver);
 		navigate.navigateTree4DeepByXpath(
-				".//span[contains(.,'" + locSiteAdmin +	"')]", 
-				locPlugins, 
-				locTextEditors, 
-				locManageEditors);
+				".//span[contains(.,'" + this.properties.get("siteAdmin") +	"')]", 
+				".//li[contains(.,'" + this.properties.get("siteAdmin") + "')]/ul//span[contains(.,'" + this.properties.get("treePlugins") + "')]",
+				".//li[contains(.,'" + this.properties.get("siteAdmin") + "')]/ul//span[contains(.,'" + this.properties.get("treeTextEditors") + "')]", 
+				".//a[@title='" + this.properties.get("treeManageEditors") + "']"
+				);
 	}
 }

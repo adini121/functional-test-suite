@@ -50,11 +50,6 @@ public class PluginsManageEditors {
 		this.properties.put("locTinyMCE", blockSettings.getProperty("locTinyMCE"));
 		this.properties.put("locPlainText", blockSettings.getProperty("locPlainText"));
 	}
-	private String locDisable = this.properties.get("locDisable");
-	private String locEnable = this.properties.get("locEnable");
-	private String locSettings = this.properties.get("locSettings");
-	private String locTinyMCE = this.properties.get("locTinyMCE");
-	private String locPlainText = this.properties.get("locPlainText");
 	/*
 	 * Generic methods for class.
 	 */
@@ -62,34 +57,34 @@ public class PluginsManageEditors {
 		boolean itemVisible = false;
 		try{
 			driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
-			WebElement e = driver.findElementByXPath(".//tr[contains(.,'" + locName + "')]/*/a/img[@alt='" + locDisable + "']");
+			WebElement e = driver.findElementByXPath(".//tr[contains(.,'" + locName + "')]/*/a/img[@alt='" + this.properties.get("locDisable") + "']");
 			itemVisible = e.isDisplayed();
 		}
 		catch (NoSuchElementException ex) {};
 		if(itemVisible) {
-			WebElement e = driver.findElementByXPath(".//tr[contains(.,'" + locName + "')]/*/a/img[@alt='" + locDisable + "']");
+			WebElement e = driver.findElementByXPath(".//tr[contains(.,'" + locName + "')]/*/a/img[@alt='" + this.properties.get("locDisable") + "']");
 			e.click();	
 		}
 		else {
-			WebElement e = driver.findElementByXPath(".//tr[contains(.,'" + locName + "')]/*/a/img[@alt='" + locEnable + "']");
+			WebElement e = driver.findElementByXPath(".//tr[contains(.,'" + locName + "')]/*/a/img[@alt='" + this.properties.get("locEnable") + "']");
 			e.click();
 		}
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 	}
 	private void clickSettings(String locName) {
-		WebElement e = driver.findElementByXPath(".//tr[contains(.,'" + locName + "')]/*/a[contains(.,'" + locSettings + "')]");
+		WebElement e = driver.findElementByXPath(".//tr[contains(.,'" + locName + "')]/*/a[contains(.,'" + this.properties.get("locSettings") + "')]");
 		e.click();
 	}
 	/*
 	 * Specific methods for class.
 	 */
 	public void clickEnableDisableTinyMCE() {
-		clickEnableDisable(locTinyMCE);
+		clickEnableDisable(this.properties.get("locTinyMCE"));
 	}
 	public void clickEnableDisablePlainText() {
-		clickEnableDisable(locPlainText);
+		clickEnableDisable(this.properties.get("locPlainText"));
 	}
 	public void clickSettingsTinyMCE() {
-		clickSettings(locTinyMCE);
+		clickSettings(this.properties.get("locTinyMCE"));
 	}
 }
