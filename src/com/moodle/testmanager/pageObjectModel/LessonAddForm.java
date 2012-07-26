@@ -82,7 +82,7 @@ public class LessonAddForm extends FormAddEditSettings {
  * You cannot use the inherited method enterIntroField with the Add/Edit Lesson form. 
  */
 	@Override
-	public void enterDescriptionField(String message) {
+	public void enterDescriptionField(CharSequence message) {
 		message = null;
 	}
 /**

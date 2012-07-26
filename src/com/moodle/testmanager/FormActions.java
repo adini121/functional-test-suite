@@ -108,7 +108,7 @@ public class FormActions {
  * @param textEntryAreaID The ID of the text entry area.
  * @param message The message to enter in the field.
  */
-	public void enterValueInTinyMCE(String message) {
+	public void enterValueInTinyMCE(CharSequence message) {
 		WebElement messagebox = driver.findElement(By.tagName("iframe"));
 		driver.switchTo().frame(messagebox);
 		WebElement richTextBox = driver.findElement(By.id("tinymce"));

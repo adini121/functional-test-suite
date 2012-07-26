@@ -53,7 +53,7 @@ public abstract class FormAddEditSettings {
  * The value that you would like to enter in the Intro/Description field.
  * @param text The value that you would like to enter.
  */
-	public void enterDescriptionField(String text) {
+	public void enterDescriptionField(CharSequence text) {
 		FormActions richText = new FormActions(driver);
 		richText.enterValueInTinyMCE(text);	
 	}
