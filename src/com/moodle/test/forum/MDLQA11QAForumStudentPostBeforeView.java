@@ -61,7 +61,7 @@ public class MDLQA11QAForumStudentPostBeforeView extends TestRunSettings {
 		}
 		//Create QA forum
 		@Test
-		public void createForum(){
+		public void createForum() throws Exception{
 		//Select the course
 			course.clickCourseLink(this.properties.get("courseName"));
 			course.clickTurnEditingOn();
@@ -76,7 +76,7 @@ public class MDLQA11QAForumStudentPostBeforeView extends TestRunSettings {
 		}
 		//Teacher creates a question
 		@Test
-		public void teacherCreateDiscussion() {
+		public void teacherCreateDiscussion() throws Exception {
 			//Adding a discussion
 			forum.clickForumLink(this.properties.get("nameOfForum"));
 			forum.clickAddNewQuestionButton();
@@ -96,7 +96,7 @@ public class MDLQA11QAForumStudentPostBeforeView extends TestRunSettings {
 		}
 		//Reply to question as first student
 		@Test
-		public void replyDiscussion(){
+		public void replyDiscussion() throws Exception{
 			course.clickCourseLink(this.properties.get("courseName"));
 			forum.clickForumLink(this.properties.get("nameOfForum"));
 			forumPosts.clickDiscussionLink(this.properties.get("teacherSubject"));
@@ -129,7 +129,7 @@ public class MDLQA11QAForumStudentPostBeforeView extends TestRunSettings {
 		}
 		//Reply to question
 		@Test
-		public void student2RepliesToPost(){
+		public void student2RepliesToPost() throws Exception{
 			forumPosts.clickReplyToPostLink(this.properties.get("teacherMessage"));
 			forumPosts.enterSubjectField(this.properties.get("student2Subject"));
 			forumPosts.enterMessage(this.properties.get("student2Message"));

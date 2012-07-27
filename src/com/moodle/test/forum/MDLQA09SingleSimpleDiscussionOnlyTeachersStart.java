@@ -49,7 +49,7 @@ public class MDLQA09SingleSimpleDiscussionOnlyTeachersStart extends TestRunSetti
 		}
 		//Start a discussion in a single simple forum
 		@Test
-		public void startDiscussion(){
+		public void startDiscussion() throws Exception{
 		//Select the course
 			course.clickCourseLink(this.properties.get("courseName"));
 			course.clickTurnEditingOn();
@@ -73,7 +73,7 @@ public class MDLQA09SingleSimpleDiscussionOnlyTeachersStart extends TestRunSetti
 		}
 		//Reply to the discussion
 		@Test
-		public void replyToDiscussion(){
+		public void replyToDiscussion() throws Exception{
 			course.clickCourseLink(this.properties.get("courseName"));
 			forum.clickForumLink(this.properties.get("nameSimple"));
 			forumPosts.clickReplyToPostLink(this.properties.get("introText"));

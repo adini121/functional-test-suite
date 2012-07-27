@@ -82,7 +82,7 @@ public class MDLQA60OnlineTextInlineComments extends TestRunSettings {
 		}
 		// 3. Add an inline comment then click the 'Save changes' button.
 		@Test
-		public void addInlineComment() {
+		public void addInlineComment() throws Exception {
 			grading.enterTextStandardGrade(this.properties.get("MDLQA60Grade"));
 			grading.enterFeedbackComments(this.properties.get("MDLQA60FeedbackComments"));
 			grading.clickButtonSaveChanges();

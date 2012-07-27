@@ -57,7 +57,7 @@ public class MDLQA10EachPersonPosts1Discussion extends TestRunSettings {
 		}
 		//Create Each person posts one discussion forum
 		@Test
-		public void createForum(){
+		public void createForum() throws Exception{
 		//Select the course
 			course.clickCourseLink(this.properties.get("courseName"));
 			course.clickTurnEditingOn();
@@ -72,7 +72,7 @@ public class MDLQA10EachPersonPosts1Discussion extends TestRunSettings {
 		}
 		//Teacher creates a discussion
 		@Test
-		public void teacherCreateDiscussion() {
+		public void teacherCreateDiscussion() throws Exception {
 			//Adding a discussion
 			forum.clickForumLink(this.properties.get("nameOfForum"));
 			forum.clickAddNewDiscussionTopicButton();
@@ -92,7 +92,7 @@ public class MDLQA10EachPersonPosts1Discussion extends TestRunSettings {
 		}
 		//Start a Discussion
 		@Test
-		public void startDiscussion(){
+		public void startDiscussion() throws Exception{
 			course.clickCourseLink(this.properties.get("courseName"));
 			//Adding a discussion
 			forum.clickForumLink(this.properties.get("nameOfForum"));
@@ -108,7 +108,7 @@ public class MDLQA10EachPersonPosts1Discussion extends TestRunSettings {
 		}
 		//Reply to several discussions
 		@Test
-		public void replyDiscussions(){
+		public void replyDiscussions() throws Exception{
 			forumPosts.clickDiscussionLink(this.properties.get("studentSubject"));
 			forumPosts.clickReplyToPostLink(this.properties.get("studentMessage"));
 			forumPosts.enterSubjectField(this.properties.get("replySubjectStudent"));

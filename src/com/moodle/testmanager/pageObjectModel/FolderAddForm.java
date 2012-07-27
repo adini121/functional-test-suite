@@ -1,10 +1,7 @@
 package com.moodle.testmanager.pageObjectModel;
 
-import java.io.FileInputStream;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Properties;
-
 import org.openqa.selenium.remote.RemoteWebDriver;
 /**
  * This is the page object model for adding a Folder resource to a course.
@@ -15,6 +12,7 @@ public class FolderAddForm extends FormAddEditSettingsFileManager {
 /**
  * Hashmap for language file.
  */
+	@SuppressWarnings("unused")
 	private Map<String, String> properties = new HashMap<String, String>();
 /**
  * Language file location.

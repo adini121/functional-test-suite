@@ -88,6 +88,7 @@
 			<test todir="${testresults}" name="com.moodle.test.datacreation.MDLQADT2AddUsers"/>
 			<test todir="${testresults}" name="com.moodle.test.datacreation.MDLQADT3AssignFrontPageRoles"/>
 			<test todir="${testresults}" name="com.moodle.test.datacreation.MDLQADT4EnrolUsers"/>
+			<test todir="${testresults}" name="com.moodle.test.datacreation.MDLQADT5TurnOffTinyMCE"/>
 		<!--<test todir="${testresults}" name="com.moodle.test.forum.MDLQA03TeacherSets1Of3TrackingOptions"/>
 			<test todir="${testresults}" name="com.moodle.test.forum.MDLQA04TeacherSplitAndMoveDiscussions"/>
 			<test todir="${testresults}" name="com.moodle.test.forum.MDLQA05StudentsDisplayOptions"/>

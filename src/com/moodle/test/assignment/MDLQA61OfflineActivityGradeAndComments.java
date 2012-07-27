@@ -58,7 +58,7 @@ public class MDLQA61OfflineActivityGradeAndComments extends TestRunSettings {
  		 * This test requires an activity with File Submissions and Online Text disabled. i.e. a replication of the old off-line activity using the new single assignment type. 
 		 */
 		@Test
-		public void createOfflineAssignment() {
+		public void createOfflineAssignment() throws Exception {
 			//Teacher logs in.
 			user.selectLoginLink();
 			user.enterUsername(this.properties.get("teacherUsername"));
@@ -102,7 +102,7 @@ public class MDLQA61OfflineActivityGradeAndComments extends TestRunSettings {
 		 * 3. Add a grade and comment then click the 'Save changes' button. 
 		 */
 		@Test
-		public void gradeAndComment() {
+		public void gradeAndComment() throws Exception {
 			//Teacher grades assignment
 			grading.clickLinkGrade(this.properties.get("studentFirstname"), this.properties.get("studentSurname"));
 			grading.enterTextStandardGrade(this.properties.get("MDLQA61Grade"));

@@ -54,7 +54,7 @@ public class MDLQA69TeacherSubmissionEnabledFileSubmissionEnabled extends TestRu
 		 * An assignment exists with file submissions enabled.
 		 */
 		@Test
-		public void createAssignment() {
+		public void createAssignment() throws Exception {
 			//Login Teacher
 			user.selectLoginLink();
 			user.enterUsername(this.properties.get("teacherUsername"));

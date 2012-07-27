@@ -69,7 +69,7 @@ public class MDLQA07NewCourseLatestNews extends TestRunSettings {
 		}
 		//Start Three Discussions in news forum
 		@Test
-		public void startDiscussionNews(){
+		public void startDiscussionNews() throws Exception{
 			course.clickCourseLink(this.properties.get("courseName"));
 			course.clickTurnEditingOff();
 			//Create discussion 1

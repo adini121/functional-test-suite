@@ -75,11 +75,12 @@ public class AssignmentAddSubmission {
 /**
  * Enters the text for an online submission.
  * @param textToBeEntered The test to be entered as the online text submission.
+ * @throws Exception 
  */
-	public void enterOnlineText(String textToBeEntered) {
+	public void enterOnlineText(String textToBeEntered) throws Exception {
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		FormActions textAreaEntry = new FormActions(driver);
-		textAreaEntry.enterValueInTinyMCE(textToBeEntered);
+		textAreaEntry.enterValueInTextArea(textToBeEntered);
 	}
 /**
  * Clicks the Add button to launch the file picker.

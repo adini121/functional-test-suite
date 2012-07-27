@@ -71,10 +71,11 @@ public class ForumPosts {
 /**
  * Enter reply message.
  * @param message The message text is passed from the test.
+ * @throws Exception 
  */
-	public void enterMessage(String message) {
+	public void enterMessage(String message) throws Exception {
 		FormActions richText = new FormActions(driver);
-		richText.enterValueInTinyMCE(message);		
+		richText.enterValueInTextArea(message);		
 	}
 /**
  * Click post to forum button.

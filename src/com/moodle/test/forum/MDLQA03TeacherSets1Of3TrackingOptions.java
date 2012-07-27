@@ -68,7 +68,7 @@ public class MDLQA03TeacherSets1Of3TrackingOptions extends TestRunSettings {
 		}
 		//Create a forum with 'Read tracking for this forum' set to Optional in the forum settings.
 		@Test
-		public void createForumOptional(){
+		public void createForumOptional() throws Exception{
 			course.clickCourseLink(this.properties.get("courseName"));
 			course.clickTurnEditingOn();
 			addActivity.selectForum(this.properties.get("outlineSection"));
@@ -84,7 +84,7 @@ public class MDLQA03TeacherSets1Of3TrackingOptions extends TestRunSettings {
 		}
 		//Create a forum with 'Read tracking for this forum' set to Off.
 		@Test
-		public void createForumOff(){
+		public void createForumOff() throws Exception{
 			course.clickCourseLink(this.properties.get("courseShortname"));
 			addActivity.selectForum(this.properties.get("outlineSection"));
 			addForum.enterNameField(this.properties.get("nameOfForumOff"));
@@ -101,7 +101,7 @@ public class MDLQA03TeacherSets1Of3TrackingOptions extends TestRunSettings {
 		}
 		//Create a forum with 'Read tracking for this forum' set to On.
 		@Test
-		public void createForumOn(){
+		public void createForumOn() throws Exception{
 		//Select the course
 			course.clickCourseLink(this.properties.get("courseShortname"));
 		//select forum activity from drop down on courses page 

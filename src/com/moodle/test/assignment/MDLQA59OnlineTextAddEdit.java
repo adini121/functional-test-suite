@@ -54,7 +54,7 @@ public class MDLQA59OnlineTextAddEdit extends TestRunSettings {
 		//PRE-REQUISITES
 		//Create Assignment with online text enabled
 		@Test
-		public void loginAsTeacherAndSetupAssignment() {
+		public void loginAsTeacherAndSetupAssignment() throws Exception {
 			user.selectLoginLink();
 			user.enterUsername(this.properties.get("teacherUsername"));
 			user.enterPassword(this.properties.get("password"));
@@ -93,7 +93,7 @@ public class MDLQA59OnlineTextAddEdit extends TestRunSettings {
 		}
 		@Test
 		//3. Click the 'Edit my submission' button again, edit the text, then click the 'Save changes' button.
-		public void editSubmission() {
+		public void editSubmission() throws Exception {
 			assignment.clickButtonAddOrEditSubmission();
 			submitAssignment.clickCheckboxSubmissionStatement();
 			submitAssignment.enterOnlineText(this.properties.get("MDLQA59StudentEditedSubmissionText"));

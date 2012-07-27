@@ -22,6 +22,7 @@ public class FormActions {
 //Generic locators
 	private String locGenXpathPrefix=".//table[@id='";
 	private String locGenXpathSuffix="']/*/*/*/iframe";
+	private String exceptionNoTextEditor="The text editor is missing from the page and could either be broken or have changed in come way that has broken the test.";
 /**
  * Constructor for the FormActions utility class.	
  * @param driver The driver that is used for the test. There is no need to specify the value for the driver here as the driver
@@ -104,17 +105,41 @@ public class FormActions {
 		}
 	}
 /**
- * Enters a value in any tiny MCE text entry area.
+ * Enters a value in either of the two default text entry area plugins.
  * @param textEntryAreaID The ID of the text entry area.
  * @param message The message to enter in the field.
+ * @throws Exception Throws a descriptive exception if the plugins are not available as this would imply that
+ * <br/> a) The text area editor is broken.
+ * <br/> b) Someone has changed something that has broken the test.
+ * <br/> c) A third party plugin is implemented as the default text editor.
  */
-	public void enterValueInTinyMCE(CharSequence message) {
-		WebElement messagebox = driver.findElement(By.tagName("iframe"));
-		driver.switchTo().frame(messagebox);
-		WebElement richTextBox = driver.findElement(By.id("tinymce"));
-		richTextBox.click();
-		richTextBox.sendKeys(message);
-		driver.switchTo().window(driver.getWindowHandle());
+	public void enterValueInTextArea(CharSequence message) throws Exception {
+		driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+		boolean itemVisible = false;
+		boolean mceVisible = false;
+		try {
+			WebElement e = driver.findElementByTagName("textarea");
+			itemVisible = e.isDisplayed();
+			WebElement emce = driver.findElement(By.tagName("iframe"));
+			mceVisible = emce.isDisplayed();
+		}
+		catch (Exception e) {}
+		if (itemVisible) {
+			WebElement e = driver.findElementByTagName("textarea");
+			e.sendKeys(message);
+		}
+		else if (mceVisible) {
+			WebElement messagebox = driver.findElementByTagName("iframe");
+			driver.switchTo().frame(messagebox);
+			WebElement richTextBox = driver.findElement(By.id("tinymce"));
+			richTextBox.click();
+			richTextBox.sendKeys(message);
+			driver.switchTo().window(driver.getWindowHandle());
+		}
+		else {
+			throw new Exception(exceptionNoTextEditor);
+		}
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 	}
 /**
  * Handles a checkbox that you want to tick. If it is ticked then leave it ticked, if it is not ticked then tick it.

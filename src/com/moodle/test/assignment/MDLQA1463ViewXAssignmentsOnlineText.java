@@ -54,7 +54,7 @@ public class MDLQA1463ViewXAssignmentsOnlineText extends TestRunSettings {
 		 * This test requires an assignment with online text submissions enabled.
 		 */
 		@Test
-		public void createAssignment() {
+		public void createAssignment() throws Exception {
 			//Login as teacher
 			user.selectLoginLink();
 			user.enterUsername(this.properties.get("teacherUsername"));
@@ -77,7 +77,7 @@ public class MDLQA1463ViewXAssignmentsOnlineText extends TestRunSettings {
 		 * 1. Login as student1 and submit online text for the assignment.
 		 */
 		@Test
-		public void student1SubmitsOnlineText() {
+		public void student1SubmitsOnlineText() throws Exception {
 			//Login as student 1
 			user.selectLoginLink();
 			user.enterUsername(this.properties.get("studentUsername"));
@@ -117,7 +117,7 @@ public class MDLQA1463ViewXAssignmentsOnlineText extends TestRunSettings {
 		 * 3. Login as student2 and submit online text for the assignment.
 		 */
 		@Test
-		public void student2SubmitsOnlineText() {
+		public void student2SubmitsOnlineText() throws Exception {
 			//Login as student 2
 			user.selectLoginLink();
 			user.enterUsername(this.properties.get("student2Username"));

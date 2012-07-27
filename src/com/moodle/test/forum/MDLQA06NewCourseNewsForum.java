@@ -54,7 +54,7 @@ public class MDLQA06NewCourseNewsForum extends TestRunSettings {
 		}
 		//Start Discussion in news forum
 		@Test
-		public void startDiscussionNews(){
+		public void startDiscussionNews() throws Exception{
 			course.clickCourseLink(this.properties.get("courseName"));
 			forum.clickForumLink(this.properties.get("newsForum"));
 			forum.clickAddNewTopicButton();
@@ -67,7 +67,7 @@ public class MDLQA06NewCourseNewsForum extends TestRunSettings {
 		}
 		//Post Reply in news forum
 		@Test
-		public void postReply(){
+		public void postReply() throws Exception{
 			forumPosts.clickDiscussionLink(this.properties.get("newsSubject"));
 			forumPosts.clickReplyToPostLink(this.properties.get("newsMessage"));
 			forumPosts.enterSubjectField(this.properties.get("replySubject"));

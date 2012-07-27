@@ -66,7 +66,7 @@ public class MDLQA04TeacherSplitAndMoveDiscussions extends TestRunSettings {
 		//SETUP TEST DATA
 		//Start a discussion in a standard forum
 		@Test
-		public void startDiscussion(){
+		public void startDiscussion() throws Exception{
 		//Select the course
 			course.clickCourseLink(this.properties.get("courseName"));
 			course.clickTurnEditingOn();
@@ -111,7 +111,7 @@ public class MDLQA04TeacherSplitAndMoveDiscussions extends TestRunSettings {
 		}
 		//Reply to the discussion
 		@Test
-		public void replyToDiscussionToBeSplit(){
+		public void replyToDiscussionToBeSplit() throws Exception{
 			course.clickCourseLink(this.properties.get("courseName"));
 			forum.clickForumLink(this.properties.get("nameOfForum"));
 			forumPosts.clickDiscussionLink(this.properties.get("discussSplitSubject"));

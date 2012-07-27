@@ -52,10 +52,11 @@ public abstract class FormAddEditSettings {
 /**
  * The value that you would like to enter in the Intro/Description field.
  * @param text The value that you would like to enter.
+ * @throws Exception 
  */
-	public void enterDescriptionField(CharSequence text) {
+	public void enterDescriptionField(CharSequence text) throws Exception {
 		FormActions richText = new FormActions(driver);
-		richText.enterValueInTinyMCE(text);	
+		richText.enterValueInTextArea(text);	
 	}
 /**
  * Selects or deselects the "Display description on page" checkbox.  

@@ -69,5 +69,6 @@ public class Installation {
 	}
 	public void clickNext() {
 		WebElement nextButton = driver.findElement(By.id("nextbutton"));
+		nextButton.click();
 	}
 }

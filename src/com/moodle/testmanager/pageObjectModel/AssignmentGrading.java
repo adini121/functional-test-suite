@@ -91,10 +91,11 @@ public class AssignmentGrading {
 /**
  * Enters a value in the Feedback comments rich text editor field.
  * @param textToBeEntered The text to be entered. Pass this value from the test.
+ * @throws Exception 
  */
-	public void enterFeedbackComments(String textToBeEntered) {
+	public void enterFeedbackComments(String textToBeEntered) throws Exception {
 		FormActions textAreaEntry = new FormActions(driver);
-		textAreaEntry.enterValueInTinyMCE(textToBeEntered);
+		textAreaEntry.enterValueInTextArea(textToBeEntered);
 	}
 /**
  * Clicks the Create folder button. Re-uses objects from AssignmentAddSubmission.java

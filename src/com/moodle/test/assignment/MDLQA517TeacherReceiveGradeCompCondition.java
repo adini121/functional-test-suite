@@ -78,7 +78,7 @@ public class MDLQA517TeacherReceiveGradeCompCondition extends TestRunSettings {
 		 * Create Assignment
 		 */
 		@Test
-		public void createAssignment() {
+		public void createAssignment() throws Exception {
 			//Teacher logs in.
 			user.loginToSystem(this.properties.get("teacherUsername"), this.properties.get("password"));
 			//Teacher accesses course and turns editing on.
@@ -97,7 +97,7 @@ public class MDLQA517TeacherReceiveGradeCompCondition extends TestRunSettings {
 		 * Student Makes a subission.
 		 */
 		@Test
-		public void studentSubmitsAssignment() {
+		public void studentSubmitsAssignment() throws Exception {
 			user.loginToSystem(this.properties.get("studentUsername"), this.properties.get("password"));
 			course.clickCourseLink(this.properties.get("courseName"));
 			assignment.clickAssignmentLink(this.properties.get("MDLQA517AssignmentName"));

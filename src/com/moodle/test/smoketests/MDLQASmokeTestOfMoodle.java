@@ -114,7 +114,7 @@ public class MDLQASmokeTestOfMoodle extends TestDataLoad {
 		user.selectLogout();
 	}
 	@Test
-	public void addAssignment() {
+	public void addAssignment() throws Exception {
 		user.loginToSystem(teacher, password);
 		course.clickCourseLink(courseName);
 		course.clickTurnEditingOn();
@@ -126,14 +126,14 @@ public class MDLQASmokeTestOfMoodle extends TestDataLoad {
 		addAssignment.clickSaveAndRetToCourse();
 	}
 	@Test
-	public void addChat() {
+	public void addChat() throws Exception {
 		addActivity.selectChat("2");
 		addChat.enterNameField(chatName);
 		addChat.enterDescriptionField(chatDescription);
 		addChat.clickSaveAndRetToCourse();
 	}
 	@Test
-	public void addChoice() {
+	public void addChoice() throws Exception {
 		addActivity.selectChoice("2");
 		addChoice.enterNameField(choiceName);
 		addChoice.enterDescriptionField(choiceDescription);
@@ -142,7 +142,7 @@ public class MDLQASmokeTestOfMoodle extends TestDataLoad {
 		addChoice.clickSaveAndRetToCourse();
 	}
 	@Test
-	public void addDatabase() {
+	public void addDatabase() throws Exception {
 		addActivity.selectDatabase("2");
 		addDatabase.enterNameField(databaseName);
 		addDatabase.enterDescriptionField(databaseDescription);
@@ -153,14 +153,14 @@ public class MDLQASmokeTestOfMoodle extends TestDataLoad {
 		//TODO will come back to this as it isn't a priority and we will need some setup doing in advance
 	}
 	@Test
-	public void addForum() {
+	public void addForum() throws Exception {
 		addActivity.selectForum("2");
 		addForum.enterNameField(forumName);
 		addForum.enterDescriptionField(forumDescription);
 		addForum.clickSaveAndRetToCourse();
 	}
 	@Test
-	public void addGlossary() {
+	public void addGlossary() throws Exception {
 		addActivity.selectGlossary("2");
 		addGlossary.enterNameField(glossaryName);
 		addGlossary.enterDescriptionField(glossaryDescription);
@@ -173,7 +173,7 @@ public class MDLQASmokeTestOfMoodle extends TestDataLoad {
 		addLesson.clickSaveAndRetToCourse();
 	}
 	@Test
-	public void addSurvey() {
+	public void addSurvey() throws Exception {
 		addActivity.selectSurvey("2");
 		addSurvey.enterNameField(surveyName);
 		addSurvey.enterDescriptionField(surveyDescription);
@@ -181,14 +181,14 @@ public class MDLQASmokeTestOfMoodle extends TestDataLoad {
 		addLesson.clickSaveAndRetToCourse();
 	}
 	@Test
-	public void addQuiz() {
+	public void addQuiz() throws Exception {
 		addActivity.selectQuiz("2");
 		addQuiz.enterNameField(quizName);
 		addQuiz.enterDescriptionField(quizDescription);
 		addQuiz.clickSaveAndRetToCourse();
 	}
 	@Test
-	public void addWiki() {
+	public void addWiki() throws Exception {
 		addActivity.selectWiki("2");
 		addWiki.enterNameField(wikiName);
 		addWiki.enterDescriptionField(wikiDescription);
@@ -196,14 +196,14 @@ public class MDLQASmokeTestOfMoodle extends TestDataLoad {
 		addWiki.clickSaveAndRetToCourse();
 	}
 	@Test
-	public void addWorkshop() {
+	public void addWorkshop() throws Exception {
 		addActivity.selectWorkshop("2");
 		addWorkshop.enterNameField(workshopName);
 		addWorkshop.enterDescriptionField(workshopDescription);
 		addWorkshop.clickSaveAndRetToCourse();
 	}
 	@Test
-	public void addBook() {
+	public void addBook() throws Exception {
 		addActivity.selectBook("3");
 		addBook.enterNameField(bookName);
 		addBook.enterDescriptionField(bookDescription);
@@ -214,7 +214,7 @@ public class MDLQASmokeTestOfMoodle extends TestDataLoad {
 		//TODO Will need to start seeding database and some files objects.
 	}
 	@Test
-	public void addFolder() {
+	public void addFolder() throws Exception {
 		user.loginToSystem(teacher, password);
 		course.clickCourseLink(courseName);
 		course.clickTurnEditingOn();
@@ -231,7 +231,7 @@ public class MDLQASmokeTestOfMoodle extends TestDataLoad {
 		//TODO
 	}
 	@Test
-	public void addLabel() {
+	public void addLabel() throws Exception {
 		addActivity.selectLabel("3");
 		addLabel.enterDescriptionField(label);
 		addLabel.clickSaveAndRetToCourse();

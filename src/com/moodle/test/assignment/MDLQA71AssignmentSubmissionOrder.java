@@ -77,7 +77,7 @@ public class MDLQA71AssignmentSubmissionOrder extends TestRunSettings {
 		 * This test requires an assignment with several submissions.
 		 */
 		@Test
-		public void setupData() {
+		public void setupData() throws Exception {
 			//Teacher logs in.
 			user.loginToSystem(this.properties.get("teacherUsername"), this.properties.get("password"));
 			//Teacher accesses course and turns editing on.

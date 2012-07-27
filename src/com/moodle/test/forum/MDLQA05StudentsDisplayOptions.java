@@ -59,7 +59,7 @@ public class MDLQA05StudentsDisplayOptions extends TestRunSettings {
 		}
 		//Add an additional reply to first discussion
 		@Test
-		public void addReplyToFirstForum(){
+		public void addReplyToFirstForum() throws Exception{
 			course.clickCourseLink(this.properties.get("courseName"));
 			forum.clickForumLink(this.properties.get("nameOfFirstForum"));
 			forumPosts.clickDiscussionLink(this.properties.get("discussion1Subject"));
@@ -70,7 +70,7 @@ public class MDLQA05StudentsDisplayOptions extends TestRunSettings {
 		}
 		//Add an additional reply to second discussion
 		@Test
-		public void addReplyToSecondForum(){
+		public void addReplyToSecondForum() throws Exception{
 			navigationBlock.clickExposedLink(this.properties.get("nameOfSecondForum"));
 			forumPosts.clickDiscussionLink(this.properties.get("discussion2Subject"));
 			forumPosts.clickReplyToPostLink(this.properties.get("discussion2Message"));

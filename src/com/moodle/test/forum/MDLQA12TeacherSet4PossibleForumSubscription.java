@@ -60,7 +60,7 @@ public class MDLQA12TeacherSet4PossibleForumSubscription extends TestRunSettings
 	}
 	//Start a discussion with the 'subscription mode' set to 'Optional subscription'.
 	@Test
-	public void startDiscussionOptional() throws FileNotFoundException, IOException{
+	public void startDiscussionOptional() throws Exception{
 	//Select the course
 		course.clickCourseLink(this.properties.get("courseName"));
 		course.clickTurnEditingOn();
@@ -74,7 +74,7 @@ public class MDLQA12TeacherSet4PossibleForumSubscription extends TestRunSettings
 	}
 	//Start a discussion with the 'subscription mode' set to 'Forced subscription'.
 	@Test
-	public void startDiscussionForced() throws FileNotFoundException, IOException{
+	public void startDiscussionForced() throws Exception{
 	//select activity drop down on courses page 
 		addActivity.selectForum(this.properties.get("outlineSection"));
 	//Adding a new forum
@@ -85,7 +85,7 @@ public class MDLQA12TeacherSet4PossibleForumSubscription extends TestRunSettings
 	}
 	//Start a discussion with the 'subscription mode' set to 'Auto subscription'.
 	@Test
-	public void startDiscussionAuto() throws FileNotFoundException, IOException{
+	public void startDiscussionAuto() throws Exception{
 	//select activity drop down on courses page 
 		addActivity.selectForum(this.properties.get("outlineSection"));
 	//Adding a new forum
@@ -96,7 +96,7 @@ public class MDLQA12TeacherSet4PossibleForumSubscription extends TestRunSettings
 	}
 	//Start a discussion with the 'subscription mode' set to 'Subscription disabled'.
 	@Test
-	public void startDiscussionSubscriptionDisabled() throws FileNotFoundException, IOException{
+	public void startDiscussionSubscriptionDisabled() throws Exception{
 	//select activity drop down on courses page 
 		addActivity.selectForum(this.properties.get("outlineSection"));
 	//Adding a new forum

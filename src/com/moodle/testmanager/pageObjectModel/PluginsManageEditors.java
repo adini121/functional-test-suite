@@ -53,6 +53,10 @@ public class PluginsManageEditors {
 	/*
 	 * Generic methods for class.
 	 */
+	/**
+	 * Clicks Disable if it is enabled and vice versa.
+	 * @param locName The value for name from each table row that you want to interact with.
+	 */
 	private void clickEnableDisable(String locName) {
 		boolean itemVisible = false;
 		try{
@@ -71,6 +75,10 @@ public class PluginsManageEditors {
 		}
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 	}
+	/**
+	 * Clicks the Select link.
+	 * @param locName The value for name from each table row that you want to interact with. 
+	 */
 	private void clickSettings(String locName) {
 		WebElement e = driver.findElementByXPath(".//tr[contains(.,'" + locName + "')]/*/a[contains(.,'" + this.properties.get("locSettings") + "')]");
 		e.click();
@@ -78,12 +86,21 @@ public class PluginsManageEditors {
 	/*
 	 * Specific methods for class.
 	 */
+	/**
+	 * Enables or disables the TinyMCE editor plugin.
+	 */
 	public void clickEnableDisableTinyMCE() {
 		clickEnableDisable(this.properties.get("locTinyMCE"));
 	}
+	/**
+	 * Enables or disables the Plain text plugin.
+	 */
 	public void clickEnableDisablePlainText() {
 		clickEnableDisable(this.properties.get("locPlainText"));
 	}
+	/**
+	 * Clicks the settings link for TinyMCE.
+	 */
 	public void clickSettingsTinyMCE() {
 		clickSettings(this.properties.get("locTinyMCE"));
 	}
