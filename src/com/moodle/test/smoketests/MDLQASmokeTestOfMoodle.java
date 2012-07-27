@@ -215,9 +215,6 @@ public class MDLQASmokeTestOfMoodle extends TestDataLoad {
 	}
 	@Test
 	public void addFolder() throws Exception {
-		user.loginToSystem(teacher, password);
-		course.clickCourseLink(courseName);
-		course.clickTurnEditingOn();
 		addActivity.selectFolder("3");
 		addFolder.enterNameField(folderName);
 		addFolder.enterDescriptionField(folderDescription);
