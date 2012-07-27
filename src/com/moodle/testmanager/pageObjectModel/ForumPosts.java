@@ -23,6 +23,7 @@ public class ForumPosts {
 	//Internationalization file location
 	private Map<String, String> properties = new HashMap<String, String>();
 	private RemoteWebDriver driver;
+	private String editedBy = "(Edited by ";
 /**
  * Constructor for the page object.	
  * @param driver The driver that is used for the test. There is no need to specify the value for the driver here as the driver
@@ -83,7 +84,6 @@ public class ForumPosts {
 	public void clickPostToForum(){
 		WebElement postButton = driver.findElement(By .id("id_submitbutton"));
 		postButton.click();
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 /**
  * Clicks a discussion link in a forum passed as a variable from the test
@@ -120,7 +120,6 @@ public class ForumPosts {
 				this.properties.get("splitLink") +
 				"')]"));
 		reply.click();
-		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 	}
 /**
  * Selects a value from the Move dropdown passed via a variable in the test.
@@ -140,7 +139,6 @@ public class ForumPosts {
 				this.properties.get("moveButton") +
 				"']"));
 		move.click();		
-		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 	}
 /**
  * Selects Display replies flat, with oldest first from the display dropdown.
@@ -238,11 +236,11 @@ public class ForumPosts {
 /**
  * Asserts that a a forum post or reply has been successful by confirming that the message text appears onscreen
  * WILL NOT WORK WITH THREADED VIEW USE assertThreadedLink method instead.
- * @param postMessage The text vallue for the message.
+ * @param postMessage The text value for the message.
  */
 	public void assertForumPostMessageSuccessful(String postMessage) {
 		PassFailCriteria passFail = new PassFailCriteria(driver);
-		passFail.assertTextPresentByXpath(".//div[@class='posting fullpost']/p[contains(.,'" +
+		passFail.assertTextPresentByXpath(".//div[@class='posting fullpost'][contains(.,'" +
 				postMessage +
 				"')]", "Message should be present", postMessage);
 	}
@@ -286,8 +284,7 @@ public class ForumPosts {
 							"']"));
 					continueButton.click();
 				}
-				//Temporary solution to reset the driver timeout to 5 seconds.
-				driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+				driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 			}
 			catch (NoSuchElementException ex){
 				BlockNavigation navigate = new BlockNavigation(driver);
@@ -328,13 +325,11 @@ public class ForumPosts {
 				this.properties.get("editLink") +
 				"')]"));
 		reply.click();
-		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 	}
 /**
  * Clicks the save changes button on editing a post.
  */
 	public void clickSaveChanges() {
-		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 		WebElement saveChangesButton = driver.findElement(By .xpath("//input[@value='" +
 				this.properties.get("saveChangesButton") +
 				"']"));
@@ -363,12 +358,12 @@ public class ForumPosts {
 	}
 /**
  * Throws an exception if the automatically entered "edited" comments do not appear onscreen.
+ * @param editedBy 
+ * @param teacherName 
  * @throws Exception Exception message that is thrown when the test fails.
  */
-	public void assertTeacherEdit() throws Exception {
+	public void assertTeacherEdit(String teacherName) throws Exception {
 		PassFailCriteria passFail = new PassFailCriteria(driver);
-		passFail.assertElementIsPresentByXpath(".//span[@class='edited']", "" +
-				this.properties.get("editTeacherException") +
-				"", 5);
+		passFail.assertElementIsPresentByXpath(".//div[@class='posting fullpost'][contains(.,'" + editedBy + teacherName + "')]", this.properties.get("editTeacherException"), 5);
 	}
 }

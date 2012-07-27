@@ -60,7 +60,7 @@ public class PassFailCriteria {
 			else{
 				throw new Exception (exceptionMessage);
 			}
-			driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+			driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 	}
 /**
  * Asserts that an element, located by Xpath, is not present onscreen.

@@ -36,6 +36,8 @@ public class MDLQA16TeacherEditDeletePost extends TestRunSettings {
 			} catch (Exception e) {}
 			this.properties.put("teacherUsername", forumTestData.getProperty("teacherUsername"));
 			this.properties.put("password", forumTestData.getProperty("password"));
+			this.properties.put("teacherFirstname", forumTestData.getProperty("teacherFirstname"));
+			this.properties.put("teacherSurname", forumTestData.getProperty("teacherSurname"));
 			this.properties.put("courseName", forumTestData.getProperty("courseName"));
 			this.properties.put("nameOfForumSingleSimple", forumTestData.getProperty("nameOfForumSingleSimple"));
 			this.properties.put("simpleForumReplyText", forumTestData.getProperty("simpleForumReplyText"));
@@ -53,7 +55,7 @@ public class MDLQA16TeacherEditDeletePost extends TestRunSettings {
 			forum.clickForumLink(this.properties.get("nameOfForumSingleSimple"));
 			forumPosts.clickEditLink(this.properties.get("simpleForumReplyText"));
 			forumPosts.clickSaveChanges();
-			forumPosts.assertTeacherEdit();
+			forumPosts.assertTeacherEdit(this.properties.get("teacherFirstname") + " " + this.properties.get("teacherSurname"));
 		}
 		//Delete Post
 		@Test
