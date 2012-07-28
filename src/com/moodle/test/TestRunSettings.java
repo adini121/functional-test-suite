@@ -114,7 +114,7 @@ public class TestRunSettings {
 			sm = new SeleniumManager();
 			sm.startRemotes(gridHubURL, browserType);
 			//sm.startChromeDriver(chromeDriverLocation);
-			//sm.startFirefoxDriver();
+			sm.startFirefoxDriver();
 			driver = sm.getRemoteDriver();
 			//driver = sm.getChromeDriver();
 			//driver = sm.getFirefoxDriver();
