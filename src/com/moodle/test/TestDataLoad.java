@@ -8,6 +8,7 @@ import java.util.Properties;
 public class TestDataLoad extends TestRunSettings{
 
 	public static String usersData = "properties/data/user/Users/usersData.properties";
+	public static String assignmentData = "properties/data/user/Assignment/assignmentData.properties";
 	public static String courseData = "properties/data/user/Courses/courseData.properties";
 	public static String smokeData = "properties/data/user/Smoke/smoke.properties";
 	protected Map<String, String> properties = new HashMap<String, String>();
@@ -23,10 +24,14 @@ public class TestDataLoad extends TestRunSettings{
 		testData.load(new FileInputStream(usersData));
 		testData.load(new FileInputStream(courseData));
 		testData.load(new FileInputStream(smokeData));
+		testData.load(new FileInputStream(assignmentData));
 	} catch (Exception e) {}
 	//User Data
 	this.properties.put("adminUser", testData.getProperty("adminUser"));
-	this.properties.put("teacher", testData.getProperty("teacherUsername"));
+	this.properties.put("teacherUsername", testData.getProperty("teacherUsername"));
+	this.properties.put("studentUsername", testData.getProperty("studentUsername"));
+	this.properties.put("studentFirstname", testData.getProperty("studentFirstname"));
+	this.properties.put("studentSurname", testData.getProperty("studentSurname"));
 	this.properties.put("password", testData.getProperty("password"));
 	this.properties.put("adminEmail", testData.getProperty("adminEmail"));
 	this.properties.put("city", testData.getProperty("city"));
@@ -65,5 +70,13 @@ public class TestDataLoad extends TestRunSettings{
 	this.properties.put("folderDescription", testData.getProperty("folderDescription"));
 	this.properties.put("subFolderName", testData.getProperty("subFolderName"));
 	this.properties.put("label", testData.getProperty("label"));
+	//Assignment Test Data	
+	this.properties.put("MDLQA59AssignmentName", testData.getProperty("MDLQA59AssignmentName"));
+	this.properties.put("MDLQA59StudentEditedSubmissionText", testData.getProperty("MDLQA59StudentEditedSubmissionText"));
+	this.properties.put("MDLQA60SubmissionStatusSubmitted", testData.getProperty("MDLQA60SubmissionStatusSubmitted"));
+	this.properties.put("MDLQA60SubmissionStatusGraded", testData.getProperty("MDLQA60SubmissionStatusGraded"));
+	this.properties.put("MDLQA60FeedbackComments", testData.getProperty("MDLQA60FeedbackComments"));
+	this.properties.put("MDLQA60Grade", testData.getProperty("MDLQA60Grade"));
+	this.properties.put("MDLQA60ScreenCaptureLocation", testData.getProperty("MDLQA60ScreenCaptureLocation"));
 	}
 }

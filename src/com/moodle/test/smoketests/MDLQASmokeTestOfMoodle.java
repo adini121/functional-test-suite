@@ -12,7 +12,7 @@ import com.moodle.test.datacreation.MDLQADT4EnrolUsers;
 import com.moodle.test.moodleinstallation.Install23;
 
 public class MDLQASmokeTestOfMoodle extends TestDataLoad {
-	private String teacher = this.properties.get("teacher");
+	private String teacherUsername = this.properties.get("teacher");
 	private String password = this.properties.get("password");
 	private String courseName = this.properties.get("courseName");
 	private String assignmentName = this.properties.get("assignmentName");
@@ -115,7 +115,7 @@ public class MDLQASmokeTestOfMoodle extends TestDataLoad {
 	}
 	@Test
 	public void addAssignment() throws Exception {
-		user.loginToSystem(teacher, password);
+		user.loginToSystem(teacherUsername, password);
 		course.clickCourseLink(courseName);
 		course.clickTurnEditingOn();
 		addActivity.selectAssignment("2");

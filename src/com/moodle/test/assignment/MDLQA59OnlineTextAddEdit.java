@@ -105,7 +105,7 @@ public class MDLQA59OnlineTextAddEdit extends TestRunSettings {
 			submitAssignment.assertSubmissionPage(this.properties.get("MDLQA59AssignmentName"));
 			submitAssignment.assertSubmissionOnlineText(this.properties.get("MDLQA59StudentSubmissionText") + this.properties.get("MDLQA59StudentEditedSubmissionText"));
 		}
-		@Test
+		//@Test
 		//5. Check that the submission date and time is also displayed on the assignment index page.
 		public void verifySubmissionDateAndTime() throws IOException {
 			frameworkTools.takeScreenshotWithGivenLocationAndName(this.properties.get("MDLQA59ScreenCaptureLocation"));
