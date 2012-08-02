@@ -117,10 +117,10 @@ public class MDLQA61OfflineActivityGradeAndComments extends TestRunSettings {
 		@Test
 		public void checkGrade() throws Exception {
 			//Check the feedback comments
-			grading.assertFeedbackComments(this.properties.get("MDLQA61FeedbackComment"), this.properties.get("studentFirstname"), this.properties.get("studentSurname"));
+			assignmentAssertions.assertFeedbackComments(this.properties.get("MDLQA61FeedbackComment"), this.properties.get("studentFirstname"), this.properties.get("studentSurname"));
 			//Check the final grade
-			grading.assertFinalGradeStandard(this.properties.get("MDLQA61Grade"), this.properties.get("studentFirstname"), this.properties.get("studentSurname"));
+			assignmentAssertions.assertFinalGradeStandard(this.properties.get("MDLQA61Grade"), this.properties.get("studentFirstname"), this.properties.get("studentSurname"));
 			//Check the submission status is set to "Update"
-			grading.assertSubmissionStatusGradingTable(this.properties.get("MDLQA61StatusUpdate"), this.properties.get("studentFirstname"), this.properties.get("studentSurname"));
+			assignmentAssertions.assertSubmissionStatusGradingTable(this.properties.get("MDLQA61StatusUpdate"), this.properties.get("studentFirstname"), this.properties.get("studentSurname"));
 		}
 }

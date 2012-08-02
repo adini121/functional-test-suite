@@ -12,7 +12,6 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.moodle.seleniumutils.PassFailCriteria;
 /**
  * This is the page object model for courses. Hich level course interaction is contained in here.
  * @author Tim Barker 
@@ -20,7 +19,7 @@ import com.moodle.seleniumutils.PassFailCriteria;
  */
 public class Courses {
 	//Internationalization file location
-	public static String userData = "properties/data/static/courses.properties";
+	public static String coursesData = "properties/data/static/courses.properties";
 	private Map<String, String> properties = new HashMap<String, String>();
 	private RemoteWebDriver driver;
 /**
@@ -38,20 +37,20 @@ public class Courses {
  * where a selector requires a text string visible through the user interface e.g. value=button text, or link text.
  */
 	public void loadObjectData() {
-		Properties courses = new Properties();
+		Properties dataLoad = new Properties();
 		try {
-			courses.load(new FileInputStream(userData));
+			dataLoad.load(new FileInputStream(coursesData));
 		} catch (Exception e) {}
 		//put values from the properties file into hashmap
-		this.properties.put("addNewCourseButton", courses.getProperty("addNewCourseButton"));
-		this.properties.put("coursesNavBlock", courses.getProperty("coursesNavBlock"));
-		this.properties.put("turnEditingOn", courses.getProperty("turnEditingOn"));
-		this.properties.put("turnEditingOff", courses.getProperty("turnEditingOff"));
-		this.properties.put("deleteIconAlt", courses.getProperty("deleteIconAlt"));
-		this.properties.put("continueButton", courses.getProperty("continueButton"));
-		this.properties.put("exceptionTurnEditingOn", courses.getProperty("exceptionTurnEditingOn"));
-		this.properties.put("exceptionTrackingEnabled", courses.getProperty("exceptionTrackingEnabled"));
-		this.properties.put("exceptionPostTracked", courses.getProperty("exceptionPostTracked"));
+		this.properties.put("addNewCourseButton", dataLoad.getProperty("addNewCourseButton"));
+		this.properties.put("coursesNavBlock", dataLoad.getProperty("coursesNavBlock"));
+		this.properties.put("turnEditingOn", dataLoad.getProperty("turnEditingOn"));
+		this.properties.put("turnEditingOff", dataLoad.getProperty("turnEditingOff"));
+		this.properties.put("deleteIconAlt", dataLoad.getProperty("deleteIconAlt"));
+		this.properties.put("continueButton", dataLoad.getProperty("continueButton"));
+		this.properties.put("exceptionTurnEditingOn", dataLoad.getProperty("exceptionTurnEditingOn"));
+		this.properties.put("exceptionTrackingEnabled", dataLoad.getProperty("exceptionTrackingEnabled"));
+		this.properties.put("exceptionPostTracked", dataLoad.getProperty("exceptionPostTracked"));
 		}
 /**
  * Clicks the Add a New Course Button. If there are no courses already it does this from the home page. If there is already a course
@@ -195,39 +194,5 @@ public class Courses {
 				"')]"));
 		enrolledUserBreadcrumb.click();
 		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-	}
-/**
- * Asserts that the Turn Editing On button is not visible.
- * @throws Exception Passes silently if the button is disabled and throws an exception if it is enabled.
- */
-	public void assertTurnEditingOnIsDisabled() throws Exception {
-		PassFailCriteria passFail = new PassFailCriteria(driver);
-		passFail.assertItemNotOnscreenByCSSSelector("input[value='" +
-				this.properties.get("turnEditingOn") +
-				"']",this.properties.get("exceptionTurnEditingOn"), 0);
-	}
-/**
- * Asserts that tracking on a forum is disabled.
- * @param forumName The name of the forum where the value is passed from the test.
- * @throws Exception Passes quietly if the element does not exist and throws an exception if it does not.
- */
-	public void assertTrackingDisabled(String forumName) throws Exception {
-		PassFailCriteria passFail = new PassFailCriteria(driver);
-		passFail.assertElementIsNotPresentByXpath(".//div[@class='mod-indent'][contains(.,'" +
-				forumName +
-				"')]/span[@class='unread']", "" +
-						this.properties.get("exceptionPostTracked") +
-						"", 2);
-	}
-/**
- * Asserts that tracking is turned on for an item.
- * @param forumName The name of the forum where the value is passed from the test.
- * @throws Exception Throws and exception if tracking is turned off
- */
-	public void  assertTrackingEnabled(String forumName) throws Exception{
-		PassFailCriteria passFail = new PassFailCriteria(driver);
-		passFail.assertElementIsPresentByXpath(".//div[@class='mod-indent'][contains(.,'" +
-				forumName +
-				"')]/span[@class='unread']",this.properties.get("exceptionTrackingEnabled"), 0);
 	}
 }

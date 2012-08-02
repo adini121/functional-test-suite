@@ -10,7 +10,6 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
-import com.moodle.seleniumutils.PassFailCriteria;
 import com.moodle.testmanager.FormActions;
 /**
  * The page object model for the Add Submission.
@@ -152,28 +151,5 @@ public class AssignmentAddSubmission {
 				this.properties.get("buttonSubmit") +
 				"']");
 		button.click();
-	}
-/**
- * Makes the test fail if mod/assign/view.php does not contain the assignment title. Useful for verifying that the page has been loaded.
- * @param assignmentName The Assignment name, it should appear as a heading on the submission page. Pass the assignment name form the test.
- */
-	public void assertSubmissionPage(String assignmentName) {
-		PassFailCriteria passFail = new PassFailCriteria(driver);
-		passFail.assertTextPresentByXpath("//h2[contains(.,'" +
-				assignmentName +
-				"')]", "The assignment name should appear onscreen.", assignmentName);
-	}
-/**
- * Makes the test fail if the submission text doesn't appear on mod/assign/view.php. This verifies that the assignment has been saved.
- * @param submissionText The submission text that the student has entered. The value for this is passed from the test.
- * @throws Exception Throws an exception if the specified element ins not present onscreen.
- */
-	public void assertSubmissionOnlineText(String submissionText) throws Exception {
-		PassFailCriteria passFail = new PassFailCriteria(driver);
-		passFail.assertElementIsPresentByXpath("//tr[contains(.,'" +
-				this.properties.get("submissionTableOnlineText") +
-				"')][contains(.,'" +
-				submissionText +
-				"')]", this.properties.get("errorMessageSubmissionNotSaved"), 2);		
 	}
 }

@@ -55,7 +55,7 @@ public class MDLQA16TeacherEditDeletePost extends TestRunSettings {
 			forum.clickForumLink(this.properties.get("nameOfForumSingleSimple"));
 			forumPosts.clickEditLink(this.properties.get("simpleForumReplyText"));
 			forumPosts.clickSaveChanges();
-			forumPosts.assertTeacherEdit(this.properties.get("teacherFirstname") + " " + this.properties.get("teacherSurname"));
+			forumAssertions.assertTeacherEdit(this.properties.get("teacherFirstname") + " " + this.properties.get("teacherSurname"));
 		}
 		//Delete Post
 		@Test

@@ -216,7 +216,7 @@ public class MDLQA71AssignmentSubmissionOrder extends TestRunSettings {
 			course.clickCourseBreadcrumb(this.properties.get("courseShortname"));
 			assignment.clickAssignmentLink(this.properties.get("MDLQA71AssignmentName"));
 			assignment.clickLinkGradeAllSub();
-			grading.assertSortOrderStudentName("r0", this.properties.get("student2Firstname"), this.properties.get("student2Surname"));
+			assignmentAssertions.assertSortOrderStudentName("r0", this.properties.get("student2Firstname"), this.properties.get("student2Surname"));
 			//grading.assertFirstAndSurnameHidden(this.properties.get("studentFirstname"), this.properties.get("studentSurname"));
 		}
 		/*
@@ -228,8 +228,8 @@ public class MDLQA71AssignmentSubmissionOrder extends TestRunSettings {
 			course.clickCourseBreadcrumb(this.properties.get("courseShortname"));
 			assignment.clickAssignmentLink(this.properties.get("MDLQA71AssignmentName"));
 			assignment.clickLinkGradeAllSub();
-			grading.assertSortOrderStudentName("r0", this.properties.get("student2Firstname"), this.properties.get("student2Surname"));
-			grading.assertSortOrderStudentName("r1", this.properties.get("student3Firstname"), this.properties.get("student3Surname"));
+			assignmentAssertions.assertSortOrderStudentName("r0", this.properties.get("student2Firstname"), this.properties.get("student2Surname"));
+			assignmentAssertions.assertSortOrderStudentName("r1", this.properties.get("student3Firstname"), this.properties.get("student3Surname"));
 			//grading.assertFirstAndSurnameHidden(this.properties.get("student11Firstname"), this.properties.get("student11Surname"));
 			//Teacher logs out
 			user.selectLogout();
@@ -252,15 +252,15 @@ public class MDLQA71AssignmentSubmissionOrder extends TestRunSettings {
 			assignment.clickAssignmentLink(this.properties.get("MDLQA71AssignmentName"));
 			assignment.clickLinkGradeAllSub();
 			//Verify that, using the default 10 assignments per page that there are 2 pages.
-			grading.assertNumberOfGradingTablePages("2");
+			assignmentAssertions.assertNumberOfGradingTablePages("2");
 			//Sort by First name the navigate to second page.
 			grading.clickLinkSortFirstName();
 			grading.clickLinkGradingTablePageNumber("2");
 			//Assert that the correct student appears on this page.
-			grading.assertSortOrderStudentName("r1", this.properties.get("student11Firstname"), this.properties.get("student11Surname"));
+			assignmentAssertions.assertSortOrderStudentName("r1", this.properties.get("student11Firstname"), this.properties.get("student11Surname"));
 			//Change the number of assignments per page to 20 and verify that there is no pagination.
 			grading.selectValueAssignmentsPerPage(this.properties.get("MDLQA71Twenty"));
-			grading.assertNoLinkGradingTablePageNumber("2");
+			assignmentAssertions.assertNoLinkGradingTablePageNumber("2");
 		}
 		/*
 		 * 6. Try hiding one of the columns by clicking the hide icon next to a particular column heading.
@@ -271,17 +271,17 @@ public class MDLQA71AssignmentSubmissionOrder extends TestRunSettings {
 			course.clickCourseBreadcrumb(this.properties.get("courseShortname"));
 			assignment.clickAssignmentLink(this.properties.get("MDLQA71AssignmentName"));
 			assignment.clickLinkGradeAllSub();
-			grading.assertFirstAndSurnameHidden(this.properties.get("studentFirstname"), this.properties.get("studentSurname"));
-			grading.assertFirstAndSurnameHidden(this.properties.get("student2Firstname"), this.properties.get("student2Surname"));
-			grading.assertFirstAndSurnameHidden(this.properties.get("student3Firstname"), this.properties.get("student3Surname"));
-			grading.assertFirstAndSurnameHidden(this.properties.get("student4Firstname"), this.properties.get("student4Surname"));
-			grading.assertFirstAndSurnameHidden(this.properties.get("student5Firstname"), this.properties.get("student5Surname"));
-			grading.assertFirstAndSurnameHidden(this.properties.get("student6Firstname"), this.properties.get("student6Surname"));
-			grading.assertFirstAndSurnameHidden(this.properties.get("student7Firstname"), this.properties.get("student7Surname"));
-			grading.assertFirstAndSurnameHidden(this.properties.get("student8Firstname"), this.properties.get("student8Surname"));
-			grading.assertFirstAndSurnameHidden(this.properties.get("student9Firstname"), this.properties.get("student9Surname"));
-			grading.assertFirstAndSurnameHidden(this.properties.get("student10Firstname"), this.properties.get("student10Surname"));
-			grading.assertFirstAndSurnameHidden(this.properties.get("student11Firstname"), this.properties.get("student11Surname"));
+			assignmentAssertions.assertFirstAndSurnameHidden(this.properties.get("studentFirstname"), this.properties.get("studentSurname"));
+			assignmentAssertions.assertFirstAndSurnameHidden(this.properties.get("student2Firstname"), this.properties.get("student2Surname"));
+			assignmentAssertions.assertFirstAndSurnameHidden(this.properties.get("student3Firstname"), this.properties.get("student3Surname"));
+			assignmentAssertions.assertFirstAndSurnameHidden(this.properties.get("student4Firstname"), this.properties.get("student4Surname"));
+			assignmentAssertions.assertFirstAndSurnameHidden(this.properties.get("student5Firstname"), this.properties.get("student5Surname"));
+			assignmentAssertions.assertFirstAndSurnameHidden(this.properties.get("student6Firstname"), this.properties.get("student6Surname"));
+			assignmentAssertions.assertFirstAndSurnameHidden(this.properties.get("student7Firstname"), this.properties.get("student7Surname"));
+			assignmentAssertions.assertFirstAndSurnameHidden(this.properties.get("student8Firstname"), this.properties.get("student8Surname"));
+			assignmentAssertions.assertFirstAndSurnameHidden(this.properties.get("student9Firstname"), this.properties.get("student9Surname"));
+			assignmentAssertions.assertFirstAndSurnameHidden(this.properties.get("student10Firstname"), this.properties.get("student10Surname"));
+			assignmentAssertions.assertFirstAndSurnameHidden(this.properties.get("student11Firstname"), this.properties.get("student11Surname"));
 			user.selectLogout();
 		}
 }

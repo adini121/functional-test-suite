@@ -89,7 +89,7 @@ public class MDLQA1464TeacherSubmissionEnabledOnlineTextEnabled extends TestRunS
 			course.clickCourseLink(this.properties.get("courseName"));
 			//Access the assignment
 			assignment.clickAssignmentLink(this.properties.get("MDLQA1464AssignmentName"));
-			submitAssignment.assertSubmissionPage(this.properties.get("MDLQA1464AssignmentName"));
+			assignmentAssertions.assertSubmissionPage(this.properties.get("MDLQA1464AssignmentName"));
 		}
 		/*
 		 * 2. Create a submission, add a submission comment and save the comment.
@@ -107,7 +107,7 @@ public class MDLQA1464TeacherSubmissionEnabledOnlineTextEnabled extends TestRunS
 			//Cancel it.
 			submissionComments.clickLinkCancelComment();
 			//Check that it HASN'T been saved. 
-			submissionComments.assertCommentNotSaved(this.properties.get("MDLQA1464StudentSubmissionComment"));
+			assignmentAssertions.assertCommentNotSaved(this.properties.get("MDLQA1464StudentSubmissionComment"));
 			//Enter the submission comment again.
 			submissionComments.clickLinkSubmissionComments();
 			submissionComments.enterTextSubmissionComments(this.properties.get("MDLQA1464StudentSubmissionComment"));
@@ -117,10 +117,10 @@ public class MDLQA1464TeacherSubmissionEnabledOnlineTextEnabled extends TestRunS
 			course.clickCourseBreadcrumb(this.properties.get("courseShortname"));
 			//Access the assignment
 			assignment.clickAssignmentLink(this.properties.get("MDLQA1464AssignmentName"));
-			submitAssignment.assertSubmissionPage(this.properties.get("MDLQA1464AssignmentName"));
+			assignmentAssertions.assertSubmissionPage(this.properties.get("MDLQA1464AssignmentName"));
 			//Check that this time it has been saved.
 			submissionComments.clickLinkSubmissionComments();
-			submissionComments.assertCommentSaved(this.properties.get("MDLQA1464StudentSubmissionComment"));
+			assignmentAssertions.assertCommentSaved(this.properties.get("MDLQA1464StudentSubmissionComment"));
 			//submissionComments.clickLinkSubmissionComments();
 		}
 		/*
@@ -135,9 +135,9 @@ public class MDLQA1464TeacherSubmissionEnabledOnlineTextEnabled extends TestRunS
 			course.clickCourseBreadcrumb(this.properties.get("courseShortname"));
 			//Access the assignment
 			assignment.clickAssignmentLink(this.properties.get("MDLQA1464AssignmentName"));
-			submitAssignment.assertSubmissionPage(this.properties.get("MDLQA1464AssignmentName"));
+			assignmentAssertions.assertSubmissionPage(this.properties.get("MDLQA1464AssignmentName"));
 			//Check that it's been deleted.
-			submissionComments.assertCommentNotSaved(this.properties.get("MDLQA1464StudentSubmissionComment"));
+			assignmentAssertions.assertCommentNotSaved(this.properties.get("MDLQA1464StudentSubmissionComment"));
 			//Enter a new comment and save it.
 			submissionComments.clickLinkSubmissionComments();
 			submissionComments.enterTextSubmissionComments(this.properties.get("MDLQA1464StudentSubmissionCommentEdit"));
@@ -149,6 +149,6 @@ public class MDLQA1464TeacherSubmissionEnabledOnlineTextEnabled extends TestRunS
 		@Test
 		public void checkChangesMade() throws Exception {
 			//Check that it's been saved.
-			submissionComments.assertCommentSaved(this.properties.get("MDLQA1464StudentSubmissionCommentEdit"));
+			assignmentAssertions.assertCommentSaved(this.properties.get("MDLQA1464StudentSubmissionCommentEdit"));
 		}
 }

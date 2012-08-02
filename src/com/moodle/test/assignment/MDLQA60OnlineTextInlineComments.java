@@ -46,7 +46,7 @@ public class MDLQA60OnlineTextInlineComments extends TestDataLoad {
 		user.clickLoginButton();
 		course.clickCourseLink(courseName);
 		assignment.clickAssignmentLink(MDLQA59AssignmentName);
-		grading.assertGradingSummaryPage(MDLQA59AssignmentName);
+		assignmentAssertions.assertGradingSummaryPage(MDLQA59AssignmentName);
 	}
 	// 2. Follow the 'View x submitted assignments' link and click a Grade link.
 	@Test
@@ -54,8 +54,8 @@ public class MDLQA60OnlineTextInlineComments extends TestDataLoad {
 		//assignment.clickButtonGradeAssignment();
 		assignment.clickLinkGradeAllSub();
 		grading.clickLinkGrade(studentFirstname, studentSurname);
-		submitAssignment.assertSubmissionOnlineText(MDLQA59StudentEditedSubmissionText);
-		grading.assertSubmissionStatusGradingForm(MDLQA60SubmissionStatusSubmitted);
+		assignmentAssertions.assertSubmissionOnlineText(MDLQA59StudentEditedSubmissionText);
+		assignmentAssertions.assertSubmissionStatusGradingForm(MDLQA60SubmissionStatusSubmitted);
 	}
 	// 3. Add an inline comment then click the 'Save changes' button.
 	@Test
@@ -72,7 +72,7 @@ public class MDLQA60OnlineTextInlineComments extends TestDataLoad {
 	}
 	@Test
 	public void linkTextChanged() throws Exception {
-		grading.assertSubmissionStatusGradingTable(MDLQA60SubmissionStatusGraded, studentFirstname, studentSurname);
+		assignmentAssertions.assertSubmissionStatusGradingTable(MDLQA60SubmissionStatusGraded, studentFirstname, studentSurname);
 			user.selectLogout();
 	}
 }

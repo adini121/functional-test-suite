@@ -88,7 +88,7 @@ public class MDLQA69TeacherSubmissionEnabledFileSubmissionEnabled extends TestRu
 			course.clickCourseLink(this.properties.get("courseName"));
 			//Access the assignment
 			assignment.clickAssignmentLink(this.properties.get("MDLQA69AssignmentName"));
-			submitAssignment.assertSubmissionPage(this.properties.get("MDLQA69AssignmentName"));
+			assignmentAssertions.assertSubmissionPage(this.properties.get("MDLQA69AssignmentName"));
 		}
 		/*
 		 * 2. Add a submission comment and save the comment.
@@ -106,14 +106,14 @@ public class MDLQA69TeacherSubmissionEnabledFileSubmissionEnabled extends TestRu
 			//Cancel it.
 			submissionComments.clickLinkCancelComment();
 			//Check that it HASN'T been saved. 
-			submissionComments.assertCommentNotSaved(this.properties.get("MDLQA69StudentSubmissionComment"));
+			assignmentAssertions.assertCommentNotSaved(this.properties.get("MDLQA69StudentSubmissionComment"));
 			//Enter the submission comment again.
 			submissionComments.clickLinkSubmissionComments();
 			submissionComments.enterTextSubmissionComments(this.properties.get("MDLQA69StudentSubmissionComment"));
 			//This time save it.
 			submissionComments.clickLinkSaveComment();
 			//Check that this time it has been saved.
-			submissionComments.assertCommentSaved(this.properties.get("MDLQA69StudentSubmissionComment"));
+			assignmentAssertions.assertCommentSaved(this.properties.get("MDLQA69StudentSubmissionComment"));
 			submissionComments.clickLinkSubmissionComments();
 		}
 		/*
@@ -125,7 +125,7 @@ public class MDLQA69TeacherSubmissionEnabledFileSubmissionEnabled extends TestRu
 			submissionComments.clickLinkSubmissionComments();
 			submissionComments.clickLinkDeleteSubmissionCommentAndConfirm("MDLQA69StudentSubmissionComment");
 			//Check that it's been deleted.
-			submissionComments.assertCommentNotSaved(this.properties.get("MDLQA69StudentSubmissionComment"));
+			assignmentAssertions.assertCommentNotSaved(this.properties.get("MDLQA69StudentSubmissionComment"));
 			//Enter a new comment and save it.
 			submissionComments.enterTextSubmissionComments(this.properties.get("MDLQA69StudentSubmissionCommentEdit"));
 			submissionComments.clickLinkSaveComment();
@@ -136,6 +136,6 @@ public class MDLQA69TeacherSubmissionEnabledFileSubmissionEnabled extends TestRu
 		@Test
 		public void checkChangesMade() throws Exception {
 			//Check that it's been saved.
-			submissionComments.assertCommentSaved(this.properties.get("MDLQA69StudentSubmissionCommentEdit"));
+			assignmentAssertions.assertCommentSaved(this.properties.get("MDLQA69StudentSubmissionCommentEdit"));
 		}
 }

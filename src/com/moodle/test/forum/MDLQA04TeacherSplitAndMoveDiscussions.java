@@ -145,8 +145,8 @@ public class MDLQA04TeacherSplitAndMoveDiscussions extends TestRunSettings {
 			splitForum.clickSplitButton();
 			course.clickCourseBreadcrumb(this.properties.get("courseShortname"));	
 			forum.clickForumLink(this.properties.get("nameOfForum"));
-			forum.assertDiscussionPresent(this.properties.get("discussSplitSubject"));
-			forum.assertDiscussionPresent(this.properties.get("newName"));
+			forumAssertions.assertDiscussionPresent(this.properties.get("discussSplitSubject"));
+			forumAssertions.assertDiscussionPresent(this.properties.get("newName"));
 		}
 		//Move discussion to new forum and verify that the discussion has been moved
 		@Test
@@ -157,6 +157,6 @@ public class MDLQA04TeacherSplitAndMoveDiscussions extends TestRunSettings {
 			navigationBlock.clickHome();
 			course.clickCourseLink(this.properties.get("courseName"));
 			forum.clickForumLink(this.properties.get("nameOfForumForMove"));
-			forum.assertDiscussionPresent(this.properties.get("newName"));
+			forumAssertions.assertDiscussionPresent(this.properties.get("newName"));
 		}
 }

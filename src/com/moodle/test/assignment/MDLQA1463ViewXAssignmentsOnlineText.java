@@ -109,7 +109,7 @@ public class MDLQA1463ViewXAssignmentsOnlineText extends TestRunSettings {
 			//Teacher accesses assignment
 			assignment.clickAssignmentLink(this.properties.get("MDLQA1463AssigmentName"));
 			//Check that the number of submissions is displayed on the page.
-			grading.assertNumberOfSubmissions("1");
+			assignmentAssertions.assertNumberOfSubmissions("1");
 			//Teacher logs out
 			user.selectLogout();
 		}
@@ -149,7 +149,7 @@ public class MDLQA1463ViewXAssignmentsOnlineText extends TestRunSettings {
 			//Teacher accesses assignment
 			assignment.clickAssignmentLink(this.properties.get("MDLQA1463AssigmentName"));
 			//Check that the number of submissions is displayed on the page.
-			grading.assertNumberOfSubmissions("2");
+			assignmentAssertions.assertNumberOfSubmissions("2");
 			//Teacher logs out
 			user.selectLogout();
 		}

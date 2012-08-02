@@ -80,8 +80,8 @@ public class MDLQA07NewCourseLatestNews extends TestRunSettings {
 			forumPosts.clickPostToForum();
 			forumPosts.clickDiscussionLink(this.properties.get("newsSubject1"));
 			//Pass/Fail criteria
-			forumPosts.assertForumPostSubjectSuccessful(this.properties.get("newsSubject1"));
-			forumPosts.assertForumPostMessageSuccessful(this.properties.get("newsMessage1"));
+			forumAssertions.assertForumPostSubjectSuccessful(this.properties.get("newsSubject1"));
+			forumAssertions.assertForumPostMessageSuccessful(this.properties.get("newsMessage1"));
 			//Create discussion 2
 			forum.clickForumLink(this.properties.get("newsForum"));
 			forum.clickAddNewTopicButton();
@@ -90,8 +90,8 @@ public class MDLQA07NewCourseLatestNews extends TestRunSettings {
 			forumPosts.clickPostToForum();
 			forumPosts.clickDiscussionLink(this.properties.get("newsSubject2"));
 			//Pass/Fail criteria
-			forumPosts.assertForumPostSubjectSuccessful(this.properties.get("newsSubject2"));
-			forumPosts.assertForumPostMessageSuccessful(this.properties.get("newsMessage2"));
+			forumAssertions.assertForumPostSubjectSuccessful(this.properties.get("newsSubject2"));
+			forumAssertions.assertForumPostMessageSuccessful(this.properties.get("newsMessage2"));
 			//Create discussion 3
 			forum.clickForumLink(this.properties.get("newsForum"));
 			forum.clickAddNewTopicButton();
@@ -100,16 +100,16 @@ public class MDLQA07NewCourseLatestNews extends TestRunSettings {
 			forumPosts.clickPostToForum();
 			forumPosts.clickDiscussionLink(this.properties.get("newsSubject3"));
 			//Pass/Fail criteria
-			forumPosts.assertForumPostSubjectSuccessful(this.properties.get("newsSubject3"));
-			forumPosts.assertForumPostMessageSuccessful(this.properties.get("newsMessage3"));
+			forumAssertions.assertForumPostSubjectSuccessful(this.properties.get("newsSubject3"));
+			forumAssertions.assertForumPostMessageSuccessful(this.properties.get("newsMessage3"));
 		}
 		//Check that all discussions appear in the news block
 		@Test
 		public void check3InNewsBlock(){
 			course.clickCourseLink(this.properties.get("courseShortname"));
-			newsBlock.assertDiscussionInNewsBlock(this.properties.get("newsSubject1"));
-			newsBlock.assertDiscussionInNewsBlock(this.properties.get("newsSubject2"));
-			newsBlock.assertDiscussionInNewsBlock(this.properties.get("newsSubject3"));
+			blockAssertions.assertDiscussionInNewsBlock(this.properties.get("newsSubject1"));
+			blockAssertions.assertDiscussionInNewsBlock(this.properties.get("newsSubject2"));
+			blockAssertions.assertDiscussionInNewsBlock(this.properties.get("newsSubject3"));
 		}
 		//Change News Items to show settings to 2
 		@Test
@@ -121,8 +121,8 @@ public class MDLQA07NewCourseLatestNews extends TestRunSettings {
 		//Check that only the most recent 2 discussion titles are displayed in the Latest News block.
 		@Test
 		public void check2InNewsBlock(){
-			newsBlock.assertDiscussionInNewsBlock(this.properties.get("newsSubject2"));
-			newsBlock.assertDiscussionInNewsBlock(this.properties.get("newsSubject3"));
+			blockAssertions.assertDiscussionInNewsBlock(this.properties.get("newsSubject2"));
+			blockAssertions.assertDiscussionInNewsBlock(this.properties.get("newsSubject3"));
 		}
 		//Change the 'News items to show' in the course settings to 0.
 		@Test
@@ -134,6 +134,6 @@ public class MDLQA07NewCourseLatestNews extends TestRunSettings {
 		//Check that the Latest News block is not displayed at all.
 		@Test
 		public void checkNewsBlockNotDisplayed() throws Exception{
-			newsBlock.assertNewsBlockNotDisplayed();
+			blockAssertions.assertNewsBlockNotDisplayed();
 		}
 }

@@ -1,4 +1,4 @@
-package com.moodle.seleniumutils;
+package com.moodle.testmanager.pageObjectModel;
 
 import static org.junit.Assert.assertEquals;
 
@@ -13,14 +13,14 @@ import org.openqa.selenium.remote.RemoteWebDriver;
  * @author Tim Barker 
  * @see <a href="http://www.gnu.org/copyleft/gpl.html">License: GNU GPL v3 or later</a>
  */
-public class PassFailCriteria {
+public abstract class PassFailAssertions {
 	private RemoteWebDriver driver;
 /**
  * Constructor for the PassFailCriteria utility class.	
  * @param driver The driver that is used for the test. There is no need to specify the value for the driver here as the driver
  * is instantiated in the page object using one of the com.moodle.seleniumutils.SeleniumManager constructors.
  */
-	public PassFailCriteria(RemoteWebDriver driver) {
+	public PassFailAssertions(RemoteWebDriver driver) {
 		this.driver = driver;
 	}
 /**

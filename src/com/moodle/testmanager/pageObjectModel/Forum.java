@@ -9,7 +9,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
-import com.moodle.seleniumutils.PassFailCriteria;
 /**
  * This is the page object model for High level forum actions.
  * @author Tim Barker 
@@ -35,20 +34,20 @@ public class Forum {
  * where a selector requires a text string visible through the user interface e.g. value=button text, or link text.
  */
 	public void loadObjectData() {
-		Properties forum = new Properties();
+		Properties dataLoad = new Properties();
 		try {
-			forum.load(new FileInputStream(forumData));
+			dataLoad.load(new FileInputStream(forumData));
 		} catch (Exception e) {}
 		//put values from the properties file into hashmap
-		this.properties.put("addNewDiscussionButtonCSSValue", forum.getProperty("addNewDiscussionButtonCSSValue"));
-		this.properties.put("optionalSubscription", forum.getProperty("optionalSubscription"));
-		this.properties.put("forcedSubscription", forum.getProperty("forcedSubscription"));
-		this.properties.put("autoSubscription", forum.getProperty("autoSubscription"));
-		this.properties.put("subscriptionDisabled", forum.getProperty("subscriptionDisabled"));
-		this.properties.put("subscribeLinkText", forum.getProperty("subscribeLinkText"));
-		this.properties.put("unsubscribeLinkText", forum.getProperty("unsubscribeLinkText"));
-		this.properties.put("addNewTopicButton", forum.getProperty("addNewTopicButton"));
-		this.properties.put("addNewQuestionButton", forum.getProperty("addNewQuestionButton"));
+		this.properties.put("addNewDiscussionButtonCSSValue", dataLoad.getProperty("addNewDiscussionButtonCSSValue"));
+		this.properties.put("optionalSubscription", dataLoad.getProperty("optionalSubscription"));
+		this.properties.put("forcedSubscription", dataLoad.getProperty("forcedSubscription"));
+		this.properties.put("autoSubscription", dataLoad.getProperty("autoSubscription"));
+		this.properties.put("subscriptionDisabled", dataLoad.getProperty("subscriptionDisabled"));
+		this.properties.put("subscribeLinkText", dataLoad.getProperty("subscribeLinkText"));
+		this.properties.put("unsubscribeLinkText", dataLoad.getProperty("unsubscribeLinkText"));
+		this.properties.put("addNewTopicButton", dataLoad.getProperty("addNewTopicButton"));
+		this.properties.put("addNewQuestionButton", dataLoad.getProperty("addNewQuestionButton"));
 	}
 /**
  * Click on a forum link using the forum name passed from the test case.
@@ -93,80 +92,6 @@ public class Forum {
 				this.properties.get("addNewTopicButton") +
 				"']"));
 		addDiscussion.click();
-	}
-/**
- * Asserts that a discussion in present in a forum. 
- * @param textToBeAsserted The discussion title is the value asserted and this is passed via a variable in the test.
- */
-	public void assertDiscussionPresent(String textToBeAsserted) {
-		PassFailCriteria passFail = new PassFailCriteria(driver);
-		passFail.assertTextPresentByXpath(".//a[contains(.,'" +
-				textToBeAsserted +
-				"')]", "Discussion should be displayed", textToBeAsserted);	
-	}
-/**
- * 	Asserts that subscription to a forum is optional
- */
-	public void assertSubscriptionOptional() {
-		PassFailCriteria passFail = new PassFailCriteria(driver);
-		passFail.assertTextPresentByXpath("//span[contains(.,'" +
-				this.properties.get("optionalSubscription") +
-				"')]", "Optional subscription should be displayed", this.properties.get("optionalSubscription"));
-	}
-/**
- * Asserts that subscription to a forum is forced
- */
-	public void assertSubscriptionForced() {
-		PassFailCriteria passFail = new PassFailCriteria(driver);
-		passFail.assertTextPresentByXpath("//span[contains(.,'" +
-				this.properties.get("forcedSubscription") +
-				"')]", "Forced subscription should be displayed", this.properties.get("forcedSubscription"));
-	}
-/**
- * Asserts that subscription to a forum is automatic
- */
-	public void assertSubscriptionAuto() {
-		PassFailCriteria passFail = new PassFailCriteria(driver);
-		passFail.assertTextPresentByXpath("//span[contains(.,'" +
-				this.properties.get("autoSubscription") +
-				"')]", "Auto subscription should be displayed", this.properties.get("autoSubscription"));		
-	}
-/**
- * Asserts that subscription is disabled
- */
-	public void assertSubscriptionDisabled() {
-		PassFailCriteria passFail = new PassFailCriteria(driver);
-		passFail.assertTextPresentByXpath("//span[contains(.,'" +
-				this.properties.get("subscriptionDisabled") +
-				"')]", "Discuss subscription disabled should be displayed", this.properties.get("subscriptionDisabled"));
-	}
-/**
- * Asserts that the subscribe link is present
- */
-	public void assertSubscribeOptionPresent() {
-		PassFailCriteria passFail = new PassFailCriteria(driver);
-		passFail.assertTextPresentByXpath("//a[contains(.,'" +
-				this.properties.get("subscribeLinkText") +
-				"')]", "Should be able to subscribe to this forum", this.properties.get("subscribeLinkText"));
-	}
-/**
- * 	Asserts that the unsubscribe link is present
- */
-	public void assertUnsubscribeOptionPresent() {
-		PassFailCriteria passFail = new PassFailCriteria(driver);
-		passFail.assertTextPresentByXpath("//a[contains(.,'" +
-				this.properties.get("unsubscribeLinkText") +
-				"')]", "Should be able to unsubscribe from this forum", this.properties.get("unsubscribeLinkText"));		
-	}
-/**
- * Asserts that the Add New Discussion button is not visible
- * @throws Exception Passes silently if the button is disabled and throws an exception if it is enabled.
- */
-	public void assertAddNewTopicButtonDisabled() throws Exception {
-		PassFailCriteria passFail = new PassFailCriteria(driver);
-		passFail.assertItemNotOnscreenByCSSSelector("input[value='" +
-				this.properties.get("addNewTopicButton") +
-				"']", "Add new topic is enabled and should be disabled", 0);
 	}
 /**
  * Clicks the Add a new question button

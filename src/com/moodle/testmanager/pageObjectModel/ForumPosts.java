@@ -12,7 +12,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.Select;
 
-import com.moodle.seleniumutils.PassFailCriteria;
 import com.moodle.testmanager.FormActions;
 /**
  * This is the page object model for the Posting to a forum.
@@ -23,7 +22,6 @@ public class ForumPosts {
 	//Internationalization file location
 	private Map<String, String> properties = new HashMap<String, String>();
 	private RemoteWebDriver driver;
-	private String editedBy = "(Edited by ";
 /**
  * Constructor for the page object.	
  * @param driver The driver that is used for the test. There is no need to specify the value for the driver here as the driver
@@ -176,90 +174,7 @@ public class ForumPosts {
 				"')]")));
 		forumType.selectByVisibleText(this.properties.get("nested"));
 	}
-/**
- * Asserts that the Flat with oldest first dropdown option is selected.
- */
-	public void assertFlatOldestOptionSelected() {
-		PassFailCriteria passFail = new PassFailCriteria(driver);
-		passFail.assertTextPresentByXpath(".//option[contains(.,'" +
-				this.properties.get("flatOldestFirst") +
-				"')]", "Flat with oldest option should be selected", this.properties.get("flatOldestFirst"));	
-	}
-/**
- * Asserts that the Flat with newest first dropdown option is selected.
- */
-	public void assertFlatNewestOptionSelected() {
-		PassFailCriteria passFail = new PassFailCriteria(driver);
-		passFail.assertTextPresentByXpath(".//option[contains(.,'" +
-				this.properties.get("flatNewestFirst") +
-				"')]", "Flat with newest option should be selected", this.properties.get("flatNewestFirst"));	
-	}
-/**
- * Asserts that the Threaded dropdown option is selected.
- */
-	public void assertThreadedOptionSelected() {
-		PassFailCriteria passFail = new PassFailCriteria(driver);
-		passFail.assertTextPresentByXpath(".//option[contains(.,'" +
-				this.properties.get("threaded") +
-				"')]", "Threaded option should be selected", this.properties.get("threaded"));	
-	}
-/**
- * Asserts that the threaded link exists.
- * @param linkText The link text of the value that is to be asserted.
- */
-	public void assertThreadedLink(String linkText) {
-		PassFailCriteria passFail = new PassFailCriteria(driver);
-		passFail.assertTextPresentByXpath(".//a[contains(.,'" +
-				linkText +
-				"')]", "Thread link should exist", linkText);	
-	}
-/**
- * Asserts that the Threaded dropdown option is selected.
- */
-	public void assertNestedOptionSelected() {
-		PassFailCriteria passFail = new PassFailCriteria(driver);
-		passFail.assertTextPresentByXpath(".//option[contains(.,'" +
-				this.properties.get("nested") +
-				"')]", "Nested option should be selected", this.properties.get("nested"));	
-	}
-/**
- * Asserts that a a forum post or reply has been successful by confirming that the subject text appears onscreen
- * WILL NOT WORK WITH THREADED VIEW USE assertThreadedLink method instead.
- * @param postSubject The text value for the subject of the post.
- */
-	public void assertForumPostSubjectSuccessful(String postSubject) {
-		PassFailCriteria passFail = new PassFailCriteria(driver);
-		passFail.assertTextPresentByXpath(".//div[contains(.,'" +
-				postSubject +
-				"')]/*/div[@class='subject' ]", "Subject should be present", postSubject);			
-	}
-/**
- * Asserts that a a forum post or reply has been successful by confirming that the message text appears onscreen
- * WILL NOT WORK WITH THREADED VIEW USE assertThreadedLink method instead.
- * @param postMessage The text value for the message.
- */
-	public void assertForumPostMessageSuccessful(String postMessage) {
-		PassFailCriteria passFail = new PassFailCriteria(driver);
-		passFail.assertTextPresentByXpath(".//div[@class='posting fullpost'][contains(.,'" +
-				postMessage +
-				"')]", "Message should be present", postMessage);
-	}
-/**
- * Asserts that the reply link is not present in a discussion.
- * @param postText The reply link is located using the link text for "reply" within the context of the text that that is included in the post.
- * The parameter is all or part of the text that makes up the post but needs to be unique on the page.
- * @throws Exception passes silently if the link is not present and throws an exception if it is.
- */
-	public void assertReplyLinkNotPresent(String postText) throws Exception {
-		PassFailCriteria passFail = new PassFailCriteria(driver);
-		passFail.assertElementIsNotPresentByXpath("//div[contains(.,'" +
-				postText +
-				"')]/*/*/*/a[contains(.,'" +
-				this.properties.get("replyLink") +
-				"')]", "Reply link in" +
-						postText +
-						"is enabled and should be disabled", 0);
-	}
+
 /**
  * Deletes all forum posts(discussions) within any forum and returns to the Moodle home page when it is done.
  * Manage timeouts has to be set to 0 otherwise the catching the thrown exception slows the test down. Rest the driver timeout when
@@ -290,29 +205,6 @@ public class ForumPosts {
 				BlockNavigation navigate = new BlockNavigation(driver);
 				navigate.clickHome();
 			}
-	}
-/**
- * Asserts that a subject or message in a discussion does not appear.
- * @param postText The post text that should not appear is passed from the test.
- * @throws Exception passes silently but throws an exception if the message appears onscreen.
- */
-	public void assertSubjectOrMessageNotPresent(String postText) throws Exception {
-		PassFailCriteria passFail = new PassFailCriteria(driver);
-		passFail.assertElementIsNotPresentByXpath("//div[contains(.,'" +
-				postText +
-				"')]", "Text in" +
-						postText +
-						"is viewable and should not be.", 0);
-	}
-/**
- * Asserts that the subject hidden message does appears on the page.
- */
-	public void assertSubjectHidden() {
-		PassFailCriteria passFail = new PassFailCriteria(driver);
-		passFail.assertTextPresentByXpath(".//div[@class='topic']/div[contains(.,'" +
-				this.properties.get("subjectHidden") +
-				"')]", this.properties.get("subjectHidden") + 
-				"should appear onscreen", this.properties.get("subjectHidden"));	
 	}
 /**
  * Clicks the edit link.
@@ -355,15 +247,5 @@ public class ForumPosts {
 				this.properties.get("continueButton") +
 				"']"));
 		continueButton.click();		
-	}
-/**
- * Throws an exception if the automatically entered "edited" comments do not appear onscreen.
- * @param editedBy 
- * @param teacherName 
- * @throws Exception Exception message that is thrown when the test fails.
- */
-	public void assertTeacherEdit(String teacherName) throws Exception {
-		PassFailCriteria passFail = new PassFailCriteria(driver);
-		passFail.assertElementIsPresentByXpath(".//div[@class='posting fullpost'][contains(.,'" + editedBy + teacherName + "')]", this.properties.get("editTeacherException"), 5);
 	}
 }

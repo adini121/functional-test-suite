@@ -79,7 +79,7 @@ public class MDLQA59OnlineTextAddEdit extends TestRunSettings {
 			user.clickLoginButton();
 			course.clickCourseLink(this.properties.get("courseName"));
 			assignment.clickAssignmentLink(this.properties.get("MDLQA59AssignmentName"));
-			submitAssignment.assertSubmissionPage(this.properties.get("MDLQA59AssignmentName"));
+			assignmentAssertions.assertSubmissionPage(this.properties.get("MDLQA59AssignmentName"));
 		}
 		@Test
 		//2. Click the 'Add submission' button, add some text, then click the 'Save changes' button.
@@ -88,8 +88,8 @@ public class MDLQA59OnlineTextAddEdit extends TestRunSettings {
 			submitAssignment.clickCheckboxSubmissionStatement();
 			submitAssignment.enterOnlineText(this.properties.get("MDLQA59StudentSubmissionText"));
 			submitAssignment.clickButtonSaveChanges();
-			submitAssignment.assertSubmissionPage(this.properties.get("MDLQA59AssignmentName"));
-			submitAssignment.assertSubmissionOnlineText(this.properties.get("MDLQA59StudentSubmissionText"));
+			assignmentAssertions.assertSubmissionPage(this.properties.get("MDLQA59AssignmentName"));
+			assignmentAssertions.assertSubmissionOnlineText(this.properties.get("MDLQA59StudentSubmissionText"));
 		}
 		@Test
 		//3. Click the 'Edit my submission' button again, edit the text, then click the 'Save changes' button.
@@ -102,8 +102,8 @@ public class MDLQA59OnlineTextAddEdit extends TestRunSettings {
 		@Test
 		//4. Check that the changes have been saved and the latest submission date and time is displayed.
 		public void verifyChangesSaved() throws Exception {
-			submitAssignment.assertSubmissionPage(this.properties.get("MDLQA59AssignmentName"));
-			submitAssignment.assertSubmissionOnlineText(this.properties.get("MDLQA59StudentSubmissionText") + this.properties.get("MDLQA59StudentEditedSubmissionText"));
+			assignmentAssertions.assertSubmissionPage(this.properties.get("MDLQA59AssignmentName"));
+			assignmentAssertions.assertSubmissionOnlineText(this.properties.get("MDLQA59StudentSubmissionText") + this.properties.get("MDLQA59StudentEditedSubmissionText"));
 		}
 		//@Test
 		//5. Check that the submission date and time is also displayed on the assignment index page.

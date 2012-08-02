@@ -104,8 +104,8 @@ public class MDLQA11QAForumStudentPostBeforeView extends TestRunSettings {
 			forumPosts.enterSubjectField(this.properties.get("studentSubject"));
 			forumPosts.enterMessage(this.properties.get("studentMessage"));
 			forumPosts.clickPostToForum();
-			forumPosts.assertForumPostSubjectSuccessful(this.properties.get("studentSubject"));
-			forumPosts.assertForumPostMessageSuccessful(this.properties.get("studentMessage"));
+			forumAssertions.assertForumPostSubjectSuccessful(this.properties.get("studentSubject"));
+			forumAssertions.assertForumPostMessageSuccessful(this.properties.get("studentMessage"));
 		}
 		//Log out Student 1
 		@Test
@@ -123,9 +123,9 @@ public class MDLQA11QAForumStudentPostBeforeView extends TestRunSettings {
 			course.clickCourseLink(this.properties.get("courseName"));
 			forum.clickForumLink(this.properties.get("nameOfForum"));
 			forumPosts.clickDiscussionLink(this.properties.get("teacherSubject"));
-			forumPosts.assertSubjectOrMessageNotPresent(this.properties.get("studentSubject"));
-			forumPosts.assertSubjectOrMessageNotPresent(this.properties.get("studentMessage"));
-			forumPosts.assertSubjectHidden();
+			forumAssertions.assertSubjectOrMessageNotPresent(this.properties.get("studentSubject"));
+			forumAssertions.assertSubjectOrMessageNotPresent(this.properties.get("studentMessage"));
+			forumAssertions.assertSubjectHidden();
 		}
 		//Reply to question
 		@Test
@@ -134,7 +134,7 @@ public class MDLQA11QAForumStudentPostBeforeView extends TestRunSettings {
 			forumPosts.enterSubjectField(this.properties.get("student2Subject"));
 			forumPosts.enterMessage(this.properties.get("student2Message"));
 			forumPosts.clickPostToForum();
-			forumPosts.assertForumPostSubjectSuccessful(this.properties.get("student2Subject"));
-			forumPosts.assertForumPostMessageSuccessful(this.properties.get("student2Message"));
+			forumAssertions.assertForumPostSubjectSuccessful(this.properties.get("student2Subject"));
+			forumAssertions.assertForumPostMessageSuccessful(this.properties.get("student2Message"));
 		}
 }

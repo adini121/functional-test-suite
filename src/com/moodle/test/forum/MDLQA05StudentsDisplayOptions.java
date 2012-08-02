@@ -90,14 +90,14 @@ public class MDLQA05StudentsDisplayOptions extends TestRunSettings {
 		@Test
 		public void displayFlatOldest() throws IOException{
 			forumPosts.selectDisplayOptionDropdownFlatOldest();
-			forumPosts.assertFlatOldestOptionSelected();
+			forumAssertions.assertFlatOldestOptionSelected();
 		}
 		//Verify display option is retained in second forum
 		@Test
 		public void verifyDisplayFlatOldestRetained() throws IOException{
 			navigationBlock.clickExposedLink(this.properties.get("nameOfSecondForum"));
 			forumPosts.clickDiscussionLink(this.properties.get("discussion2Subject"));
-			forumPosts.assertFlatOldestOptionSelected();
+			forumAssertions.assertFlatOldestOptionSelected();
 		}
 
 		//Change display option to "Display replies flat, with newest first" and assert display correct
@@ -106,14 +106,14 @@ public class MDLQA05StudentsDisplayOptions extends TestRunSettings {
 			navigationBlock.clickExposedLink(this.properties.get("nameOfFirstForum"));
 			forumPosts.clickDiscussionLink(this.properties.get("discussion1Subject"));
 			forumPosts.selectDisplayOptionDropdownFlatNewest();
-			forumPosts.assertFlatNewestOptionSelected();
+			forumAssertions.assertFlatNewestOptionSelected();
 		}
 		//Verify display option is retained in second forum
 		@Test
 		public void verifyDisplayFlatNewestRetained() throws IOException{
 			navigationBlock.clickExposedLink(this.properties.get("nameOfSecondForum"));
 			forumPosts.clickDiscussionLink(this.properties.get("discussion2Subject"));
-			forumPosts.assertFlatNewestOptionSelected();
+			forumAssertions.assertFlatNewestOptionSelected();
 		}	
 		//Change display option to "Display replies in threaded form" and assert display correct
 		@Test
@@ -121,16 +121,16 @@ public class MDLQA05StudentsDisplayOptions extends TestRunSettings {
 			navigationBlock.clickExposedLink(this.properties.get("nameOfFirstForum"));
 			forumPosts.clickDiscussionLink(this.properties.get("discussion1Subject"));
 			forumPosts.selectDisplayOptionDropdownThreaded();
-			forumPosts.assertThreadedOptionSelected();
-			forumPosts.assertThreadedLink(this.properties.get("forum1OriginalReply"));
+			forumAssertions.assertThreadedOptionSelected();
+			forumAssertions.assertThreadedLink(this.properties.get("forum1OriginalReply"));
 		}
 		//Verify display option is retained in second forum
 		@Test
 		public void verifyDisplayThreadedRetained() throws IOException{
 			navigationBlock.clickExposedLink(this.properties.get("nameOfSecondForum"));
 			forumPosts.clickDiscussionLink(this.properties.get("discussion2Subject"));
-			forumPosts.assertThreadedOptionSelected();
-			forumPosts.assertThreadedLink(this.properties.get("forum1OriginalReply"));
+			forumAssertions.assertThreadedOptionSelected();
+			forumAssertions.assertThreadedLink(this.properties.get("forum1OriginalReply"));
 			
 		}
 		//Change display option to "Display replies in nested form" and assert display correct
@@ -139,13 +139,13 @@ public class MDLQA05StudentsDisplayOptions extends TestRunSettings {
 			navigationBlock.clickExposedLink(this.properties.get("nameOfFirstForum"));
 			forumPosts.clickDiscussionLink(this.properties.get("discussion1Subject"));
 			forumPosts.selectDisplayOptionNested();
-			forumPosts.assertNestedOptionSelected();
+			forumAssertions.assertNestedOptionSelected();
 		}
 		//Verify display option is retained in second forum
 		@Test
 		public void verifyDisplayNestedRetained(){
 			navigationBlock.clickExposedLink(this.properties.get("nameOfSecondForum"));
 			forumPosts.clickDiscussionLink(this.properties.get("discussion2Subject"));
-			forumPosts.assertNestedOptionSelected();
+			forumAssertions.assertNestedOptionSelected();
 		}	
 }

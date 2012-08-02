@@ -123,12 +123,12 @@ public class MDLQA12TeacherSet4PossibleForumSubscription extends TestRunSettings
 		course.clickCourseLink(this.properties.get("courseName"));
 		forum.clickForumLink(this.properties.get("nameOfForumOptional"));
 	//Test Pass/Fail Criteria
-		forum.assertSubscriptionOptional();
-		forum.assertSubscribeOptionPresent();	
+		forumAssertions.assertSubscriptionOptional();
+		forumAssertions.assertSubscribeOptionPresent();	
 	//Subscribe to discussion
 		forum.subscribe();
 	//Test Pass/Fail Criteria
-		forum.assertUnsubscribeOptionPresent();
+		forumAssertions.assertUnsubscribeOptionPresent();
 	//Unsubscribe from Discussion
 		forum.unsubscribe();
 		course.clickCourseBreadcrumb(this.properties.get("courseShortname"));
@@ -139,7 +139,7 @@ public class MDLQA12TeacherSet4PossibleForumSubscription extends TestRunSettings
 	//Run test
 		forum.clickForumLink(this.properties.get("nameOfForumForced"));
 	//Test Pass/Fail Criteria
-		forum.assertSubscriptionForced();
+		forumAssertions.assertSubscriptionForced();
 	//Back to course outline
 		course.clickCourseBreadcrumb(this.properties.get("courseShortname"));
 	}
@@ -149,13 +149,13 @@ public class MDLQA12TeacherSet4PossibleForumSubscription extends TestRunSettings
 	//Run test
 		forum.clickForumLink(this.properties.get("nameOfForumAuto"));
 	//Test Pass/Fail Criteria
-		forum.assertSubscriptionAuto();
-		forum.assertUnsubscribeOptionPresent();
+		forumAssertions.assertSubscriptionAuto();
+		forumAssertions.assertUnsubscribeOptionPresent();
 	//Unsubscribe from Discussion
 		forum.unsubscribe();
 	//Test Pass/Fail Criteria
-		forum.assertSubscriptionAuto();
-		forum.assertSubscribeOptionPresent();
+		forumAssertions.assertSubscriptionAuto();
+		forumAssertions.assertSubscribeOptionPresent();
 	//Subscribe to discussion
 		forum.subscribe();
 		course.clickCourseBreadcrumb(this.properties.get("courseShortname"));
@@ -166,7 +166,7 @@ public class MDLQA12TeacherSet4PossibleForumSubscription extends TestRunSettings
 	//Run test
 		forum.clickForumLink(this.properties.get("nameOfForumDisabled"));
 	//Test Pass/Fail Criteria
-		forum.assertSubscriptionDisabled();
+		forumAssertions.assertSubscriptionDisabled();
 	//Back to course outline
 		course.clickCourseBreadcrumb(this.properties.get("courseShortname"));
 	}

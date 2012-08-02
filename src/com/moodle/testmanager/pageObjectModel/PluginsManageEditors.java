@@ -10,7 +10,6 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
-import com.moodle.seleniumutils.PassFailCriteria;
 import com.moodle.testmanager.Navigation;
 /**
  * This is the page object model for the Settings Block. All interaction with the settings block is contained in here.
@@ -23,7 +22,6 @@ public class PluginsManageEditors {
 	private Map<String, String> properties = new HashMap<String, String>();
 	RemoteWebDriver driver;
 	protected Navigation navigate = new Navigation(driver);
-	protected PassFailCriteria passFail = new PassFailCriteria(driver);
 /**
  * Constructor for the page object.	
  * @param driver The driver that is used for the test. There is no need to specify the value for the driver here as the driver

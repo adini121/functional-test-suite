@@ -7,7 +7,6 @@ import java.util.Properties;
 
 import org.openqa.selenium.remote.RemoteWebDriver;
 
-import com.moodle.seleniumutils.PassFailCriteria;
 import com.moodle.testmanager.Navigation;
 /**
  * This is the page object model for the Settings Block. All interaction with the settings block is contained in here.
@@ -54,8 +53,6 @@ public class BlockSettings {
 		this.properties.put("treeDontTrack", blockSettings.getProperty("treeDontTrack"));
 		this.properties.put("treeAdvancedFeatures", blockSettings.getProperty("treeAdvancedFeatures"));
 		this.properties.put("treeAssignmentAdministration", blockSettings.getProperty("treeAssignmentAdministration"));
-		this.properties.put("exceptionTrackingCanBeEnabled", blockSettings.getProperty("exceptionTrackingCanBeEnabled"));
-		this.properties.put("exceptionTrackingCanBeDisabled", blockSettings.getProperty("exceptionTrackingCanBeDisabled"));
 		this.properties.put("treePlugins", blockSettings.getProperty("treePlugins"));
 		this.properties.put("treeTextEditors", blockSettings.getProperty("treeTextEditors"));
 		this.properties.put("treeManageEditors", blockSettings.getProperty("treeManageEditors"));
@@ -143,30 +140,6 @@ public class BlockSettings {
 				"')]/ul/li/*/a[contains(.,'" +
 				this.properties.get("treeDontTrack") +
 				"')]");
-	}
-/**
- * Asserts that tracking cannot be enabled by the user.
- * @throws Exception An exception is thrown if tracking can be enabled.
- */
-	public void assertTrackingCannotBeEnabled() throws Exception {
-		PassFailCriteria passFail = new PassFailCriteria(driver);
-		passFail.assertElementIsNotPresentByXpath(".//li[contains(.,'" +
-				this.properties.get("treeForumAdmin") +
-				"')]/ul/li/*/a[contains(.,'" +
-				this.properties.get("treeDontTrack") +
-				"')]", this.properties.get("exceptionTrackingCanBeEnabled"), 0);
-	}
-/**
- * Asserts that tracking cannot be disabled by the user.
- * @throws Exception An exception is thrown if tracking can be disabled.
- */
-	public void assertTrackingCannotBeDisabled() throws Exception {
-		PassFailCriteria passFail = new PassFailCriteria(driver);
-		passFail.assertElementIsNotPresentByXpath(".//li[contains(.,'" +
-				this.properties.get("treeForumAdmin") +
-				"')]/ul/li/*/a[contains(.,'" +
-				this.properties.get("treeDontTrack") +
-				"')]", this.properties.get("exceptionTrackingCanBeDisabled"), 0);
 	}
 /**
  * Navigates to the Edit assignment settngs page via the tree view whether it's expanded or collapsed.

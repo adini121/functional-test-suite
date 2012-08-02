@@ -143,26 +143,26 @@ public class MDLQA03TeacherSets1Of3TrackingOptions extends TestRunSettings {
 		@Test
 		public void trackingOptional() throws Exception{
 			course.clickCourseBreadcrumb(this.properties.get("courseShortname"));
-			course.assertTrackingEnabled(this.properties.get("nameOfForumOptional"));
+			courseAssertions.assertTrackingEnabled(this.properties.get("nameOfForumOptional"));
 			forum.clickForumLink(this.properties.get("nameOfForumOptional"));
 			settingsBlock.navigateDontTrackUnread();
 			course.clickCourseBreadcrumb(this.properties.get("courseShortname"));
-			course.assertTrackingDisabled(this.properties.get("nameOfForumOptional"));
+			courseAssertions.assertTrackingDisabled(this.properties.get("nameOfForumOptional"));
 		}
 		//Check that read forum posts are not tracked and that you have no option to enable the feature.
 		@Test
 		public void trackingOff() throws Exception{
-			course.assertTrackingDisabled(this.properties.get("nameOfForumOff"));
+			courseAssertions.assertTrackingDisabled(this.properties.get("nameOfForumOff"));
 			forum.clickForumLink(this.properties.get("nameOfForumOff"));
-			settingsBlock.assertTrackingCannotBeEnabled();
+			blockAssertions.assertTrackingCannotBeEnabled();
 			course.clickCourseLink(this.properties.get("courseShortname"));
 		}
 		//Check that read forum posts are tracked and that you have no option to disable the feature.
 		@Test
 		public void trackingOn() throws Exception{
-			course.assertTrackingEnabled(this.properties.get("nameOfForumOn"));
+			courseAssertions.assertTrackingEnabled(this.properties.get("nameOfForumOn"));
 			forum.clickForumLink(this.properties.get("nameOfForumOff"));
-			settingsBlock.assertTrackingCannotBeDisabled();
+			blockAssertions.assertTrackingCannotBeDisabled();
 		}
 		//Log out Student
 		//@Test

@@ -10,7 +10,6 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
-import com.moodle.seleniumutils.PassFailCriteria;
 /**
  * The page object model for the Assignment module.
  * @author Tim Barker 
@@ -98,14 +97,6 @@ public class Assignment {
 	public void clickAssignmentLink(String assignmentName) {
 		WebElement link = driver.findElementByLinkText(assignmentName);
 		link.click();
-	}
-/**
- * 
- * @throws Exception
- */
-	public void assertFileSubmisisonDisabled() throws Exception {
-		PassFailCriteria passFail = new PassFailCriteria(driver);
-		passFail.assertItemNotOnscreenByCSSSelector("input[value='" + this.properties.get("buttonEditMySubmission") + "']", this.properties.get("exceptionSubmissionEnabled"), 2);
 	}
 /**
  * Clicks the link "View/grade all submissions" on the assignment page.

@@ -85,6 +85,6 @@ public class MDLQA09SingleSimpleDiscussionOnlyTeachersStart extends TestRunSetti
 		@Test
 		public void tryToStartANewDiscussion() throws Exception{
 			course.clickCourseBreadcrumb(this.properties.get("courseShortname"));
-			course.assertTurnEditingOnIsDisabled();
+			courseAssertions.assertTurnEditingOnIsDisabled();
 		}
 }

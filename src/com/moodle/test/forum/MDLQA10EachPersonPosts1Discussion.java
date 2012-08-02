@@ -104,7 +104,7 @@ public class MDLQA10EachPersonPosts1Discussion extends TestRunSettings {
 		//Check that it is not possible to start another discussion in the forum.
 		@Test
 		public void checkNoDiscussion() throws Exception{
-			forum.assertAddNewTopicButtonDisabled();
+			forumAssertions.assertAddNewTopicButtonDisabled();
 		}
 		//Reply to several discussions
 		@Test
@@ -114,8 +114,8 @@ public class MDLQA10EachPersonPosts1Discussion extends TestRunSettings {
 			forumPosts.enterSubjectField(this.properties.get("replySubjectStudent"));
 			forumPosts.enterMessage(this.properties.get("replyMessageStudent"));
 			forumPosts.clickPostToForum();
-			forumPosts.assertForumPostSubjectSuccessful(this.properties.get("replySubjectStudent"));
-			forumPosts.assertForumPostMessageSuccessful(this.properties.get("replyMessageStudent"));
+			forumAssertions.assertForumPostSubjectSuccessful(this.properties.get("replySubjectStudent"));
+			forumAssertions.assertForumPostMessageSuccessful(this.properties.get("replyMessageStudent"));
 			navigationBlock.clickHome();
 			navigationBlock.clickExposedLink(this.properties.get("courseName"));
 			forum.clickForumLink(this.properties.get("nameOfForum"));
@@ -124,7 +124,7 @@ public class MDLQA10EachPersonPosts1Discussion extends TestRunSettings {
 			forumPosts.enterSubjectField(this.properties.get("replySubjectTeacher"));
 			forumPosts.enterMessage(this.properties.get("replyMessageTeacher"));
 			forumPosts.clickPostToForum();
-			forumPosts.assertForumPostSubjectSuccessful(this.properties.get("replySubjectTeacher"));
-			forumPosts.assertForumPostMessageSuccessful(this.properties.get("replyMessageTeacher"));
+			forumAssertions.assertForumPostSubjectSuccessful(this.properties.get("replySubjectTeacher"));
+			forumAssertions.assertForumPostMessageSuccessful(this.properties.get("replyMessageTeacher"));
 		}
 }

@@ -62,8 +62,8 @@ public class MDLQA06NewCourseNewsForum extends TestRunSettings {
 			forumPosts.enterMessage(this.properties.get("newsMessage"));
 			forumPosts.clickPostToForum();
 			forumPosts.clickDiscussionLink(this.properties.get("newsSubject"));
-			forumPosts.assertForumPostSubjectSuccessful(this.properties.get("newsSubject"));
-			forumPosts.assertForumPostMessageSuccessful(this.properties.get("newsMessage"));
+			forumAssertions.assertForumPostSubjectSuccessful(this.properties.get("newsSubject"));
+			forumAssertions.assertForumPostMessageSuccessful(this.properties.get("newsMessage"));
 		}
 		//Post Reply in news forum
 		@Test
@@ -73,8 +73,8 @@ public class MDLQA06NewCourseNewsForum extends TestRunSettings {
 			forumPosts.enterSubjectField(this.properties.get("replySubject"));
 			forumPosts.enterMessage(this.properties.get("replyMessage"));
 			forumPosts.clickPostToForum();
-			forumPosts.assertForumPostSubjectSuccessful(this.properties.get("replySubject"));
-			forumPosts.assertForumPostMessageSuccessful(this.properties.get("replyMessage"));
+			forumAssertions.assertForumPostSubjectSuccessful(this.properties.get("replySubject"));
+			forumAssertions.assertForumPostMessageSuccessful(this.properties.get("replyMessage"));
 		}
 		//Log Teacher out
 		@Test
@@ -92,18 +92,18 @@ public class MDLQA06NewCourseNewsForum extends TestRunSettings {
 		public void subscriptionForced(){
 			course.clickCourseLink(this.properties.get("courseName"));
 			forum.clickForumLink(this.properties.get("newsForum"));
-			forum.assertSubscriptionForced();
+			forumAssertions.assertSubscriptionForced();
 		}
 		//Student cannot post
 		@Test
 		public void studentCannotPost() throws Exception{
-			forum.assertAddNewTopicButtonDisabled();
+			forumAssertions.assertAddNewTopicButtonDisabled();
 			forum.clickForumLink(this.properties.get("newsForum"));
 			forumPosts.clickDiscussionLink(this.properties.get("newsSubject"));
-			forumPosts.assertForumPostSubjectSuccessful(this.properties.get("newsSubject"));
-			forumPosts.assertForumPostMessageSuccessful(this.properties.get("newsMessage"));
-			forumPosts.assertForumPostMessageSuccessful(this.properties.get("replyMessage"));
-			forumPosts.assertReplyLinkNotPresent(this.properties.get("newsMessage"));
-			forumPosts.assertReplyLinkNotPresent(this.properties.get("replyMessage"));
+			forumAssertions.assertForumPostSubjectSuccessful(this.properties.get("newsSubject"));
+			forumAssertions.assertForumPostMessageSuccessful(this.properties.get("newsMessage"));
+			forumAssertions.assertForumPostMessageSuccessful(this.properties.get("replyMessage"));
+			forumAssertions.assertReplyLinkNotPresent(this.properties.get("newsMessage"));
+			forumAssertions.assertReplyLinkNotPresent(this.properties.get("replyMessage"));
 		}
 }

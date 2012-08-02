@@ -12,7 +12,6 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.moodle.seleniumutils.PassFailCriteria;
 /**
  * The page object model for Assignment Submission Comments.
  * @author Tim Barker 
@@ -47,8 +46,6 @@ public class AssignmentSubmissionComments {
 		this.properties.put("linkSaveComment", dataLoad.getProperty("linkSaveComment"));
 		this.properties.put("linkCancelComment", dataLoad.getProperty("linkCancelComment"));
 		this.properties.put("linkYes", dataLoad.getProperty("linkYes"));
-		this.properties.put("exceptionMessageCommentPresentShouldNotBe", dataLoad.getProperty("exceptionMessageCommentPresentShouldNotBe"));
-		this.properties.put("exceptionMessageCommentNotPresent", dataLoad.getProperty("exceptionMessageCommentNotPresent"));
 	}
 /**
  * Clicks the comments link to display submission comments.
@@ -85,24 +82,6 @@ public class AssignmentSubmissionComments {
 	public void clickLinkCancelComment() {
 		WebElement link = driver.findElement(By .linkText(this.properties.get("linkCancelComment")));
 		link.click();
-	}
-/**
- * Makes the test fail if a given submission comment has been saved.	
- * @param commentText The text that was entered when the user entered the comment. This is the text that you are verifying is not there.
- * @throws Exception Throws an exception if the comment was saved.
- */
-	public void assertCommentNotSaved(String commentText) throws Exception {
-		PassFailCriteria passFail = new PassFailCriteria(driver);
-		passFail.assertElementIsNotPresentByXpath("//div[contains(.,'" + commentText + "')][@class='text_to_html']", this.properties.get("exceptionMessageCommentPresentShouldNotBe"), 2);
-	}
-/**
- * Makes the test fail if a given submission comment has not been saved.
- * @param commentText The text that was entered when the user entered the comment. This is the text that you are verifying is there.
- * @throws Exception Throws an exception if the comment was not saved.
- */
-	public void assertCommentSaved(String commentText) throws Exception {
-		PassFailCriteria passFail = new PassFailCriteria(driver);
-		passFail.assertElementIsPresentByXpath("//div[@class='no-overflow'][contains(.,'" + commentText + "')]", this.properties.get("exceptionMessageCommentNotPresent"), 2);
 	}
 /**
  * Deletes a comment and confirms the deletion.

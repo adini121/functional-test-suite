@@ -58,7 +58,7 @@ public class MDLQA70ViewXAssignments extends TestRunSettings {
 			//TODO The test won't pass without seeding the database first. See Tracker issue MDLTEST-143
 			assignment.clickAssignmentLink(this.properties.get("MDLQA70AssigmentName"));
 			//Check that the number of submissions is displayed on the page.
-			grading.assertNumberOfSubmissions(this.properties.get("MDLQA70NumberOfSubmissions"));
+			assignmentAssertions.assertNumberOfSubmissions(this.properties.get("MDLQA70NumberOfSubmissions"));
 			//Teacher logs out
 			user.selectLogout();
 		}
