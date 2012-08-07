@@ -12,7 +12,7 @@ import com.moodle.test.datacreation.MDLQADT4EnrolUsers;
 import com.moodle.test.moodleinstallation.Install23;
 
 public class MDLQASmokeTestOfMoodle extends TestDataLoad {
-	private String teacherUsername = this.properties.get("teacher");
+	private String teacherUsername = this.properties.get("teacherUsername");
 	private String password = this.properties.get("password");
 	private String courseName = this.properties.get("courseName");
 	private String assignmentName = this.properties.get("assignmentName");

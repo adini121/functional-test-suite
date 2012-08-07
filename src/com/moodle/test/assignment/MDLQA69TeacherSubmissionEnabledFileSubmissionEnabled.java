@@ -48,6 +48,7 @@ public class MDLQA69TeacherSubmissionEnabledFileSubmissionEnabled extends TestRu
 			this.properties.put("MDLQA69AssignmentText", testData.getProperty("MDLQA69AssignmentText"));
 			this.properties.put("MDLQA69StudentSubmissionComment", testData.getProperty("MDLQA69StudentSubmissionComment"));
 			this.properties.put("MDLQA69StudentSubmissionCommentEdit", testData.getProperty("MDLQA69StudentSubmissionCommentEdit"));
+			this.properties.put("MDLQA69OnlineText", testData.getProperty("MDLQA69OnlineText"));
 		}
 		/*
 		 * TEST PRE-REQUISITES:
@@ -68,7 +69,8 @@ public class MDLQA69TeacherSubmissionEnabledFileSubmissionEnabled extends TestRu
 			//Setup Assigment activity
 			addAssignment.enterNameField(this.properties.get("MDLQA69AssignmentName"));
 			addAssignment.enterDescriptionField(this.properties.get("MDLQA69AssignmentText"));
-			addAssignment.selectFileSubmissionsEnabledYes();
+			addAssignment.selectFileSubmissionsEnabledNo();
+			addAssignment.selectOnlineTextEnabledYes();
 			addAssignment.selectSubmissionCommentsYes();
 			addAssignment.clickSaveAndDisplay();
 			//Log Teacher out
@@ -98,8 +100,8 @@ public class MDLQA69TeacherSubmissionEnabledFileSubmissionEnabled extends TestRu
 			//Student adds a file submission.
 			assignment.clickButtonAddOrEditSubmission();
 			submitAssignment.clickCheckboxSubmissionStatement();
-			submitAssignment.clickButtonAdd();
-			//TODO Add steps to add a file from private files server files etc.
+			submitAssignment.enterOnlineText(this.properties.get("MDLQA69OnlineText"));
+			submitAssignment.clickButtonSaveChanges();
 			//Enter a submission comment.
 			submissionComments.clickLinkSubmissionComments();
 			submissionComments.enterTextSubmissionComments(this.properties.get("MDLQA69StudentSubmissionComment"));
@@ -125,8 +127,10 @@ public class MDLQA69TeacherSubmissionEnabledFileSubmissionEnabled extends TestRu
 			submissionComments.clickLinkSubmissionComments();
 			submissionComments.clickLinkDeleteSubmissionCommentAndConfirm("MDLQA69StudentSubmissionComment");
 			//Check that it's been deleted.
+			assignment.clickAssignmentLink(this.properties.get("MDLQA69AssignmentName"));
 			assignmentAssertions.assertCommentNotSaved(this.properties.get("MDLQA69StudentSubmissionComment"));
 			//Enter a new comment and save it.
+			submissionComments.clickLinkSubmissionComments();
 			submissionComments.enterTextSubmissionComments(this.properties.get("MDLQA69StudentSubmissionCommentEdit"));
 			submissionComments.clickLinkSaveComment();
 		}

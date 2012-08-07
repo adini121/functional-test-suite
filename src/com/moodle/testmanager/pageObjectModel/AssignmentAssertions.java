@@ -161,8 +161,8 @@ public void assertSubmissionStatusGradingTable(String status, String studentFirs
  * @param studentSurname The surname of the student.
  * @throws Exception Throws an exception if the name is not present in the specified table row.
  */
-public void assertSortOrderStudentName(String rowClass, String studentFirstName, String studentSurname) throws Exception {
-	assertElementIsPresentByXpath(".//tr[@class='" + rowClass + "']/td[@class='cell c1'][contains(.,'" + studentFirstName + " " + studentSurname + "')]",
+public void assertSortOrderStudentName(String studentFirstName, String studentSurname) throws Exception {
+	assertElementIsPresentByXpath(".//tr/td[@class='cell c3'][contains(.,'" + studentFirstName + " " + studentSurname + "')]",
 			studentFirstName + " " + studentSurname + " " + this.properties.get("errorSortOrderFirstName"), 2);
 }
 /**
