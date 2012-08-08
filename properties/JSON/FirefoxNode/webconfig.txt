@@ -7,7 +7,7 @@
                         "javascriptEnabled":true,
                         "takesScreenshot":true,
                         "firefox_profile":"",
-                        "maxInstances":5,
+                        "maxInstances":1,
 			"nativeEvents":true
                 },
         ],
