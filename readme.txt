@@ -21,12 +21,8 @@ Installation Testing
 Please see the http://www.seleniumhq.org for official support and documentation of Selenium. For training documentation also see: http://www.compendiumdev.co.uk/selenium/ (Selenium 1).
 
 DESIGN CONSIDERATIONS:
-Whilst it would have been desirable to use PHP, Selenium no longer officially support PHP language bindings. The unofficial
-Language bindings for PHP are incomplete and not comprehensively documented. Furthermore, the PHP language bindings do not support a large number of features of WebDriver. Java is used here as it is officially supported by Selenium and allows all features to be used.
 
 Tests are written making use of page object repositories and NOT recorded using Selenium IDE. The object repositories model the behaviour of a Moodle page or even a distinct section of a page e.g. the navigation block.
-
-JUnit is currently used to run the test cases.
 
 LIMITATIONS:
 The page objects may need to be modified to work with your Moodle installation depending on the implementation of themes. Currently, only very limited testing have been performed on themes.
