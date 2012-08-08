@@ -1,6 +1,6 @@
 The Moodle Functional Test Automation Harness
 
-This is an open source project that automates some types of testing for Moodle. The framework is based upon
+This is an open source project that automates some types of testing for Moodle and is based upon
 Selenium WebDriver, it includes all Jars required to build the project. Please feel free to generate your own javadocs, 
 write your own tests, page objects and utilities or even extend WebDriver to make it more user friendly. Everything in the
 project is Open Source.
@@ -38,4 +38,5 @@ The only WebDrivers that have been tested with Moodle are:
 RemoteWebdriver; for use with Selenium Server(RC).
 ChromeDriver; For local Chrome installations.
 FirefoxDriver; For local Firefox installations.
-All are fully functional.
+
+This software is supplied free of charge without any warranty.
