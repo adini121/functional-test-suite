@@ -6,3 +6,6 @@ bin/*
 buildfiles/*
 latex/*
 html/*
+junit-report
+junit-results
+MoodleDoxygen.Doxyfile
