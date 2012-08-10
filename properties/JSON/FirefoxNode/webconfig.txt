@@ -2,12 +2,12 @@
 "capabilities":
         [
  		{
-                        "browserName":"firefox",
-                        "acceptSslCerts":true,
-                        "javascriptEnabled":true,
-                        "takesScreenshot":true,
-                        "firefox_profile":"",
-                        "maxInstances":1,
+            "browserName":"firefox",
+            "acceptSslCerts":true,
+            "javascriptEnabled":true,
+            "takesScreenshot":true,
+            "firefox_profile":"",
+            "maxInstances":1,
 			"nativeEvents":true
                 },
         ],
