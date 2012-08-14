@@ -55,8 +55,8 @@ public abstract class FormAddEditSettings {
  * @throws Exception 
  */
 	public void enterDescriptionField(CharSequence text) throws Exception {
-		FormActions richText = new FormActions(driver);
-		richText.enterValueInTextArea(text);	
+		FormActions textArea = new FormActions(driver);
+		textArea.enterValueInTextArea(text);	
 	}
 /**
  * Selects or deselects the "Display description on page" checkbox.  

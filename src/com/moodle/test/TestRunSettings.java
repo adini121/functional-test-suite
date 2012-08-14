@@ -73,6 +73,7 @@ public class TestRunSettings {
 			String gridHubURL = startupConfig.getProperty("gridHubURL");
 			String browserType = startupConfig.getProperty("browserType");
 			String moodleHomePage = startupConfig.getProperty("moodleHomePage");
+			String chromeDriverLocation = startupConfig.getProperty("chromeDriverLocation");
 		//Call setup method
 			sm = new SeleniumManager();
 			sm.startRemotes(gridHubURL, browserType);
@@ -86,8 +87,8 @@ public class TestRunSettings {
 	@AfterClass
 	public static void Quit() {
 	//End Webdriver Session by calling teardown method
-			sm.teardown();
-			//sm.teardownFirefox();
+		sm.teardown();
+		//sm.teardownFirefox();
+		//sm.teardownChrome();
 	}
-
 }

@@ -1,15 +1,8 @@
 package com.moodle.test.smoketests;
 
-import java.net.MalformedURLException;
-
 import org.junit.Test;
 
 import com.moodle.test.TestDataLoad;
-import com.moodle.test.datacreation.MDLQADT1AddCourse;
-import com.moodle.test.datacreation.MDLQADT2AddUsers;
-import com.moodle.test.datacreation.MDLQADT3AssignFrontPageRoles;
-import com.moodle.test.datacreation.MDLQADT4EnrolUsers;
-import com.moodle.test.moodleinstallation.Install23;
 
 public class MDLQASmokeTestOfMoodle extends TestDataLoad {
 	private String teacherUsername = this.properties.get("teacherUsername");
@@ -44,75 +37,7 @@ public class MDLQASmokeTestOfMoodle extends TestDataLoad {
 	private String folderDescription = this.properties.get("folderDescription");
 	private String subFolderName = this.properties.get("subFolderName");
 	private String label = this.properties.get("label");
-	//@Test
-	public void installation() {
-		Install23 install23 = new Install23();
-		install23.install();
-	}
-	//@Test
-	public void addCourse() throws MalformedURLException {
-		MDLQADT1AddCourse addCourse = new MDLQADT1AddCourse();
-		addCourse.login();
-		addCourse.addCourse();
-	}
-	//@Test
-	public void addUsers() throws Exception {
-		MDLQADT2AddUsers addUsers = new MDLQADT2AddUsers();
-		addUsers.addTeacher();
-		addUsers.addFirstStudent();
-		addUsers.addSecondStudent();
-		addUsers.addThirdStudent();
-		addUsers.addFourthStudent();
-		addUsers.addFifthStudent();
-		addUsers.addSixthStudent();
-		addUsers.addSeventhStudent();
-		addUsers.addEighthStudent();
-		addUsers.addNinthStudent();
-		addUsers.addTenthStudent();
-		addUsers.addEleventhStudent();
-		//TODO Create Add Manager Step
-		//addUsers.addManager();
-	}
-	//@Test
-	public void assignFrontPageRoles() {
-		MDLQADT3AssignFrontPageRoles roles = new MDLQADT3AssignFrontPageRoles();
-		roles.assignTeacherRole();
-		roles.assignStudentRole();
-		roles.assignStudent2Role();
-		roles.assignStudent3Role();
-		roles.assignStudent4Role();
-		roles.assignStudent5Role();
-		roles.assignStudent6Role();
-		roles.assignStudent7Role();
-		roles.assignStudent8Role();
-		roles.assignStudent9Role();
-		roles.assignStudent10Role();
-		roles.assignStudent11Role();
-		navigationBlock.clickHome();
-		//TODO Create Add manager role step
-		//roles.assignManagerRole();
-	}
-	//@Test
-	public void enrolUsers() {
-		MDLQADT4EnrolUsers enrol = new MDLQADT4EnrolUsers();
-		//TODO re-write the enrol teacher step so you don't have to use the ajax buttons
-		enrol.enrolTeacher();
-		enrol.assignTeacherRole();
-		enrol.enrolStudent();
-		enrol.enrolStudent2();
-		enrol.enrolStudent3();
-		enrol.enrolStudent4();
-		enrol.enrolStudent5();
-		enrol.enrolStudent6();
-		enrol.enrolStudent7();
-		enrol.enrolStudent8();
-		enrol.enrolStudent9();
-		enrol.enrolStudent10();
-		enrol.enrolStudent11();
-		//TODO create enrol manager step
-		//enrol.enrolManager();
-		user.selectLogout();
-	}
+	
 	@Test
 	public void addAssignment() throws Exception {
 		user.loginToSystem(teacherUsername, password);

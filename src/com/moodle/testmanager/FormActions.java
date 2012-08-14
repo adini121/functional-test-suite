@@ -13,6 +13,9 @@ import org.openqa.selenium.support.ui.Select;
  * @see <a href="http://www.gnu.org/copyleft/gpl.html">License: GNU GPL v3 or later</a>
  */
 public class FormActions {
+	private static final String TINYMCE = "tinymce";
+	private static final String IFRAME = "iframe";
+	private static final String TEXTAREA = "textarea";
 	private RemoteWebDriver driver;
 	private String locDay = "day";
 	private String locMonth = "month";
@@ -23,6 +26,8 @@ public class FormActions {
 	private String locGenXpathPrefix=".//table[@id='";
 	private String locGenXpathSuffix="']/*/*/*/iframe";
 	private String exceptionNoTextEditor="The text editor is missing from the page and could either be broken or have changed in come way that has broken the test.";
+//Other locator variables
+	
 /**
  * Constructor for the FormActions utility class.	
  * @param driver The driver that is used for the test. There is no need to specify the value for the driver here as the driver
@@ -113,25 +118,25 @@ public class FormActions {
  * <br/> b) Someone has changed something that has broken the test.
  * <br/> c) A third party plugin is implemented as the default text editor.
  */
-	public void enterValueInTextArea(CharSequence message) throws Exception {
+public void enterValueInTextArea(CharSequence message) throws Exception {
 		driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
 		boolean itemVisible = false;
 		boolean mceVisible = false;
 		try {
-			WebElement e = driver.findElementByTagName("textarea");
+			WebElement e = driver.findElementByTagName(TEXTAREA);
 			itemVisible = e.isDisplayed();
-			WebElement emce = driver.findElement(By.tagName("iframe"));
+			WebElement emce = driver.findElement(By.tagName(IFRAME));
 			mceVisible = emce.isDisplayed();
 		}
 		catch (Exception e) {}
 		if (itemVisible) {
-			WebElement e = driver.findElementByTagName("textarea");
+			WebElement e = driver.findElementByTagName(TEXTAREA);
 			e.sendKeys(message);
 		}
 		else if (mceVisible) {
-			WebElement messagebox = driver.findElementByTagName("iframe");
+			WebElement messagebox = driver.findElementByTagName(IFRAME);
 			driver.switchTo().frame(messagebox);
-			WebElement richTextBox = driver.findElement(By.id("tinymce"));
+			WebElement richTextBox = driver.findElement(By.id(TINYMCE));
 			richTextBox.click();
 			richTextBox.sendKeys(message);
 			driver.switchTo().window(driver.getWindowHandle());
@@ -259,7 +264,7 @@ public class FormActions {
 	public void enterValueGenericTinyMCE(CharSequence message, String tableID) {
 		WebElement messagebox = driver.findElement(By.xpath(locGenXpathPrefix + tableID + locGenXpathSuffix));
 		driver.switchTo().frame(messagebox);
-		WebElement richTextBox = driver.findElement(By.id("tinymce"));
+		WebElement richTextBox = driver.findElement(By.id(TINYMCE));
 		richTextBox.click();
 		richTextBox.sendKeys(message);
 		driver.switchTo().window(driver.getWindowHandle());
