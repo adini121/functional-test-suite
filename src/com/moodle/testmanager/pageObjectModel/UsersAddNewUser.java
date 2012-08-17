@@ -41,6 +41,7 @@ public class UsersAddNewUser {
  * @param username The desired username, this value is passed from the test.
  */
 	public void enterUsername(String username) {
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		WebElement usernameField = driver.findElementById("id_username");
 		usernameField.sendKeys(username);
 	}
