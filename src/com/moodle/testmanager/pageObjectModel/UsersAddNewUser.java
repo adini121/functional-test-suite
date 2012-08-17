@@ -41,7 +41,7 @@ public class UsersAddNewUser {
  * @param username The desired username, this value is passed from the test.
  */
 	public void enterUsername(String username) {
-		WebElement usernameField = driver.findElement(By .cssSelector("#id_username"));
+		WebElement usernameField = driver.findElementById("id_username");
 		usernameField.sendKeys(username);
 	}
 /**
