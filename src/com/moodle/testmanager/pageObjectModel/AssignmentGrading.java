@@ -4,8 +4,10 @@ import java.io.FileInputStream;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
+import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
@@ -68,8 +70,23 @@ public class AssignmentGrading {
  * Clicks the Grade link
  */
 	public void clickLinkGrade(String studentFirstName, String studentSurname) {
+		driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+		boolean studentVisible = false;
+		try {
 		WebElement link = driver.findElementByXPath("//tr[contains(.,'" + studentFirstName + " " + studentSurname + "')]/td/a/*[@title='Grade']");
-		link.click();
+		studentVisible = link.isDisplayed();
+		}
+		catch (NoSuchElementException ex){};
+		if (studentVisible) {
+			WebElement link = driver.findElementByXPath("//tr[contains(.,'" + studentFirstName + " " + studentSurname + "')]/td/a/*[@title='Grade']");
+			link.click();
+		}
+		else {
+			WebElement next = driver.findElementByLinkText("Next");
+			next.click();
+			clickLinkGrade(studentFirstName, studentSurname);
+		}
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 	}
 /**
  * Downloads a file with a given filename.
