@@ -95,7 +95,7 @@ public class WikiAddForm extends FormAddEditSettings {
  * @param valueToEnter The value that you would like to enter in the text field.
  */
 	private void textFieldWiki(String fieldLocator, CharSequence valueToEnter){
-		WebElement textField = driver.findElementById(fieldLocator);
+		WebElement textField = driver.findElementById("id_firstpagetitle");
 		textField.sendKeys(valueToEnter);
 	}
 /**
