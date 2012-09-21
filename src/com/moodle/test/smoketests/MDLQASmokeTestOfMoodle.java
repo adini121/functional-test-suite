@@ -112,7 +112,7 @@ public class MDLQASmokeTestOfMoodle extends TestDataLoad {
 		addQuiz.enterDescriptionField(quizDescription);
 		addQuiz.clickSaveAndRetToCourse();
 	}
-	@Test
+//	@Test
 	public void addWiki() throws Exception {
 		addActivity.selectWiki("2");
 		addWiki.enterNameField(wikiName);
