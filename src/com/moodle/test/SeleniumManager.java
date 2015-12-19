@@ -1,8 +1,6 @@
 package com.moodle.test;
 
-import java.net.MalformedURLException;
-import java.net.URL;
-
+import com.opera.core.systems.OperaDriver;
 import org.openqa.selenium.android.AndroidDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -13,7 +11,8 @@ import org.openqa.selenium.iphone.IPhoneDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
-import com.opera.core.systems.OperaDriver;
+import java.net.MalformedURLException;
+import java.net.URL;
 /**
  * This is the manager class for all drivers.
  * @author Tim Barker 
@@ -37,10 +36,15 @@ public class SeleniumManager {
  * @throws MalformedURLException Catches an exception caused by a malformed URL. All URL's are malformed so this much be caught.
  */
 //Remote WebDriver
-	public void startRemotes(String baseURL, String browserType) throws MalformedURLException {		
+	public void startRemotes(String baseURL) throws MalformedURLException {
 		DesiredCapabilities capability = new DesiredCapabilities();
-		capability.setBrowserName(browserType);
-		capability.setJavascriptEnabled(true);
+//		capability.setBrowserName(browserType);
+//		capability.setJavascriptEnabled(true);
+		capability.setCapability("browser", "FIREFOX_30_WINDOWS_8_64");
+		capability.setCapability("apikey", "c717c5b3-a307-461e-84ea-1232d44cde89");
+		capability.setCapability("email", "test@testfabrik.com");
+		capability.setCapability("record", true);
+		capability.setCapability("extract", true);
 		driver = new RemoteWebDriver(new URL(baseURL),capability);
 	}
 /**

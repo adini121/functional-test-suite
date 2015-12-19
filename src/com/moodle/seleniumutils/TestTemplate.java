@@ -1,18 +1,17 @@
 package com.moodle.seleniumutils;
 
+import com.moodle.test.SeleniumManager;
+import com.moodle.testmanager.pageObjectModel.Users;
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.openqa.selenium.remote.RemoteWebDriver;
+
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
-
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
-import org.openqa.selenium.remote.RemoteWebDriver;
-
-import com.moodle.test.SeleniumManager;
-import com.moodle.testmanager.pageObjectModel.Users;
 /**
  * DESCRIPTION:
  * 
@@ -60,7 +59,7 @@ public class TestTemplate {
 			String moodleHomePage = startupConfig.getProperty("moodleHomePage");
 		//Call setup method
 			sm = new SeleniumManager();
-			sm.startRemotes(gridHubURL, browserType);
+			sm.startRemotes(gridHubURL);
 			driver = sm.getRemoteDriver();
 			driver.get(moodleHomePage);
 		}

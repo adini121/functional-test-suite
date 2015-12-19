@@ -1,12 +1,11 @@
 package com.moodle.test.moodleinstallation;
+import com.moodle.test.TestRunSettings;
+import org.junit.Test;
+
 import java.io.FileInputStream;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
-
-import org.junit.Test;
-
-import com.moodle.test.TestRunSettings;
 /**
  * Installer for 2.3
  * @author tim
@@ -33,10 +32,7 @@ public class Install23 extends TestRunSettings {
 		}
 	@Test
 	public void install (){
-		installation.clickContinue();
-		installation.clickContinue();
-		installation.clickContinue();
-		addNewUser.enterPassword(this.properties.get("password"));
+		user.loginToSystem(this.properties.get("adminUser"), this.properties.get("password"));
 		addNewUser.enterEmail(this.properties.get("adminEmail"));
 		addNewUser.enterCity(this.properties.get("city"));
 		addNewUser.enterCountry(this.properties.get("country"));

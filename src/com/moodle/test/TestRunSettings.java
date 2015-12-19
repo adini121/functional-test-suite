@@ -1,54 +1,14 @@
 package com.moodle.test;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.util.Properties;
-
+import com.moodle.testmanager.pageObjectModel.*;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
-import com.moodle.testmanager.pageObjectModel.Assignment;
-import com.moodle.testmanager.pageObjectModel.AssignmentAddAssignmentForm;
-import com.moodle.testmanager.pageObjectModel.AssignmentAddSubmission;
-import com.moodle.testmanager.pageObjectModel.AssignmentAdminUpgradeAssignments;
-import com.moodle.testmanager.pageObjectModel.AssignmentGrading;
-import com.moodle.testmanager.pageObjectModel.AssignmentPluginManageFeedback;
-import com.moodle.testmanager.pageObjectModel.AssignmentPluginManageSubmission;
-import com.moodle.testmanager.pageObjectModel.AssignmentSubmissionComments;
-import com.moodle.testmanager.pageObjectModel.BlockNavigation;
-import com.moodle.testmanager.pageObjectModel.BlockNews;
-import com.moodle.testmanager.pageObjectModel.BlockSettings;
-import com.moodle.testmanager.pageObjectModel.BookAddForm;
-import com.moodle.testmanager.pageObjectModel.ChatAddForm;
-import com.moodle.testmanager.pageObjectModel.ChoiceAddForm;
-import com.moodle.testmanager.pageObjectModel.Courses;
-import com.moodle.testmanager.pageObjectModel.CoursesAddActivityResource;
-import com.moodle.testmanager.pageObjectModel.CoursesEditCourseSettings;
-import com.moodle.testmanager.pageObjectModel.Databases;
-import com.moodle.testmanager.pageObjectModel.DatabasesAddDatabase;
-import com.moodle.testmanager.pageObjectModel.DatabasesFields;
-import com.moodle.testmanager.pageObjectModel.FolderAddForm;
-import com.moodle.testmanager.pageObjectModel.Forum;
-import com.moodle.testmanager.pageObjectModel.ForumAddForm;
-import com.moodle.testmanager.pageObjectModel.ForumPosts;
-import com.moodle.testmanager.pageObjectModel.ForumSplit;
-import com.moodle.testmanager.pageObjectModel.FrontPageRoles;
-import com.moodle.testmanager.pageObjectModel.GlossaryAddForm;
-import com.moodle.testmanager.pageObjectModel.Installation;
-import com.moodle.testmanager.pageObjectModel.LabelAddForm;
-import com.moodle.testmanager.pageObjectModel.LessonAddForm;
-import com.moodle.testmanager.pageObjectModel.ProfileEdit;
-import com.moodle.testmanager.pageObjectModel.QuizAddForm;
-import com.moodle.testmanager.pageObjectModel.ReportActivityCompletion;
-import com.moodle.testmanager.pageObjectModel.SiteAdministration;
-import com.moodle.testmanager.pageObjectModel.SurveyAddForm;
-import com.moodle.testmanager.pageObjectModel.Users;
-import com.moodle.testmanager.pageObjectModel.UsersAddNewUser;
-import com.moodle.testmanager.pageObjectModel.UsersEnrolled;
-import com.moodle.testmanager.pageObjectModel.WikiAddForm;
-import com.moodle.testmanager.pageObjectModel.WorkshopAddForm;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.Properties;
 
 public class TestRunSettings {
 	//Load test data from properties file
@@ -106,11 +66,11 @@ public class TestRunSettings {
 			Properties startupConfig = new Properties();
 			startupConfig.load(new FileInputStream(runParameters));
 			String gridHubURL = startupConfig.getProperty("gridHubURL");
-			String browserType = startupConfig.getProperty("browserType");
+//			String browserType = startupConfig.getProperty("browserType");
 			String moodleHomePage = startupConfig.getProperty("moodleHomePage");
 		//Call setup method
 			sm = new SeleniumManager();
-			sm.startRemotes(gridHubURL, browserType);
+			sm.startRemotes(gridHubURL);
 			//sm.startChromeDriver(chromeDriverLocation);
 			//sm.startFirefoxDriver();
 			driver = sm.getRemoteDriver();

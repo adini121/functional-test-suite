@@ -88,16 +88,16 @@
 			<test todir="${testresults}" name="com.moodle.test.datacreation.MDLQADT2AddUsers"/>
 			<test todir="${testresults}" name="com.moodle.test.datacreation.MDLQADT3AssignFrontPageRoles"/>
 			<test todir="${testresults}" name="com.moodle.test.datacreation.MDLQADT4EnrolUsers"/>
-		<!--<test todir="${testresults}" name="com.moodle.test.forum.MDLQA03TeacherSets1Of3TrackingOptions"/>
-			<test todir="${testresults}" name="com.moodle.test.forum.MDLQA04TeacherSplitAndMoveDiscussions"/>
-			<test todir="${testresults}" name="com.moodle.test.forum.MDLQA05StudentsDisplayOptions"/>
-			<test todir="${testresults}" name="com.moodle.test.forum.MDLQA06NewCourseNewsForum"/>
-			<test todir="${testresults}" name="com.moodle.test.forum.MDLQA07NewCourseLatestNews"/>
-			<test todir="${testresults}" name="com.moodle.test.forum.MDLQA09SingleSimpleDiscussionOnlyTeachersStart"/>
-			<test todir="${testresults}" name="com.moodle.test.forum.MDLQA10EachPersonPosts1Discussion"/>
-			<test todir="${testresults}" name="com.moodle.test.forum.MDLQA11QAForumStudentPostBeforeView"/>
-			<test todir="${testresults}" name="com.moodle.test.forum.MDLQA12TeacherSet4PossibleForumSubscription"/>
-			<test todir="${testresults}" name="com.moodle.test.forum.MDLQA16TeacherEditDeletePost"/>-->
+			<!--<test todir="${testresults}" name="com.moodle.test.forum.MDLQA03TeacherSets1Of3TrackingOptions"/>-->
+			<!--<test todir="${testresults}" name="com.moodle.test.forum.MDLQA04TeacherSplitAndMoveDiscussions"/>-->
+			<!--<test todir="${testresults}" name="com.moodle.test.forum.MDLQA05StudentsDisplayOptions"/>-->
+			<!--<test todir="${testresults}" name="com.moodle.test.forum.MDLQA06NewCourseNewsForum"/>-->
+			<!--<test todir="${testresults}" name="com.moodle.test.forum.MDLQA07NewCourseLatestNews"/>-->
+			<!--<test todir="${testresults}" name="com.moodle.test.forum.MDLQA09SingleSimpleDiscussionOnlyTeachersStart"/>-->
+			<!--<test todir="${testresults}" name="com.moodle.test.forum.MDLQA10EachPersonPosts1Discussion"/>-->
+			<!--<test todir="${testresults}" name="com.moodle.test.forum.MDLQA11QAForumStudentPostBeforeView"/>-->
+			<!--<test todir="${testresults}" name="com.moodle.test.forum.MDLQA12TeacherSet4PossibleForumSubscription"/>-->
+			<!--<test todir="${testresults}" name="com.moodle.test.forum.MDLQA16TeacherEditDeletePost"/>-->
 		</junit>
 			<antcall target ="report-junit"/>
 			<fail if="junit.error" message="Selenium test(s) failed. See reports!"/>
