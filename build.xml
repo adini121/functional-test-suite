@@ -8,6 +8,7 @@
 	<property name="testreport" location="junit-report" />
 	<path id="junit.class.path">
 		<pathelement location="${libs}/junit-4.10.jar" />
+		<pathelement location="${libs}/mysql-connector-java-5.1.37-bin.jar" />
 		<pathelement location="${sellibs}/selenium-java-2.25.0.jar" />
 		<pathelement location="${sellibs}/selenium-java-2.25.0-srcs.jar" />
 		<pathelement location="${sellibs}/selenium-server-standalone-2.25.0.jar" />
